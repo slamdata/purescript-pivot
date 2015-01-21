@@ -20,7 +20,9 @@
     "purescript-argonaut": "git@github.com:purescript-contrib/purescript-argonaut.git#0.3.0",
     "purescript-smolder": "~1.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "purescript-strongcheck": "~0.6.0"
+  },
   "resolutions": {
     "purescript-maps": "~0.2.0"
   }
