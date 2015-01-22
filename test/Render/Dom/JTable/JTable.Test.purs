@@ -5,5 +5,4 @@ import Debug.Trace
 
 import Render.Dom.JTable
 
-main = do
-  trace "wowzers!!"
+main = trace "wowzers!!"
