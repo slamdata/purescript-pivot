@@ -28,7 +28,7 @@ var paths = {
 
 var options = {
     test: {
-        main: true,
+        main: "Test.Main",
         output: 'output/test.js'
     }
 };
@@ -78,8 +78,7 @@ gulp.task('make', function() {
 gulp.task('test', function() {
 
     compile(purescript.psc, [paths.src, paths.test].concat(paths.bowerSrc), options.test)
-        // .pipe(run('node').exec());
-        .pipe(gulp.dest(options.test.output));
+        .pipe(run('node').exec());
 });
 
 gulp.task('docs', docs('all'));
