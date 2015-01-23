@@ -2,7 +2,8 @@
   "name": "purescript-jtable",
   "license": "MIT",
   "authors": [
-    "John A. De Goes <john@degoes.net> (http://degoes.net)"
+    "John A. De Goes <john@degoes.net> (http://degoes.net)",
+    "Isaac Shapira <fresheyeball@gmail.com>"
   ],
   "ignore": [
     "**/.*",
@@ -18,9 +19,12 @@
   ],
   "dependencies": {
     "purescript-argonaut": "git@github.com:purescript-contrib/purescript-argonaut.git#0.3.0",
-    "purescript-smolder": "~1.0.2"
+    "purescript-smolder": "~1.0.2",
+    "purescript-tuples": "~0.2.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "purescript-strongcheck": "~0.6.0"
+  },
   "resolutions": {
     "purescript-maps": "~0.2.0"
   }

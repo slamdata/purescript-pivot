@@ -28,7 +28,7 @@ var paths = {
 
 var options = {
     test: {
-        main: 'Test.Main',
+        main: "Test.Main",
         output: 'output/test.js'
     }
 };
@@ -39,6 +39,7 @@ function compile (compiler, src, opts) {
         console.error(e.message);
         psc.end();
     });
+
     return gulp.src(src.concat(paths.bowerSrc))
         .pipe(psc)
         .pipe(jsValidate());
@@ -75,7 +76,8 @@ gulp.task('make', function() {
 });
 
 gulp.task('test', function() {
-    return compile(purescript.psc, [paths.src, paths.test].concat(paths.bowerSrc), options.test)
+
+    compile(purescript.psc, [paths.src, paths.test].concat(paths.bowerSrc), options.test)
         .pipe(run('node').exec());
 });
 
