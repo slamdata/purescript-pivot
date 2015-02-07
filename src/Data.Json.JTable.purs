@@ -50,12 +50,12 @@ isTuple ja = if length ja <= 1 then Nothing else
                                                     else Just $ length ja
 
 
-tMerge :: Tree -> Tree -> Tree
-tMerge (T p w h k) (T p1 w1 h1 k1) =
+tMergeArray :: Tree -> Tree -> Tree
+tMergeArray (T p w h k) (T p1 w1 h1 k1) =
   let i = findIndex (\n -> last p1 == last (n # tPath)) k in case k !! i of
     Just t2@(T p2 w2 h2 k2) ->
-      let k2' = tKids $ foldl tMerge t2 k1
-          k' = updateAt i (T p2 w2 h2 k2') k
+      let k2' = tKids $ foldl tMergeArray t2 k1
+          k' = updateAt i (T p2 (max w1 w2) h2 k2') k
           w' = w - w2 + (max w1 w2)
           h' = max h (h2 + 1)
       in  T p w' h' k'
@@ -73,14 +73,14 @@ tFromJson path json =
       Just ja -> case isTuple ja of
         Just n -> T path n 0 [] -- tuple
         Nothing -> -- array
-          let t = ja <#> tFromJson path
-              w = foldl max 0 (t <#> tWidth)
-              ts = t >>= tKids
-              h = 1 + foldl max 0 (ts <#> tHeight)
-              t' = foldl tMerge (T path 0 0 []) ts
+          let ts = ja <#> tFromJson path
+              tk = ts >>= tKids
+              h = 1 + foldl max 0 (tk <#> tHeight)
+              t' = foldl tMergeArray (T path 0 0 []) tk
+              w = foldl max (t' # tWidth) (ts <#> tWidth)
               h' = if null (t' # tKids) then 0 else h
-          in T path (max w (t' # tWidth)) h' (t' # tKids)
-      Nothing -> T path 1 0 [] -- primitive
+          in T path w h' (t' # tKids)
+      Nothing -> T path 1 0 []
 
 
 _nattr :: String -> Number -> Markup -> Markup
