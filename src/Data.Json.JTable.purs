@@ -13,7 +13,7 @@ import Math (max)
 import Data.Argonaut.Core
 import Data.Argonaut.JCursor
 import Data.Argonaut.Parser (jsonParser)
-import Text.Smolder.HTML (tr, th, td)
+import Text.Smolder.HTML (thead, tbody, tr, th, td)
 import Text.Smolder.Markup (Markup(..), Attribute(..), attribute, (!))
 
 
@@ -23,21 +23,23 @@ tWidth (T _ w _ _) = w
 tHeight (T _ _ h _) = h
 tKids (T _ _ _ k) = k
 
+data Cell = C  JCursor Number Number Json
+cCursor (C c _ _ _) = c
+cWidth (C _ w _ _) = w
+cHeight (C _ _ h _) = h
+cJson (C _ _ _ j) = j
+
+type MarkupF = Markup -> Markup
+
+instance showCell :: Show Cell where
+  show (C c w h j) = joinWith " " ["<T", show w, show h, show c, show j, ">"]
+
 instance showTree :: Show Tree where
   show (T p w h k) = joinWith " " ["<T", show p, show w, show h, show k, ">"]
 
-data Cell = C Number Number JCursor Json
-cWidth (C w _ _ _) = w
-cHeight (C _ h _ _) = h
-cCursor (C _ _ c _) = c
-cJson (C _ _ _ j) = j
-
-instance showCell :: Show Cell where
-  show (C w h c j) = joinWith " " ["<T", show w, show h, show c, show j, ">"]
 
 foreign import jnull "var jnull = null;" :: Json
 
-type MarkupF = Markup -> Markup
 
 
 isTuple :: [Json] -> Maybe Number
@@ -89,16 +91,16 @@ _cspan = _nattr "colspan"
 _rspan = _nattr "rowspan"
 
 
-renderThead :: MarkupF -> ([String] -> Markup) -> Tree -> Markup
+renderThead :: MarkupF -> (Tree -> Markup) -> Tree -> Markup
 renderThead tr' thf root = mconcat $ do 
   let height = tHeight root
   let toRows ts = if null ts then [] else ts : toRows (ts >>= tKids)
   let rows = toRows (root # tKids)
   (Tuple row i) <- rows `zip` (0 .. height)
   return $ tr' $ mconcat $ do
-    (T p w h k) <- row
+    t@(T p w h k) <- row
     let rs = if null k then height - i else 1
-    return $ (thf p # _cspan w >>> _rspan rs)
+    return $ (thf t # _cspan w >>> _rspan rs)
 
 
 cMergeObject :: [[[Cell]]] -> [[Cell]]
@@ -110,9 +112,9 @@ cMergeObject rss = do
   return $ concat $ do
     (Tuple rs w)<- rss `zip` maxws
     return $  if length rs == 1 
-              then if n == 0 then (\(C w h c j) -> C w maxh c j) `map` (AU.head rs)
+              then if n == 0 then (\(C c w h j) -> C c w maxh j) `map` (AU.head rs)
                              else fromMaybe [] $ rs !! n 
-              else fromMaybe [C w 1 (JCursorTop) jnull] $ rs !! n
+              else fromMaybe [C (JCursorTop) w 1 jnull] $ rs !! n
 
 
 cFromJson :: Tree -> JCursor -> Json -> [[Cell]]
@@ -132,16 +134,16 @@ cFromJson t c json =
         else singleton $ do -- tuple
           i <- 0 .. (t # tWidth) - 1
           let j = fromMaybe jnull $ ja !! i
-          return $ C 1 1 (downIndex i c) j
-      Nothing -> [[C (t # tWidth) 1 c json]] -- primitive
+          return $ C (downIndex i c) 1 1 j
+      Nothing -> [[C c (t # tWidth) 1 json]]
 
 
-renderTbody :: MarkupF -> (JCursor -> Json -> Markup) -> Tree -> Json -> Markup
+renderTbody :: MarkupF -> (Cell -> Markup) -> Tree -> Json -> Markup
 renderTbody tr' tdf t json = mconcat $ do
   row <- cFromJson t JCursorTop json
   return $ tr' $ mconcat $ do
-    (C w h c j) <- row
-    return $ (tdf c j # _cspan w >>> _rspan h)
+    cc@(C c w h j) <- row
+    return $ (tdf cc # _cspan w >>> _rspan h)
 
 
 sortTree :: ([String] -> [String] -> Ordering) -> Tree -> Tree
@@ -157,16 +159,27 @@ strcmp :: String -> String -> Ordering
 strcmp s1 s2 = compare (localeCompare s1 s2) 0
 
 
+-- renderJTableRaw :: {...} -> Json
+renderJTableRaw o json = 
+  o.style.table $ do 
+    let t = sortTree o.columnOrdering $ tFromJson [] json
+    thead $ renderThead o.style.tr o.style.th t
+    tbody $ renderTbody o.style.tr o.style.td t json
+
+
 
 module Data.Json.JTable where
 
 import Data.Json.JTable.Internal
 
+import Data.String (joinWith)
 import qualified Data.Array.Unsafe as AU
 import Data.Argonaut.Core
 import Data.Argonaut.JCursor
-import Text.Smolder.HTML (table, thead, tbody, tr, th, td)
+import Text.Smolder.HTML (table, thead, tbody, tr, th, td, br, small)
+import Text.Smolder.HTML.Attributes (className)
 import Text.Smolder.Markup (Markup(..), MarkupM(..), Attributable, attribute, (!), text)
+import Data.Foldable (mconcat)
 
 
 type TableStyle = {
@@ -194,6 +207,12 @@ renderJsonSemantic = \c j -> show j
 semanticStyle = (noStyle {
   td = \c j -> td $ text $ renderJsonSemantic c j} :: TableStyle)
 
+debugStyle = (noStyle {
+  th = (\p -> th $ text $ joinWith "." p),
+  td = (\c j -> td $ mconcat $
+    [(small ! className "grey" $ text $ show c), (br), (text $ show j)]
+)}::TableStyle)
+
 
 type ColumnOrdering = [String] -> [String] -> Ordering
 
@@ -214,11 +233,9 @@ defJTableOpts  = {
 
 
 renderJTable :: JTableOpts -> Json -> Markup
-renderJTable opt json = 
-  opt.style.table $ table $ do 
-    let t = sortTree opt.columnOrdering $ tFromJson [] json
-    thead $ renderThead opt.style.tr opt.style.th t
-    tbody $ renderTbody opt.style.tr opt.style.td t json
+renderJTable o = renderJTableRaw o { style = o.style {
+  th = (\t -> o.style.th (t # tPath)),
+  td = (\c -> o.style.td (c # cCursor) (c # cJson)) }}
 
 renderJTableArray :: JTableOpts -> [Json] -> Markup
 renderJTableArray opt ja = renderJTable opt $ fromArray ja
