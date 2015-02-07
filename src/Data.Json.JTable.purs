@@ -23,11 +23,11 @@ tWidth (T _ w _ _) = w
 tHeight (T _ _ h _) = h
 tKids (T _ _ _ k) = k
 
-data Cell = C  JCursor Number Number Json
+data Cell = C  JCursor Number Number JsonPrim
 cCursor (C c _ _ _) = c
 cWidth (C _ w _ _) = w
 cHeight (C _ _ h _) = h
-cJson (C _ _ _ j) = j
+cJsonPrim (C _ _ _ j) = j
 
 type MarkupF = Markup -> Markup
 
@@ -40,13 +40,15 @@ instance showTree :: Show Tree where
 
 foreign import jnull "var jnull = null;" :: Json
 
+_cN = const primNull
+toPrim = (foldJson _cN primBool primNum primStr _cN _cN) :: Json -> JsonPrim
 
 
 isTuple :: [Json] -> Maybe Number
 isTuple ja = if length ja <= 1 then Nothing else
-  let f = foldJson (const 0) (const 1) (const 2) (const 3) (const 4) (const 4)
+  let f = foldJson (const 0) (const 1) (const 2) (const 3) (const 8) (const 9)
       types = ja <#> f
-      has_arr_or_obj = any ((==) 4) types
+      has_arr_or_obj = any (\x -> x > 7) types
       all_eq = all ((==) $ AU.head types) types
   in if has_arr_or_obj || (all_eq && length ja > 2) then Nothing 
                                                     else Just $ length ja
@@ -114,7 +116,7 @@ cMergeObject rss = do
     return $  if length rs == 1 
               then if n == 0 then (\(C c w h j) -> C c w maxh j) `map` (AU.head rs)
                              else fromMaybe [] $ rs !! n 
-              else fromMaybe [C (JCursorTop) w 1 jnull] $ rs !! n
+              else fromMaybe [C (JCursorTop) w 1 primNull] $ rs !! n
 
 
 cFromJson :: Tree -> JCursor -> Json -> [[Cell]]
@@ -134,8 +136,8 @@ cFromJson t c json =
         else singleton $ do -- tuple
           i <- 0 .. (t # tWidth) - 1
           let j = fromMaybe jnull $ ja !! i
-          return $ C (downIndex i c) 1 1 j
-      Nothing -> [[C c (t # tWidth) 1 json]]
+          return $ C (downIndex i c) 1 1 $ toPrim j
+      Nothing -> [[C c (t # tWidth) 1 $ toPrim json]]
 
 
 renderTbody :: MarkupF -> (Cell -> Markup) -> Tree -> Json -> Markup
@@ -186,9 +188,9 @@ type TableStyle = {
   table :: Markup -> Markup,
   tr    :: Markup -> Markup ,
   th    :: [String] -> Markup,
-  td    :: JCursor -> Json -> Markup }
+  td    :: JCursor -> JsonPrim -> Markup }
 
-renderJsonSimple = foldJson (const "&nbsp;") show show id (const "") (const "")
+renderJsonSimple j = runJsonPrim j (const "&nbsp;") show show id
 
 noStyle = {
   table: table, 
@@ -201,7 +203,7 @@ noStyle = {
 bootstrapStyle = (noStyle {
   table = \m -> table ! attribute "class" "table" $ m}) :: TableStyle
 
-renderJsonSemantic :: JCursor -> Json -> String
+renderJsonSemantic :: JCursor -> JsonPrim -> String
 renderJsonSemantic = \c j -> show j
 
 semanticStyle = (noStyle {
@@ -235,7 +237,7 @@ defJTableOpts  = {
 renderJTable :: JTableOpts -> Json -> Markup
 renderJTable o = renderJTableRaw o { style = o.style {
   th = (\t -> o.style.th (t # tPath)),
-  td = (\c -> o.style.td (c # cCursor) (c # cJson)) }}
+  td = (\c -> o.style.td (c # cCursor) (c # cJsonPrim)) }}
 
 renderJTableArray :: JTableOpts -> [Json] -> Markup
 renderJTableArray opt ja = renderJTable opt $ fromArray ja
