@@ -24,7 +24,10 @@
   &nbsp;
   (or paste json below)
   <br/>
-  <button id="button">render</button>
+  <button id="but_render">Render</button>
+  &nbsp;
+  <button id="but_benchmark">Benchmark (avg 100 renders)</button>
+  <span id="benchmark"></span>
 </div>
 <br/>
 <textarea id="in" cols="80" rows="20"></textarea>
@@ -126,12 +129,25 @@ window.addEventListener("load", function () {
     S("out").innerHTML = out
   } catch (err) { S("out").innerText = err}}
   
+  var benchmark = function () { try {
+    var inp = JSON.parse(S("in").value)
+    var markup;
+    t1 = performance.now()
+    for (var i=0; i<100; i++) {
+      markup = JT.renderJTableDef(inp) }
+    t2 = performance.now()
+    var out = Sm.render(markup)
+    S("out").innerHTML = out
+    S("benchmark").innerText = (Math.floor(t2 - t1) / 100) + " ms"
+  } catch (err) { S("out").innerText = err}}
+
   var select_example = function () {
     S("in").value = S("example-" + S("select").value).innerHTML 
     render() }
   
   S("select").addEventListener("change", select_example) 
-  S("button").addEventListener("click", render)
+  S("but_render").addEventListener("click", render)
+  S("but_benchmark").addEventListener("click", benchmark)
 
   select_example() 
 })
