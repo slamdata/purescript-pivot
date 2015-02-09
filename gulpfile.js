@@ -18,7 +18,8 @@ var paths = {
         'all': {
             dest: 'MODULES.md',
             src: [
-              'src/**/*.purs'
+              'src/**/*.purs',
+              'src/*.purs'
             ]
         }
     },
@@ -65,8 +66,8 @@ function sequence () {
 }
 
 gulp.task('browser', function() {
-    return compile(purescript.psc, [paths.src].concat(paths.bowerSrc), {})
-        .pipe(gulp.dest('example'))
+    return compile(purescript.psc, [paths.src].concat(paths.bowerSrc), {output: 'jtable.js'})
+        .pipe(gulp.dest('dist'))
 });
 
 gulp.task('make', function() {
