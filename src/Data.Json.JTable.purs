@@ -57,15 +57,17 @@ widthOfPrimTuple ja = if length ja <= 1 then Nothing else
 
 
 tMergeArray :: Tree -> Tree -> Tree
-tMergeArray (T p w h k) (T p1 w1 h1 k1) =
+tMergeArray (T p w h k) t1@(T p1 w1 h1 k1) =
   let i = findIndex (\n -> last p1 == last (n # tPath)) k in case k !! i of
-    Just t2@(T p2 w2 h2 k2) ->
-      let k2' = tKids $ foldl tMergeArray t2 k1
-          k' = updateAt i (T p2 (max w1 w2) h2 k2') k
-          w' = w - w2 + (max w1 w2)
-          h' = max h (h2 + 1)
-      in  T p w' h' k'
-    Nothing -> T p (w+w1) 1 (snoc k (T p1 w1 h1 k1))
+    Just t2@(T p2 w2 h2 k2) -> case foldl tMergeArray t2 k1 of 
+      (T _ w2' h2' k2') -> let k' = updateAt i (T p2 w2' h2' k2') k
+                               w' = w - w2 + w2'
+                               h' = max h (h2' + 1)
+                           in T p w' h' k'
+    Nothing -> let w' = if null k then w1 else w+w1
+                   h' = max h h1+1
+                   k' = snoc k (T p1 w1 h1 k1)
+               in T p w' h' k'
 
 
 tFromJson :: [String] -> Json -> Tree
