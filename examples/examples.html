@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>purescript-jtable examples</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html {font-family: sans-serif;}
+    table {border-collapse: collapse;}
+    table, td, th {border:1px solid #ccc; padding: 3px;}
+    .grey {color: grey;}
+  </style>
+</head>
+<body>
+
+<h3>purescript-jtable examples</h3>
+
+<div>
+  Load example:
+  <select id="select">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  &nbsp;
+  (or paste json below)
+  <br/>
+  <button id="button">render</button>
+</div>
+<br/>
+<textarea id="in" cols="80" rows="20"></textarea>
+<br/><br/>
+<div id="out"></div>
+
+
+
+<div style="display:none">
+<pre id="example-1">[
+  {
+    "userId": 8927524,
+    "profile": {
+      "name":   "Mary Jane",
+      "age":    29,
+      "gender": "female"
+    },
+    "comments": [{
+      "id":       "F2372BAC",
+      "text":     "I concur.",
+      "replyTo":  [9817361, "F8ACD164F", false],
+      "obj": {"a": 5 },
+      "time":     "2015-02-03"
+    }, {
+      "id":       "GH732AFC",
+      "obj": {"a": 1,"b": "test"},
+      "replyTo":  [9654726, "A44124F"],
+      "time":     "2015-03-01"
+    }, null]
+  }, {
+    "b": 3, 
+    "d": [1, 2]
+  }
+]
+</pre>
+<pre id="example-2">{
+  "foo"  : "foozle",
+  "bars" : [{
+      "zip" : [5, 3],
+      "zop": null
+    },{
+      "zip":null,
+      "zop":[1, 9, 2]
+  }]
+}
+</pre>
+<pre id="example-3">{
+  "foo": "foozle",
+  "bars": [{
+      "zip": 0,
+      "zop": 5
+    },{
+      "zip": 3,
+      "zop": 7
+  }]
+}
+</pre>
+<pre id="example-4">[{
+  "foo": "foozle",
+  "bars": [{
+      "zip": 0,
+      "zop": 5
+    },{
+      "zip": 3,
+      "zop": 7
+  }]
+}, {
+  "foo": "chozle",
+  "bars": [{
+      "zip": 7,
+      "zop": 6
+    },{
+      "zip": 0,
+      "zop": 2
+  }]
+}, {
+  "foo": "boggle",
+  "bars": [{
+      "zip": 3,
+      "zop": 8
+    },{
+      "zip": 3,
+      "zop": 8
+  }]
+}]
+</pre>
+</div>
+
+<script src="../dist/jtable.js"></script>
+<script>
+window.addEventListener("load", function () {
+  var S = function (id) { return document.getElementById(id) }
+  var Sm = PS.Text_Smolder_Renderer_String
+  var JT = PS.Data_Json_JTable
+  
+  var render = function () { try { 
+    var inp = JSON.parse(S("in").value)
+    var out = Sm.render(JT.renderJTableDef(inp))
+    S("out").innerHTML = out
+  } catch (err) { S("out").innerText = err}}
+  
+  var select_example = function () {
+    S("in").value = S("example-" + S("select").value).innerHTML 
+    render() }
+  
+  S("select").addEventListener("change", select_example) 
+  S("button").addEventListener("click", render)
+
+  select_example() 
+})
+</script>
+
+</body>
+</html>
