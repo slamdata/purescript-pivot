@@ -91,24 +91,6 @@ tFromJson path json =
           in T path w h' (t' # tKids)
 
 
-_nattr :: String -> Number -> Markup -> Markup
-_nattr attr n m = if n > 1 then m ! (attribute attr $ show n) else m
-_cspan = _nattr "colspan"
-_rspan = _nattr "rowspan"
-
-
-renderThead :: MarkupF -> (Tree -> Markup) -> Tree -> Markup
-renderThead tr' thf root = mconcat $ do 
-  let height = tHeight root
-  let toRows ts = if null ts then [] else ts : toRows (ts >>= tKids)
-  let rows = toRows (root # tKids)
-  (Tuple row i) <- rows `zip` (0 .. height)
-  return $ tr' $ mconcat $ do
-    t@(T p w h k) <- row
-    let rs = if null k then height - i else 1
-    return $ (thf t # _cspan w >>> _rspan rs)
-
-
 cMergeObj :: [[[Cell]]] -> [[Cell]]
 cMergeObj rss = do
   let maxh = foldl (\n l -> max n $ length l) 0 rss
@@ -162,12 +144,31 @@ cFromJson t@(T p w h k) c json =
             return $ cFromJson t (downIndex i c) j
 
 
-renderTbody :: MarkupF -> (Cell -> Markup) -> Tree -> Json -> Markup
-renderTbody tr' tdf t json = mconcat $ do
-  row <- cFromJson t JCursorTop json
+renderRows :: forall a. MarkupF -> (Number -> Number -> a -> Markup) -> [[a]] -> Markup
+renderRows tr' cellf rows = mconcat $ do
+  (Tuple row y) <- rows `zip` (0 .. length rows)
   return $ tr' $ mconcat $ do
-    cc@(C c w h j) <- row
-    return $ (tdf cc # _cspan w >>> _rspan h)
+    (Tuple cell x) <- row `zip` (0 .. length row)
+    return $ cellf y x cell
+
+_nattr :: String -> Number -> Markup -> Markup
+_nattr attr n m = if n > 1 then m ! (attribute attr $ show n) else m
+_cspan = _nattr "colspan"
+_rspan = _nattr "rowspan"
+
+tsToRows :: [Tree] -> [[Tree]]
+tsToRows ts = if null ts then [] else ts : tsToRows (ts >>= tKids)
+
+renderThead :: MarkupF -> (Tree -> Markup) -> Tree -> Markup
+renderThead tr' thf (T p w h k) =
+  let rs i k = if null k then h - i else 1
+      tdf' y x t@(T p w h k) = thf t # _cspan w >>> (_rspan $ rs y k)
+  in renderRows tr' tdf' $ tsToRows k
+
+renderTbody :: MarkupF -> (Cell -> Markup) -> Tree -> Json -> Markup
+renderTbody tr' tdf t json =
+  let tdf' y x cell@(C c w h j) = tdf cell # _cspan w >>> _rspan h
+  in renderRows tr' tdf' $ cFromJson t JCursorTop json
 
 
 sortTree :: ([String] -> [String] -> Ordering) -> Tree -> Tree
