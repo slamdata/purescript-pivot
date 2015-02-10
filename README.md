@@ -40,6 +40,10 @@ Into this:
 |----------|-----------|-----|----------|------------------------------------------------------------|
 ```
 
+[Try it](/examples/try.html) with your own data or some samples.
+
+TODO: See [examples/examples.html](/examples/examples.html) for different ways of calling the library.
+
 
 ## How?
 
@@ -48,11 +52,6 @@ TODO: API
 The `Json` and `JCursor` data types that appear in the API are from [purescript-argonaut](https://github.com/purescript-contrib/purescript-argonaut). The `Markup` data type that appears in the API is from [purescript-smolder](https://github.com/bodil/purescript-smolder). 
 
 Both of these libraries are listed as dependencies in [bower.json](bower.json).
-
-
-## Examples
-
-[examples/examples.html](/examples/examples.html) contains a handful of example tables that are rendered with this library, as well as [examples/index.html](/examples/index.html), an editable text form that allows you to copy / paste JSON into the form and click *Render* to see how the library renders the JSON data.
 
 
 ## Tests
