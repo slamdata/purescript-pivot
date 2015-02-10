@@ -159,9 +159,10 @@ tMergeArray (T p w h k) t1@(T p1 w1 h1 k1) =
 tFromJson :: [String] -> Json -> Tree
 tFromJson path json =
   case json # toObject of -- object
-    Just jo -> let k = map (\(Tuple l j) -> tFromJson (snoc path l) j) (M.toList jo)
-                   w = foldl (+) 0 (k <#> tWidth)
-                   h = 1 + foldl max 0 (k <#> tHeight)
+    Just jo -> if M.isEmpty jo then T path 1 0 [] else let
+               k = map (\(Tuple l j) -> tFromJson (snoc path l) j) (M.toList jo)
+               w = foldl (+) 0 (k <#> tWidth)
+               h = 1 + foldl max 0 (k <#> tHeight)
                in T path w h k
     Nothing -> case json # toArray of
       Nothing -> T path 1 0 [] -- primitive
@@ -210,11 +211,12 @@ mergeObjTuple t@(T p w h k) c ja =
 cFromJson :: Tree -> JCursor -> Json -> [[Cell]]
 cFromJson t@(T p w h k) c json = 
   case json # toObject of 
-    Just jo -> cMergeObj $ do -- object
-      t'@(T p' _ _ _) <- k
-      let label = AU.last p'
-      let j = fromMaybe jnull $ M.lookup label jo
-      return $ cFromJson t' (downField label c) j
+    Just jo -> if M.isEmpty jo then [[C c w 1 primNull]] else
+      cMergeObj $ do -- object
+        t'@(T p' _ _ _) <- k
+        let label = AU.last p'
+        let j = fromMaybe jnull $ M.lookup label jo
+        return $ cFromJson t' (downField label c) j
     Nothing -> case json # toArray of
       Nothing -> [[C c w 1 $ toPrim json]] -- primitive
       Just ja -> case mergeObjTuple t c ja of
