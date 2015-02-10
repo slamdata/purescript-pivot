@@ -2,7 +2,6 @@ module Data.Json.JTable.Internal where
 
 import Data.Either
 import Data.Maybe (Maybe(..), fromMaybe, isJust)
-import qualified Data.Set as S
 import Data.Tuple
 import Data.String (joinWith)
 import Data.Array
@@ -46,14 +45,15 @@ _cN = const primNull
 toPrim = (foldJson _cN primBool primNum primStr _cN _cN) :: Json -> JsonPrim
 
 
-widthOfPrimTuple :: [Json] -> Maybe Number
-widthOfPrimTuple ja = if length ja <= 1 then Nothing else
-  let f = foldJson (const 0) (const 1) (const 2) (const 3) (const 4) (const 5)
-      types = ja <#> f
-      has_arr_or_obj = any (\x -> x >= 4) types
-      all_eq = all ((==) $ AU.head types) types
-  in if has_arr_or_obj || (all_eq && length ja > 2) then Nothing 
-                                                    else Just $ length ja
+widthOfPrimTuple :: [String] -> [Json] -> Maybe Number
+widthOfPrimTuple path ja = 
+  if null path || length ja <= 1 then Nothing else let
+    f = foldJson (const 0) (const 1) (const 2) (const 3) (const 4) (const 5)
+    types = ja <#> f
+    has_arr_or_obj = any (\x -> x >= 4) types
+    all_eq = all ((==) $ AU.head types) types
+    in if has_arr_or_obj || (all_eq && length ja > 2) then Nothing 
+                                                      else Just $ length ja
 
 
 tMergeArray :: Tree -> Tree -> Tree
@@ -79,7 +79,7 @@ tFromJson path json =
                in T path w h k
     Nothing -> case json # toArray of
       Nothing -> T path 1 0 [] -- primitive
-      Just ja -> case widthOfPrimTuple ja of
+      Just ja -> case widthOfPrimTuple path ja of
         Just n -> T path n 0 [] -- tuple
         Nothing -> -- array
           let ts = ja <#> tFromJson path
@@ -111,7 +111,7 @@ mergeObjTuple t@(T p w h k) c ja =
      else let jos = catMaybes joms
               keyss = jos <#> M.keys
               all_keys = concat keyss
-          in if length (S.toList $ S.fromList all_keys) /= length all_keys
+          in if length (nub all_keys) /= length all_keys
              then Nothing
              else Just $ cMergeObj $ do 
                t'@(T p' _ _ _) <- k
@@ -134,7 +134,7 @@ cFromJson t@(T p w h k) c json =
       Just ja -> case mergeObjTuple t c ja of
         Just css -> css -- tuple of objects
         Nothing ->
-          if h <= 0 && w > 1 && (isJust $ widthOfPrimTuple ja)
+          if h <= 0 && w > 1 && (isJust $ widthOfPrimTuple p ja)
           then singleton $ do -- tuple
             i <- 0 .. w-1
             let j = fromMaybe jnull $ ja !! i
