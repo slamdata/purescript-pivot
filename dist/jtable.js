@@ -19229,26 +19229,19 @@ function (s1) { return function (s2) {
     return {
         C: C, 
         T: T, 
-        renderJTableRaw: renderJTableRaw, 
-        strcmp: strcmp, 
-        localeCompare: localeCompare, 
-        sortTree: sortTree, 
-        renderTbody: renderTbody, 
-        renderThead: renderThead, 
-        tsToRows: tsToRows, 
         _rspan: _rspan, 
         _cspan: _cspan, 
         _nattr: _nattr, 
-        renderRows: renderRows, 
-        cFromJson: cFromJson, 
-        mergeObjTuple: mergeObjTuple, 
-        cMergeObj: cMergeObj, 
-        tFromJson: tFromJson, 
-        tMergeArray: tMergeArray, 
-        widthOfPrimTuple: widthOfPrimTuple, 
+        localeCompare: localeCompare, 
+        strcmp: strcmp, 
         toPrim: toPrim, 
         _cN: _cN, 
-        jnull: jnull, 
+        mergeObjTuple: mergeObjTuple, 
+        cMergeObj: cMergeObj, 
+        cFromJson: cFromJson, 
+        widthOfPrimTuple: widthOfPrimTuple, 
+        tMergeArray: tMergeArray, 
+        tFromJson: tFromJson, 
         cJsonPrim: cJsonPrim, 
         cHeight: cHeight, 
         cWidth: cWidth, 
@@ -19257,6 +19250,12 @@ function (s1) { return function (s2) {
         tHeight: tHeight, 
         tWidth: tWidth, 
         tPath: tPath, 
+        sortTree: sortTree, 
+        tsToRows: tsToRows, 
+        renderTbody: renderTbody, 
+        renderThead: renderThead, 
+        renderRows: renderRows, 
+        renderJTableRaw: renderJTableRaw, 
         showTree: showTree, 
         showCell: showCell
     };
@@ -19725,18 +19724,15 @@ PS.Data_Json_JTable = (function () {
         };
     };
     return {
-        renderJTableDef: renderJTableDef, 
-        renderJTableArray: renderJTableArray, 
-        renderJTable: renderJTable, 
-        defJTableOpts: defJTableOpts, 
-        alphaOrdering: alphaOrdering, 
-        inOrdering: inOrdering, 
         debugStyle: debugStyle, 
-        semanticStyle: semanticStyle, 
-        renderJsonSemantic: renderJsonSemantic, 
         bootstrapStyle: bootstrapStyle, 
         noStyle: noStyle, 
-        renderJsonSimple: renderJsonSimple
+        alphaOrdering: alphaOrdering, 
+        inOrdering: inOrdering, 
+        defJTableOpts: defJTableOpts, 
+        renderJTableDef: renderJTableDef, 
+        renderJTableArray: renderJTableArray, 
+        renderJTable: renderJTable
     };
 })();
 var PS = PS || {};

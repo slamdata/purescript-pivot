@@ -1,4 +1,93 @@
-module Data.Json.JTable.Internal where
+module Data.Json.JTable
+  ( renderJTable, renderJTableArray, renderJTableDef
+  , JTableOpts(..), defJTableOpts
+  , ColumnOrdering(..), inOrdering, alphaOrdering
+  , TableStyle(..), noStyle, bootstrapStyle, debugStyle
+  ) where
+
+import Data.Json.JTable.Internal
+
+import Data.String (joinWith)
+import qualified Data.Array.Unsafe as AU
+import Data.Argonaut.Core
+import Data.Argonaut.JCursor
+import Text.Smolder.HTML (table, thead, tbody, tr, th, td, br, small)
+import Text.Smolder.HTML.Attributes (className)
+import Text.Smolder.Markup (Markup(..), MarkupM(..), Attributable, attribute, (!), text)
+import Data.Foldable (mconcat)
+
+
+type TableStyle = {
+  table :: Markup -> Markup,
+  tr    :: Markup -> Markup ,
+  th    :: [String] -> Markup,
+  td    :: JCursor -> JsonPrim -> Markup }
+
+renderJsonSimple j = runJsonPrim j (const "&nbsp;") show show id
+
+noStyle = {
+  table: table, 
+  tr: tr, 
+  th: \p -> th $ text $ AU.last p,
+  td: \c j -> td $ text $ renderJsonSimple j
+    
+} :: TableStyle
+
+bootstrapStyle = (noStyle {
+  table = \m -> table ! attribute "class" "table" $ m}) :: TableStyle
+
+renderJsonSemantic :: JCursor -> JsonPrim -> String
+renderJsonSemantic = \c j -> show j
+
+semanticStyle = (noStyle {
+  td = \c j -> td $ text $ renderJsonSemantic c j} :: TableStyle)
+
+debugStyle = (noStyle {
+  th = (\p -> th $ text $ joinWith "." p),
+  td = (\c j -> td $ mconcat $
+    [(small ! className "grey" $ text $ show c), (br), (text $ show j)]
+)}::TableStyle)
+
+
+type ColumnOrdering = [String] -> [String] -> Ordering
+
+inOrdering = (\p1 p2 -> EQ) :: ColumnOrdering
+alphaOrdering = (\p1 p2 -> strcmp (AU.last p1) (AU.last p2)) :: ColumnOrdering
+
+
+type JTableOpts = {
+  style :: TableStyle,
+  columnOrdering :: ColumnOrdering,
+  insertHeaderCells :: Boolean }
+
+defJTableOpts  = {
+  style: noStyle,
+  columnOrdering: inOrdering,
+  insertHeaderCells: false
+} :: JTableOpts
+
+
+renderJTable :: JTableOpts -> Json -> Markup
+renderJTable o = renderJTableRaw o { style = o.style {
+  th = (\t -> o.style.th (t # tPath)),
+  td = (\c -> o.style.td (c # cCursor) (c # cJsonPrim)) }}
+
+renderJTableArray :: JTableOpts -> [Json] -> Markup
+renderJTableArray opt ja = renderJTable opt $ fromArray ja
+
+renderJTableDef :: Json -> Markup
+renderJTableDef = renderJTable defJTableOpts
+
+
+
+module Data.Json.JTable.Internal
+  ( renderJTableRaw, renderRows, renderThead, renderTbody, tsToRows, sortTree
+  , Tree(..), tPath, tWidth, tHeight, tKids
+  , Cell(..), cCursor, cWidth, cHeight, cJsonPrim
+  , tFromJson, tMergeArray, widthOfPrimTuple
+  , cFromJson, cMergeObj, mergeObjTuple
+  , _cN, toPrim, strcmp, localeCompare, _nattr, _cspan, _rspan
+  ) where
 
 import Data.Either
 import Data.Maybe (Maybe(..), fromMaybe, isJust)
@@ -26,14 +115,11 @@ tKids (T _ _ _ k) = k
 instance showTree :: Show Tree where
   show (T p w h k) = joinWith " " ["<T", show p, show w, show h, show k, ">"]
 
-
 data Cell = C  JCursor Number Number JsonPrim
 cCursor (C c _ _ _) = c
 cWidth (C _ w _ _) = w
 cHeight (C _ _ h _) = h
 cJsonPrim (C _ _ _ j) = j
-
-type MarkupF = Markup -> Markup
 
 instance showCell :: Show Cell where
   show (C c w h j) = joinWith " " ["<T", show w, show h, show c, show j, ">"]
@@ -144,7 +230,7 @@ cFromJson t@(T p w h k) c json =
             return $ cFromJson t (downIndex i c) j
 
 
-renderRows :: forall a. MarkupF -> (Number -> Number -> a -> Markup) -> [[a]] -> Markup
+renderRows :: forall a. (Markup -> Markup) -> (Number -> Number -> a -> Markup) -> [[a]] -> Markup
 renderRows tr' cellf rows = mconcat $ do
   (Tuple row y) <- rows `zip` (0 .. length rows)
   return $ tr' $ mconcat $ do
@@ -159,13 +245,13 @@ _rspan = _nattr "rowspan"
 tsToRows :: [Tree] -> [[Tree]]
 tsToRows ts = if null ts then [] else ts : tsToRows (ts >>= tKids)
 
-renderThead :: MarkupF -> (Tree -> Markup) -> Tree -> Markup
+renderThead :: (Markup -> Markup) -> (Tree -> Markup) -> Tree -> Markup
 renderThead tr' thf (T p w h k) =
   let rs i k = if null k then h - i else 1
       tdf' y x t@(T p w h k) = thf t # _cspan w >>> (_rspan $ rs y k)
   in renderRows tr' tdf' $ tsToRows k
 
-renderTbody :: MarkupF -> (Cell -> Markup) -> Tree -> Json -> Markup
+renderTbody :: (Markup -> Markup) -> (Cell -> Markup) -> Tree -> Json -> Markup
 renderTbody tr' tdf t json =
   let tdf' y x cell@(C c w h j) = tdf cell # _cspan w >>> _rspan h
   in renderRows tr' tdf' $ cFromJson t JCursorTop json
@@ -190,80 +276,3 @@ renderJTableRaw o json =
     let t = sortTree o.columnOrdering $ tFromJson [] json
     thead $ renderThead o.style.tr o.style.th t
     tbody $ renderTbody o.style.tr o.style.td t json
-
-
-
-module Data.Json.JTable where
-
-import Data.Json.JTable.Internal
-
-import Data.String (joinWith)
-import qualified Data.Array.Unsafe as AU
-import Data.Argonaut.Core
-import Data.Argonaut.JCursor
-import Text.Smolder.HTML (table, thead, tbody, tr, th, td, br, small)
-import Text.Smolder.HTML.Attributes (className)
-import Text.Smolder.Markup (Markup(..), MarkupM(..), Attributable, attribute, (!), text)
-import Data.Foldable (mconcat)
-
-
-type TableStyle = {
-  table :: Markup -> Markup,
-  tr    :: Markup -> Markup ,
-  th    :: [String] -> Markup,
-  td    :: JCursor -> JsonPrim -> Markup }
-
-renderJsonSimple j = runJsonPrim j (const "&nbsp;") show show id
-
-noStyle = {
-  table: table, 
-  tr: tr, 
-  th: \p -> th $ text $ AU.last p,
-  td: \c j -> td $ text $ renderJsonSimple j
-    
-} :: TableStyle
-
-bootstrapStyle = (noStyle {
-  table = \m -> table ! attribute "class" "table" $ m}) :: TableStyle
-
-renderJsonSemantic :: JCursor -> JsonPrim -> String
-renderJsonSemantic = \c j -> show j
-
-semanticStyle = (noStyle {
-  td = \c j -> td $ text $ renderJsonSemantic c j} :: TableStyle)
-
-debugStyle = (noStyle {
-  th = (\p -> th $ text $ joinWith "." p),
-  td = (\c j -> td $ mconcat $
-    [(small ! className "grey" $ text $ show c), (br), (text $ show j)]
-)}::TableStyle)
-
-
-type ColumnOrdering = [String] -> [String] -> Ordering
-
-inOrdering = (\p1 p2 -> EQ) :: ColumnOrdering
-alphaOrdering = (\p1 p2 -> strcmp (AU.last p1) (AU.last p2)) :: ColumnOrdering
-
-
-type JTableOpts = {
-  style :: TableStyle,
-  columnOrdering :: ColumnOrdering,
-  insertHeaderCells :: Boolean }
-
-defJTableOpts  = {
-  style: noStyle,
-  columnOrdering: inOrdering,
-  insertHeaderCells: false
-} :: JTableOpts
-
-
-renderJTable :: JTableOpts -> Json -> Markup
-renderJTable o = renderJTableRaw o { style = o.style {
-  th = (\t -> o.style.th (t # tPath)),
-  td = (\c -> o.style.td (c # cCursor) (c # cJsonPrim)) }}
-
-renderJTableArray :: JTableOpts -> [Json] -> Markup
-renderJTableArray opt ja = renderJTable opt $ fromArray ja
-
-renderJTableDef :: Json -> Markup
-renderJTableDef = renderJTable defJTableOpts

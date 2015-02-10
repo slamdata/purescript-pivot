@@ -18,8 +18,8 @@ var paths = {
         'all': {
             dest: 'MODULES.md',
             src: [
-              'src/**/*.purs',
-              'src/*.purs'
+              'src/Data.Json.JTable.purs',
+              'src/Data.Json.JSemantic.purs'
             ]
         }
     },
