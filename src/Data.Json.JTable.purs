@@ -36,12 +36,6 @@ noStyle = {
 bootstrapStyle = (noStyle {
   table = \m -> table ! attribute "class" "table" $ m}) :: TableStyle
 
-renderJsonSemantic :: JCursor -> JsonPrim -> String
-renderJsonSemantic = \c j -> show j
-
-semanticStyle = (noStyle {
-  td = \c j -> td $ text $ renderJsonSemantic c j} :: TableStyle)
-
 debugStyle = (noStyle {
   th = (\p -> th $ text $ joinWith "." p),
   td = (\c j -> td $ mconcat $
