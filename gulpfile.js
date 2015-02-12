@@ -19,6 +19,7 @@ var paths = {
             dest: 'MODULES.md',
             src: [
               'src/Data.Json.JTable.purs',
+              'src/Data.Json.JTable.Internal.purs',
               'src/Data.Json.JSemantic.purs'
             ]
         }
