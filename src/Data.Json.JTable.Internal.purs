@@ -89,11 +89,9 @@ tFromJson path json =
         Nothing -> -- array
           let ts = ja <#> tFromJson path
               tk = ts >>= tKids
-              h = 1 + foldl max 0 (tk <#> tHeight)
               t' = foldl tMergeArray (T path 0 0 []) tk
-              w = foldl max (t' # tWidth) (ts <#> tWidth)
-              h' = if null (t' # tKids) then 0 else h
-          in T path w h' (t' # tKids)
+              w = max 1 (t' # tWidth)
+          in T path w (t' # tHeight) (t' # tKids)
 
 
 cMergeObj :: [[[Cell]]] -> [[Cell]]
