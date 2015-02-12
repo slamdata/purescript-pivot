@@ -42,8 +42,6 @@ Into this:
 
 [Try it](/examples/try.html) with your own data or some samples.
 
-TODO: See [examples/examples.html](/examples/examples.html) for different ways of calling the library.
-
 
 ## How?
 

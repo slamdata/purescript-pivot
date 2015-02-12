@@ -15,17 +15,33 @@
 <h3>purescript-jtable examples</h3>
 
 <div>
+
   Load example:
   <select id="select">
+    <option value="simple">Simple</option>
     <option value="comprehensive">Comprehensive</option>
-    <option value="olympic">Olympic games</option>
+    <option value="readme">Example from Readme</option>
+    <option value="olympic">Olympic Games</option>
     <option value="1">other 1</option>
     <option value="2">other 2</option>
     <option value="3">other 3</option>
   </select>
   &nbsp;
   (or paste json below)
-  <br/>
+  <p></p>
+
+  Renderer:
+  <select id="select_renderer">
+    <option value="Default">Default</option>
+    <option value="Debug">Debug</option>
+    <option value="Semantic" selected>Semantic</option>
+    <option value="AlphaColumnOrdering">Alphabetic Column Ordering</option>
+    <option value="AltHeader">Alternate Header</option>
+  </select>
+  &nbsp;
+  see <a href="../src/Data.Json.JTable.Examples.purs" target="_blank">Data.Json.JTable.Examples.purs</a>
+  <p></p>
+
   <button id="but_render">Render</button>
   &nbsp;
   <button id="but_benchmark">Benchmark (avg 100 renders)</button>
@@ -39,6 +55,42 @@
 
 
 <div style="display:none">
+<pre id="example-simple">
+{
+  "observations" : [{
+    "name": "RJD2",
+    "metadata": {
+      "time": "1981-04-01T06:55:00+00:00"
+    },
+    "change": "3.4%",
+    "verified": true,
+    "notes": [
+      "gps malfunction, location data unavailable"
+    ]
+  }, {
+    "name": "RXD2",
+    "metadata": {
+      "location": [38.991,-76.852],
+      "time": "1981-04-01T07:14:00+00:00"
+    },
+    "change": "0%",
+    "verified": true
+  }, {
+    "name": "RXD5",
+    "metadata": {
+      "location": [47.669,-122.121],
+      "time": "1981-04-01T09:32:00+00:00"
+    },
+    "change": "-6.1%",
+    "verified": false,
+    "notes": [
+      "data could not be verified",
+      "interference detected"
+    ]
+  }],
+  "results": "inconclusive"
+}
+</pre>
 <pre id="example-comprehensive">[
 {
   "example": {
@@ -166,7 +218,25 @@
 }
 ]
 </pre>
-
+<pre id="example-readme">{
+  "userId": 8927524,
+  "profile": {
+    "name":   "Mary Jane",
+    "age":    29,
+    "gender": "female"
+  },
+  "comments": [{
+    "id":       "F2372BAC",
+    "text":     "I concur.",
+    "replyTo":  [9817361, "F8ACD164F"],
+    "time":     "2015-02-03"
+  }, {
+    "id":       "GH732AFC",
+    "replyTo":  [9654726, "A44124F"],
+    "time":     "2015-03-01"
+  }]
+}
+</pre>
 <!-- source: "https://www.freebase.com/user/dimitrisandreou/views/olympic_games?mql=" -->
 <pre id="example-olympic">
 { 
@@ -1394,30 +1464,34 @@ window.addEventListener("load", function () {
   var S = function (id) { return document.getElementById(id) }
   var Sm = PS.Text_Smolder_Renderer_String
   var JT = PS.Data_Json_JTable
+  var JTE = PS.Data_Json_JTable_Examples
   
   var render = function () { try { 
     var inp = JSON.parse(S("in").value)
-    var out = Sm.render(JT.renderJTableDef(inp))
+    var renderer = JTE["exampleRenderer"+S("select_renderer").value]
+    var out = Sm.render(renderer(inp))
     S("out").innerHTML = out
-  } catch (err) { S("out").innerText = err}}
+  } catch (err) { S("out").innerText = err; throw err}}
   
   var benchmark = function () { try {
     var inp = JSON.parse(S("in").value)
+    var renderer = JTE["exampleRenderer"+S("select_renderer").value]
     var markup;
-    t1 = performance.now()
+    var t1 = performance.now()
     for (var i=0; i<100; i++) {
-      markup = JT.renderJTableDef(inp) }
-    t2 = performance.now()
+      markup = renderer(inp) }
+    var t2 = performance.now()
     var out = Sm.render(markup)
     S("out").innerHTML = out
     S("benchmark").innerText = (Math.floor(t2 - t1) / 100) + " ms"
-  } catch (err) { S("out").innerText = err}}
+  } catch (err) { S("out").innerText = err; throw err}}
 
   var select_example = function () {
     S("in").value = S("example-" + S("select").value).innerHTML 
     render() }
   
   S("select").addEventListener("change", select_example) 
+  S("select_renderer").addEventListener("change", render) 
   S("but_render").addEventListener("click", render)
   S("but_benchmark").addEventListener("click", benchmark)
 
