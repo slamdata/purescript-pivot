@@ -7,6 +7,7 @@ import Text.Smolder.HTML (table, thead, tbody, tr, th, td, br, span, small)
 import Text.Smolder.Markup ((!), text)
 import qualified Text.Smolder.Renderer.String (render) as Sm
 import Debug.Trace
+import Debug.Spy
 
 import Data.Json.JTable.Internal
 import Data.Json.JTable
@@ -28,6 +29,7 @@ foreign import jObj2Obj2 "var jObj2Obj2 = {a:1, b: {b1: 'one', b2: false}}" :: J
 foreign import jObjArr2Tup2 "var jObjArr2Tup2 = {a:[[1, 'two'], [3, 'four']]}" :: Json
 foreign import jTup2Obj "var jTup2Obj = [{x:1}, {y:2}]" :: [Json]
 foreign import jObjTup2Obj "var jObjTup2Obj = {a:[{x:1}, {y:2}]}" :: Json
+foreign import jObj2EArr "var jObj2EArr = {a:[], b:'one'}" :: Json
 
 
 main = do
@@ -60,7 +62,7 @@ main = do
     tf "e" "é" LT
     tf "É" "e" GT
   test "renderJTableRaw" do
-    let tf s j r = assert s $ (Sm.render $ renderJTableDef j) == r
+    let tf s j r = assert s $ (spy $ Sm.render $ renderJTableDef j) == r
     tf "null" jNull $ 
       "<table><thead/><tbody><tr><td>&nbsp;</td></tr></tbody></table>"
     tf "0" j0 $ 
@@ -82,6 +84,9 @@ main = do
       "<table><thead><tr><th colspan=\"2\">a</th></tr>" ++ 
       "<tr><th>x</th><th>y</th></tr></thead>" ++ 
       "<tbody><tr><td>1</td><td>2</td></tr></tbody></table>"
+    tf "jObj2EArr" jObj2EArr $ 
+      "<table><thead><tr><th>a</th><th>b</th></tr></thead>" ++ 
+      "<tbody><tr><td>&nbsp;</td><td>one</td></tr></tbody></table>"
   test "insertHeaderCells" do
     let o = defJTableOpts {insertHeaderCells = true}
     let tf s j r = assert s $ (Sm.render $ renderJTable o j) == r

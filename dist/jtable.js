@@ -19612,7 +19612,7 @@ function (s1) { return function (s2) {
         return function (_973) {
             return function (_974) {
                 var joms = Prelude["<#>"](Data_Array.functorArray)(_974)(Data_Argonaut_Core.toObject);
-                var _3638 = !Data_Foldable.all(Data_Foldable.foldableArray)(Data_Maybe.isJust)(joms);
+                var _3638 = Data_Array["null"](_974) || !Data_Foldable.all(Data_Foldable.foldableArray)(Data_Maybe.isJust)(joms);
                 if (_3638) {
                     return Data_Maybe.Nothing.value;
                 };

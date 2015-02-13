@@ -121,7 +121,7 @@ cMergeObj rss = do
 mergeObjTuple ::Tree -> JCursor -> [Json] -> Maybe [[Cell]]
 mergeObjTuple t@(T p w h k) c ja = 
   let joms = ja <#> toObject
-  in if not $ all isJust joms then Nothing
+  in if (null ja) || (not $ all isJust joms) then Nothing
      else let jos = catMaybes joms
               keyss = jos <#> M.keys
               all_keys = concat keyss
