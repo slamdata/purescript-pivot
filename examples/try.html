@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>purescript-jtable examples</title>
+  <title>try purescript-jtable</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     html {font-family: sans-serif;}
@@ -42,7 +42,7 @@
   see <a href="../src/Data.Json.JTable.Examples.purs" target="_blank">Data.Json.JTable.Examples.purs</a>
   <p></p>
 
-  <button id="but_render">Render</button>
+  <button id="but_render">Render (Ctrl+Enter)</button>
   &nbsp;
   <button id="but_benchmark">Benchmark (avg 100 renders)</button>
   <span id="benchmark"></span>
@@ -197,6 +197,13 @@
     }
   ],
   "notes": "A tuple (list) of objects with disjunct keys is rendered side-by-side."
+}, {
+  "example": {
+    "left": {
+      "x": [47.492, 19.752]
+    }
+  },
+  "notes": "Two element lists are also tuples. Handy for latlng and such."
 }, {
   "example": {
     "left" : [
@@ -1494,7 +1501,9 @@ window.addEventListener("load", function () {
   S("select_renderer").addEventListener("change", render) 
   S("but_render").addEventListener("click", render)
   S("but_benchmark").addEventListener("click", benchmark)
-
+  S("in").addEventListener("keydown", function(e) {
+    if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) { render() } } )
+  
   select_example() 
 })
 </script>
