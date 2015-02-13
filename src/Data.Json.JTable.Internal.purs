@@ -2,7 +2,7 @@ module Data.Json.JTable.Internal
   ( renderJTableRaw, renderRows, renderThead, renderTbody, tsToRows, sortTree
   , Tree(..), tPath, tWidth, tHeight, tKids
   , Cell(..), cCursor, cWidth, cHeight, cJsonPrim
-  , tFromJson, tMergeArray, widthOfPrimTuple
+  , tFromJson, tMergeArray, widthOfPrimTuple, insertHeaderCells
   , cFromJson, cMergeObj, mergeObjTuple
   , _cN, toPrim, strcmp, localeCompare, _nattr, _cspan, _rspan
   ) where
@@ -69,7 +69,7 @@ tMergeArray (T p w h k) t1@(T p1 w1 h1 k1) =
                                h' = max h (h2' + 1)
                            in T p w' h' k'
     Nothing -> let w' = if null k then w1 else w+w1
-                   h' = max h h1+1
+                   h' = max h (h1 + 1)
                    k' = snoc k (T p1 w1 h1 k1)
                in T p w' h' k'
 
@@ -188,9 +188,19 @@ strcmp :: String -> String -> Ordering
 strcmp s1 s2 = compare (localeCompare s1 s2) 0
 
 
+insertHeaderCells :: Number -> Tree -> Tree
+insertHeaderCells maxh t@(T p w h k) = 
+  if null k 
+  then if maxh > 0 then T [] w 1 [insertHeaderCells (maxh-1) t]
+                   else T p w 1 k
+  else T p w h (k <#> insertHeaderCells (maxh - 1))
+
+
 -- renderJTableRaw :: {...} -> Json
 renderJTableRaw o json = 
   o.style.table $ do 
-    let t = sortTree o.columnOrdering $ tFromJson [] json
-    thead $ renderThead o.style.tr o.style.th t
+    let t  = sortTree o.columnOrdering $ tFromJson [] json
+    let t' = if o.insertHeaderCells then insertHeaderCells (t # tHeight) t 
+                                    else t
+    thead $ renderThead o.style.tr o.style.th t'
     tbody $ renderTbody o.style.tr o.style.td t json

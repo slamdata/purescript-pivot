@@ -60,6 +60,9 @@
     cMergeObj :: [[[Cell]]] -> [[Cell]]
 
 
+    insertHeaderCells :: Number -> Tree -> Tree
+
+
     localeCompare :: String -> String -> Number
 
 
