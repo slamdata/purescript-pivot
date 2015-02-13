@@ -24,6 +24,7 @@ import Text.Smolder.HTML (thead, tbody, tr, th, td)
 import Text.Smolder.Markup (Markup(..), Attribute(..), attribute, (!))
 
 
+-- header data
 data Tree = T [String] Number Number [Tree]
 tPath (T p _ _ _) = p
 tWidth (T _ w _ _) = w
@@ -33,6 +34,7 @@ tKids (T _ _ _ k) = k
 instance showTree :: Show Tree where
   show (T p w h k) = joinWith " " ["<T", show p, show w, show h, show k, ">"]
 
+-- cell data
 data Cell = C  JCursor Number Number JsonPrim
 cCursor (C c _ _ _) = c
 cWidth (C _ w _ _) = w
@@ -49,6 +51,7 @@ _cN = const primNull
 toPrim = (foldJson _cN primBool primNum primStr _cN _cN) :: Json -> JsonPrim
 
 
+-- maybe return the width of a tuple composed of primitive values
 widthOfPrimTuple :: [String] -> [Json] -> Maybe Number
 widthOfPrimTuple path ja = 
   if null path || length ja <= 1 then Nothing else let
@@ -59,7 +62,7 @@ widthOfPrimTuple path ja =
     in if has_arr_or_obj || (all_eq && length ja > 2) then Nothing 
                                                       else Just $ length ja
 
-
+-- add child to tree, unify if exists
 tMergeArray :: Tree -> Tree -> Tree
 tMergeArray (T p w h k) t1@(T p1 w1 h1 k1) =
   let i = findIndex (\n -> last p1 == last (n # tPath)) k in case k !! i of
@@ -73,7 +76,7 @@ tMergeArray (T p w h k) t1@(T p1 w1 h1 k1) =
                    k' = snoc k (T p1 w1 h1 k1)
                in T p w' h' k'
 
-
+-- produce a tree of header data from json
 tFromJson :: [String] -> Json -> Tree
 tFromJson path json =
   case json # toObject of -- object
@@ -94,6 +97,7 @@ tFromJson path json =
           in T path w (t' # tHeight) (t' # tKids)
 
 
+-- merge table segments for each key of an object into one
 cMergeObj :: [[[Cell]]] -> [[Cell]]
 cMergeObj rss = do
   let maxh = foldl (\n l -> max n $ length l) 0 rss
@@ -107,6 +111,7 @@ cMergeObj rss = do
                              else fromMaybe [] $ rs !! n 
               else fromMaybe [C (JCursorTop) w 1 primNull] $ rs !! n
 
+-- maybe merge a tuple of objects into a table segment
 mergeObjTuple ::Tree -> JCursor -> [Json] -> Maybe [[Cell]]
 mergeObjTuple t@(T p w h k) c ja = 
   let joms = ja <#> toObject
@@ -124,6 +129,7 @@ mergeObjTuple t@(T p w h k) c ja =
                let j = fromMaybe jnull $ M.lookup label jo
                return $ cFromJson t' (downField label $ downIndex i c) j
 
+-- produce data table from json, according to header tree
 cFromJson :: Tree -> JCursor -> Json -> [[Cell]]
 cFromJson t@(T p w h k) c json = 
   case json # toObject of 
@@ -147,7 +153,7 @@ cFromJson t@(T p w h k) c json =
             (Tuple j i)<- ja `zip` (0 .. length ja)
             return $ cFromJson t (downIndex i c) j
 
-
+-- render a grid from an array of arrays
 renderRows :: forall a. (Markup -> Markup) -> (Number -> Number -> a -> Markup) -> [[a]] -> Markup
 renderRows tr' cellf rows = mconcat $ do
   (Tuple row y) <- rows `zip` (0 .. length rows)
@@ -160,6 +166,7 @@ _nattr attr n m = if n > 1 then m ! (attribute attr $ show n) else m
 _cspan = _nattr "colspan"
 _rspan = _nattr "rowspan"
 
+-- produce header rows from header tree
 tsToRows :: [Tree] -> [[Tree]]
 tsToRows ts = if null ts then [] else ts : tsToRows (ts >>= tKids)
 
@@ -174,7 +181,7 @@ renderTbody tr' tdf t json =
   let tdf' y x cell@(C c w h j) = tdf cell # _cspan w >>> _rspan h
   in renderRows tr' tdf' $ cFromJson t JCursorTop json
 
-
+-- sort header tree by ColumnOrdering
 sortTree :: ([String] -> [String] -> Ordering) -> Tree -> Tree
 sortTree ord (T p w h k) = T p w h ( 
   sortBy (\t1 t2 -> ord (t1 # tPath) (t2 # tPath)) (k <#> sortTree ord))
@@ -188,6 +195,7 @@ strcmp :: String -> String -> Ordering
 strcmp s1 s2 = compare (localeCompare s1 s2) 0
 
 
+-- pad tall header cells from above
 insertHeaderCells :: Number -> Tree -> Tree
 insertHeaderCells maxh t@(T p w h k) = 
   if null k 

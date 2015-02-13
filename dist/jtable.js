@@ -356,28 +356,28 @@ PS.Prelude = (function () {
     var shr = function (dict) {
         return dict.shr;
     };
-    var showUnit = new Show(function (_86) {
+    var showUnit = new Show(function (_88) {
         return "Unit {}";
     });
     var showString = new Show(showStringImpl);
-    var showOrdering = new Show(function (_94) {
-        if (_94 instanceof LT) {
+    var showOrdering = new Show(function (_96) {
+        if (_96 instanceof LT) {
             return "LT";
         };
-        if (_94 instanceof GT) {
+        if (_96 instanceof GT) {
             return "GT";
         };
-        if (_94 instanceof EQ) {
+        if (_96 instanceof EQ) {
             return "EQ";
         };
         throw new Error("Failed pattern match");
     });
     var showNumber = new Show(showNumberImpl);
-    var showBoolean = new Show(function (_87) {
-        if (_87) {
+    var showBoolean = new Show(function (_89) {
+        if (_89) {
             return "true";
         };
-        if (!_87) {
+        if (!_89) {
             return "false";
         };
         throw new Error("Failed pattern match");
@@ -398,8 +398,8 @@ PS.Prelude = (function () {
             };
         };
     });
-    var semigroupUnit = new Semigroup(function (_101) {
-        return function (_102) {
+    var semigroupUnit = new Semigroup(function (_103) {
+        return function (_104) {
             return {};
         };
     });
@@ -454,19 +454,19 @@ PS.Prelude = (function () {
             };
         };
     };
-    var eqUnit = new Eq(function (_90) {
-        return function (_91) {
+    var eqUnit = new Eq(function (_92) {
+        return function (_93) {
             return false;
         };
-    }, function (_88) {
-        return function (_89) {
+    }, function (_90) {
+        return function (_91) {
             return true;
         };
     });
     var ordUnit = new Ord(function () {
         return eqUnit;
-    }, function (_95) {
-        return function (_96) {
+    }, function (_97) {
+        return function (_98) {
             return EQ.value;
         };
     });
@@ -481,26 +481,26 @@ PS.Prelude = (function () {
     var eqBoolean = new Eq(refIneq, refEq);
     var ordBoolean = new Ord(function () {
         return eqBoolean;
-    }, function (_97) {
-        return function (_98) {
-            if (!_97 && !_98) {
+    }, function (_99) {
+        return function (_100) {
+            if (!_99 && !_100) {
                 return EQ.value;
             };
-            if (!_97 && _98) {
+            if (!_99 && _100) {
                 return LT.value;
             };
-            if (_97 && _98) {
+            if (_99 && _100) {
                 return EQ.value;
             };
-            if (_97 && !_98) {
+            if (_99 && !_100) {
                 return GT.value;
             };
             throw new Error("Failed pattern match");
         };
     });
-    var $$const = function (_82) {
-        return function (_83) {
-            return _82;
+    var $$const = function (_84) {
+        return function (_85) {
+            return _84;
         };
     };
     var $$void = function (__dict_Functor_9) {
@@ -517,8 +517,8 @@ PS.Prelude = (function () {
     var $less = function (__dict_Ord_11) {
         return function (a1) {
             return function (a2) {
-                var _1136 = compare(__dict_Ord_11)(a1)(a2);
-                if (_1136 instanceof LT) {
+                var _1144 = compare(__dict_Ord_11)(a1)(a2);
+                if (_1144 instanceof LT) {
                     return true;
                 };
                 return false;
@@ -528,8 +528,8 @@ PS.Prelude = (function () {
     var $less$eq = function (__dict_Ord_12) {
         return function (a1) {
             return function (a2) {
-                var _1137 = compare(__dict_Ord_12)(a1)(a2);
-                if (_1137 instanceof GT) {
+                var _1145 = compare(__dict_Ord_12)(a1)(a2);
+                if (_1145 instanceof GT) {
                     return false;
                 };
                 return true;
@@ -539,8 +539,8 @@ PS.Prelude = (function () {
     var $greater = function (__dict_Ord_13) {
         return function (a1) {
             return function (a2) {
-                var _1138 = compare(__dict_Ord_13)(a1)(a2);
-                if (_1138 instanceof GT) {
+                var _1146 = compare(__dict_Ord_13)(a1)(a2);
+                if (_1146 instanceof GT) {
                     return true;
                 };
                 return false;
@@ -550,8 +550,8 @@ PS.Prelude = (function () {
     var $greater$eq = function (__dict_Ord_14) {
         return function (a1) {
             return function (a2) {
-                var _1139 = compare(__dict_Ord_14)(a1)(a2);
-                if (_1139 instanceof LT) {
+                var _1147 = compare(__dict_Ord_14)(a1)(a2);
+                if (_1147 instanceof LT) {
                     return false;
                 };
                 return true;
@@ -578,26 +578,26 @@ PS.Prelude = (function () {
     var ordArray = function (__dict_Ord_10) {
         return new Ord(function () {
             return eqArray(__dict_Ord_10["__superclass_Prelude.Eq_0"]());
-        }, function (_99) {
-            return function (_100) {
-                if (_99.length === 0 && _100.length === 0) {
+        }, function (_101) {
+            return function (_102) {
+                if (_101.length === 0 && _102.length === 0) {
                     return EQ.value;
                 };
-                if (_99.length === 0) {
+                if (_101.length === 0) {
                     return LT.value;
                 };
-                if (_100.length === 0) {
+                if (_102.length === 0) {
                     return GT.value;
                 };
-                if (_99.length >= 1) {
-                    var _1146 = _99.slice(1);
-                    if (_100.length >= 1) {
-                        var _1144 = _100.slice(1);
-                        var _1142 = compare(__dict_Ord_10)(_99[0])(_100[0]);
-                        if (_1142 instanceof EQ) {
-                            return compare(ordArray(__dict_Ord_10))(_1146)(_1144);
+                if (_101.length >= 1) {
+                    var _1154 = _101.slice(1);
+                    if (_102.length >= 1) {
+                        var _1152 = _102.slice(1);
+                        var _1150 = compare(__dict_Ord_10)(_101[0])(_102[0]);
+                        if (_1150 instanceof EQ) {
+                            return compare(ordArray(__dict_Ord_10))(_1154)(_1152);
                         };
-                        return _1142;
+                        return _1150;
                     };
                 };
                 throw new Error("Failed pattern match");
@@ -608,24 +608,24 @@ PS.Prelude = (function () {
         return function (y) {
             return not(boolLikeBoolean)($eq$eq(eqOrdering)(x)(y));
         };
-    }, function (_92) {
-        return function (_93) {
-            if (_92 instanceof LT && _93 instanceof LT) {
+    }, function (_94) {
+        return function (_95) {
+            if (_94 instanceof LT && _95 instanceof LT) {
                 return true;
             };
-            if (_92 instanceof GT && _93 instanceof GT) {
+            if (_94 instanceof GT && _95 instanceof GT) {
                 return true;
             };
-            if (_92 instanceof EQ && _93 instanceof EQ) {
+            if (_94 instanceof EQ && _95 instanceof EQ) {
                 return true;
             };
             return false;
         };
     });
     var bitsNumber = new Bits(numAnd, numXor, numOr, numComplement, numShl, numShr, numZshr);
-    var asTypeOf = function (_84) {
-        return function (_85) {
-            return _84;
+    var asTypeOf = function (_86) {
+        return function (_87) {
+            return _86;
         };
     };
     var applyArr = new Apply(function (f) {
@@ -928,16 +928,16 @@ PS.Optic_Internal_Iso = (function () {
         };
         return Exchange;
     })();
-    var profunctorExchange = new Data_Profunctor.Profunctor(function (_105) {
-        return function (_106) {
-            return function (_107) {
-                return new Exchange(Prelude[">>>"](Prelude.semigroupoidArr)(_105)(_107.value0), Prelude[">>>"](Prelude.semigroupoidArr)(_107.value1)(_106));
+    var profunctorExchange = new Data_Profunctor.Profunctor(function (_107) {
+        return function (_108) {
+            return function (_109) {
+                return new Exchange(Prelude[">>>"](Prelude.semigroupoidArr)(_107)(_109.value0), Prelude[">>>"](Prelude.semigroupoidArr)(_109.value1)(_108));
             };
         };
     });
-    var functorExchange = new Prelude.Functor(function (_103) {
-        return function (_104) {
-            return new Exchange(_104.value0, Prelude[">>>"](Prelude.semigroupoidArr)(_104.value1)(_103));
+    var functorExchange = new Prelude.Functor(function (_105) {
+        return function (_106) {
+            return new Exchange(_106.value0, Prelude[">>>"](Prelude.semigroupoidArr)(_106.value1)(_105));
         };
     });
     return {
@@ -1270,27 +1270,27 @@ PS.Data_Char = (function () {
     var Char = function (x) {
         return x;
     };
-    var showChar = new Prelude.Show(function (_113) {
-        return "Char " + Prelude.show(Prelude.showString)(_113);
+    var showChar = new Prelude.Show(function (_115) {
+        return "Char " + Prelude.show(Prelude.showString)(_115);
     });
     var eqChar = new Prelude.Eq(function (a) {
         return function (b) {
             return !Prelude["=="](eqChar)(a)(b);
         };
-    }, function (_109) {
-        return function (_110) {
-            return _109 === _110;
+    }, function (_111) {
+        return function (_112) {
+            return _111 === _112;
         };
     });
     var ordChar = new Prelude.Ord(function () {
         return eqChar;
-    }, function (_111) {
-        return function (_112) {
-            return Prelude.compare(Prelude.ordString)(_111)(_112);
+    }, function (_113) {
+        return function (_114) {
+            return Prelude.compare(Prelude.ordString)(_113)(_114);
         };
     });
-    var charString = function (_108) {
-        return _108;
+    var charString = function (_110) {
+        return _110;
     };
     return {
         toCharCode: toCharCode, 
@@ -1548,11 +1548,11 @@ PS.Control_Monad_Eff_Random = (function () {
             var floor = function (x) {
                 var ix = 0 | x;
                 return ix - (function () {
-                    var _1169 = ix > x;
-                    if (_1169) {
+                    var _1177 = ix > x;
+                    if (_1177) {
                         return 1;
                     };
-                    if (!_1169) {
+                    if (!_1177) {
                         return 0;
                     };
                     throw new Error("Failed pattern match");
@@ -1568,6 +1568,75 @@ PS.Control_Monad_Eff_Random = (function () {
         randomRange: randomRange, 
         randomInt: randomInt, 
         random: random
+    };
+})();
+var PS = PS || {};
+PS.Control_Monad_Eff_Ref = (function () {
+    "use strict";
+    var Prelude = PS.Prelude;
+    var Control_Monad_Eff = PS.Control_Monad_Eff;
+    
+  function newRef(val) {
+    return function () {
+      return { value: val };
+    };
+  }
+;
+    
+  function readRef(ref) {
+    return function() {
+      return ref.value;
+    };
+  }
+;
+    
+  function modifyRef$prime(ref) {
+    return function(f) {
+      return function() {
+        var t = f(ref.value);
+        ref.value = t.newState;
+        return t.retVal;
+      };
+    };
+  }
+;
+    
+  function writeRef(ref) {
+    return function(val) {
+      return function() {
+        ref.value = val;
+        return {};
+      };
+    };
+  }
+;
+    var modifyRef = function (ref) {
+        return function (f) {
+            return modifyRef$prime(ref)(function (s) {
+                return {
+                    newState: f(s), 
+                    retVal: Prelude.unit
+                };
+            });
+        };
+    };
+    return {
+        writeRef: writeRef, 
+        modifyRef: modifyRef, 
+        "modifyRef'": modifyRef$prime, 
+        readRef: readRef, 
+        newRef: newRef
+    };
+})();
+var PS = PS || {};
+PS.Control_Monad_Eff_Ref_Unsafe = (function () {
+    "use strict";
+    var Prelude = PS.Prelude;
+    var Control_Monad_Eff = PS.Control_Monad_Eff;
+    var Control_Monad_Eff_Ref = PS.Control_Monad_Eff_Ref;
+    function unsafeRunRef(f) {  return f;};
+    return {
+        unsafeRunRef: unsafeRunRef
     };
 })();
 var PS = PS || {};
@@ -1636,6 +1705,55 @@ PS.Control_Monad_ST = (function () {
         modifySTRef: modifySTRef, 
         readSTRef: readSTRef, 
         newSTRef: newSTRef
+    };
+})();
+var PS = PS || {};
+PS.Control_Timer = (function () {
+    "use strict";
+    var Prelude = PS.Prelude;
+    var Control_Monad_Eff = PS.Control_Monad_Eff;
+    var globalEnv = typeof window === 'undefined' ? global : window;
+    
+  function timeout(time){
+    return function(fn){
+      return function(){
+        return globalEnv.setTimeout(function(){
+          fn();
+        }, time);
+      };
+    };
+  }
+;
+    
+  function clearTimeout(timer){
+    return function(){
+      return globalEnv.clearTimeout(timer);
+    };
+  }
+;
+    
+  function interval(time){
+    return function(fn){
+      return function(){
+        return globalEnv.setInterval(function(){
+          fn();
+        }, time);
+      };
+    };
+  }
+;
+    
+  function clearInterval(timer){
+    return function(){
+      return globalEnv.clearInterval(timer);
+    };
+  }
+;
+    return {
+        clearInterval: clearInterval, 
+        interval: interval, 
+        clearTimeout: clearTimeout, 
+        timeout: timeout
     };
 })();
 var PS = PS || {};
@@ -1718,6 +1836,57 @@ PS.Debug_Foreign_Eval = (function () {
     };
 })();
 var PS = PS || {};
+PS.Test_Unit_Console = (function () {
+    "use strict";
+    var Prelude = PS.Prelude;
+    var Control_Monad_Eff = PS.Control_Monad_Eff;
+    
+  function savePos() {
+    process.stderr.write("\x1b[s");
+  };
+    
+  function restorePos() {
+    process.stderr.write("\x1b[u");
+  };
+    
+  function eraseLine() {
+    process.stderr.write("\x1b[K");
+  };
+    
+  function print(s) {
+    return function() {
+      process.stderr.write("\x1b[33m" + s + "\x1b[0m");
+    };
+  };
+    
+  function printLabel(s) {
+    return function() {
+      process.stderr.write("\x1b[33;1m" + s + "\x1b[0m");
+    };
+  };
+    
+  function printFail(s) {
+    return function() {
+      process.stderr.write("\x1b[31;1m" + s + "\x1b[0m");
+    };
+  };
+    
+  function printPass(s) {
+    return function() {
+      process.stderr.write("\x1b[32m" + s + "\x1b[0m");
+    };
+  };
+    return {
+        printPass: printPass, 
+        printFail: printFail, 
+        printLabel: printLabel, 
+        print: print, 
+        eraseLine: eraseLine, 
+        restorePos: restorePos, 
+        savePos: savePos
+    };
+})();
+var PS = PS || {};
 PS.Control_Monad_Cont_Trans = (function () {
     "use strict";
     var Prelude = PS.Prelude;
@@ -1725,9 +1894,9 @@ PS.Control_Monad_Cont_Trans = (function () {
     var ContT = function (x) {
         return x;
     };
-    var runContT = function (_114) {
-        return function (_115) {
-            return _114(_115);
+    var runContT = function (_116) {
+        return function (_117) {
+            return _116(_117);
         };
     };
     var withContT = function (f) {
@@ -1838,12 +2007,12 @@ PS.Control_Monad = (function () {
     "use strict";
     var Prelude = PS.Prelude;
     var when = function (__dict_Monad_28) {
-        return function (_121) {
-            return function (_122) {
-                if (_121) {
-                    return _122;
+        return function (_123) {
+            return function (_124) {
+                if (_123) {
+                    return _124;
                 };
-                if (!_121) {
+                if (!_123) {
                     return Prelude["return"](__dict_Monad_28)(Prelude.unit);
                 };
                 throw new Error("Failed pattern match");
@@ -1851,12 +2020,12 @@ PS.Control_Monad = (function () {
         };
     };
     var unless = function (__dict_Monad_29) {
-        return function (_123) {
-            return function (_124) {
-                if (!_123) {
-                    return _124;
+        return function (_125) {
+            return function (_126) {
+                if (!_125) {
+                    return _126;
                 };
-                if (_123) {
+                if (_125) {
                     return Prelude["return"](__dict_Monad_29)(Prelude.unit);
                 };
                 throw new Error("Failed pattern match");
@@ -1864,13 +2033,13 @@ PS.Control_Monad = (function () {
         };
     };
     var replicateM = function (__dict_Monad_30) {
-        return function (_116) {
-            return function (_117) {
-                if (_116 === 0) {
+        return function (_118) {
+            return function (_119) {
+                if (_118 === 0) {
                     return Prelude["return"](__dict_Monad_30)([  ]);
                 };
-                return Prelude[">>="](__dict_Monad_30["__superclass_Prelude.Bind_1"]())(_117)(function (_6) {
-                    return Prelude[">>="](__dict_Monad_30["__superclass_Prelude.Bind_1"]())(replicateM(__dict_Monad_30)(_116 - 1)(_117))(function (_5) {
+                return Prelude[">>="](__dict_Monad_30["__superclass_Prelude.Bind_1"]())(_119)(function (_6) {
+                    return Prelude[">>="](__dict_Monad_30["__superclass_Prelude.Bind_1"]())(replicateM(__dict_Monad_30)(_118 - 1)(_119))(function (_5) {
                         return Prelude["return"](__dict_Monad_30)(Prelude[":"](_6)(_5));
                     });
                 });
@@ -1878,16 +2047,16 @@ PS.Control_Monad = (function () {
         };
     };
     var foldM = function (__dict_Monad_31) {
-        return function (_118) {
-            return function (_119) {
-                return function (_120) {
-                    if (_120.length === 0) {
-                        return Prelude["return"](__dict_Monad_31)(_119);
+        return function (_120) {
+            return function (_121) {
+                return function (_122) {
+                    if (_122.length === 0) {
+                        return Prelude["return"](__dict_Monad_31)(_121);
                     };
-                    if (_120.length >= 1) {
-                        var _1185 = _120.slice(1);
-                        return Prelude[">>="](__dict_Monad_31["__superclass_Prelude.Bind_1"]())(_118(_119)(_120[0]))(function (a$prime) {
-                            return foldM(__dict_Monad_31)(_118)(a$prime)(_1185);
+                    if (_122.length >= 1) {
+                        var _1193 = _122.slice(1);
+                        return Prelude[">>="](__dict_Monad_31["__superclass_Prelude.Bind_1"]())(_120(_121)(_122[0]))(function (a$prime) {
+                            return foldM(__dict_Monad_31)(_120)(a$prime)(_1193);
                         });
                     };
                     throw new Error("Failed pattern match");
@@ -2069,10 +2238,10 @@ PS.Data_Coyoneda = (function () {
         return x;
     };
     var lowerCoyoneda = function (__dict_Functor_41) {
-        return function (_131) {
-            return Data_Exists.runExists(function (_129) {
-                return Prelude["<$>"](__dict_Functor_41)(_129.k)(_129.fi);
-            })(_131);
+        return function (_133) {
+            return Data_Exists.runExists(function (_131) {
+                return Prelude["<$>"](__dict_Functor_41)(_131.k)(_131.fi);
+            })(_133);
         };
     };
     var liftCoyoneda = function (fa) {
@@ -2092,29 +2261,29 @@ PS.Data_Coyoneda = (function () {
             }));
         };
     };
-    var functorCoyoneda = new Prelude.Functor(function (_134) {
-        return function (_135) {
-            return Data_Exists.runExists(function (_125) {
-                return coyoneda(Prelude["<<<"](Prelude.semigroupoidArr)(_134)(_125.k))(_125.fi);
-            })(_135);
+    var functorCoyoneda = new Prelude.Functor(function (_136) {
+        return function (_137) {
+            return Data_Exists.runExists(function (_127) {
+                return coyoneda(Prelude["<<<"](Prelude.semigroupoidArr)(_136)(_127.k))(_127.fi);
+            })(_137);
         };
     });
     var extendCoyoneda = function (__dict_Extend_43) {
-        return new Control_Extend.Extend(function (_138) {
-            return function (_139) {
-                return Data_Exists.runExists(function (_127) {
-                    return liftCoyoneda(Control_Extend["<<="](__dict_Extend_43)(Prelude["<<<"](Prelude.semigroupoidArr)(_138)(coyoneda(_127.k)))(_127.fi));
-                })(_139);
+        return new Control_Extend.Extend(function (_140) {
+            return function (_141) {
+                return Data_Exists.runExists(function (_129) {
+                    return liftCoyoneda(Control_Extend["<<="](__dict_Extend_43)(Prelude["<<<"](Prelude.semigroupoidArr)(_140)(coyoneda(_129.k)))(_129.fi));
+                })(_141);
             };
         }, function () {
             return functorCoyoneda;
         });
     };
-    var liftCoyonedaT = function (_132) {
-        return function (_133) {
-            return Data_Exists.runExists(function (_130) {
-                return coyoneda(_130.k)(_132(_130.fi));
-            })(_133);
+    var liftCoyonedaT = function (_134) {
+        return function (_135) {
+            return Data_Exists.runExists(function (_132) {
+                return coyoneda(_132.k)(_134(_132.fi));
+            })(_135);
         };
     };
     var liftCoyonedaTF = function (__dict_Functor_44) {
@@ -2125,10 +2294,10 @@ PS.Data_Coyoneda = (function () {
     var comonadCoyoneda = function (__dict_Comonad_45) {
         return new Control_Comonad.Comonad(function () {
             return extendCoyoneda(__dict_Comonad_45["__superclass_Control.Extend.Extend_0"]());
-        }, function (_140) {
-            return Data_Exists.runExists(function (_128) {
-                return _128.k(Control_Comonad.extract(__dict_Comonad_45)(_128.fi));
-            })(_140);
+        }, function (_142) {
+            return Data_Exists.runExists(function (_130) {
+                return _130.k(Control_Comonad.extract(__dict_Comonad_45)(_130.fi));
+            })(_142);
         });
     };
     var applyCoyoneda = function (__dict_Apply_47) {
@@ -2141,11 +2310,11 @@ PS.Data_Coyoneda = (function () {
         });
     };
     var bindCoyoneda = function (__dict_Bind_46) {
-        return new Prelude.Bind(function (_136) {
-            return function (_137) {
-                return liftCoyoneda(Data_Exists.runExists(function (_126) {
-                    return Prelude[">>="](__dict_Bind_46)(_126.fi)(Prelude["<<<"](Prelude.semigroupoidArr)(lowerCoyoneda((__dict_Bind_46["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]()))(Prelude["<<<"](Prelude.semigroupoidArr)(_137)(_126.k)));
-                })(_136));
+        return new Prelude.Bind(function (_138) {
+            return function (_139) {
+                return liftCoyoneda(Data_Exists.runExists(function (_128) {
+                    return Prelude[">>="](__dict_Bind_46)(_128.fi)(Prelude["<<<"](Prelude.semigroupoidArr)(lowerCoyoneda((__dict_Bind_46["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]()))(Prelude["<<<"](Prelude.semigroupoidArr)(_139)(_128.k)));
+                })(_138));
             };
         }, function () {
             return applyCoyoneda(__dict_Bind_46["__superclass_Prelude.Apply_0"]());
@@ -2295,13 +2464,13 @@ PS.Data_Yoneda = (function () {
     var Yoneda = function (x) {
         return x;
     };
-    var runYoneda = function (_141) {
-        return function (_142) {
-            return _141(_142);
+    var runYoneda = function (_143) {
+        return function (_144) {
+            return _143(_144);
         };
     };
-    var lowerYoneda = function (_143) {
-        return _143(Prelude.id(Prelude.categoryArr));
+    var lowerYoneda = function (_145) {
+        return _145(Prelude.id(Prelude.categoryArr));
     };
     var liftYoneda = function (__dict_Functor_53) {
         return function (m) {
@@ -2321,10 +2490,10 @@ PS.Data_Yoneda = (function () {
         };
     });
     var extendYoneda = function (__dict_Extend_55) {
-        return new Control_Extend.Extend(function (_148) {
-            return function (_149) {
+        return new Control_Extend.Extend(function (_150) {
+            return function (_151) {
                 return function (k) {
-                    return Control_Extend["<<="](__dict_Extend_55)(Prelude["<<<"](Prelude.semigroupoidArr)(k)(Prelude["<<<"](Prelude.semigroupoidArr)(_148)(liftYoneda(__dict_Extend_55["__superclass_Prelude.Functor_0"]()))))(_149(Prelude.id(Prelude.categoryArr)));
+                    return Control_Extend["<<="](__dict_Extend_55)(Prelude["<<<"](Prelude.semigroupoidArr)(k)(Prelude["<<<"](Prelude.semigroupoidArr)(_150)(liftYoneda(__dict_Extend_55["__superclass_Prelude.Functor_0"]()))))(_151(Prelude.id(Prelude.categoryArr)));
                 };
             };
         }, function () {
@@ -2337,10 +2506,10 @@ PS.Data_Yoneda = (function () {
         }, Prelude["<<<"](Prelude.semigroupoidArr)(Control_Comonad.extract(__dict_Comonad_56))(lowerYoneda));
     };
     var applyYoneda = function (__dict_Apply_58) {
-        return new Prelude.Apply(function (_144) {
-            return function (_145) {
+        return new Prelude.Apply(function (_146) {
+            return function (_147) {
                 return function (k) {
-                    return Prelude["<*>"](__dict_Apply_58)(_144(Prelude["<<<"](Prelude.semigroupoidArr)(k)))(_145(Prelude.id(Prelude.categoryArr)));
+                    return Prelude["<*>"](__dict_Apply_58)(_146(Prelude["<<<"](Prelude.semigroupoidArr)(k)))(_147(Prelude.id(Prelude.categoryArr)));
                 };
             };
         }, function () {
@@ -2348,11 +2517,11 @@ PS.Data_Yoneda = (function () {
         });
     };
     var bindCoyoneda = function (__dict_Bind_57) {
-        return new Prelude.Bind(function (_146) {
-            return function (_147) {
+        return new Prelude.Bind(function (_148) {
+            return function (_149) {
                 return function (k) {
-                    return Prelude[">>="](__dict_Bind_57)(_146(Prelude.id(Prelude.categoryArr)))(function (a) {
-                        return runYoneda(_147(a))(k);
+                    return Prelude[">>="](__dict_Bind_57)(_148(Prelude.id(Prelude.categoryArr)))(function (a) {
+                        return runYoneda(_149(a))(k);
                     });
                 };
             };
@@ -2604,11 +2773,11 @@ PS.Control_MonadPlus = (function () {
         this["__superclass_Prelude.Monad_0"] = __superclass_Prelude$dotMonad_0;
     };
     var guard = function (__dict_MonadPlus_76) {
-        return function (_150) {
-            if (_150) {
+        return function (_152) {
+            if (_152) {
                 return Prelude["return"](__dict_MonadPlus_76["__superclass_Prelude.Monad_0"]())(Prelude.unit);
             };
-            if (!_150) {
+            if (!_152) {
                 return Control_Plus.empty((__dict_MonadPlus_76["__superclass_Control.Alternative.Alternative_1"]())["__superclass_Control.Plus.Plus_1"]());
             };
             throw new Error("Failed pattern match");
@@ -2631,8 +2800,8 @@ PS.Control_Monad_Reader_Trans = (function () {
     var ReaderT = function (x) {
         return x;
     };
-    var runReaderT = function (_151) {
-        return _151;
+    var runReaderT = function (_153) {
+        return _153;
     };
     var withReaderT = function (f) {
         return function (m) {
@@ -2788,24 +2957,24 @@ PS.Data_Either = (function () {
     })();
     var showEither = function (__dict_Show_87) {
         return function (__dict_Show_88) {
-            return new Prelude.Show(function (_161) {
-                if (_161 instanceof Left) {
-                    return "Left (" + (Prelude.show(__dict_Show_87)(_161.value0) + ")");
+            return new Prelude.Show(function (_163) {
+                if (_163 instanceof Left) {
+                    return "Left (" + (Prelude.show(__dict_Show_87)(_163.value0) + ")");
                 };
-                if (_161 instanceof Right) {
-                    return "Right (" + (Prelude.show(__dict_Show_88)(_161.value0) + ")");
+                if (_163 instanceof Right) {
+                    return "Right (" + (Prelude.show(__dict_Show_88)(_163.value0) + ")");
                 };
                 throw new Error("Failed pattern match");
             });
         };
     };
-    var functorEither = new Prelude.Functor(function (_155) {
-        return function (_156) {
-            if (_156 instanceof Left) {
-                return new Left(_156.value0);
+    var functorEither = new Prelude.Functor(function (_157) {
+        return function (_158) {
+            if (_158 instanceof Left) {
+                return new Left(_158.value0);
             };
-            if (_156 instanceof Right) {
-                return new Right(_155(_156.value0));
+            if (_158 instanceof Right) {
+                return new Right(_157(_158.value0));
             };
             throw new Error("Failed pattern match");
         };
@@ -2816,13 +2985,13 @@ PS.Data_Either = (function () {
                 return function (b) {
                     return !Prelude["=="](eqEither(__dict_Eq_91)(__dict_Eq_92))(a)(b);
                 };
-            }, function (_162) {
-                return function (_163) {
-                    if (_162 instanceof Left && _163 instanceof Left) {
-                        return Prelude["=="](__dict_Eq_91)(_162.value0)(_163.value0);
+            }, function (_164) {
+                return function (_165) {
+                    if (_164 instanceof Left && _165 instanceof Left) {
+                        return Prelude["=="](__dict_Eq_91)(_164.value0)(_165.value0);
                     };
-                    if (_162 instanceof Right && _163 instanceof Right) {
-                        return Prelude["=="](__dict_Eq_92)(_162.value0)(_163.value0);
+                    if (_164 instanceof Right && _165 instanceof Right) {
+                        return Prelude["=="](__dict_Eq_92)(_164.value0)(_165.value0);
                     };
                     return false;
                 };
@@ -2833,18 +3002,18 @@ PS.Data_Either = (function () {
         return function (__dict_Ord_90) {
             return new Prelude.Ord(function () {
                 return eqEither(__dict_Ord_89["__superclass_Prelude.Eq_0"]())(__dict_Ord_90["__superclass_Prelude.Eq_0"]());
-            }, function (_164) {
-                return function (_165) {
-                    if (_164 instanceof Left && _165 instanceof Left) {
-                        return Prelude.compare(__dict_Ord_89)(_164.value0)(_165.value0);
+            }, function (_166) {
+                return function (_167) {
+                    if (_166 instanceof Left && _167 instanceof Left) {
+                        return Prelude.compare(__dict_Ord_89)(_166.value0)(_167.value0);
                     };
-                    if (_164 instanceof Right && _165 instanceof Right) {
-                        return Prelude.compare(__dict_Ord_90)(_164.value0)(_165.value0);
+                    if (_166 instanceof Right && _167 instanceof Right) {
+                        return Prelude.compare(__dict_Ord_90)(_166.value0)(_167.value0);
                     };
-                    if (_164 instanceof Left) {
+                    if (_166 instanceof Left) {
                         return Prelude.LT.value;
                     };
-                    if (_165 instanceof Left) {
+                    if (_167 instanceof Left) {
                         return Prelude.GT.value;
                     };
                     throw new Error("Failed pattern match");
@@ -2852,14 +3021,14 @@ PS.Data_Either = (function () {
             });
         };
     };
-    var either = function (_152) {
-        return function (_153) {
-            return function (_154) {
-                if (_154 instanceof Left) {
-                    return _152(_154.value0);
+    var either = function (_154) {
+        return function (_155) {
+            return function (_156) {
+                if (_156 instanceof Left) {
+                    return _154(_156.value0);
                 };
-                if (_154 instanceof Right) {
-                    return _153(_154.value0);
+                if (_156 instanceof Right) {
+                    return _155(_156.value0);
                 };
                 throw new Error("Failed pattern match");
             };
@@ -2867,13 +3036,13 @@ PS.Data_Either = (function () {
     };
     var isLeft = either(Prelude["const"](true))(Prelude["const"](false));
     var isRight = either(Prelude["const"](false))(Prelude["const"](true));
-    var applyEither = new Prelude.Apply(function (_157) {
-        return function (_158) {
-            if (_157 instanceof Left) {
-                return new Left(_157.value0);
+    var applyEither = new Prelude.Apply(function (_159) {
+        return function (_160) {
+            if (_159 instanceof Left) {
+                return new Left(_159.value0);
             };
-            if (_157 instanceof Right) {
-                return Prelude["<$>"](functorEither)(_157.value0)(_158);
+            if (_159 instanceof Right) {
+                return Prelude["<$>"](functorEither)(_159.value0)(_160);
             };
             throw new Error("Failed pattern match");
         };
@@ -2899,12 +3068,12 @@ PS.Data_Either = (function () {
     }, function () {
         return bindEither;
     });
-    var altEither = new Control_Alt.Alt(function (_159) {
-        return function (_160) {
-            if (_159 instanceof Left) {
-                return _160;
+    var altEither = new Control_Alt.Alt(function (_161) {
+        return function (_162) {
+            if (_161 instanceof Left) {
+                return _162;
             };
-            return _159;
+            return _161;
         };
     }, function () {
         return functorEither;
@@ -3075,13 +3244,13 @@ PS.Data_Profunctor_Choice = (function () {
     };
     var choiceArr = new Choice(function () {
         return Data_Profunctor.profunctorArr;
-    }, function (_166) {
-        return function (_167) {
-            if (_167 instanceof Data_Either.Left) {
-                return Data_Either.Left.create(_166(_167.value0));
+    }, function (_168) {
+        return function (_169) {
+            if (_169 instanceof Data_Either.Left) {
+                return Data_Either.Left.create(_168(_169.value0));
             };
-            if (_167 instanceof Data_Either.Right) {
-                return new Data_Either.Right(_167.value0);
+            if (_169 instanceof Data_Either.Right) {
+                return new Data_Either.Right(_169.value0);
             };
             throw new Error("Failed pattern match");
         };
@@ -3112,37 +3281,37 @@ PS.Optic_Internal_Prism = (function () {
         };
         return Market;
     })();
-    var profunctorMarket = new Data_Profunctor.Profunctor(function (_170) {
-        return function (_171) {
-            return function (_172) {
-                return new Market(Prelude[">>>"](Prelude.semigroupoidArr)(_172.value0)(_171), Prelude[">>>"](Prelude.semigroupoidArr)(_170)(Prelude[">>>"](Prelude.semigroupoidArr)(_172.value1)(Data_Either.either(Prelude[">>>"](Prelude.semigroupoidArr)(_171)(Data_Either.Left.create))(Data_Either.Right.create))));
+    var profunctorMarket = new Data_Profunctor.Profunctor(function (_172) {
+        return function (_173) {
+            return function (_174) {
+                return new Market(Prelude[">>>"](Prelude.semigroupoidArr)(_174.value0)(_173), Prelude[">>>"](Prelude.semigroupoidArr)(_172)(Prelude[">>>"](Prelude.semigroupoidArr)(_174.value1)(Data_Either.either(Prelude[">>>"](Prelude.semigroupoidArr)(_173)(Data_Either.Left.create))(Data_Either.Right.create))));
             };
         };
     });
-    var functorMarket = new Prelude.Functor(function (_168) {
-        return function (_169) {
-            return new Market(Prelude[">>>"](Prelude.semigroupoidArr)(_169.value0)(_168), Prelude[">>>"](Prelude.semigroupoidArr)(_169.value1)(Data_Either.either(Prelude[">>>"](Prelude.semigroupoidArr)(_168)(Data_Either.Left.create))(Data_Either.Right.create)));
+    var functorMarket = new Prelude.Functor(function (_170) {
+        return function (_171) {
+            return new Market(Prelude[">>>"](Prelude.semigroupoidArr)(_171.value0)(_170), Prelude[">>>"](Prelude.semigroupoidArr)(_171.value1)(Data_Either.either(Prelude[">>>"](Prelude.semigroupoidArr)(_170)(Data_Either.Left.create))(Data_Either.Right.create)));
         };
     });
     var choiceMarket = new Data_Profunctor_Choice.Choice(function () {
         return profunctorMarket;
-    }, function (_173) {
-        return new Market(Prelude[">>>"](Prelude.semigroupoidArr)(_173.value0)(Data_Either.Left.create), function (thing) {
+    }, function (_175) {
+        return new Market(Prelude[">>>"](Prelude.semigroupoidArr)(_175.value0)(Data_Either.Left.create), function (thing) {
             if (thing instanceof Data_Either.Left) {
-                return Data_Either.either(Prelude[">>>"](Prelude.semigroupoidArr)(Data_Either.Left.create)(Data_Either.Left.create))(Data_Either.Right.create)(_173.value1(thing.value0));
+                return Data_Either.either(Prelude[">>>"](Prelude.semigroupoidArr)(Data_Either.Left.create)(Data_Either.Left.create))(Data_Either.Right.create)(_175.value1(thing.value0));
             };
             if (thing instanceof Data_Either.Right) {
                 return Data_Either.Left.create(new Data_Either.Right(thing.value0));
             };
             throw new Error("Failed pattern match");
         });
-    }, function (_174) {
-        return new Market(Prelude[">>>"](Prelude.semigroupoidArr)(_174.value0)(Data_Either.Right.create), function (thing) {
+    }, function (_176) {
+        return new Market(Prelude[">>>"](Prelude.semigroupoidArr)(_176.value0)(Data_Either.Right.create), function (thing) {
             if (thing instanceof Data_Either.Left) {
                 return Data_Either.Left.create(new Data_Either.Left(thing.value0));
             };
             if (thing instanceof Data_Either.Right) {
-                return Data_Either.either(Prelude[">>>"](Prelude.semigroupoidArr)(Data_Either.Right.create)(Data_Either.Left.create))(Data_Either.Right.create)(_174.value1(thing.value0));
+                return Data_Either.either(Prelude[">>>"](Prelude.semigroupoidArr)(Data_Either.Right.create)(Data_Either.Left.create))(Data_Either.Right.create)(_176.value1(thing.value0));
             };
             throw new Error("Failed pattern match");
         });
@@ -3180,40 +3349,40 @@ PS.Data_Maybe = (function () {
         return Just;
     })();
     var showMaybe = function (__dict_Show_93) {
-        return new Prelude.Show(function (_190) {
-            if (_190 instanceof Just) {
-                return "Just (" + (Prelude.show(__dict_Show_93)(_190.value0) + ")");
+        return new Prelude.Show(function (_192) {
+            if (_192 instanceof Just) {
+                return "Just (" + (Prelude.show(__dict_Show_93)(_192.value0) + ")");
             };
-            if (_190 instanceof Nothing) {
+            if (_192 instanceof Nothing) {
                 return "Nothing";
             };
             throw new Error("Failed pattern match");
         });
     };
     var semigroupMaybe = function (__dict_Semigroup_94) {
-        return new Prelude.Semigroup(function (_188) {
-            return function (_189) {
-                if (_188 instanceof Nothing) {
-                    return _189;
+        return new Prelude.Semigroup(function (_190) {
+            return function (_191) {
+                if (_190 instanceof Nothing) {
+                    return _191;
                 };
-                if (_189 instanceof Nothing) {
-                    return _188;
+                if (_191 instanceof Nothing) {
+                    return _190;
                 };
-                if (_188 instanceof Just && _189 instanceof Just) {
-                    return new Just(Prelude["<>"](__dict_Semigroup_94)(_188.value0)(_189.value0));
+                if (_190 instanceof Just && _191 instanceof Just) {
+                    return new Just(Prelude["<>"](__dict_Semigroup_94)(_190.value0)(_191.value0));
                 };
                 throw new Error("Failed pattern match");
             };
         });
     };
-    var maybe = function (_175) {
-        return function (_176) {
-            return function (_177) {
-                if (_177 instanceof Nothing) {
-                    return _175;
+    var maybe = function (_177) {
+        return function (_178) {
+            return function (_179) {
+                if (_179 instanceof Nothing) {
+                    return _177;
                 };
-                if (_177 instanceof Just) {
-                    return _176(_177.value0);
+                if (_179 instanceof Just) {
+                    return _178(_179.value0);
                 };
                 throw new Error("Failed pattern match");
             };
@@ -3221,10 +3390,10 @@ PS.Data_Maybe = (function () {
     };
     var isNothing = maybe(true)(Prelude["const"](false));
     var isJust = maybe(false)(Prelude["const"](true));
-    var functorMaybe = new Prelude.Functor(function (_178) {
-        return function (_179) {
-            if (_179 instanceof Just) {
-                return new Just(_178(_179.value0));
+    var functorMaybe = new Prelude.Functor(function (_180) {
+        return function (_181) {
+            if (_181 instanceof Just) {
+                return new Just(_180(_181.value0));
             };
             return Nothing.value;
         };
@@ -3232,12 +3401,12 @@ PS.Data_Maybe = (function () {
     var fromMaybe = function (a) {
         return maybe(a)(Prelude.id(Prelude.categoryArr));
     };
-    var extendMaybe = new Control_Extend.Extend(function (_186) {
-        return function (_187) {
-            if (_187 instanceof Nothing) {
+    var extendMaybe = new Control_Extend.Extend(function (_188) {
+        return function (_189) {
+            if (_189 instanceof Nothing) {
                 return Nothing.value;
             };
-            return Just.create(_186(_187));
+            return Just.create(_188(_189));
         };
     }, function () {
         return functorMaybe;
@@ -3247,13 +3416,13 @@ PS.Data_Maybe = (function () {
             return function (b) {
                 return !Prelude["=="](eqMaybe(__dict_Eq_96))(a)(b);
             };
-        }, function (_191) {
-            return function (_192) {
-                if (_191 instanceof Nothing && _192 instanceof Nothing) {
+        }, function (_193) {
+            return function (_194) {
+                if (_193 instanceof Nothing && _194 instanceof Nothing) {
                     return true;
                 };
-                if (_191 instanceof Just && _192 instanceof Just) {
-                    return Prelude["=="](__dict_Eq_96)(_191.value0)(_192.value0);
+                if (_193 instanceof Just && _194 instanceof Just) {
+                    return Prelude["=="](__dict_Eq_96)(_193.value0)(_194.value0);
                 };
                 return false;
             };
@@ -3262,30 +3431,30 @@ PS.Data_Maybe = (function () {
     var ordMaybe = function (__dict_Ord_95) {
         return new Prelude.Ord(function () {
             return eqMaybe(__dict_Ord_95["__superclass_Prelude.Eq_0"]());
-        }, function (_193) {
-            return function (_194) {
-                if (_193 instanceof Just && _194 instanceof Just) {
-                    return Prelude.compare(__dict_Ord_95)(_193.value0)(_194.value0);
+        }, function (_195) {
+            return function (_196) {
+                if (_195 instanceof Just && _196 instanceof Just) {
+                    return Prelude.compare(__dict_Ord_95)(_195.value0)(_196.value0);
                 };
-                if (_193 instanceof Nothing && _194 instanceof Nothing) {
+                if (_195 instanceof Nothing && _196 instanceof Nothing) {
                     return Prelude.EQ.value;
                 };
-                if (_193 instanceof Nothing) {
+                if (_195 instanceof Nothing) {
                     return Prelude.LT.value;
                 };
-                if (_194 instanceof Nothing) {
+                if (_196 instanceof Nothing) {
                     return Prelude.GT.value;
                 };
                 throw new Error("Failed pattern match");
             };
         });
     };
-    var applyMaybe = new Prelude.Apply(function (_180) {
-        return function (_181) {
-            if (_180 instanceof Just) {
-                return Prelude["<$>"](functorMaybe)(_180.value0)(_181);
+    var applyMaybe = new Prelude.Apply(function (_182) {
+        return function (_183) {
+            if (_182 instanceof Just) {
+                return Prelude["<$>"](functorMaybe)(_182.value0)(_183);
             };
-            if (_180 instanceof Nothing) {
+            if (_182 instanceof Nothing) {
                 return Nothing.value;
             };
             throw new Error("Failed pattern match");
@@ -3293,12 +3462,12 @@ PS.Data_Maybe = (function () {
     }, function () {
         return functorMaybe;
     });
-    var bindMaybe = new Prelude.Bind(function (_184) {
-        return function (_185) {
-            if (_184 instanceof Just) {
-                return _185(_184.value0);
+    var bindMaybe = new Prelude.Bind(function (_186) {
+        return function (_187) {
+            if (_186 instanceof Just) {
+                return _187(_186.value0);
             };
-            if (_184 instanceof Nothing) {
+            if (_186 instanceof Nothing) {
                 return Nothing.value;
             };
             throw new Error("Failed pattern match");
@@ -3314,12 +3483,12 @@ PS.Data_Maybe = (function () {
     }, function () {
         return bindMaybe;
     });
-    var altMaybe = new Control_Alt.Alt(function (_182) {
-        return function (_183) {
-            if (_182 instanceof Nothing) {
-                return _183;
+    var altMaybe = new Control_Alt.Alt(function (_184) {
+        return function (_185) {
+            if (_184 instanceof Nothing) {
+                return _185;
             };
-            return _182;
+            return _184;
         };
     }, function () {
         return functorMaybe;
@@ -3394,11 +3563,11 @@ PS.Data_Array = (function () {
             var isInt = function (n_1) {
                 return n_1 !== ~~n_1;
             };
-            var _1304 = n < 0 || (n >= length(xs) || isInt(n));
-            if (_1304) {
+            var _1312 = n < 0 || (n >= length(xs) || isInt(n));
+            if (_1312) {
                 return Data_Maybe.Nothing.value;
             };
-            if (!_1304) {
+            if (!_1312) {
                 return new Data_Maybe.Just(xs[n]);
             };
             throw new Error("Failed pattern match");
@@ -3407,35 +3576,35 @@ PS.Data_Array = (function () {
     var take = function (n) {
         return slice(0)(n);
     };
-    var tail = function (_197) {
-        if (_197.length >= 1) {
-            var _1307 = _197.slice(1);
-            return new Data_Maybe.Just(_1307);
+    var tail = function (_199) {
+        if (_199.length >= 1) {
+            var _1315 = _199.slice(1);
+            return new Data_Maybe.Just(_1315);
         };
         return Data_Maybe.Nothing.value;
     };
     var span = (function () {
-        var go = function (__copy__213) {
-            return function (__copy__214) {
-                return function (__copy__215) {
-                    var _213 = __copy__213;
-                    var _214 = __copy__214;
+        var go = function (__copy__215) {
+            return function (__copy__216) {
+                return function (__copy__217) {
                     var _215 = __copy__215;
+                    var _216 = __copy__216;
+                    var _217 = __copy__217;
                     tco: while (true) {
-                        if (_215.length >= 1) {
-                            var _1312 = _215.slice(1);
-                            if (_214(_215[0])) {
-                                var __tco__213 = Prelude[":"](_215[0])(_213);
-                                var __tco__214 = _214;
-                                _213 = __tco__213;
-                                _214 = __tco__214;
-                                _215 = _1312;
+                        if (_217.length >= 1) {
+                            var _1320 = _217.slice(1);
+                            if (_216(_217[0])) {
+                                var __tco__215 = Prelude[":"](_217[0])(_215);
+                                var __tco__216 = _216;
+                                _215 = __tco__215;
+                                _216 = __tco__216;
+                                _217 = _1320;
                                 continue tco;
                             };
                         };
                         return {
-                            init: reverse(_213), 
-                            rest: _215
+                            init: reverse(_215), 
+                            rest: _217
                         };
                     };
                 };
@@ -3452,14 +3621,14 @@ PS.Data_Array = (function () {
         return function (xs) {
             var comp$prime = function (x) {
                 return function (y) {
-                    var _1313 = comp(x)(y);
-                    if (_1313 instanceof Prelude.GT) {
+                    var _1321 = comp(x)(y);
+                    if (_1321 instanceof Prelude.GT) {
                         return 1;
                     };
-                    if (_1313 instanceof Prelude.EQ) {
+                    if (_1321 instanceof Prelude.EQ) {
                         return 0;
                     };
-                    if (_1313 instanceof Prelude.LT) {
+                    if (_1321 instanceof Prelude.LT) {
                         return -1;
                     };
                     throw new Error("Failed pattern match");
@@ -3477,22 +3646,22 @@ PS.Data_Array = (function () {
         return [ a ];
     };
     var semigroupArray = new Prelude.Semigroup(append);
-    var $$null = function (_199) {
-        if (_199.length === 0) {
+    var $$null = function (_201) {
+        if (_201.length === 0) {
             return true;
         };
         return false;
     };
-    var nubBy = function (_206) {
-        return function (_207) {
-            if (_207.length === 0) {
+    var nubBy = function (_208) {
+        return function (_209) {
+            if (_209.length === 0) {
                 return [  ];
             };
-            if (_207.length >= 1) {
-                var _1318 = _207.slice(1);
-                return Prelude[":"](_207[0])(nubBy(_206)(filter(function (y) {
-                    return !_206(_207[0])(y);
-                })(_1318)));
+            if (_209.length >= 1) {
+                var _1326 = _209.slice(1);
+                return Prelude[":"](_209[0])(nubBy(_208)(filter(function (y) {
+                    return !_208(_209[0])(y);
+                })(_1326)));
             };
             throw new Error("Failed pattern match");
         };
@@ -3503,74 +3672,74 @@ PS.Data_Array = (function () {
     var mapMaybe = function (f) {
         return concatMap(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.maybe([  ])(singleton))(f));
     };
-    var last = function (__copy__196) {
-        var _196 = __copy__196;
+    var last = function (__copy__198) {
+        var _198 = __copy__198;
         tco: while (true) {
-            if (_196.length >= 1) {
-                var _1321 = _196.slice(1);
-                if (_1321.length === 0) {
-                    return new Data_Maybe.Just(_196[0]);
+            if (_198.length >= 1) {
+                var _1329 = _198.slice(1);
+                if (_1329.length === 0) {
+                    return new Data_Maybe.Just(_198[0]);
                 };
             };
-            if (_196.length >= 1) {
-                var _1323 = _196.slice(1);
-                _196 = _1323;
+            if (_198.length >= 1) {
+                var _1331 = _198.slice(1);
+                _198 = _1331;
                 continue tco;
             };
             return Data_Maybe.Nothing.value;
         };
     };
-    var intersectBy = function (_203) {
-        return function (_204) {
-            return function (_205) {
-                if (_204.length === 0) {
+    var intersectBy = function (_205) {
+        return function (_206) {
+            return function (_207) {
+                if (_206.length === 0) {
                     return [  ];
                 };
-                if (_205.length === 0) {
+                if (_207.length === 0) {
                     return [  ];
                 };
                 var el = function (x) {
-                    return findIndex(_203(x))(_205) >= 0;
+                    return findIndex(_205(x))(_207) >= 0;
                 };
-                return filter(el)(_204);
+                return filter(el)(_206);
             };
         };
     };
     var intersect = function (__dict_Eq_99) {
         return intersectBy(Prelude["=="](__dict_Eq_99));
     };
-    var init = function (_198) {
-        if (_198.length === 0) {
+    var init = function (_200) {
+        if (_200.length === 0) {
             return Data_Maybe.Nothing.value;
         };
-        return new Data_Maybe.Just(slice(0)(length(_198) - 1)(_198));
+        return new Data_Maybe.Just(slice(0)(length(_200) - 1)(_200));
     };
-    var head = function (_195) {
-        if (_195.length >= 1) {
-            var _1330 = _195.slice(1);
-            return new Data_Maybe.Just(_195[0]);
+    var head = function (_197) {
+        if (_197.length >= 1) {
+            var _1338 = _197.slice(1);
+            return new Data_Maybe.Just(_197[0]);
         };
         return Data_Maybe.Nothing.value;
     };
     var groupBy = (function () {
-        var go = function (__copy__210) {
-            return function (__copy__211) {
-                return function (__copy__212) {
-                    var _210 = __copy__210;
-                    var _211 = __copy__211;
+        var go = function (__copy__212) {
+            return function (__copy__213) {
+                return function (__copy__214) {
                     var _212 = __copy__212;
+                    var _213 = __copy__213;
+                    var _214 = __copy__214;
                     tco: while (true) {
-                        if (_212.length === 0) {
-                            return reverse(_210);
+                        if (_214.length === 0) {
+                            return reverse(_212);
                         };
-                        if (_212.length >= 1) {
-                            var _1335 = _212.slice(1);
-                            var sp = span(_211(_212[0]))(_1335);
-                            var __tco__210 = Prelude[":"](Prelude[":"](_212[0])(sp.init))(_210);
-                            var __tco__211 = _211;
-                            _210 = __tco__210;
-                            _211 = __tco__211;
-                            _212 = sp.rest;
+                        if (_214.length >= 1) {
+                            var _1343 = _214.slice(1);
+                            var sp = span(_213(_214[0]))(_1343);
+                            var __tco__212 = Prelude[":"](Prelude[":"](_214[0])(sp.init))(_212);
+                            var __tco__213 = _213;
+                            _212 = __tco__212;
+                            _213 = __tco__213;
+                            _214 = sp.rest;
                             continue tco;
                         };
                         throw new Error("Failed pattern match");
@@ -3608,17 +3777,17 @@ PS.Data_Array = (function () {
             return (span(p)(xs)).rest;
         };
     };
-    var deleteBy = function (_200) {
-        return function (_201) {
-            return function (_202) {
-                if (_202.length === 0) {
+    var deleteBy = function (_202) {
+        return function (_203) {
+            return function (_204) {
+                if (_204.length === 0) {
                     return [  ];
                 };
-                var _1339 = findIndex(_200(_201))(_202);
-                if (_1339 < 0) {
-                    return _202;
+                var _1347 = findIndex(_202(_203))(_204);
+                if (_1347 < 0) {
+                    return _204;
                 };
-                return deleteAt(_1339)(1)(_202);
+                return deleteAt(_1347)(1)(_204);
             };
         };
     };
@@ -3628,22 +3797,22 @@ PS.Data_Array = (function () {
     var $bslash$bslash = function (__dict_Eq_105) {
         return function (xs) {
             return function (ys) {
-                var go = function (__copy__208) {
-                    return function (__copy__209) {
-                        var _208 = __copy__208;
-                        var _209 = __copy__209;
+                var go = function (__copy__210) {
+                    return function (__copy__211) {
+                        var _210 = __copy__210;
+                        var _211 = __copy__211;
                         tco: while (true) {
-                            if (_209.length === 0) {
-                                return _208;
+                            if (_211.length === 0) {
+                                return _210;
                             };
-                            if (_208.length === 0) {
+                            if (_210.length === 0) {
                                 return [  ];
                             };
-                            if (_209.length >= 1) {
-                                var _1343 = _209.slice(1);
-                                var __tco__208 = $$delete(__dict_Eq_105)(_209[0])(_208);
-                                _208 = __tco__208;
-                                _209 = _1343;
+                            if (_211.length >= 1) {
+                                var _1351 = _211.slice(1);
+                                var __tco__210 = $$delete(__dict_Eq_105)(_211[0])(_210);
+                                _210 = __tco__210;
+                                _211 = _1351;
                                 continue tco;
                             };
                             throw new Error("Failed pattern match");
@@ -3855,9 +4024,9 @@ PS.Data_Maybe_Unsafe = (function () {
     "use strict";
     var Prelude = PS.Prelude;
     var Data_Maybe = PS.Data_Maybe;
-    var fromJust = function (_216) {
-        if (_216 instanceof Data_Maybe.Just) {
-            return _216.value0;
+    var fromJust = function (_218) {
+        if (_218 instanceof Data_Maybe.Just) {
+            return _218.value0;
         };
         throw new Error("Failed pattern match");
     };
@@ -3872,10 +4041,10 @@ PS.Data_Array_Unsafe = (function () {
     var Data_Array = PS.Data_Array;
     var Data_Maybe_Unsafe = PS.Data_Maybe_Unsafe;
     var Prelude = PS.Prelude;
-    var tail = function (_218) {
-        if (_218.length >= 1) {
-            var _1348 = _218.slice(1);
-            return _1348;
+    var tail = function (_220) {
+        if (_220.length >= 1) {
+            var _1356 = _220.slice(1);
+            return _1356;
         };
         throw new Error("Failed pattern match");
     };
@@ -3883,10 +4052,10 @@ PS.Data_Array_Unsafe = (function () {
         return xs[Data_Array.length(xs) - 1];
     };
     var init = Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe_Unsafe.fromJust)(Data_Array.init);
-    var head = function (_217) {
-        if (_217.length >= 1) {
-            var _1351 = _217.slice(1);
-            return _217[0];
+    var head = function (_219) {
+        if (_219.length >= 1) {
+            var _1359 = _219.slice(1);
+            return _219[0];
         };
         throw new Error("Failed pattern match");
     };
@@ -3947,27 +4116,27 @@ PS.Data_Monoid_All = (function () {
     var All = function (x) {
         return x;
     };
-    var showAll = new Prelude.Show(function (_224) {
-        return "All (" + (Prelude.show(Prelude.showBoolean)(_224) + ")");
+    var showAll = new Prelude.Show(function (_226) {
+        return "All (" + (Prelude.show(Prelude.showBoolean)(_226) + ")");
     });
-    var semigroupAll = new Prelude.Semigroup(function (_225) {
-        return function (_226) {
-            return _225 && _226;
+    var semigroupAll = new Prelude.Semigroup(function (_227) {
+        return function (_228) {
+            return _227 && _228;
         };
     });
-    var runAll = function (_219) {
-        return _219;
+    var runAll = function (_221) {
+        return _221;
     };
     var monoidAll = new Data_Monoid.Monoid(function () {
         return semigroupAll;
     }, true);
-    var eqAll = new Prelude.Eq(function (_222) {
-        return function (_223) {
-            return _222 !== _223;
+    var eqAll = new Prelude.Eq(function (_224) {
+        return function (_225) {
+            return _224 !== _225;
         };
-    }, function (_220) {
-        return function (_221) {
-            return _220 === _221;
+    }, function (_222) {
+        return function (_223) {
+            return _222 === _223;
         };
     });
     return {
@@ -3987,27 +4156,27 @@ PS.Data_Monoid_Any = (function () {
     var Any = function (x) {
         return x;
     };
-    var showAny = new Prelude.Show(function (_232) {
-        return "Any (" + (Prelude.show(Prelude.showBoolean)(_232) + ")");
+    var showAny = new Prelude.Show(function (_234) {
+        return "Any (" + (Prelude.show(Prelude.showBoolean)(_234) + ")");
     });
-    var semigroupAny = new Prelude.Semigroup(function (_233) {
-        return function (_234) {
-            return _233 || _234;
+    var semigroupAny = new Prelude.Semigroup(function (_235) {
+        return function (_236) {
+            return _235 || _236;
         };
     });
-    var runAny = function (_227) {
-        return _227;
+    var runAny = function (_229) {
+        return _229;
     };
     var monoidAny = new Data_Monoid.Monoid(function () {
         return semigroupAny;
     }, false);
-    var eqAny = new Prelude.Eq(function (_230) {
-        return function (_231) {
-            return _230 !== _231;
+    var eqAny = new Prelude.Eq(function (_232) {
+        return function (_233) {
+            return _232 !== _233;
         };
-    }, function (_228) {
-        return function (_229) {
-            return _228 === _229;
+    }, function (_230) {
+        return function (_231) {
+            return _230 === _231;
         };
     });
     return {
@@ -4028,19 +4197,19 @@ PS.Data_Monoid_Dual = (function () {
         return x;
     };
     var showDual = function (__dict_Show_108) {
-        return new Prelude.Show(function (_242) {
-            return "Dual (" + (Prelude.show(__dict_Show_108)(_242) + ")");
+        return new Prelude.Show(function (_244) {
+            return "Dual (" + (Prelude.show(__dict_Show_108)(_244) + ")");
         });
     };
     var semigroupDual = function (__dict_Semigroup_109) {
-        return new Prelude.Semigroup(function (_243) {
-            return function (_244) {
-                return Prelude["<>"](__dict_Semigroup_109)(_244)(_243);
+        return new Prelude.Semigroup(function (_245) {
+            return function (_246) {
+                return Prelude["<>"](__dict_Semigroup_109)(_246)(_245);
             };
         });
     };
-    var runDual = function (_235) {
-        return _235;
+    var runDual = function (_237) {
+        return _237;
     };
     var monoidDual = function (__dict_Monoid_111) {
         return new Data_Monoid.Monoid(function () {
@@ -4048,22 +4217,22 @@ PS.Data_Monoid_Dual = (function () {
         }, Data_Monoid.mempty(__dict_Monoid_111));
     };
     var eqDual = function (__dict_Eq_112) {
-        return new Prelude.Eq(function (_238) {
-            return function (_239) {
-                return Prelude["/="](__dict_Eq_112)(_238)(_239);
+        return new Prelude.Eq(function (_240) {
+            return function (_241) {
+                return Prelude["/="](__dict_Eq_112)(_240)(_241);
             };
-        }, function (_236) {
-            return function (_237) {
-                return Prelude["=="](__dict_Eq_112)(_236)(_237);
+        }, function (_238) {
+            return function (_239) {
+                return Prelude["=="](__dict_Eq_112)(_238)(_239);
             };
         });
     };
     var ordDual = function (__dict_Ord_110) {
         return new Prelude.Ord(function () {
             return eqDual(__dict_Ord_110["__superclass_Prelude.Eq_0"]());
-        }, function (_240) {
-            return function (_241) {
-                return Prelude.compare(__dict_Ord_110)(_240)(_241);
+        }, function (_242) {
+            return function (_243) {
+                return Prelude.compare(__dict_Ord_110)(_242)(_243);
             };
         });
     };
@@ -4085,13 +4254,13 @@ PS.Data_Monoid_Endo = (function () {
     var Endo = function (x) {
         return x;
     };
-    var semigroupEndo = new Prelude.Semigroup(function (_246) {
-        return function (_247) {
-            return Prelude["<<<"](Prelude.semigroupoidArr)(_246)(_247);
+    var semigroupEndo = new Prelude.Semigroup(function (_248) {
+        return function (_249) {
+            return Prelude["<<<"](Prelude.semigroupoidArr)(_248)(_249);
         };
     });
-    var runEndo = function (_245) {
-        return _245;
+    var runEndo = function (_247) {
+        return _247;
     };
     var monoidEndo = new Data_Monoid.Monoid(function () {
         return semigroupEndo;
@@ -4111,34 +4280,34 @@ PS.Data_Monoid_Product = (function () {
     var Product = function (x) {
         return x;
     };
-    var showProduct = new Prelude.Show(function (_255) {
-        return "Product (" + (Prelude.show(Prelude.showNumber)(_255) + ")");
+    var showProduct = new Prelude.Show(function (_257) {
+        return "Product (" + (Prelude.show(Prelude.showNumber)(_257) + ")");
     });
-    var semigroupProduct = new Prelude.Semigroup(function (_256) {
-        return function (_257) {
-            return _256 * _257;
+    var semigroupProduct = new Prelude.Semigroup(function (_258) {
+        return function (_259) {
+            return _258 * _259;
         };
     });
-    var runProduct = function (_248) {
-        return _248;
+    var runProduct = function (_250) {
+        return _250;
     };
     var monoidProduct = new Data_Monoid.Monoid(function () {
         return semigroupProduct;
     }, 1);
-    var eqProduct = new Prelude.Eq(function (_251) {
-        return function (_252) {
-            return _251 !== _252;
+    var eqProduct = new Prelude.Eq(function (_253) {
+        return function (_254) {
+            return _253 !== _254;
         };
-    }, function (_249) {
-        return function (_250) {
-            return _249 === _250;
+    }, function (_251) {
+        return function (_252) {
+            return _251 === _252;
         };
     });
     var ordProduct = new Prelude.Ord(function () {
         return eqProduct;
-    }, function (_253) {
-        return function (_254) {
-            return Prelude.compare(Prelude.ordNumber)(_253)(_254);
+    }, function (_255) {
+        return function (_256) {
+            return Prelude.compare(Prelude.ordNumber)(_255)(_256);
         };
     });
     return {
@@ -4159,34 +4328,34 @@ PS.Data_Monoid_Sum = (function () {
     var Sum = function (x) {
         return x;
     };
-    var showSum = new Prelude.Show(function (_265) {
-        return "Sum (" + (Prelude.show(Prelude.showNumber)(_265) + ")");
+    var showSum = new Prelude.Show(function (_267) {
+        return "Sum (" + (Prelude.show(Prelude.showNumber)(_267) + ")");
     });
-    var semigroupSum = new Prelude.Semigroup(function (_266) {
-        return function (_267) {
-            return _266 + _267;
+    var semigroupSum = new Prelude.Semigroup(function (_268) {
+        return function (_269) {
+            return _268 + _269;
         };
     });
-    var runSum = function (_258) {
-        return _258;
+    var runSum = function (_260) {
+        return _260;
     };
     var monoidSum = new Data_Monoid.Monoid(function () {
         return semigroupSum;
     }, 0);
-    var eqSum = new Prelude.Eq(function (_261) {
-        return function (_262) {
-            return _261 !== _262;
+    var eqSum = new Prelude.Eq(function (_263) {
+        return function (_264) {
+            return _263 !== _264;
         };
-    }, function (_259) {
-        return function (_260) {
-            return _259 === _260;
+    }, function (_261) {
+        return function (_262) {
+            return _261 === _262;
         };
     });
     var ordSum = new Prelude.Ord(function () {
         return eqSum;
-    }, function (_263) {
-        return function (_264) {
-            return Prelude.compare(Prelude.ordNumber)(_263)(_264);
+    }, function (_265) {
+        return function (_266) {
+            return Prelude.compare(Prelude.ordNumber)(_265)(_266);
         };
     });
     return {
@@ -4221,45 +4390,45 @@ PS.Data_Tuple = (function () {
         return Tuple;
     })();
     var zip = Data_Array.zipWith(Tuple.create);
-    var unzip = function (_272) {
-        if (_272.length >= 1) {
-            var _1408 = _272.slice(1);
-            var _1402 = unzip(_1408);
-            return new Tuple(Prelude[":"]((_272[0]).value0)(_1402.value0), Prelude[":"]((_272[0]).value1)(_1402.value1));
+    var unzip = function (_274) {
+        if (_274.length >= 1) {
+            var _1416 = _274.slice(1);
+            var _1410 = unzip(_1416);
+            return new Tuple(Prelude[":"]((_274[0]).value0)(_1410.value0), Prelude[":"]((_274[0]).value1)(_1410.value1));
         };
-        if (_272.length === 0) {
+        if (_274.length === 0) {
             return new Tuple([  ], [  ]);
         };
         throw new Error("Failed pattern match");
     };
-    var uncurry = function (_270) {
-        return function (_271) {
-            return _270(_271.value0)(_271.value1);
+    var uncurry = function (_272) {
+        return function (_273) {
+            return _272(_273.value0)(_273.value1);
         };
     };
-    var swap = function (_273) {
-        return new Tuple(_273.value1, _273.value0);
+    var swap = function (_275) {
+        return new Tuple(_275.value1, _275.value0);
     };
-    var snd = function (_269) {
-        return _269.value1;
+    var snd = function (_271) {
+        return _271.value1;
     };
     var showTuple = function (__dict_Show_113) {
         return function (__dict_Show_114) {
-            return new Prelude.Show(function (_274) {
-                return "Tuple (" + (Prelude.show(__dict_Show_113)(_274.value0) + (") (" + (Prelude.show(__dict_Show_114)(_274.value1) + ")")));
+            return new Prelude.Show(function (_276) {
+                return "Tuple (" + (Prelude.show(__dict_Show_113)(_276.value0) + (") (" + (Prelude.show(__dict_Show_114)(_276.value1) + ")")));
             });
         };
     };
-    var semigroupoidTuple = new Prelude.Semigroupoid(function (_279) {
-        return function (_280) {
-            return new Tuple(_280.value0, _279.value1);
+    var semigroupoidTuple = new Prelude.Semigroupoid(function (_281) {
+        return function (_282) {
+            return new Tuple(_282.value0, _281.value1);
         };
     });
     var semigroupTuple = function (__dict_Semigroup_115) {
         return function (__dict_Semigroup_116) {
-            return new Prelude.Semigroup(function (_281) {
-                return function (_282) {
-                    return new Tuple(Prelude["<>"](__dict_Semigroup_115)(_281.value0)(_282.value0), Prelude["<>"](__dict_Semigroup_116)(_281.value1)(_282.value1));
+            return new Prelude.Semigroup(function (_283) {
+                return function (_284) {
+                    return new Tuple(Prelude["<>"](__dict_Semigroup_115)(_283.value0)(_284.value0), Prelude["<>"](__dict_Semigroup_116)(_283.value1)(_284.value1));
                 };
             });
         };
@@ -4271,13 +4440,13 @@ PS.Data_Tuple = (function () {
             }, new Tuple(Data_Monoid.mempty(__dict_Monoid_119), Data_Monoid.mempty(__dict_Monoid_120)));
         };
     };
-    var functorTuple = new Prelude.Functor(function (_283) {
-        return function (_284) {
-            return new Tuple(_284.value0, _283(_284.value1));
+    var functorTuple = new Prelude.Functor(function (_285) {
+        return function (_286) {
+            return new Tuple(_286.value0, _285(_286.value1));
         };
     });
-    var fst = function (_268) {
-        return _268.value0;
+    var fst = function (_270) {
+        return _270.value0;
     };
     var lazyLazy1Tuple = function (__dict_Lazy1_122) {
         return function (__dict_Lazy1_123) {
@@ -4312,9 +4481,9 @@ PS.Data_Tuple = (function () {
             });
         };
     };
-    var extendTuple = new Control_Extend.Extend(function (_289) {
-        return function (_290) {
-            return new Tuple(_290.value0, _289(_290));
+    var extendTuple = new Control_Extend.Extend(function (_291) {
+        return function (_292) {
+            return new Tuple(_292.value0, _291(_292));
         };
     }, function () {
         return functorTuple;
@@ -4325,9 +4494,9 @@ PS.Data_Tuple = (function () {
                 return function (t2) {
                     return !Prelude["=="](eqTuple(__dict_Eq_128)(__dict_Eq_129))(t1)(t2);
                 };
-            }, function (_275) {
-                return function (_276) {
-                    return Prelude["=="](__dict_Eq_128)(_275.value0)(_276.value0) && Prelude["=="](__dict_Eq_129)(_275.value1)(_276.value1);
+            }, function (_277) {
+                return function (_278) {
+                    return Prelude["=="](__dict_Eq_128)(_277.value0)(_278.value0) && Prelude["=="](__dict_Eq_129)(_277.value1)(_278.value1);
                 };
             });
         };
@@ -4336,13 +4505,13 @@ PS.Data_Tuple = (function () {
         return function (__dict_Ord_118) {
             return new Prelude.Ord(function () {
                 return eqTuple(__dict_Ord_117["__superclass_Prelude.Eq_0"]())(__dict_Ord_118["__superclass_Prelude.Eq_0"]());
-            }, function (_277) {
-                return function (_278) {
-                    var _1453 = Prelude.compare(__dict_Ord_117)(_277.value0)(_278.value0);
-                    if (_1453 instanceof Prelude.EQ) {
-                        return Prelude.compare(__dict_Ord_118)(_277.value1)(_278.value1);
+            }, function (_279) {
+                return function (_280) {
+                    var _1461 = Prelude.compare(__dict_Ord_117)(_279.value0)(_280.value0);
+                    if (_1461 instanceof Prelude.EQ) {
+                        return Prelude.compare(__dict_Ord_118)(_279.value1)(_280.value1);
                     };
-                    return _1453;
+                    return _1461;
                 };
             });
         };
@@ -4358,19 +4527,19 @@ PS.Data_Tuple = (function () {
         return extendTuple;
     }, snd);
     var applyTuple = function (__dict_Semigroup_131) {
-        return new Prelude.Apply(function (_285) {
-            return function (_286) {
-                return new Tuple(Prelude["<>"](__dict_Semigroup_131)(_285.value0)(_286.value0), _285.value1(_286.value1));
+        return new Prelude.Apply(function (_287) {
+            return function (_288) {
+                return new Tuple(Prelude["<>"](__dict_Semigroup_131)(_287.value0)(_288.value0), _287.value1(_288.value1));
             };
         }, function () {
             return functorTuple;
         });
     };
     var bindTuple = function (__dict_Semigroup_130) {
-        return new Prelude.Bind(function (_287) {
-            return function (_288) {
-                var _1466 = _288(_287.value1);
-                return new Tuple(Prelude["<>"](__dict_Semigroup_130)(_287.value0)(_1466.value0), _1466.value1);
+        return new Prelude.Bind(function (_289) {
+            return function (_290) {
+                var _1474 = _290(_289.value1);
+                return new Tuple(Prelude["<>"](__dict_Semigroup_130)(_289.value0)(_1474.value0), _1474.value1);
             };
         }, function () {
             return applyTuple(__dict_Semigroup_130);
@@ -4426,45 +4595,45 @@ PS.Control_Comonad_Env_Trans = (function () {
     var EnvT = function (x) {
         return x;
     };
-    var withEnvT = function (_292) {
-        return function (_293) {
-            return EnvT(new Data_Tuple.Tuple(_292(_293.value0), _293.value1));
+    var withEnvT = function (_294) {
+        return function (_295) {
+            return EnvT(new Data_Tuple.Tuple(_294(_295.value0), _295.value1));
         };
     };
-    var runEnvT = function (_291) {
-        return _291;
+    var runEnvT = function (_293) {
+        return _293;
     };
-    var mapEnvT = function (_294) {
-        return function (_295) {
-            return EnvT(new Data_Tuple.Tuple(_295.value0, _294(_295.value1)));
+    var mapEnvT = function (_296) {
+        return function (_297) {
+            return EnvT(new Data_Tuple.Tuple(_297.value0, _296(_297.value1)));
         };
     };
     var functorEnvT = function (__dict_Functor_133) {
-        return new Prelude.Functor(function (_296) {
-            return function (_297) {
-                return EnvT(new Data_Tuple.Tuple(_297.value0, Prelude["<$>"](__dict_Functor_133)(_296)(_297.value1)));
+        return new Prelude.Functor(function (_298) {
+            return function (_299) {
+                return EnvT(new Data_Tuple.Tuple(_299.value0, Prelude["<$>"](__dict_Functor_133)(_298)(_299.value1)));
             };
         });
     };
     var extendEnvT = function (__dict_Extend_134) {
-        return new Control_Extend.Extend(function (_298) {
-            return function (_299) {
-                return EnvT(new Data_Tuple.Tuple(_299.value0, Prelude["<$>"](__dict_Extend_134["__superclass_Prelude.Functor_0"]())(_298)(Control_Extend["<<="](__dict_Extend_134)(Prelude[">>>"](Prelude.semigroupoidArr)(Data_Tuple.Tuple.create(_299.value0))(EnvT))(_299.value1))));
+        return new Control_Extend.Extend(function (_300) {
+            return function (_301) {
+                return EnvT(new Data_Tuple.Tuple(_301.value0, Prelude["<$>"](__dict_Extend_134["__superclass_Prelude.Functor_0"]())(_300)(Control_Extend["<<="](__dict_Extend_134)(Prelude[">>>"](Prelude.semigroupoidArr)(Data_Tuple.Tuple.create(_301.value0))(EnvT))(_301.value1))));
             };
         }, function () {
             return functorEnvT(__dict_Extend_134["__superclass_Prelude.Functor_0"]());
         });
     };
     var comonadTransEnvT = new Control_Comonad_Trans.ComonadTrans(function (__dict_Comonad_135) {
-        return function (_301) {
-            return _301.value1;
+        return function (_303) {
+            return _303.value1;
         };
     });
     var comonadEnvT = function (__dict_Comonad_136) {
         return new Control_Comonad.Comonad(function () {
             return extendEnvT(__dict_Comonad_136["__superclass_Control.Extend.Extend_0"]());
-        }, function (_300) {
-            return Control_Comonad.extract(__dict_Comonad_136)(_300.value1);
+        }, function (_302) {
+            return Control_Comonad.extract(__dict_Comonad_136)(_302.value1);
         });
     };
     return {
@@ -4489,43 +4658,43 @@ PS.Control_Comonad_Store_Trans = (function () {
     var StoreT = function (x) {
         return x;
     };
-    var runStoreT = function (_302) {
-        return _302;
+    var runStoreT = function (_304) {
+        return _304;
     };
     var functorStoreT = function (__dict_Functor_137) {
-        return new Prelude.Functor(function (_303) {
-            return function (_304) {
+        return new Prelude.Functor(function (_305) {
+            return function (_306) {
                 return StoreT(new Data_Tuple.Tuple(Prelude["<$>"](__dict_Functor_137)(function (h) {
-                    return Prelude[">>>"](Prelude.semigroupoidArr)(h)(_303);
-                })(_304.value0), _304.value1));
+                    return Prelude[">>>"](Prelude.semigroupoidArr)(h)(_305);
+                })(_306.value0), _306.value1));
             };
         });
     };
     var extendStoreT = function (__dict_Extend_138) {
-        return new Control_Extend.Extend(function (_305) {
-            return function (_306) {
+        return new Control_Extend.Extend(function (_307) {
+            return function (_308) {
                 return StoreT(new Data_Tuple.Tuple(Control_Extend["<<="](__dict_Extend_138)(function (w$prime) {
                     return function (s$prime) {
-                        return _305(StoreT(new Data_Tuple.Tuple(w$prime, s$prime)));
+                        return _307(StoreT(new Data_Tuple.Tuple(w$prime, s$prime)));
                     };
-                })(_306.value0), _306.value1));
+                })(_308.value0), _308.value1));
             };
         }, function () {
             return functorStoreT(__dict_Extend_138["__superclass_Prelude.Functor_0"]());
         });
     };
     var comonadTransStoreT = new Control_Comonad_Trans.ComonadTrans(function (__dict_Comonad_139) {
-        return function (_308) {
+        return function (_310) {
             return Prelude["<$>"]((__dict_Comonad_139["__superclass_Control.Extend.Extend_0"]())["__superclass_Prelude.Functor_0"]())(function (f) {
-                return f(_308.value1);
-            })(_308.value0);
+                return f(_310.value1);
+            })(_310.value0);
         };
     });
     var comonadStoreT = function (__dict_Comonad_140) {
         return new Control_Comonad.Comonad(function () {
             return extendStoreT(__dict_Comonad_140["__superclass_Control.Extend.Extend_0"]());
-        }, function (_307) {
-            return Control_Comonad.extract(__dict_Comonad_140)(_307.value0)(_307.value1);
+        }, function (_309) {
+            return Control_Comonad.extract(__dict_Comonad_140)(_309.value0)(_309.value1);
         });
     };
     return {
@@ -4593,12 +4762,12 @@ PS.Control_Comonad_Store_Class = (function () {
     var comonadStoreStoreT = function (__dict_Comonad_148) {
         return new ComonadStore(function () {
             return Control_Comonad_Store_Trans.comonadStoreT(__dict_Comonad_148);
-        }, function (_310) {
-            return function (_311) {
-                return Control_Comonad.extract(__dict_Comonad_148)(_311.value0)(_310);
+        }, function (_312) {
+            return function (_313) {
+                return Control_Comonad.extract(__dict_Comonad_148)(_313.value0)(_312);
             };
-        }, function (_309) {
-            return _309.value1;
+        }, function (_311) {
+            return _311.value1;
         });
     };
     return {
@@ -4624,33 +4793,33 @@ PS.Control_Comonad_Traced_Trans = (function () {
     var TracedT = function (x) {
         return x;
     };
-    var runTracedT = function (_312) {
-        return _312;
+    var runTracedT = function (_314) {
+        return _314;
     };
     var functorTracedT = function (__dict_Functor_149) {
-        return new Prelude.Functor(function (_313) {
-            return function (_314) {
+        return new Prelude.Functor(function (_315) {
+            return function (_316) {
                 return Prelude["<$>"](__dict_Functor_149)(function (g) {
                     return function (t) {
-                        return _313(g(t));
+                        return _315(g(t));
                     };
-                })(_314);
+                })(_316);
             };
         });
     };
     var extendTracedT = function (__dict_Extend_150) {
         return function (__dict_Semigroup_151) {
-            return new Control_Extend.Extend(function (_315) {
-                return function (_316) {
+            return new Control_Extend.Extend(function (_317) {
+                return function (_318) {
                     return Control_Extend["<<="](__dict_Extend_150)(function (w_1) {
                         return function (t) {
-                            return _315(Prelude["<$>"](__dict_Extend_150["__superclass_Prelude.Functor_0"]())(function (h) {
+                            return _317(Prelude["<$>"](__dict_Extend_150["__superclass_Prelude.Functor_0"]())(function (h) {
                                 return function (t$prime) {
                                     return h(Prelude["<>"](__dict_Semigroup_151)(t)(t$prime));
                                 };
                             })(w_1));
                         };
-                    })(_316);
+                    })(_318);
                 };
             }, function () {
                 return functorTracedT(__dict_Extend_150["__superclass_Prelude.Functor_0"]());
@@ -4659,10 +4828,10 @@ PS.Control_Comonad_Traced_Trans = (function () {
     };
     var comonadTransTracedT = function (__dict_Monoid_152) {
         return new Control_Comonad_Trans.ComonadTrans(function (__dict_Comonad_153) {
-            return function (_318) {
+            return function (_320) {
                 return Prelude["<$>"]((__dict_Comonad_153["__superclass_Control.Extend.Extend_0"]())["__superclass_Prelude.Functor_0"]())(function (f) {
                     return f(Data_Monoid.mempty(__dict_Monoid_152));
-                })(_318);
+                })(_320);
             };
         });
     };
@@ -4670,8 +4839,8 @@ PS.Control_Comonad_Traced_Trans = (function () {
         return function (__dict_Monoid_155) {
             return new Control_Comonad.Comonad(function () {
                 return extendTracedT(__dict_Comonad_154["__superclass_Control.Extend.Extend_0"]())(__dict_Monoid_155["__superclass_Prelude.Semigroup_0"]());
-            }, function (_317) {
-                return Control_Comonad.extract(__dict_Comonad_154)(_317)(Data_Monoid.mempty(__dict_Monoid_155));
+            }, function (_319) {
+                return Control_Comonad.extract(__dict_Comonad_154)(_319)(Data_Monoid.mempty(__dict_Monoid_155));
             });
         };
     };
@@ -4773,8 +4942,8 @@ PS.Control_Monad_Error_Trans = (function () {
     var ErrorT = function (x) {
         return x;
     };
-    var runErrorT = function (_319) {
-        return _319;
+    var runErrorT = function (_321) {
+        return _321;
     };
     var monadTransErrorT = function (__dict_Error_165) {
         return new Control_Monad_Trans.MonadTrans(function (__dict_Monad_166) {
@@ -4833,9 +5002,9 @@ PS.Control_Monad_Error_Trans = (function () {
         });
     };
     var applyErrorT = function (__dict_Apply_176) {
-        return new Prelude.Apply(function (_320) {
-            return function (_321) {
-                return ErrorT(Prelude["<*>"](__dict_Apply_176)(Prelude["<$>"](__dict_Apply_176["__superclass_Prelude.Functor_0"]())(Control_Apply.lift2(Data_Either.applyEither)(Prelude["$"]))(_320))(_321));
+        return new Prelude.Apply(function (_322) {
+            return function (_323) {
+                return ErrorT(Prelude["<*>"](__dict_Apply_176)(Prelude["<$>"](__dict_Apply_176["__superclass_Prelude.Functor_0"]())(Control_Apply.lift2(Data_Either.applyEither)(Prelude["$"]))(_322))(_323));
             };
         }, function () {
             return functorErrorT(__dict_Apply_176["__superclass_Prelude.Functor_0"]());
@@ -4937,6 +5106,185 @@ PS.Control_Monad_Error_Trans = (function () {
     };
 })();
 var PS = PS || {};
+PS.Test_Unit = (function () {
+    "use strict";
+    var Prelude = PS.Prelude;
+    var Control_Monad_Eff_Ref = PS.Control_Monad_Eff_Ref;
+    var Control_Monad_Cont_Trans = PS.Control_Monad_Cont_Trans;
+    var Control_Monad_Error_Trans = PS.Control_Monad_Error_Trans;
+    var Control_Timer = PS.Control_Timer;
+    var Test_Unit_Console = PS.Test_Unit_Console;
+    var Control_Monad_Eff = PS.Control_Monad_Eff;
+    var Data_Either = PS.Data_Either;
+    
+  function exit(rv) {
+    return function() {
+      process.exit(rv);
+    }
+  };
+    var testC = function (c) {
+        return Control_Monad_Error_Trans.ErrorT(function (cb) {
+            return Control_Monad_Cont_Trans.runContT(c)(cb);
+        });
+    };
+    var testFn = function (f) {
+        return testC(f);
+    };
+    var success = new Data_Either.Right(Prelude.unit);
+    var test = function (l) {
+        return function (t) {
+            var run = function (cb) {
+                var handler = function (_328) {
+                    if (_328 instanceof Data_Either.Right) {
+                        return function __do() {
+                            Test_Unit_Console.restorePos();
+                            Test_Unit_Console.eraseLine();
+                            Test_Unit_Console.printPass("\u2713 Passed: ")();
+                            Test_Unit_Console.printLabel(l)();
+                            Test_Unit_Console.print("\n")();
+                            return cb(success)();
+                        };
+                    };
+                    if (_328 instanceof Data_Either.Left) {
+                        return function __do() {
+                            Test_Unit_Console.restorePos();
+                            Test_Unit_Console.eraseLine();
+                            Test_Unit_Console.printFail("\u2620 Failed: ")();
+                            Test_Unit_Console.printLabel(l)();
+                            Test_Unit_Console.print(" because ")();
+                            Test_Unit_Console.printFail(_328.value0)();
+                            Test_Unit_Console.print("\n")();
+                            return cb(_328)();
+                        };
+                    };
+                    throw new Error("Failed pattern match");
+                };
+                return function __do() {
+                    Test_Unit_Console.savePos();
+                    Test_Unit_Console.print("\u2192 Running: ")();
+                    Test_Unit_Console.printLabel(l)();
+                    return Control_Monad_Cont_Trans.runContT(Control_Monad_Error_Trans.runErrorT(t))(handler)();
+                };
+            };
+            return Control_Monad_Error_Trans.ErrorT(run);
+        };
+    };
+    var runTest = function (t) {
+        var handler = function (_329) {
+            if (_329 instanceof Data_Either.Left) {
+                return exit(1);
+            };
+            return exit(0);
+        };
+        return Control_Monad_Cont_Trans.runContT(Control_Monad_Error_Trans.runErrorT(t))(handler);
+    };
+    var pickFirst = function (t1) {
+        return function (t2) {
+            return Control_Monad_Error_Trans.ErrorT(Control_Monad_Cont_Trans.ContT(function (cb) {
+                return function __do() {
+                    var _13 = Control_Monad_Eff_Ref.newRef(false)();
+                    return (function () {
+                        var $$yield = function (t) {
+                            return Control_Monad_Cont_Trans.runContT(Control_Monad_Error_Trans.runErrorT(t))(function (res) {
+                                return function __do() {
+                                    var _12 = Control_Monad_Eff_Ref.readRef(_13)();
+                                    Control_Monad_Eff_Ref.writeRef(_13)(true)();
+                                    if (_12) {
+                                        return Prelude.unit;
+                                    };
+                                    if (!_12) {
+                                        return cb(res)();
+                                    };
+                                    throw new Error("Failed pattern match");
+                                };
+                            });
+                        };
+                        return function __do() {
+                            $$yield(t1)();
+                            return $$yield(t2)();
+                        };
+                    })()();
+                };
+            }));
+        };
+    };
+    var failure = Data_Either.Left.create;
+    var timeout = function (time) {
+        return function (test_1) {
+            return pickFirst(test_1)(Control_Monad_Error_Trans.ErrorT(function (cb) {
+                return function __do() {
+                    Control_Timer.timeout(time)(cb(failure("test timed out after " + (Prelude.show(Prelude.showNumber)(time) + "ms"))))();
+                    return Prelude.unit;
+                };
+            }));
+        };
+    };
+    var assertFalse = function (_326) {
+        return function (_327) {
+            if (!_327) {
+                return Control_Monad_Error_Trans.ErrorT(function (cb) {
+                    return cb(success);
+                });
+            };
+            if (_327) {
+                return Control_Monad_Error_Trans.ErrorT(function (cb) {
+                    return cb(failure(_326));
+                });
+            };
+            throw new Error("Failed pattern match");
+        };
+    };
+    var assertC = function (reason) {
+        return function (c) {
+            return Control_Monad_Error_Trans.ErrorT(function (cb) {
+                return Control_Monad_Cont_Trans.runContT(c)(function (res) {
+                    if (res) {
+                        return cb(new Data_Either.Right(Prelude.unit));
+                    };
+                    if (!res) {
+                        return cb(new Data_Either.Left(reason));
+                    };
+                    throw new Error("Failed pattern match");
+                });
+            });
+        };
+    };
+    var assertFn = function (reason) {
+        return function (f) {
+            return assertC(reason)(f);
+        };
+    };
+    var assert = function (_324) {
+        return function (_325) {
+            if (_325) {
+                return Control_Monad_Error_Trans.ErrorT(function (cb) {
+                    return cb(success);
+                });
+            };
+            if (!_325) {
+                return Control_Monad_Error_Trans.ErrorT(function (cb) {
+                    return cb(failure(_324));
+                });
+            };
+            throw new Error("Failed pattern match");
+        };
+    };
+    return {
+        runTest: runTest, 
+        test: test, 
+        assertFn: assertFn, 
+        assertC: assertC, 
+        testFn: testFn, 
+        testC: testC, 
+        assertFalse: assertFalse, 
+        assert: assert, 
+        timeout: timeout, 
+        pickFirst: pickFirst, 
+        failure: failure, 
+        success: success
+    };
+})();
+var PS = PS || {};
 PS.Control_Monad_Maybe_Trans = (function () {
     "use strict";
     var Prelude = PS.Prelude;
@@ -4948,8 +5296,8 @@ PS.Control_Monad_Maybe_Trans = (function () {
     var MaybeT = function (x) {
         return x;
     };
-    var runMaybeT = function (_322) {
-        return _322;
+    var runMaybeT = function (_330) {
+        return _330;
     };
     var monadTransMaybeT = new Control_Monad_Trans.MonadTrans(function (__dict_Monad_182) {
         return Prelude["<<<"](Prelude.semigroupoidArr)(MaybeT)(Prelude.liftM1(__dict_Monad_182)(Data_Maybe.Just.create));
@@ -4960,13 +5308,13 @@ PS.Control_Monad_Maybe_Trans = (function () {
     var liftPassMaybe = function (__dict_Monad_184) {
         return function (pass) {
             return mapMaybeT(function (m) {
-                return pass(Prelude[">>="](__dict_Monad_184["__superclass_Prelude.Bind_1"]())(m)(function (_14) {
+                return pass(Prelude[">>="](__dict_Monad_184["__superclass_Prelude.Bind_1"]())(m)(function (_16) {
                     return Prelude["return"](__dict_Monad_184)((function () {
-                        if (_14 instanceof Data_Maybe.Nothing) {
+                        if (_16 instanceof Data_Maybe.Nothing) {
                             return new Data_Tuple.Tuple(Data_Maybe.Nothing.value, Prelude.id(Prelude.categoryArr));
                         };
-                        if (_14 instanceof Data_Maybe.Just) {
-                            return new Data_Tuple.Tuple(new Data_Maybe.Just(_14.value0.value0), _14.value0.value1);
+                        if (_16 instanceof Data_Maybe.Just) {
+                            return new Data_Tuple.Tuple(new Data_Maybe.Just(_16.value0.value0), _16.value0.value1);
                         };
                         throw new Error("Failed pattern match");
                     })());
@@ -4977,10 +5325,10 @@ PS.Control_Monad_Maybe_Trans = (function () {
     var liftListenMaybe = function (__dict_Monad_185) {
         return function (listen) {
             return mapMaybeT(function (m) {
-                return Prelude[">>="](__dict_Monad_185["__superclass_Prelude.Bind_1"]())(listen(m))(function (_13) {
+                return Prelude[">>="](__dict_Monad_185["__superclass_Prelude.Bind_1"]())(listen(m))(function (_15) {
                     return Prelude["return"](__dict_Monad_185)(Prelude["<$>"](Data_Maybe.functorMaybe)(function (r) {
-                        return new Data_Tuple.Tuple(r, _13.value1);
-                    })(_13.value0));
+                        return new Data_Tuple.Tuple(r, _15.value1);
+                    })(_15.value0));
                 });
             });
         };
@@ -5014,12 +5362,12 @@ PS.Control_Monad_Maybe_Trans = (function () {
     var bindMaybeT = function (__dict_Monad_187) {
         return new Prelude.Bind(function (x) {
             return function (f) {
-                return MaybeT(Prelude[">>="](__dict_Monad_187["__superclass_Prelude.Bind_1"]())(runMaybeT(x))(function (_12) {
-                    if (_12 instanceof Data_Maybe.Nothing) {
+                return MaybeT(Prelude[">>="](__dict_Monad_187["__superclass_Prelude.Bind_1"]())(runMaybeT(x))(function (_14) {
+                    if (_14 instanceof Data_Maybe.Nothing) {
                         return Prelude["return"](__dict_Monad_187)(Data_Maybe.Nothing.value);
                     };
-                    if (_12 instanceof Data_Maybe.Just) {
-                        return runMaybeT(f(_12.value0));
+                    if (_14 instanceof Data_Maybe.Just) {
+                        return runMaybeT(f(_14.value0));
                     };
                     throw new Error("Failed pattern match");
                 }));
@@ -5064,8 +5412,8 @@ PS.Control_Monad_RWS_Trans = (function () {
     var RWST = function (x) {
         return x;
     };
-    var runRWST = function (_325) {
-        return _325;
+    var runRWST = function (_333) {
+        return _333;
     };
     var withRWST = function (f) {
         return function (m) {
@@ -5117,14 +5465,14 @@ PS.Control_Monad_RWS_Trans = (function () {
                 return function (r) {
                     return function (s) {
                         return Prelude["<$>"](__dict_Functor_195)(function (see) {
-                            var _1555 = {};
-                            for (var _1556 in see) {
-                                if (see.hasOwnProperty(_1556)) {
-                                    _1555[_1556] = see[_1556];
+                            var _1576 = {};
+                            for (var _1577 in see) {
+                                if (see.hasOwnProperty(_1577)) {
+                                    _1576[_1577] = see[_1577];
                                 };
                             };
-                            _1555.result = f(see.result);
-                            return _1555;
+                            _1576.result = f(see.result);
+                            return _1576;
                         })(runRWST(m)(r)(s));
                     };
                 };
@@ -5159,17 +5507,17 @@ PS.Control_Monad_RWS_Trans = (function () {
                 return function (m) {
                     return function (r) {
                         return function (s) {
-                            return Prelude["<*>"](__dict_Apply_200)(Prelude["<$>"](__dict_Apply_200["__superclass_Prelude.Functor_0"]())(function (_323) {
+                            return Prelude["<*>"](__dict_Apply_200)(Prelude["<$>"](__dict_Apply_200["__superclass_Prelude.Functor_0"]())(function (_331) {
                                 return function (see) {
-                                    var _1558 = {};
-                                    for (var _1559 in see) {
-                                        if (see.hasOwnProperty(_1559)) {
-                                            _1558[_1559] = see[_1559];
+                                    var _1579 = {};
+                                    for (var _1580 in see) {
+                                        if (see.hasOwnProperty(_1580)) {
+                                            _1579[_1580] = see[_1580];
                                         };
                                     };
-                                    _1558.result = _323.result(see.result);
-                                    _1558.log = Prelude["<>"](__dict_Semigroup_201)(_323.log)(see.log);
-                                    return _1558;
+                                    _1579.result = _331.result(see.result);
+                                    _1579.log = Prelude["<>"](__dict_Semigroup_201)(_331.log)(see.log);
+                                    return _1579;
                                 };
                             })(runRWST(f)(r)(s)))(runRWST(m)(r)(s));
                         };
@@ -5186,17 +5534,17 @@ PS.Control_Monad_RWS_Trans = (function () {
                 return function (f) {
                     return function (r) {
                         return function (s) {
-                            return Prelude[">>="](__dict_Bind_198)(runRWST(m)(r)(s))(function (_324) {
+                            return Prelude[">>="](__dict_Bind_198)(runRWST(m)(r)(s))(function (_332) {
                                 return Prelude["<$>"]((__dict_Bind_198["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(function (see$prime) {
-                                    var _1563 = {};
-                                    for (var _1564 in see$prime) {
-                                        if (see$prime.hasOwnProperty(_1564)) {
-                                            _1563[_1564] = see$prime[_1564];
+                                    var _1584 = {};
+                                    for (var _1585 in see$prime) {
+                                        if (see$prime.hasOwnProperty(_1585)) {
+                                            _1584[_1585] = see$prime[_1585];
                                         };
                                     };
-                                    _1563.log = Prelude["<>"](__dict_Semigroup_199)(_324.log)(see$prime.log);
-                                    return _1563;
-                                })(runRWST(f(_324.result))(r)(_324.state));
+                                    _1584.log = Prelude["<>"](__dict_Semigroup_199)(_332.log)(see$prime.log);
+                                    return _1584;
+                                })(runRWST(f(_332.result))(r)(_332.state));
                             });
                         };
                     };
@@ -5258,8 +5606,8 @@ PS.Control_Monad_State_Trans = (function () {
     var StateT = function (x) {
         return x;
     };
-    var runStateT = function (_326) {
-        return _326;
+    var runStateT = function (_334) {
+        return _334;
     };
     var withStateT = function (f) {
         return function (s) {
@@ -5269,8 +5617,8 @@ PS.Control_Monad_State_Trans = (function () {
     var monadTransStateT = new Control_Monad_Trans.MonadTrans(function (__dict_Monad_206) {
         return function (m) {
             return function (s) {
-                return Prelude[">>="](__dict_Monad_206["__superclass_Prelude.Bind_1"]())(m)(function (_16) {
-                    return Prelude["return"](__dict_Monad_206)(new Data_Tuple.Tuple(_16, s));
+                return Prelude[">>="](__dict_Monad_206["__superclass_Prelude.Bind_1"]())(m)(function (_18) {
+                    return Prelude["return"](__dict_Monad_206)(new Data_Tuple.Tuple(_18, s));
                 });
             };
         };
@@ -5284,8 +5632,8 @@ PS.Control_Monad_State_Trans = (function () {
         return function (pass) {
             return function (m) {
                 return StateT(function (s) {
-                    return pass(Prelude[">>="](__dict_Monad_209["__superclass_Prelude.Bind_1"]())(runStateT(m)(s))(function (_18) {
-                        return Prelude["return"](__dict_Monad_209)(new Data_Tuple.Tuple(new Data_Tuple.Tuple(_18.value0.value0, _18.value1), _18.value0.value1));
+                    return pass(Prelude[">>="](__dict_Monad_209["__superclass_Prelude.Bind_1"]())(runStateT(m)(s))(function (_20) {
+                        return Prelude["return"](__dict_Monad_209)(new Data_Tuple.Tuple(new Data_Tuple.Tuple(_20.value0.value0, _20.value1), _20.value0.value1));
                     }));
                 });
             };
@@ -5295,8 +5643,8 @@ PS.Control_Monad_State_Trans = (function () {
         return function (listen) {
             return function (m) {
                 return StateT(function (s) {
-                    return Prelude[">>="](__dict_Monad_210["__superclass_Prelude.Bind_1"]())(listen(runStateT(m)(s)))(function (_17) {
-                        return Prelude["return"](__dict_Monad_210)(new Data_Tuple.Tuple(new Data_Tuple.Tuple(_17.value0.value0, _17.value1), _17.value0.value1));
+                    return Prelude[">>="](__dict_Monad_210["__superclass_Prelude.Bind_1"]())(listen(runStateT(m)(s)))(function (_19) {
+                        return Prelude["return"](__dict_Monad_210)(new Data_Tuple.Tuple(new Data_Tuple.Tuple(_19.value0.value0, _19.value1), _19.value0.value1));
                     });
                 });
             };
@@ -5369,11 +5717,11 @@ PS.Control_Monad_State_Trans = (function () {
         return new Prelude.Functor(Prelude.liftM1(monadStateT(__dict_Monad_211)));
     };
     var bindStateT = function (__dict_Monad_214) {
-        return new Prelude.Bind(function (_327) {
-            return function (_328) {
+        return new Prelude.Bind(function (_335) {
+            return function (_336) {
                 return function (s) {
-                    return Prelude[">>="](__dict_Monad_214["__superclass_Prelude.Bind_1"]())(_327(s))(function (_15) {
-                        return runStateT(_328(_15.value0))(_15.value1);
+                    return Prelude[">>="](__dict_Monad_214["__superclass_Prelude.Bind_1"]())(_335(s))(function (_17) {
+                        return runStateT(_336(_17.value0))(_17.value1);
                     });
                 };
             };
@@ -5472,14 +5820,14 @@ PS.Control_Monad_Writer_Trans = (function () {
     var WriterT = function (x) {
         return x;
     };
-    var runWriterT = function (_330) {
-        return _330;
+    var runWriterT = function (_338) {
+        return _338;
     };
     var monadTransWriterT = function (__dict_Monoid_225) {
         return new Control_Monad_Trans.MonadTrans(function (__dict_Monad_226) {
             return function (m) {
-                return WriterT(Prelude[">>="](__dict_Monad_226["__superclass_Prelude.Bind_1"]())(m)(function (_21) {
-                    return Prelude["return"](__dict_Monad_226)(new Data_Tuple.Tuple(_21, Data_Monoid.mempty(__dict_Monoid_225)));
+                return WriterT(Prelude[">>="](__dict_Monad_226["__superclass_Prelude.Bind_1"]())(m)(function (_23) {
+                    return Prelude["return"](__dict_Monad_226)(new Data_Tuple.Tuple(_23, Data_Monoid.mempty(__dict_Monoid_225)));
                 }));
             };
         });
@@ -5511,8 +5859,8 @@ PS.Control_Monad_Writer_Trans = (function () {
     };
     var functorWriterT = function (__dict_Functor_230) {
         return new Prelude.Functor(function (f) {
-            return mapWriterT(Prelude["<$>"](__dict_Functor_230)(function (_329) {
-                return new Data_Tuple.Tuple(f(_329.value0), _329.value1);
+            return mapWriterT(Prelude["<$>"](__dict_Functor_230)(function (_337) {
+                return new Data_Tuple.Tuple(f(_337.value0), _337.value1);
             }));
         });
     };
@@ -5526,9 +5874,9 @@ PS.Control_Monad_Writer_Trans = (function () {
             return new Prelude.Apply(function (f) {
                 return function (v) {
                     return WriterT((function () {
-                        var k = function (_331) {
-                            return function (_332) {
-                                return new Data_Tuple.Tuple(_331.value0(_332.value0), Prelude["<>"](__dict_Monoid_234["__superclass_Prelude.Semigroup_0"]())(_331.value1)(_332.value1));
+                        var k = function (_339) {
+                            return function (_340) {
+                                return new Data_Tuple.Tuple(_339.value0(_340.value0), Prelude["<>"](__dict_Monoid_234["__superclass_Prelude.Semigroup_0"]())(_339.value1)(_340.value1));
                             };
                         };
                         return Prelude["<*>"](__dict_Apply_235)(Prelude["<$>"](__dict_Apply_235["__superclass_Prelude.Functor_0"]())(k)(runWriterT(f)))(runWriterT(v));
@@ -5543,9 +5891,9 @@ PS.Control_Monad_Writer_Trans = (function () {
         return function (__dict_Monad_233) {
             return new Prelude.Bind(function (m) {
                 return function (k) {
-                    return WriterT(Prelude[">>="](__dict_Monad_233["__superclass_Prelude.Bind_1"]())(runWriterT(m))(function (_20) {
-                        return Prelude[">>="](__dict_Monad_233["__superclass_Prelude.Bind_1"]())(runWriterT(k(_20.value0)))(function (_19) {
-                            return Prelude["return"](__dict_Monad_233)(new Data_Tuple.Tuple(_19.value0, Prelude["<>"](__dict_Monoid_232["__superclass_Prelude.Semigroup_0"]())(_20.value1)(_19.value1)));
+                    return WriterT(Prelude[">>="](__dict_Monad_233["__superclass_Prelude.Bind_1"]())(runWriterT(m))(function (_22) {
+                        return Prelude[">>="](__dict_Monad_233["__superclass_Prelude.Bind_1"]())(runWriterT(k(_22.value0)))(function (_21) {
+                            return Prelude["return"](__dict_Monad_233)(new Data_Tuple.Tuple(_21.value0, Prelude["<>"](__dict_Monoid_232["__superclass_Prelude.Semigroup_0"]())(_22.value1)(_21.value1)));
                         });
                     }));
                 };
@@ -5702,12 +6050,12 @@ PS.Control_Monad_Error_Class = (function () {
         return function (__dict_Error_251) {
             return new MonadError(function (m) {
                 return function (h) {
-                    return Control_Monad_Error_Trans.ErrorT(Prelude[">>="](__dict_Monad_250["__superclass_Prelude.Bind_1"]())(Control_Monad_Error_Trans.runErrorT(m))(function (_22) {
-                        if (_22 instanceof Data_Either.Left) {
-                            return Control_Monad_Error_Trans.runErrorT(h(_22.value0));
+                    return Control_Monad_Error_Trans.ErrorT(Prelude[">>="](__dict_Monad_250["__superclass_Prelude.Bind_1"]())(Control_Monad_Error_Trans.runErrorT(m))(function (_24) {
+                        if (_24 instanceof Data_Either.Left) {
+                            return Control_Monad_Error_Trans.runErrorT(h(_24.value0));
                         };
-                        if (_22 instanceof Data_Either.Right) {
-                            return Prelude["return"](__dict_Monad_250)(new Data_Either.Right(_22.value0));
+                        if (_24 instanceof Data_Either.Right) {
+                            return Prelude["return"](__dict_Monad_250)(new Data_Either.Right(_24.value0));
                         };
                         throw new Error("Failed pattern match");
                     }));
@@ -5718,13 +6066,13 @@ PS.Control_Monad_Error_Class = (function () {
         };
     };
     var monadErrorError = function (__dict_Error_252) {
-        return new MonadError(function (_333) {
-            return function (_334) {
-                if (_333 instanceof Data_Either.Left) {
-                    return _334(_333.value0);
+        return new MonadError(function (_341) {
+            return function (_342) {
+                if (_341 instanceof Data_Either.Left) {
+                    return _342(_341.value0);
                 };
-                if (_333 instanceof Data_Either.Right) {
-                    return new Data_Either.Right(_333.value0);
+                if (_341 instanceof Data_Either.Right) {
+                    return new Data_Either.Right(_341.value0);
                 };
                 throw new Error("Failed pattern match");
             };
@@ -5788,9 +6136,9 @@ PS.Data_Profunctor_Strong = (function () {
     };
     var strongArr = new Strong(function () {
         return Data_Profunctor.profunctorArr;
-    }, function (_335) {
-        return function (_336) {
-            return new Data_Tuple.Tuple(_335(_336.value0), _336.value1);
+    }, function (_343) {
+        return function (_344) {
+            return new Data_Tuple.Tuple(_343(_344.value0), _344.value1);
         };
     }, Prelude["<$>"](Data_Tuple.functorTuple));
     var second = function (dict) {
@@ -5879,22 +6227,22 @@ PS.Control_Arrow_Kleisli = (function () {
         return x;
     };
     var semigroupoidKleisli = function (__dict_Monad_265) {
-        return new Prelude.Semigroupoid(function (_340) {
-            return function (_341) {
+        return new Prelude.Semigroupoid(function (_348) {
+            return function (_349) {
                 return function (b) {
-                    return Prelude[">>="](__dict_Monad_265["__superclass_Prelude.Bind_1"]())(_341(b))(_340);
+                    return Prelude[">>="](__dict_Monad_265["__superclass_Prelude.Bind_1"]())(_349(b))(_348);
                 };
             };
         });
     };
-    var runKleisli = function (_339) {
-        return _339;
+    var runKleisli = function (_347) {
+        return _347;
     };
     var profunctorKleisli = function (__dict_Functor_266) {
-        return new Data_Profunctor.Profunctor(function (_342) {
-            return function (_343) {
-                return function (_344) {
-                    return Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["<$>"](__dict_Functor_266)(_343))(Prelude["<<<"](Prelude.semigroupoidArr)(_344)(_342));
+        return new Data_Profunctor.Profunctor(function (_350) {
+            return function (_351) {
+                return function (_352) {
+                    return Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["<$>"](__dict_Functor_266)(_351))(Prelude["<<<"](Prelude.semigroupoidArr)(_352)(_350));
                 };
             };
         });
@@ -5902,16 +6250,16 @@ PS.Control_Arrow_Kleisli = (function () {
     var strongKleisli = function (__dict_Monad_264) {
         return new Data_Profunctor_Strong.Strong(function () {
             return profunctorKleisli(((__dict_Monad_264["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]());
-        }, function (_345) {
-            return function (_337) {
-                return Prelude[">>="](__dict_Monad_264["__superclass_Prelude.Bind_1"]())(_345(_337.value0))(function (b) {
-                    return Prelude["return"](__dict_Monad_264)(new Data_Tuple.Tuple(b, _337.value1));
+        }, function (_353) {
+            return function (_345) {
+                return Prelude[">>="](__dict_Monad_264["__superclass_Prelude.Bind_1"]())(_353(_345.value0))(function (b) {
+                    return Prelude["return"](__dict_Monad_264)(new Data_Tuple.Tuple(b, _345.value1));
                 });
             };
-        }, function (_346) {
-            return function (_338) {
-                return Prelude[">>="](__dict_Monad_264["__superclass_Prelude.Bind_1"]())(_346(_338.value1))(function (b) {
-                    return Prelude["return"](__dict_Monad_264)(new Data_Tuple.Tuple(_338.value0, b));
+        }, function (_354) {
+            return function (_346) {
+                return Prelude[">>="](__dict_Monad_264["__superclass_Prelude.Bind_1"]())(_354(_346.value1))(function (b) {
+                    return Prelude["return"](__dict_Monad_264)(new Data_Tuple.Tuple(_346.value0, b));
                 });
             };
         });
@@ -5986,20 +6334,20 @@ PS.Data_Machine_Mealy = (function () {
         return Halt;
     })();
     var stepMealy = function (__dict_Monad_270) {
-        return function (_347) {
-            return function (_348) {
-                return Control_Bind.join(__dict_Monad_270["__superclass_Prelude.Bind_1"]())(Prelude["<*>"]((__dict_Monad_270["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())(_348.value0)(Prelude.pure(__dict_Monad_270["__superclass_Prelude.Applicative_0"]())(_347)));
+        return function (_355) {
+            return function (_356) {
+                return Control_Bind.join(__dict_Monad_270["__superclass_Prelude.Bind_1"]())(Prelude["<*>"]((__dict_Monad_270["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())(_356.value0)(Prelude.pure(__dict_Monad_270["__superclass_Prelude.Applicative_0"]())(_355)));
             };
         };
     };
     var runMealy = function (__dict_Monad_271) {
         return function (m) {
-            var f = function (_350) {
-                if (_350 instanceof Halt) {
+            var f = function (_358) {
+                if (_358 instanceof Halt) {
                     return Prelude.pure(__dict_Monad_271["__superclass_Prelude.Applicative_0"]())(Prelude.unit);
                 };
-                if (_350 instanceof Emit) {
-                    return runMealy(__dict_Monad_271)(_350.value1);
+                if (_358 instanceof Emit) {
+                    return runMealy(__dict_Monad_271)(_358.value1);
                 };
                 throw new Error("Failed pattern match");
             };
@@ -6022,11 +6370,11 @@ PS.Data_Machine_Mealy = (function () {
         return new Data_Profunctor.Profunctor(function (l) {
             return function (r) {
                 var remap = function (m) {
-                    var g = function (_364) {
-                        if (_364 instanceof Emit) {
-                            return new Emit(r(_364.value0), remap(_364.value1));
+                    var g = function (_372) {
+                        if (_372 instanceof Emit) {
+                            return new Emit(r(_372.value0), remap(_372.value1));
                         };
-                        if (_364 instanceof Halt) {
+                        if (_372 instanceof Halt) {
                             return Halt.value;
                         };
                         throw new Error("Failed pattern match");
@@ -6043,11 +6391,11 @@ PS.Data_Machine_Mealy = (function () {
         return new Prelude.Semigroup(function (l) {
             return function (r) {
                 return mealy(__dict_Monad_278["__superclass_Prelude.Applicative_0"]())(function (s) {
-                    var g = function (_366) {
-                        if (_366 instanceof Emit) {
-                            return Prelude.pure(__dict_Monad_278["__superclass_Prelude.Applicative_0"]())(new Emit(_366.value0, Prelude["<>"](semigroupMealy(__dict_Monad_278))(_366.value1)(r)));
+                    var g = function (_374) {
+                        if (_374 instanceof Emit) {
+                            return Prelude.pure(__dict_Monad_278["__superclass_Prelude.Applicative_0"]())(new Emit(_374.value0, Prelude["<>"](semigroupMealy(__dict_Monad_278))(_374.value1)(r)));
                         };
-                        if (_366 instanceof Halt) {
+                        if (_374 instanceof Halt) {
                             return stepMealy(__dict_Monad_278)(s)(r);
                         };
                         throw new Error("Failed pattern match");
@@ -6067,21 +6415,21 @@ PS.Data_Machine_Mealy = (function () {
     var semigroupoidMealy = function (__dict_Monad_279) {
         return new Prelude.Semigroupoid(function (f) {
             return function (g) {
-                var gb = function (_367) {
-                    if (_367 instanceof Halt) {
+                var gb = function (_375) {
+                    if (_375 instanceof Halt) {
                         return Prelude.pure(__dict_Monad_279["__superclass_Prelude.Applicative_0"]())(Halt.value);
                     };
-                    if (_367 instanceof Emit) {
-                        var fc = function (_368) {
-                            if (_368 instanceof Emit) {
-                                return new Emit(_368.value0, Prelude["<<<"](semigroupoidMealy(__dict_Monad_279))(_368.value1)(_367.value1));
+                    if (_375 instanceof Emit) {
+                        var fc = function (_376) {
+                            if (_376 instanceof Emit) {
+                                return new Emit(_376.value0, Prelude["<<<"](semigroupoidMealy(__dict_Monad_279))(_376.value1)(_375.value1));
                             };
-                            if (_368 instanceof Halt) {
+                            if (_376 instanceof Halt) {
                                 return Halt.value;
                             };
                             throw new Error("Failed pattern match");
                         };
-                        return Prelude["<$>"](((__dict_Monad_279["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(fc)(stepMealy(__dict_Monad_279)(_367.value0)(f));
+                        return Prelude["<$>"](((__dict_Monad_279["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(fc)(stepMealy(__dict_Monad_279)(_375.value0)(f));
                     };
                     throw new Error("Failed pattern match");
                 };
@@ -6111,11 +6459,11 @@ PS.Data_Machine_Mealy = (function () {
         }, function (m) {
             return mealy(__dict_Monad_282["__superclass_Prelude.Applicative_0"]())(function (s) {
                 var d = Data_Tuple.snd(s);
-                var g = function (_365) {
-                    if (_365 instanceof Emit) {
-                        return new Emit(new Data_Tuple.Tuple(_365.value0, d), Data_Profunctor_Strong.first(strongMealy(__dict_Monad_282))(_365.value1));
+                var g = function (_373) {
+                    if (_373 instanceof Emit) {
+                        return new Emit(new Data_Tuple.Tuple(_373.value0, d), Data_Profunctor_Strong.first(strongMealy(__dict_Monad_282))(_373.value1));
                     };
-                    if (_365 instanceof Halt) {
+                    if (_373 instanceof Halt) {
                         return Halt.value;
                     };
                     throw new Error("Failed pattern match");
@@ -6129,12 +6477,12 @@ PS.Data_Machine_Mealy = (function () {
         return function (m) {
             var loop$prime = function (m_1) {
                 return mealy(__dict_Monad_283["__superclass_Prelude.Applicative_0"]())(function (s) {
-                    var f = function (_353) {
-                        if (_353 instanceof Halt) {
+                    var f = function (_361) {
+                        if (_361 instanceof Halt) {
                             return stepMealy(__dict_Monad_283)(s)(loop(__dict_Monad_283)(m));
                         };
-                        if (_353 instanceof Emit) {
-                            return Prelude.pure(__dict_Monad_283["__superclass_Prelude.Applicative_0"]())(new Emit(_353.value0, loop$prime(_353.value1)));
+                        if (_361 instanceof Emit) {
+                            return Prelude.pure(__dict_Monad_283["__superclass_Prelude.Applicative_0"]())(new Emit(_361.value0, loop$prime(_361.value1)));
                         };
                         throw new Error("Failed pattern match");
                     };
@@ -6149,13 +6497,13 @@ PS.Data_Machine_Mealy = (function () {
             var loop_1 = function (b) {
                 return function (m) {
                     return mealy(__dict_Monad_284["__superclass_Prelude.Applicative_0"]())(function (s) {
-                        var g = function (_354) {
-                            if (_354 instanceof Halt) {
+                        var g = function (_362) {
+                            if (_362 instanceof Halt) {
                                 return Halt.value;
                             };
-                            if (_354 instanceof Emit) {
-                                var b$prime = f(b)(_354.value0);
-                                return new Emit(b$prime, loop_1(b$prime)(_354.value1));
+                            if (_362 instanceof Emit) {
+                                var b$prime = f(b)(_362.value0);
+                                return new Emit(b$prime, loop_1(b$prime)(_362.value1));
                             };
                             throw new Error("Failed pattern match");
                         };
@@ -6170,12 +6518,12 @@ PS.Data_Machine_Mealy = (function () {
         return function (m1) {
             return function (m2) {
                 return mealy(__dict_Monad_285["__superclass_Prelude.Applicative_0"]())(function (s) {
-                    var f = function (_357) {
-                        if (_357 instanceof Halt) {
+                    var f = function (_365) {
+                        if (_365 instanceof Halt) {
                             return stepMealy(__dict_Monad_285)(s)(m2);
                         };
-                        if (_357 instanceof Emit) {
-                            return Prelude.pure(__dict_Monad_285["__superclass_Prelude.Applicative_0"]())(new Emit(_357.value0, interleave(__dict_Monad_285)(m2)(_357.value1)));
+                        if (_365 instanceof Emit) {
+                            return Prelude.pure(__dict_Monad_285["__superclass_Prelude.Applicative_0"]())(new Emit(_365.value0, interleave(__dict_Monad_285)(m2)(_365.value1)));
                         };
                         throw new Error("Failed pattern match");
                     };
@@ -6189,23 +6537,23 @@ PS.Data_Machine_Mealy = (function () {
             return function (f) {
                 return function (mb) {
                     return mealy(__dict_Monad_286["__superclass_Prelude.Applicative_0"]())(function (s) {
-                        var h = function (_359) {
-                            return function (_360) {
-                                if (_360 instanceof Halt) {
+                        var h = function (_367) {
+                            return function (_368) {
+                                if (_368 instanceof Halt) {
                                     return Halt.value;
                                 };
-                                if (_360 instanceof Emit) {
-                                    return new Emit(_360.value0, Prelude["<>"](semigroupMealy(__dict_Monad_286))(_360.value1)(ifte(__dict_Monad_286)(_359)(f)(mb)));
+                                if (_368 instanceof Emit) {
+                                    return new Emit(_368.value0, Prelude["<>"](semigroupMealy(__dict_Monad_286))(_368.value1)(ifte(__dict_Monad_286)(_367)(f)(mb)));
                                 };
                                 throw new Error("Failed pattern match");
                             };
                         };
-                        var g = function (_358) {
-                            if (_358 instanceof Halt) {
+                        var g = function (_366) {
+                            if (_366 instanceof Halt) {
                                 return stepMealy(__dict_Monad_286)(s)(mb);
                             };
-                            if (_358 instanceof Emit) {
-                                return Prelude["<$>"](((__dict_Monad_286["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(h(_358.value1))(stepMealy(__dict_Monad_286)(s)(f(_358.value0)));
+                            if (_366 instanceof Emit) {
+                                return Prelude["<$>"](((__dict_Monad_286["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(h(_366.value1))(stepMealy(__dict_Monad_286)(s)(f(_366.value0)));
                             };
                             throw new Error("Failed pattern match");
                         };
@@ -6224,12 +6572,12 @@ PS.Data_Machine_Mealy = (function () {
      */
     var msplit = function (__dict_Monad_288) {
         return function (m) {
-            var f = function (_356) {
-                if (_356 instanceof Halt) {
+            var f = function (_364) {
+                if (_364 instanceof Halt) {
                     return new Emit(Data_Maybe.Nothing.value, halt(__dict_Monad_288["__superclass_Prelude.Applicative_0"]()));
                 };
-                if (_356 instanceof Emit) {
-                    return new Emit(Data_Maybe.Just.create(new Data_Tuple.Tuple(_356.value0, _356.value1)), msplit(__dict_Monad_288)(_356.value1));
+                if (_364 instanceof Emit) {
+                    return new Emit(Data_Maybe.Just.create(new Data_Tuple.Tuple(_364.value0, _364.value1)), msplit(__dict_Monad_288)(_364.value1));
                 };
                 throw new Error("Failed pattern match");
             };
@@ -6248,20 +6596,20 @@ PS.Data_Machine_Mealy = (function () {
     var take = function (__dict_Monad_291) {
         return function (n) {
             return function (m) {
-                var f = function (_351) {
-                    if (_351 instanceof Halt) {
+                var f = function (_359) {
+                    if (_359 instanceof Halt) {
                         return Halt.value;
                     };
-                    if (_351 instanceof Emit) {
-                        return new Emit(_351.value0, take(__dict_Monad_291)(n - 1)(_351.value1));
+                    if (_359 instanceof Emit) {
+                        return new Emit(_359.value0, take(__dict_Monad_291)(n - 1)(_359.value1));
                     };
                     throw new Error("Failed pattern match");
                 };
-                var _1671 = n <= 0;
-                if (_1671) {
+                var _1692 = n <= 0;
+                if (_1692) {
                     return halt(__dict_Monad_291["__superclass_Prelude.Applicative_0"]());
                 };
-                if (!_1671) {
+                if (!_1692) {
                     return mealy(__dict_Monad_291["__superclass_Prelude.Applicative_0"]())(function (s) {
                         return Prelude["<$>"](((__dict_Monad_291["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(f)(stepMealy(__dict_Monad_291)(s)(m));
                     });
@@ -6288,11 +6636,11 @@ PS.Data_Machine_Mealy = (function () {
     var functorMealy = function (__dict_Monad_295) {
         return new Prelude.Functor(function (f) {
             return function (m) {
-                var g = function (_361) {
-                    if (_361 instanceof Emit) {
-                        return new Emit(f(_361.value0), Prelude["<$>"](functorMealy(__dict_Monad_295))(f)(_361.value1));
+                var g = function (_369) {
+                    if (_369 instanceof Emit) {
+                        return new Emit(f(_369.value0), Prelude["<$>"](functorMealy(__dict_Monad_295))(f)(_369.value1));
                     };
-                    if (_361 instanceof Halt) {
+                    if (_369 instanceof Halt) {
                         return Halt.value;
                     };
                     throw new Error("Failed pattern match");
@@ -6304,12 +6652,12 @@ PS.Data_Machine_Mealy = (function () {
         });
     };
     var fromMaybe = function (__dict_Monad_296) {
-        return function (_349) {
-            if (_349 instanceof Data_Maybe.Nothing) {
+        return function (_357) {
+            if (_357 instanceof Data_Maybe.Nothing) {
                 return halt(__dict_Monad_296["__superclass_Prelude.Applicative_0"]());
             };
-            if (_349 instanceof Data_Maybe.Just) {
-                return singleton(__dict_Monad_296)(_349.value0);
+            if (_357 instanceof Data_Maybe.Just) {
+                return singleton(__dict_Monad_296)(_357.value0);
             };
             throw new Error("Failed pattern match");
         };
@@ -6317,11 +6665,11 @@ PS.Data_Machine_Mealy = (function () {
     var fromArray = function (__dict_Monad_297) {
         return function (a) {
             var len = Data_Array.length(a);
-            var loop_1 = function (_355) {
-                if (_355 < 0 || _355 >= len) {
+            var loop_1 = function (_363) {
+                if (_363 < 0 || _363 >= len) {
                     return halt(__dict_Monad_297["__superclass_Prelude.Applicative_0"]());
                 };
-                return Prelude["<>"](semigroupMealy(__dict_Monad_297))(fromMaybe(__dict_Monad_297)(Data_Array["!!"](a)(_355)))(loop_1(_355 + 1));
+                return Prelude["<>"](semigroupMealy(__dict_Monad_297))(fromMaybe(__dict_Monad_297)(Data_Array["!!"](a)(_363)))(loop_1(_363 + 1));
             };
             return loop_1(0);
         };
@@ -6329,18 +6677,18 @@ PS.Data_Machine_Mealy = (function () {
     var drop = function (__dict_Monad_298) {
         return function (n) {
             return function (m) {
-                var _1678 = n <= 0;
-                if (_1678) {
+                var _1699 = n <= 0;
+                if (_1699) {
                     return m;
                 };
-                if (!_1678) {
+                if (!_1699) {
                     return mealy(__dict_Monad_298["__superclass_Prelude.Applicative_0"]())(function (s) {
-                        var f = function (_352) {
-                            if (_352 instanceof Halt) {
+                        var f = function (_360) {
+                            if (_360 instanceof Halt) {
                                 return Prelude.pure(__dict_Monad_298["__superclass_Prelude.Applicative_0"]())(Halt.value);
                             };
-                            if (_352 instanceof Emit) {
-                                return stepMealy(__dict_Monad_298)(s)(drop(__dict_Monad_298)(n - 1)(_352.value1));
+                            if (_360 instanceof Emit) {
+                                return stepMealy(__dict_Monad_298)(s)(drop(__dict_Monad_298)(n - 1)(_360.value1));
                             };
                             throw new Error("Failed pattern match");
                         };
@@ -6376,16 +6724,16 @@ PS.Data_Machine_Mealy = (function () {
         return new Prelude.Apply(function (f) {
             return function (x) {
                 return mealy(__dict_Monad_303["__superclass_Prelude.Applicative_0"]())(function (s) {
-                    var ap = function (_362) {
-                        return function (_363) {
-                            if (_362 instanceof Halt) {
+                    var ap = function (_370) {
+                        return function (_371) {
+                            if (_370 instanceof Halt) {
                                 return Halt.value;
                             };
-                            if (_363 instanceof Halt) {
+                            if (_371 instanceof Halt) {
                                 return Halt.value;
                             };
-                            if (_362 instanceof Emit && _363 instanceof Emit) {
-                                return new Emit(_362.value0(_363.value0), Prelude["<*>"](applyMealy(__dict_Monad_303))(_362.value1)(_363.value1));
+                            if (_370 instanceof Emit && _371 instanceof Emit) {
+                                return new Emit(_370.value0(_371.value0), Prelude["<*>"](applyMealy(__dict_Monad_303))(_370.value1)(_371.value1));
                             };
                             throw new Error("Failed pattern match");
                         };
@@ -6401,20 +6749,20 @@ PS.Data_Machine_Mealy = (function () {
         return new Prelude.Bind(function (m) {
             return function (f) {
                 return mealy(__dict_Monad_301["__superclass_Prelude.Applicative_0"]())(function (s) {
-                    var g = function (_369) {
-                        if (_369 instanceof Emit) {
-                            var h = function (_370) {
-                                if (_370 instanceof Emit) {
-                                    return new Emit(_370.value0, Prelude["<>"](semigroupMealy(__dict_Monad_301))(_370.value1)(Prelude[">>="](bindMealy(__dict_Monad_301))(_369.value1)(f)));
+                    var g = function (_377) {
+                        if (_377 instanceof Emit) {
+                            var h = function (_378) {
+                                if (_378 instanceof Emit) {
+                                    return new Emit(_378.value0, Prelude["<>"](semigroupMealy(__dict_Monad_301))(_378.value1)(Prelude[">>="](bindMealy(__dict_Monad_301))(_377.value1)(f)));
                                 };
-                                if (_370 instanceof Halt) {
+                                if (_378 instanceof Halt) {
                                     return Halt.value;
                                 };
                                 throw new Error("Failed pattern match");
                             };
-                            return Prelude["<$>"](((__dict_Monad_301["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(h)(stepMealy(__dict_Monad_301)(s)(f(_369.value0)));
+                            return Prelude["<$>"](((__dict_Monad_301["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(h)(stepMealy(__dict_Monad_301)(s)(f(_377.value0)));
                         };
-                        if (_369 instanceof Halt) {
+                        if (_377 instanceof Halt) {
                             return Prelude.pure(__dict_Monad_301["__superclass_Prelude.Applicative_0"]())(Halt.value);
                         };
                         throw new Error("Failed pattern match");
@@ -6455,12 +6803,12 @@ PS.Data_Machine_Mealy = (function () {
         return new Control_Alt.Alt(function (x) {
             return function (y) {
                 return mealy(__dict_Monad_306["__superclass_Prelude.Applicative_0"]())(function (s) {
-                    var f = function (_371) {
-                        if (_371 instanceof Halt) {
+                    var f = function (_379) {
+                        if (_379 instanceof Halt) {
                             return stepMealy(__dict_Monad_306)(s)(y);
                         };
-                        if (_371 instanceof Emit) {
-                            return Prelude.pure(__dict_Monad_306["__superclass_Prelude.Applicative_0"]())(new Emit(_371.value0, _371.value1));
+                        if (_379 instanceof Emit) {
+                            return Prelude.pure(__dict_Monad_306["__superclass_Prelude.Applicative_0"]())(new Emit(_379.value0, _379.value1));
                         };
                         throw new Error("Failed pattern match");
                     };
@@ -6544,48 +6892,48 @@ PS.Data_Tuple_Nested = (function () {
         };
     };
     var con9 = function (f) {
-        return function (_379) {
-            return f(_379.value0)(_379.value1.value0)(_379.value1.value1.value0)(_379.value1.value1.value1.value0)(_379.value1.value1.value1.value1.value0)(_379.value1.value1.value1.value1.value1.value0)(_379.value1.value1.value1.value1.value1.value1.value0)(_379.value1.value1.value1.value1.value1.value1.value1.value0)(_379.value1.value1.value1.value1.value1.value1.value1.value1);
+        return function (_387) {
+            return f(_387.value0)(_387.value1.value0)(_387.value1.value1.value0)(_387.value1.value1.value1.value0)(_387.value1.value1.value1.value1.value0)(_387.value1.value1.value1.value1.value1.value0)(_387.value1.value1.value1.value1.value1.value1.value0)(_387.value1.value1.value1.value1.value1.value1.value1.value0)(_387.value1.value1.value1.value1.value1.value1.value1.value1);
         };
     };
     var con8 = function (f) {
-        return function (_378) {
-            return f(_378.value0)(_378.value1.value0)(_378.value1.value1.value0)(_378.value1.value1.value1.value0)(_378.value1.value1.value1.value1.value0)(_378.value1.value1.value1.value1.value1.value0)(_378.value1.value1.value1.value1.value1.value1.value0)(_378.value1.value1.value1.value1.value1.value1.value1);
+        return function (_386) {
+            return f(_386.value0)(_386.value1.value0)(_386.value1.value1.value0)(_386.value1.value1.value1.value0)(_386.value1.value1.value1.value1.value0)(_386.value1.value1.value1.value1.value1.value0)(_386.value1.value1.value1.value1.value1.value1.value0)(_386.value1.value1.value1.value1.value1.value1.value1);
         };
     };
     var con7 = function (f) {
-        return function (_377) {
-            return f(_377.value0)(_377.value1.value0)(_377.value1.value1.value0)(_377.value1.value1.value1.value0)(_377.value1.value1.value1.value1.value0)(_377.value1.value1.value1.value1.value1.value0)(_377.value1.value1.value1.value1.value1.value1);
+        return function (_385) {
+            return f(_385.value0)(_385.value1.value0)(_385.value1.value1.value0)(_385.value1.value1.value1.value0)(_385.value1.value1.value1.value1.value0)(_385.value1.value1.value1.value1.value1.value0)(_385.value1.value1.value1.value1.value1.value1);
         };
     };
     var con6 = function (f) {
-        return function (_376) {
-            return f(_376.value0)(_376.value1.value0)(_376.value1.value1.value0)(_376.value1.value1.value1.value0)(_376.value1.value1.value1.value1.value0)(_376.value1.value1.value1.value1.value1);
+        return function (_384) {
+            return f(_384.value0)(_384.value1.value0)(_384.value1.value1.value0)(_384.value1.value1.value1.value0)(_384.value1.value1.value1.value1.value0)(_384.value1.value1.value1.value1.value1);
         };
     };
     var con5 = function (f) {
-        return function (_375) {
-            return f(_375.value0)(_375.value1.value0)(_375.value1.value1.value0)(_375.value1.value1.value1.value0)(_375.value1.value1.value1.value1);
+        return function (_383) {
+            return f(_383.value0)(_383.value1.value0)(_383.value1.value1.value0)(_383.value1.value1.value1.value0)(_383.value1.value1.value1.value1);
         };
     };
     var con4 = function (f) {
-        return function (_374) {
-            return f(_374.value0)(_374.value1.value0)(_374.value1.value1.value0)(_374.value1.value1.value1);
+        return function (_382) {
+            return f(_382.value0)(_382.value1.value0)(_382.value1.value1.value0)(_382.value1.value1.value1);
         };
     };
     var con3 = function (f) {
-        return function (_373) {
-            return f(_373.value0)(_373.value1.value0)(_373.value1.value1);
+        return function (_381) {
+            return f(_381.value0)(_381.value1.value0)(_381.value1.value1);
         };
     };
     var con2 = function (f) {
-        return function (_372) {
-            return f(_372.value0)(_372.value1);
+        return function (_380) {
+            return f(_380.value0)(_380.value1);
         };
     };
     var con10 = function (f) {
-        return function (_380) {
-            return f(_380.value0)(_380.value1.value0)(_380.value1.value1.value0)(_380.value1.value1.value1.value0)(_380.value1.value1.value1.value1.value0)(_380.value1.value1.value1.value1.value1.value0)(_380.value1.value1.value1.value1.value1.value1.value0)(_380.value1.value1.value1.value1.value1.value1.value1.value0)(_380.value1.value1.value1.value1.value1.value1.value1.value1.value0)(_380.value1.value1.value1.value1.value1.value1.value1.value1.value1);
+        return function (_388) {
+            return f(_388.value0)(_388.value1.value0)(_388.value1.value1.value0)(_388.value1.value1.value1.value0)(_388.value1.value1.value1.value1.value0)(_388.value1.value1.value1.value1.value1.value0)(_388.value1.value1.value1.value1.value1.value1.value0)(_388.value1.value1.value1.value1.value1.value1.value1.value0)(_388.value1.value1.value1.value1.value1.value1.value1.value1.value0)(_388.value1.value1.value1.value1.value1.value1.value1.value1.value1);
         };
     };
     return {
@@ -6611,41 +6959,41 @@ PS.Data_Monoid_First = (function () {
         return x;
     };
     var showFirst = function (__dict_Show_307) {
-        return new Prelude.Show(function (_388) {
-            return "First (" + (Prelude.show(Data_Maybe.showMaybe(__dict_Show_307))(_388) + ")");
+        return new Prelude.Show(function (_396) {
+            return "First (" + (Prelude.show(Data_Maybe.showMaybe(__dict_Show_307))(_396) + ")");
         });
     };
-    var semigroupFirst = new Prelude.Semigroup(function (_389) {
-        return function (_390) {
-            if (_389 instanceof Data_Maybe.Just) {
-                return _389;
+    var semigroupFirst = new Prelude.Semigroup(function (_397) {
+        return function (_398) {
+            if (_397 instanceof Data_Maybe.Just) {
+                return _397;
             };
-            return _390;
+            return _398;
         };
     });
-    var runFirst = function (_381) {
-        return _381;
+    var runFirst = function (_389) {
+        return _389;
     };
     var monoidFirst = new Data_Monoid.Monoid(function () {
         return semigroupFirst;
     }, Data_Maybe.Nothing.value);
     var eqFirst = function (__dict_Eq_309) {
-        return new Prelude.Eq(function (_384) {
-            return function (_385) {
-                return Prelude["/="](Data_Maybe.eqMaybe(__dict_Eq_309))(_384)(_385);
+        return new Prelude.Eq(function (_392) {
+            return function (_393) {
+                return Prelude["/="](Data_Maybe.eqMaybe(__dict_Eq_309))(_392)(_393);
             };
-        }, function (_382) {
-            return function (_383) {
-                return Prelude["=="](Data_Maybe.eqMaybe(__dict_Eq_309))(_382)(_383);
+        }, function (_390) {
+            return function (_391) {
+                return Prelude["=="](Data_Maybe.eqMaybe(__dict_Eq_309))(_390)(_391);
             };
         });
     };
     var ordFirst = function (__dict_Ord_308) {
         return new Prelude.Ord(function () {
             return eqFirst(__dict_Ord_308["__superclass_Prelude.Eq_0"]());
-        }, function (_386) {
-            return function (_387) {
-                return Prelude.compare(Data_Maybe.ordMaybe(__dict_Ord_308))(_386)(_387);
+        }, function (_394) {
+            return function (_395) {
+                return Prelude.compare(Data_Maybe.ordMaybe(__dict_Ord_308))(_394)(_395);
             };
         });
     };
@@ -6725,17 +7073,17 @@ PS.Data_Foldable = (function () {
         return function (__dict_Monoid_317) {
             return function (sep) {
                 return function (xs) {
-                    var go = function (_416) {
-                        return function (_417) {
-                            if (_416.init) {
+                    var go = function (_424) {
+                        return function (_425) {
+                            if (_424.init) {
                                 return {
                                     init: false, 
-                                    acc: _417
+                                    acc: _425
                                 };
                             };
                             return {
                                 init: false, 
-                                acc: Prelude["<>"](__dict_Monoid_317["__superclass_Prelude.Semigroup_0"]())(_416.acc)(Prelude["<>"](__dict_Monoid_317["__superclass_Prelude.Semigroup_0"]())(sep)(_417))
+                                acc: Prelude["<>"](__dict_Monoid_317["__superclass_Prelude.Semigroup_0"]())(_424.acc)(Prelude["<>"](__dict_Monoid_317["__superclass_Prelude.Semigroup_0"]())(sep)(_425))
                             };
                         };
                     };
@@ -6762,31 +7110,68 @@ PS.Data_Foldable = (function () {
         return foldl(__dict_Foldable_322)(Prelude["+"](Prelude.numNumber))(0);
     };
     var foldableTuple = new Foldable(function (__dict_Monoid_323) {
+        return function (_422) {
+            return function (_423) {
+                return _422(_423.value1);
+            };
+        };
+    }, function (_419) {
+        return function (_420) {
+            return function (_421) {
+                return _419(_420)(_421.value1);
+            };
+        };
+    }, function (_416) {
+        return function (_417) {
+            return function (_418) {
+                return _416(_418.value1)(_417);
+            };
+        };
+    });
+    var foldableMaybe = new Foldable(function (__dict_Monoid_324) {
         return function (_414) {
             return function (_415) {
-                return _414(_415.value1);
+                if (_415 instanceof Data_Maybe.Nothing) {
+                    return Data_Monoid.mempty(__dict_Monoid_324);
+                };
+                if (_415 instanceof Data_Maybe.Just) {
+                    return _414(_415.value0);
+                };
+                throw new Error("Failed pattern match");
             };
         };
     }, function (_411) {
         return function (_412) {
             return function (_413) {
-                return _411(_412)(_413.value1);
+                if (_413 instanceof Data_Maybe.Nothing) {
+                    return _412;
+                };
+                if (_413 instanceof Data_Maybe.Just) {
+                    return _411(_412)(_413.value0);
+                };
+                throw new Error("Failed pattern match");
             };
         };
     }, function (_408) {
         return function (_409) {
             return function (_410) {
-                return _408(_410.value1)(_409);
+                if (_410 instanceof Data_Maybe.Nothing) {
+                    return _409;
+                };
+                if (_410 instanceof Data_Maybe.Just) {
+                    return _408(_410.value0)(_409);
+                };
+                throw new Error("Failed pattern match");
             };
         };
     });
-    var foldableMaybe = new Foldable(function (__dict_Monoid_324) {
+    var foldableEither = new Foldable(function (__dict_Monoid_325) {
         return function (_406) {
             return function (_407) {
-                if (_407 instanceof Data_Maybe.Nothing) {
-                    return Data_Monoid.mempty(__dict_Monoid_324);
+                if (_407 instanceof Data_Either.Left) {
+                    return Data_Monoid.mempty(__dict_Monoid_325);
                 };
-                if (_407 instanceof Data_Maybe.Just) {
+                if (_407 instanceof Data_Either.Right) {
                     return _406(_407.value0);
                 };
                 throw new Error("Failed pattern match");
@@ -6795,10 +7180,10 @@ PS.Data_Foldable = (function () {
     }, function (_403) {
         return function (_404) {
             return function (_405) {
-                if (_405 instanceof Data_Maybe.Nothing) {
+                if (_405 instanceof Data_Either.Left) {
                     return _404;
                 };
-                if (_405 instanceof Data_Maybe.Just) {
+                if (_405 instanceof Data_Either.Right) {
                     return _403(_404)(_405.value0);
                 };
                 throw new Error("Failed pattern match");
@@ -6807,48 +7192,11 @@ PS.Data_Foldable = (function () {
     }, function (_400) {
         return function (_401) {
             return function (_402) {
-                if (_402 instanceof Data_Maybe.Nothing) {
+                if (_402 instanceof Data_Either.Left) {
                     return _401;
                 };
-                if (_402 instanceof Data_Maybe.Just) {
+                if (_402 instanceof Data_Either.Right) {
                     return _400(_402.value0)(_401);
-                };
-                throw new Error("Failed pattern match");
-            };
-        };
-    });
-    var foldableEither = new Foldable(function (__dict_Monoid_325) {
-        return function (_398) {
-            return function (_399) {
-                if (_399 instanceof Data_Either.Left) {
-                    return Data_Monoid.mempty(__dict_Monoid_325);
-                };
-                if (_399 instanceof Data_Either.Right) {
-                    return _398(_399.value0);
-                };
-                throw new Error("Failed pattern match");
-            };
-        };
-    }, function (_395) {
-        return function (_396) {
-            return function (_397) {
-                if (_397 instanceof Data_Either.Left) {
-                    return _396;
-                };
-                if (_397 instanceof Data_Either.Right) {
-                    return _395(_396)(_397.value0);
-                };
-                throw new Error("Failed pattern match");
-            };
-        };
-    }, function (_392) {
-        return function (_393) {
-            return function (_394) {
-                if (_394 instanceof Data_Either.Left) {
-                    return _393;
-                };
-                if (_394 instanceof Data_Either.Right) {
-                    return _392(_394.value0)(_393);
                 };
                 throw new Error("Failed pattern match");
             };
@@ -6884,12 +7232,12 @@ PS.Data_Foldable = (function () {
         return function (__dict_Foldable_328) {
             return function (a) {
                 return function (f) {
-                    return Data_Monoid_First.runFirst(foldMap(__dict_Foldable_328)(Data_Monoid_First.monoidFirst)(function (_391) {
-                        var _1851 = Prelude["=="](__dict_Eq_327)(a)(_391.value0);
-                        if (_1851) {
-                            return new Data_Maybe.Just(_391.value1);
+                    return Data_Monoid_First.runFirst(foldMap(__dict_Foldable_328)(Data_Monoid_First.monoidFirst)(function (_399) {
+                        var _1872 = Prelude["=="](__dict_Eq_327)(a)(_399.value0);
+                        if (_1872) {
+                            return new Data_Maybe.Just(_399.value1);
                         };
-                        if (!_1851) {
+                        if (!_1872) {
                             return Data_Maybe.Nothing.value;
                         };
                         throw new Error("Failed pattern match");
@@ -6906,21 +7254,21 @@ PS.Data_Foldable = (function () {
     var find = function (__dict_Foldable_331) {
         return function (p) {
             return function (f) {
-                var _1855 = foldMap(__dict_Foldable_331)(Data_Monoid.monoidArray)(function (x) {
-                    var _1854 = p(x);
-                    if (_1854) {
+                var _1876 = foldMap(__dict_Foldable_331)(Data_Monoid.monoidArray)(function (x) {
+                    var _1875 = p(x);
+                    if (_1875) {
                         return [ x ];
                     };
-                    if (!_1854) {
+                    if (!_1875) {
                         return [  ];
                     };
                     throw new Error("Failed pattern match");
                 })(f);
-                if (_1855.length >= 1) {
-                    var _1857 = _1855.slice(1);
-                    return new Data_Maybe.Just(_1855[0]);
+                if (_1876.length >= 1) {
+                    var _1878 = _1876.slice(1);
+                    return new Data_Maybe.Just(_1876[0]);
                 };
-                if (_1855.length === 0) {
+                if (_1876.length === 0) {
                     return Data_Maybe.Nothing.value;
                 };
                 throw new Error("Failed pattern match");
@@ -6995,44 +7343,44 @@ PS.Data_Monoid_Last = (function () {
         return x;
     };
     var showLast = function (__dict_Show_339) {
-        return new Prelude.Show(function (_425) {
-            return "Last (" + (Prelude.show(Data_Maybe.showMaybe(__dict_Show_339))(_425) + ")");
+        return new Prelude.Show(function (_433) {
+            return "Last (" + (Prelude.show(Data_Maybe.showMaybe(__dict_Show_339))(_433) + ")");
         });
     };
-    var semigroupLast = new Prelude.Semigroup(function (_426) {
-        return function (_427) {
-            if (_427 instanceof Data_Maybe.Just) {
-                return _427;
+    var semigroupLast = new Prelude.Semigroup(function (_434) {
+        return function (_435) {
+            if (_435 instanceof Data_Maybe.Just) {
+                return _435;
             };
-            if (_427 instanceof Data_Maybe.Nothing) {
-                return _426;
+            if (_435 instanceof Data_Maybe.Nothing) {
+                return _434;
             };
             throw new Error("Failed pattern match");
         };
     });
-    var runLast = function (_418) {
-        return _418;
+    var runLast = function (_426) {
+        return _426;
     };
     var monoidLast = new Data_Monoid.Monoid(function () {
         return semigroupLast;
     }, Data_Maybe.Nothing.value);
     var eqLast = function (__dict_Eq_341) {
-        return new Prelude.Eq(function (_421) {
-            return function (_422) {
-                return Prelude["/="](Data_Maybe.eqMaybe(__dict_Eq_341))(_421)(_422);
+        return new Prelude.Eq(function (_429) {
+            return function (_430) {
+                return Prelude["/="](Data_Maybe.eqMaybe(__dict_Eq_341))(_429)(_430);
             };
-        }, function (_419) {
-            return function (_420) {
-                return Prelude["=="](Data_Maybe.eqMaybe(__dict_Eq_341))(_419)(_420);
+        }, function (_427) {
+            return function (_428) {
+                return Prelude["=="](Data_Maybe.eqMaybe(__dict_Eq_341))(_427)(_428);
             };
         });
     };
     var ordLast = function (__dict_Ord_340) {
         return new Prelude.Ord(function () {
             return eqLast(__dict_Ord_340["__superclass_Prelude.Eq_0"]());
-        }, function (_423) {
-            return function (_424) {
-                return Prelude.compare(Data_Maybe.ordMaybe(__dict_Ord_340))(_423)(_424);
+        }, function (_431) {
+            return function (_432) {
+                return Prelude.compare(Data_Maybe.ordMaybe(__dict_Ord_340))(_431)(_432);
             };
         });
     };
@@ -7239,13 +7587,13 @@ PS.Data_String = (function () {
     var $$null = function (s) {
         return length(s) === 0;
     };
-    var uncons = function (_428) {
-        if ($$null(_428)) {
+    var uncons = function (_436) {
+        if ($$null(_436)) {
             return Data_Maybe.Nothing.value;
         };
         return new Data_Maybe.Just({
-            head: Data_String_Unsafe.charAt(0)(_428), 
-            tail: drop(1)(_428)
+            head: Data_String_Unsafe.charAt(0)(_436), 
+            tail: drop(1)(_436)
         });
     };
     var fromChar = Data_Char.charString;
@@ -7482,13 +7830,13 @@ PS.Data_Traversable = (function () {
     }, function () {
         return Data_Tuple.functorTuple;
     }, function (__dict_Applicative_343) {
-        return function (_442) {
-            return Prelude["<$>"]((__dict_Applicative_343["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Tuple.Tuple.create(_442.value0))(_442.value1);
+        return function (_450) {
+            return Prelude["<$>"]((__dict_Applicative_343["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Tuple.Tuple.create(_450.value0))(_450.value1);
         };
     }, function (__dict_Applicative_342) {
-        return function (_440) {
-            return function (_441) {
-                return Prelude["<$>"]((__dict_Applicative_342["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Tuple.Tuple.create(_441.value0))(_440(_441.value1));
+        return function (_448) {
+            return function (_449) {
+                return Prelude["<$>"]((__dict_Applicative_342["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Tuple.Tuple.create(_449.value0))(_448(_449.value1));
             };
         };
     });
@@ -7497,23 +7845,23 @@ PS.Data_Traversable = (function () {
     }, function () {
         return Data_Maybe.functorMaybe;
     }, function (__dict_Applicative_345) {
-        return function (_439) {
-            if (_439 instanceof Data_Maybe.Nothing) {
+        return function (_447) {
+            if (_447 instanceof Data_Maybe.Nothing) {
                 return Prelude.pure(__dict_Applicative_345)(Data_Maybe.Nothing.value);
             };
-            if (_439 instanceof Data_Maybe.Just) {
-                return Prelude["<$>"]((__dict_Applicative_345["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Maybe.Just.create)(_439.value0);
+            if (_447 instanceof Data_Maybe.Just) {
+                return Prelude["<$>"]((__dict_Applicative_345["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Maybe.Just.create)(_447.value0);
             };
             throw new Error("Failed pattern match");
         };
     }, function (__dict_Applicative_344) {
-        return function (_437) {
-            return function (_438) {
-                if (_438 instanceof Data_Maybe.Nothing) {
+        return function (_445) {
+            return function (_446) {
+                if (_446 instanceof Data_Maybe.Nothing) {
                     return Prelude.pure(__dict_Applicative_344)(Data_Maybe.Nothing.value);
                 };
-                if (_438 instanceof Data_Maybe.Just) {
-                    return Prelude["<$>"]((__dict_Applicative_344["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Maybe.Just.create)(_437(_438.value0));
+                if (_446 instanceof Data_Maybe.Just) {
+                    return Prelude["<$>"]((__dict_Applicative_344["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Maybe.Just.create)(_445(_446.value0));
                 };
                 throw new Error("Failed pattern match");
             };
@@ -7524,33 +7872,33 @@ PS.Data_Traversable = (function () {
     }, function () {
         return Data_Either.functorEither;
     }, function (__dict_Applicative_347) {
-        return function (_436) {
-            if (_436 instanceof Data_Either.Left) {
-                return Prelude.pure(__dict_Applicative_347)(new Data_Either.Left(_436.value0));
+        return function (_444) {
+            if (_444 instanceof Data_Either.Left) {
+                return Prelude.pure(__dict_Applicative_347)(new Data_Either.Left(_444.value0));
             };
-            if (_436 instanceof Data_Either.Right) {
-                return Prelude["<$>"]((__dict_Applicative_347["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Right.create)(_436.value0);
+            if (_444 instanceof Data_Either.Right) {
+                return Prelude["<$>"]((__dict_Applicative_347["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Right.create)(_444.value0);
             };
             throw new Error("Failed pattern match");
         };
     }, function (__dict_Applicative_346) {
-        return function (_434) {
-            return function (_435) {
-                if (_435 instanceof Data_Either.Left) {
-                    return Prelude.pure(__dict_Applicative_346)(new Data_Either.Left(_435.value0));
+        return function (_442) {
+            return function (_443) {
+                if (_443 instanceof Data_Either.Left) {
+                    return Prelude.pure(__dict_Applicative_346)(new Data_Either.Left(_443.value0));
                 };
-                if (_435 instanceof Data_Either.Right) {
-                    return Prelude["<$>"]((__dict_Applicative_346["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Right.create)(_434(_435.value0));
+                if (_443 instanceof Data_Either.Right) {
+                    return Prelude["<$>"]((__dict_Applicative_346["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Right.create)(_442(_443.value0));
                 };
                 throw new Error("Failed pattern match");
             };
         };
     });
-    var stateR = function (_430) {
-        return _430;
+    var stateR = function (_438) {
+        return _438;
     };
-    var stateL = function (_429) {
-        return _429;
+    var stateL = function (_437) {
+        return _437;
     };
     var sequence = function (dict) {
         return dict.sequence;
@@ -7560,25 +7908,25 @@ PS.Data_Traversable = (function () {
     }, function () {
         return Data_Array.functorArray;
     }, function (__dict_Applicative_349) {
-        return function (_433) {
-            if (_433.length === 0) {
+        return function (_441) {
+            if (_441.length === 0) {
                 return Prelude.pure(__dict_Applicative_349)([  ]);
             };
-            if (_433.length >= 1) {
-                var _1898 = _433.slice(1);
-                return Prelude["<*>"](__dict_Applicative_349["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_349["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Prelude[":"])(_433[0]))(sequence(traversableArray)(__dict_Applicative_349)(_1898));
+            if (_441.length >= 1) {
+                var _1919 = _441.slice(1);
+                return Prelude["<*>"](__dict_Applicative_349["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_349["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Prelude[":"])(_441[0]))(sequence(traversableArray)(__dict_Applicative_349)(_1919));
             };
             throw new Error("Failed pattern match");
         };
     }, function (__dict_Applicative_348) {
-        return function (_431) {
-            return function (_432) {
-                if (_432.length === 0) {
+        return function (_439) {
+            return function (_440) {
+                if (_440.length === 0) {
                     return Prelude.pure(__dict_Applicative_348)([  ]);
                 };
-                if (_432.length >= 1) {
-                    var _1902 = _432.slice(1);
-                    return Prelude["<*>"](__dict_Applicative_348["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_348["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Prelude[":"])(_431(_432[0])))(traverse(traversableArray)(__dict_Applicative_348)(_431)(_1902));
+                if (_440.length >= 1) {
+                    var _1923 = _440.slice(1);
+                    return Prelude["<*>"](__dict_Applicative_348["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_348["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Prelude[":"])(_439(_440[0])))(traverse(traversableArray)(__dict_Applicative_348)(_439)(_1923));
                 };
                 throw new Error("Failed pattern match");
             };
@@ -7596,16 +7944,16 @@ PS.Data_Traversable = (function () {
     var functorStateR = new Prelude.Functor(function (f) {
         return function (k) {
             return StateR(function (s) {
-                var _1903 = stateR(k)(s);
-                return new Data_Tuple.Tuple(_1903.value0, f(_1903.value1));
+                var _1924 = stateR(k)(s);
+                return new Data_Tuple.Tuple(_1924.value0, f(_1924.value1));
             });
         };
     });
     var functorStateL = new Prelude.Functor(function (f) {
         return function (k) {
             return StateL(function (s) {
-                var _1906 = stateL(k)(s);
-                return new Data_Tuple.Tuple(_1906.value0, f(_1906.value1));
+                var _1927 = stateL(k)(s);
+                return new Data_Tuple.Tuple(_1927.value0, f(_1927.value1));
             });
         };
     });
@@ -7621,9 +7969,9 @@ PS.Data_Traversable = (function () {
     var applyStateR = new Prelude.Apply(function (f) {
         return function (x) {
             return StateR(function (s) {
-                var _1909 = stateR(x)(s);
-                var _1910 = stateR(f)(_1909.value0);
-                return new Data_Tuple.Tuple(_1910.value0, _1910.value1(_1909.value1));
+                var _1930 = stateR(x)(s);
+                var _1931 = stateR(f)(_1930.value0);
+                return new Data_Tuple.Tuple(_1931.value0, _1931.value1(_1930.value1));
             });
         };
     }, function () {
@@ -7632,9 +7980,9 @@ PS.Data_Traversable = (function () {
     var applyStateL = new Prelude.Apply(function (f) {
         return function (x) {
             return StateL(function (s) {
-                var _1915 = stateL(f)(s);
-                var _1916 = stateL(x)(_1915.value0);
-                return new Data_Tuple.Tuple(_1916.value0, _1915.value1(_1916.value1));
+                var _1936 = stateL(f)(s);
+                var _1937 = stateL(x)(_1936.value0);
+                return new Data_Tuple.Tuple(_1937.value0, _1936.value1(_1937.value1));
             });
         };
     }, function () {
@@ -7736,19 +8084,19 @@ PS.Data_Const = (function () {
         return x;
     };
     var showConst = function (__dict_Show_359) {
-        return new Prelude.Show(function (_448) {
-            return "Const (" + (Prelude.show(__dict_Show_359)(_448) + ")");
+        return new Prelude.Show(function (_456) {
+            return "Const (" + (Prelude.show(__dict_Show_359)(_456) + ")");
         });
     };
-    var semigroupoidConst = new Prelude.Semigroupoid(function (_449) {
-        return function (_450) {
-            return _450;
+    var semigroupoidConst = new Prelude.Semigroupoid(function (_457) {
+        return function (_458) {
+            return _458;
         };
     });
     var semigroupConst = function (__dict_Semigroup_360) {
-        return new Prelude.Semigroup(function (_451) {
-            return function (_452) {
-                return Prelude["<>"](__dict_Semigroup_360)(_451)(_452);
+        return new Prelude.Semigroup(function (_459) {
+            return function (_460) {
+                return Prelude["<>"](__dict_Semigroup_360)(_459)(_460);
             };
         });
     };
@@ -7757,30 +8105,30 @@ PS.Data_Const = (function () {
             return semigroupConst(__dict_Monoid_362["__superclass_Prelude.Semigroup_0"]());
         }, Data_Monoid.mempty(__dict_Monoid_362));
     };
-    var getConst = function (_443) {
-        return _443;
+    var getConst = function (_451) {
+        return _451;
     };
-    var functorConst = new Prelude.Functor(function (_453) {
-        return function (_454) {
-            return _454;
+    var functorConst = new Prelude.Functor(function (_461) {
+        return function (_462) {
+            return _462;
         };
     });
     var foldableConst = new Data_Foldable.Foldable(function (__dict_Monoid_363) {
-        return function (_468) {
-            return function (_469) {
+        return function (_476) {
+            return function (_477) {
                 return Data_Monoid.mempty(__dict_Monoid_363);
             };
         };
-    }, function (_465) {
-        return function (_466) {
-            return function (_467) {
-                return _466;
+    }, function (_473) {
+        return function (_474) {
+            return function (_475) {
+                return _474;
             };
         };
-    }, function (_462) {
-        return function (_463) {
-            return function (_464) {
-                return _463;
+    }, function (_470) {
+        return function (_471) {
+            return function (_472) {
+                return _471;
             };
         };
     });
@@ -7789,13 +8137,13 @@ PS.Data_Const = (function () {
     }, function () {
         return functorConst;
     }, function (__dict_Applicative_358) {
-        return function (_472) {
-            return Prelude.pure(__dict_Applicative_358)(_472);
+        return function (_480) {
+            return Prelude.pure(__dict_Applicative_358)(_480);
         };
     }, function (__dict_Applicative_357) {
-        return function (_470) {
-            return function (_471) {
-                return Prelude.pure(__dict_Applicative_357)(_471);
+        return function (_478) {
+            return function (_479) {
+                return Prelude.pure(__dict_Applicative_357)(_479);
             };
         };
     });
@@ -7804,39 +8152,39 @@ PS.Data_Const = (function () {
             return function (c$prime) {
                 return !Prelude["=="](eqConst(__dict_Eq_364))(c)(c$prime);
             };
-        }, function (_444) {
-            return function (_445) {
-                return Prelude["=="](__dict_Eq_364)(_444)(_445);
+        }, function (_452) {
+            return function (_453) {
+                return Prelude["=="](__dict_Eq_364)(_452)(_453);
             };
         });
     };
     var ordConst = function (__dict_Ord_361) {
         return new Prelude.Ord(function () {
             return eqConst(__dict_Ord_361["__superclass_Prelude.Eq_0"]());
-        }, function (_446) {
-            return function (_447) {
-                return Prelude.compare(__dict_Ord_361)(_446)(_447);
+        }, function (_454) {
+            return function (_455) {
+                return Prelude.compare(__dict_Ord_361)(_454)(_455);
             };
         });
     };
-    var contravariantConst = new Data_Contravariant.Contravariant(function (_460) {
-        return function (_461) {
-            return _461;
+    var contravariantConst = new Data_Contravariant.Contravariant(function (_468) {
+        return function (_469) {
+            return _469;
         };
     });
     var applyConst = function (__dict_Semigroup_366) {
-        return new Prelude.Apply(function (_455) {
-            return function (_456) {
-                return Prelude["<>"](__dict_Semigroup_366)(_455)(_456);
+        return new Prelude.Apply(function (_463) {
+            return function (_464) {
+                return Prelude["<>"](__dict_Semigroup_366)(_463)(_464);
             };
         }, function () {
             return functorConst;
         });
     };
     var bindConst = function (__dict_Semigroup_365) {
-        return new Prelude.Bind(function (_457) {
-            return function (_458) {
-                return _457;
+        return new Prelude.Bind(function (_465) {
+            return function (_466) {
+                return _465;
             };
         }, function () {
             return applyConst(__dict_Semigroup_365);
@@ -7845,7 +8193,7 @@ PS.Data_Const = (function () {
     var applicativeConst = function (__dict_Monoid_367) {
         return new Prelude.Applicative(function () {
             return applyConst(__dict_Monoid_367["__superclass_Prelude.Semigroup_0"]());
-        }, function (_459) {
+        }, function (_467) {
             return Data_Monoid.mempty(__dict_Monoid_367);
         });
     };
@@ -7916,67 +8264,67 @@ PS.Data_Bifoldable = (function () {
         return dict.bifoldl;
     };
     var bifoldableTuple = new Bifoldable(function (__dict_Monoid_374) {
-        return function (_473) {
-            return function (_474) {
-                return function (_475) {
-                    return Prelude["<>"](__dict_Monoid_374["__superclass_Prelude.Semigroup_0"]())(_473(_475.value0))(_474(_475.value1));
-                };
-            };
-        };
-    }, function (_480) {
         return function (_481) {
             return function (_482) {
                 return function (_483) {
-                    return _481(_480(_482)(_483.value0))(_483.value1);
+                    return Prelude["<>"](__dict_Monoid_374["__superclass_Prelude.Semigroup_0"]())(_481(_483.value0))(_482(_483.value1));
                 };
             };
         };
-    }, function (_476) {
-        return function (_477) {
-            return function (_478) {
-                return function (_479) {
-                    return _476(_479.value0)(_477(_479.value1)(_478));
+    }, function (_488) {
+        return function (_489) {
+            return function (_490) {
+                return function (_491) {
+                    return _489(_488(_490)(_491.value0))(_491.value1);
+                };
+            };
+        };
+    }, function (_484) {
+        return function (_485) {
+            return function (_486) {
+                return function (_487) {
+                    return _484(_487.value0)(_485(_487.value1)(_486));
                 };
             };
         };
     });
     var bifoldableEither = new Bifoldable(function (__dict_Monoid_375) {
-        return function (_484) {
-            return function (_485) {
-                return function (_486) {
-                    if (_486 instanceof Data_Either.Left) {
-                        return _484(_486.value0);
-                    };
-                    if (_486 instanceof Data_Either.Right) {
-                        return _485(_486.value0);
-                    };
-                    throw new Error("Failed pattern match");
-                };
-            };
-        };
-    }, function (_491) {
         return function (_492) {
             return function (_493) {
                 return function (_494) {
                     if (_494 instanceof Data_Either.Left) {
-                        return _491(_493)(_494.value0);
+                        return _492(_494.value0);
                     };
                     if (_494 instanceof Data_Either.Right) {
-                        return _492(_493)(_494.value0);
+                        return _493(_494.value0);
                     };
                     throw new Error("Failed pattern match");
                 };
             };
         };
-    }, function (_487) {
-        return function (_488) {
-            return function (_489) {
-                return function (_490) {
-                    if (_490 instanceof Data_Either.Left) {
-                        return _487(_490.value0)(_489);
+    }, function (_499) {
+        return function (_500) {
+            return function (_501) {
+                return function (_502) {
+                    if (_502 instanceof Data_Either.Left) {
+                        return _499(_501)(_502.value0);
                     };
-                    if (_490 instanceof Data_Either.Right) {
-                        return _488(_490.value0)(_489);
+                    if (_502 instanceof Data_Either.Right) {
+                        return _500(_501)(_502.value0);
+                    };
+                    throw new Error("Failed pattern match");
+                };
+            };
+        };
+    }, function (_495) {
+        return function (_496) {
+            return function (_497) {
+                return function (_498) {
+                    if (_498 instanceof Data_Either.Left) {
+                        return _495(_498.value0)(_497);
+                    };
+                    if (_498 instanceof Data_Either.Right) {
+                        return _496(_498.value0)(_497);
                     };
                     throw new Error("Failed pattern match");
                 };
@@ -7984,26 +8332,26 @@ PS.Data_Bifoldable = (function () {
         };
     });
     var bifoldableConst = new Bifoldable(function (__dict_Monoid_376) {
-        return function (_495) {
-            return function (_496) {
-                return function (_497) {
-                    return _495(_497);
-                };
-            };
-        };
-    }, function (_502) {
         return function (_503) {
             return function (_504) {
                 return function (_505) {
-                    return _502(_504)(_505);
+                    return _503(_505);
                 };
             };
         };
-    }, function (_498) {
-        return function (_499) {
-            return function (_500) {
-                return function (_501) {
-                    return _498(_501)(_500);
+    }, function (_510) {
+        return function (_511) {
+            return function (_512) {
+                return function (_513) {
+                    return _510(_512)(_513);
+                };
+            };
+        };
+    }, function (_506) {
+        return function (_507) {
+            return function (_508) {
+                return function (_509) {
+                    return _506(_509)(_508);
                 };
             };
         };
@@ -8067,30 +8415,30 @@ PS.Data_Bifunctor = (function () {
     var rmap = function (__dict_Bifunctor_382) {
         return bimap(__dict_Bifunctor_382)(Prelude.id(Prelude.categoryArr));
     };
-    var bifunctorTuple = new Bifunctor(function (_509) {
-        return function (_510) {
-            return function (_511) {
-                return new Data_Tuple.Tuple(_509(_511.value0), _510(_511.value1));
+    var bifunctorTuple = new Bifunctor(function (_517) {
+        return function (_518) {
+            return function (_519) {
+                return new Data_Tuple.Tuple(_517(_519.value0), _518(_519.value1));
             };
         };
     });
-    var bifunctorEither = new Bifunctor(function (_506) {
-        return function (_507) {
-            return function (_508) {
-                if (_508 instanceof Data_Either.Left) {
-                    return new Data_Either.Left(_506(_508.value0));
+    var bifunctorEither = new Bifunctor(function (_514) {
+        return function (_515) {
+            return function (_516) {
+                if (_516 instanceof Data_Either.Left) {
+                    return new Data_Either.Left(_514(_516.value0));
                 };
-                if (_508 instanceof Data_Either.Right) {
-                    return new Data_Either.Right(_507(_508.value0));
+                if (_516 instanceof Data_Either.Right) {
+                    return new Data_Either.Right(_515(_516.value0));
                 };
                 throw new Error("Failed pattern match");
             };
         };
     });
-    var bifunctorConst = new Bifunctor(function (_512) {
-        return function (_513) {
-            return function (_514) {
-                return _512(_514);
+    var bifunctorConst = new Bifunctor(function (_520) {
+        return function (_521) {
+            return function (_522) {
+                return _520(_522);
             };
         };
     });
@@ -8158,16 +8506,16 @@ PS.Control_Biapply = (function () {
             };
         };
     };
-    var biapplyTuple = new Biapply(function (_515) {
-        return function (_516) {
-            return new Data_Tuple.Tuple(_515.value0(_516.value0), _515.value1(_516.value1));
+    var biapplyTuple = new Biapply(function (_523) {
+        return function (_524) {
+            return new Data_Tuple.Tuple(_523.value0(_524.value0), _523.value1(_524.value1));
         };
     }, function () {
         return Data_Bifunctor.bifunctorTuple;
     });
-    var biapplyConst = new Biapply(function (_517) {
-        return function (_518) {
-            return _517(_518);
+    var biapplyConst = new Biapply(function (_525) {
+        return function (_526) {
+            return _525(_526);
         };
     }, function () {
         return Data_Bifunctor.bifunctorConst;
@@ -8203,9 +8551,9 @@ PS.Control_Biapplicative = (function () {
     }, Data_Tuple.Tuple.create);
     var biapplicativeConst = new Biapplicative(function () {
         return Control_Biapply.biapplyConst;
-    }, function (_519) {
-        return function (_520) {
-            return _519;
+    }, function (_527) {
+        return function (_528) {
+            return _527;
         };
     });
     return {
@@ -8238,14 +8586,14 @@ PS.Data_Bitraversable = (function () {
     }, function () {
         return Data_Bifunctor.bifunctorTuple;
     }, function (__dict_Applicative_388) {
-        return function (_524) {
-            return Prelude["<*>"](__dict_Applicative_388["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_388["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Tuple.Tuple.create)(_524.value0))(_524.value1);
+        return function (_532) {
+            return Prelude["<*>"](__dict_Applicative_388["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_388["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Tuple.Tuple.create)(_532.value0))(_532.value1);
         };
     }, function (__dict_Applicative_387) {
-        return function (_521) {
-            return function (_522) {
-                return function (_523) {
-                    return Prelude["<*>"](__dict_Applicative_387["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_387["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Tuple.Tuple.create)(_521(_523.value0)))(_522(_523.value1));
+        return function (_529) {
+            return function (_530) {
+                return function (_531) {
+                    return Prelude["<*>"](__dict_Applicative_387["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_387["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Tuple.Tuple.create)(_529(_531.value0)))(_530(_531.value1));
                 };
             };
         };
@@ -8255,24 +8603,24 @@ PS.Data_Bitraversable = (function () {
     }, function () {
         return Data_Bifunctor.bifunctorEither;
     }, function (__dict_Applicative_390) {
-        return function (_528) {
-            if (_528 instanceof Data_Either.Left) {
-                return Prelude["<$>"]((__dict_Applicative_390["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Left.create)(_528.value0);
+        return function (_536) {
+            if (_536 instanceof Data_Either.Left) {
+                return Prelude["<$>"]((__dict_Applicative_390["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Left.create)(_536.value0);
             };
-            if (_528 instanceof Data_Either.Right) {
-                return Prelude["<$>"]((__dict_Applicative_390["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Right.create)(_528.value0);
+            if (_536 instanceof Data_Either.Right) {
+                return Prelude["<$>"]((__dict_Applicative_390["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Right.create)(_536.value0);
             };
             throw new Error("Failed pattern match");
         };
     }, function (__dict_Applicative_389) {
-        return function (_525) {
-            return function (_526) {
-                return function (_527) {
-                    if (_527 instanceof Data_Either.Left) {
-                        return Prelude["<$>"]((__dict_Applicative_389["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Left.create)(_525(_527.value0));
+        return function (_533) {
+            return function (_534) {
+                return function (_535) {
+                    if (_535 instanceof Data_Either.Left) {
+                        return Prelude["<$>"]((__dict_Applicative_389["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Left.create)(_533(_535.value0));
                     };
-                    if (_527 instanceof Data_Either.Right) {
-                        return Prelude["<$>"]((__dict_Applicative_389["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Right.create)(_526(_527.value0));
+                    if (_535 instanceof Data_Either.Right) {
+                        return Prelude["<$>"]((__dict_Applicative_389["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Either.Right.create)(_534(_535.value0));
                     };
                     throw new Error("Failed pattern match");
                 };
@@ -8284,14 +8632,14 @@ PS.Data_Bitraversable = (function () {
     }, function () {
         return Data_Bifunctor.bifunctorConst;
     }, function (__dict_Applicative_392) {
-        return function (_532) {
-            return Prelude["<$>"]((__dict_Applicative_392["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Const.Const)(_532);
+        return function (_540) {
+            return Prelude["<$>"]((__dict_Applicative_392["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Const.Const)(_540);
         };
     }, function (__dict_Applicative_391) {
-        return function (_529) {
-            return function (_530) {
-                return function (_531) {
-                    return Prelude["<$>"]((__dict_Applicative_391["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Const.Const)(_529(_531));
+        return function (_537) {
+            return function (_538) {
+                return function (_539) {
+                    return Prelude["<$>"]((__dict_Applicative_391["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Const.Const)(_537(_539));
                 };
             };
         };
@@ -8342,25 +8690,25 @@ PS.Data_Bifunctor_Clown = (function () {
         };
         return Clown;
     })();
-    var runClown = function (_533) {
-        return _533.value0;
+    var runClown = function (_541) {
+        return _541.value0;
     };
-    var clownFunctor = new Prelude.Functor(function (_536) {
+    var clownFunctor = new Prelude.Functor(function (_544) {
         return Prelude["<<<"](Prelude.semigroupoidArr)(Clown.create)(runClown);
     });
     var clownFoldable = new Data_Foldable.Foldable(function (__dict_Monoid_397) {
-        return function (_553) {
-            return function (_554) {
+        return function (_561) {
+            return function (_562) {
                 return Data_Monoid.mempty(__dict_Monoid_397);
             };
         };
-    }, function (_551) {
-        return function (_552) {
-            return Prelude["const"](_552);
+    }, function (_559) {
+        return function (_560) {
+            return Prelude["const"](_560);
         };
-    }, function (_549) {
-        return function (_550) {
-            return Prelude["const"](_550);
+    }, function (_557) {
+        return function (_558) {
+            return Prelude["const"](_558);
         };
     });
     var clownTraversable = new Data_Traversable.Traversable(function () {
@@ -8370,34 +8718,34 @@ PS.Data_Bifunctor_Clown = (function () {
     }, function (__dict_Applicative_396) {
         return Data_Traversable.traverse(clownTraversable)(__dict_Applicative_396)(Prelude.id(Prelude.categoryArr));
     }, function (__dict_Applicative_395) {
-        return function (_557) {
+        return function (_565) {
             return Prelude["<<<"](Prelude.semigroupoidArr)(Prelude.pure(__dict_Applicative_395))(Prelude["<<<"](Prelude.semigroupoidArr)(Clown.create)(runClown));
         };
     });
     var clownBifunctor = function (__dict_Functor_401) {
-        return new Data_Bifunctor.Bifunctor(function (_534) {
-            return function (_535) {
-                return Prelude["<<<"](Prelude.semigroupoidArr)(Clown.create)(Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["<$>"](__dict_Functor_401)(_534))(runClown));
+        return new Data_Bifunctor.Bifunctor(function (_542) {
+            return function (_543) {
+                return Prelude["<<<"](Prelude.semigroupoidArr)(Clown.create)(Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["<$>"](__dict_Functor_401)(_542))(runClown));
             };
         });
     };
     var clownBifoldable = function (__dict_Foldable_402) {
         return new Data_Bifoldable.Bifoldable(function (__dict_Monoid_403) {
-            return function (_547) {
-                return function (_548) {
-                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldMap(__dict_Foldable_402)(__dict_Monoid_403)(_547))(runClown);
+            return function (_555) {
+                return function (_556) {
+                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldMap(__dict_Foldable_402)(__dict_Monoid_403)(_555))(runClown);
                 };
             };
-        }, function (_544) {
-            return function (_545) {
-                return function (_546) {
-                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldl(__dict_Foldable_402)(_544)(_546))(runClown);
+        }, function (_552) {
+            return function (_553) {
+                return function (_554) {
+                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldl(__dict_Foldable_402)(_552)(_554))(runClown);
                 };
             };
-        }, function (_541) {
-            return function (_542) {
-                return function (_543) {
-                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldr(__dict_Foldable_402)(_541)(_543))(runClown);
+        }, function (_549) {
+            return function (_550) {
+                return function (_551) {
+                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldr(__dict_Foldable_402)(_549)(_551))(runClown);
                 };
             };
         });
@@ -8410,17 +8758,17 @@ PS.Data_Bifunctor_Clown = (function () {
         }, function (__dict_Applicative_400) {
             return Data_Bitraversable.bitraverse(clownBitraversable(__dict_Traversable_398))(__dict_Applicative_400)(Prelude.id(Prelude.categoryArr))(Prelude.id(Prelude.categoryArr));
         }, function (__dict_Applicative_399) {
-            return function (_555) {
-                return function (_556) {
-                    return Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["<$>"]((__dict_Applicative_399["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Clown.create))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Traversable.traverse(__dict_Traversable_398)(__dict_Applicative_399)(_555))(runClown));
+            return function (_563) {
+                return function (_564) {
+                    return Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["<$>"]((__dict_Applicative_399["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Clown.create))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Traversable.traverse(__dict_Traversable_398)(__dict_Applicative_399)(_563))(runClown));
                 };
             };
         });
     };
     var clownBiapply = function (__dict_Apply_404) {
-        return new Control_Biapply.Biapply(function (_537) {
-            return function (_538) {
-                return new Clown(Prelude["<*>"](__dict_Apply_404)(_537.value0)(_538.value0));
+        return new Control_Biapply.Biapply(function (_545) {
+            return function (_546) {
+                return new Clown(Prelude["<*>"](__dict_Apply_404)(_545.value0)(_546.value0));
             };
         }, function () {
             return clownBifunctor(__dict_Apply_404["__superclass_Prelude.Functor_0"]());
@@ -8429,9 +8777,9 @@ PS.Data_Bifunctor_Clown = (function () {
     var clownBiapplicative = function (__dict_Applicative_405) {
         return new Control_Biapplicative.Biapplicative(function () {
             return clownBiapply(__dict_Applicative_405["__superclass_Prelude.Apply_0"]());
-        }, function (_539) {
-            return function (_540) {
-                return new Clown(Prelude.pure(__dict_Applicative_405)(_539));
+        }, function (_547) {
+            return function (_548) {
+                return new Clown(Prelude.pure(__dict_Applicative_405)(_547));
             };
         });
     };
@@ -8470,8 +8818,8 @@ PS.Data_Bifunctor_Flip = (function () {
         };
         return Flip;
     })();
-    var runFlip = function (_558) {
-        return _558.value0;
+    var runFlip = function (_566) {
+        return _566.value0;
     };
     var flipFunctor = function (__dict_Bifunctor_409) {
         return new Prelude.Functor(function (f) {
@@ -8550,9 +8898,9 @@ PS.Data_Bifunctor_Flip = (function () {
         });
     };
     var flipBiapply = function (__dict_Biapply_418) {
-        return new Control_Biapply.Biapply(function (_559) {
-            return function (_560) {
-                return new Flip(Control_Biapply["<<*>>"](__dict_Biapply_418)(_559.value0)(_560.value0));
+        return new Control_Biapply.Biapply(function (_567) {
+            return function (_568) {
+                return new Flip(Control_Biapply["<<*>>"](__dict_Biapply_418)(_567.value0)(_568.value0));
             };
         }, function () {
             return flipBifunctor(__dict_Biapply_418["__superclass_Data.Bifunctor.Bifunctor_0"]());
@@ -8602,8 +8950,8 @@ PS.Data_Bifunctor_Join = (function () {
         };
         return Join;
     })();
-    var runJoin = function (_561) {
-        return _561.value0;
+    var runJoin = function (_569) {
+        return _569.value0;
     };
     var joinFunctor = function (__dict_Bifunctor_423) {
         return new Prelude.Functor(function (f) {
@@ -8633,17 +8981,17 @@ PS.Data_Bifunctor_Join = (function () {
         }, function (__dict_Applicative_422) {
             return Data_Traversable.traverse(joinTraversable(__dict_Bitraversable_420))(__dict_Applicative_422)(Prelude.id(Prelude.categoryArr));
         }, function (__dict_Applicative_421) {
-            return function (_564) {
-                return function (_565) {
-                    return Prelude["<$>"]((__dict_Applicative_421["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Join.create)(Data_Bitraversable.bitraverse(__dict_Bitraversable_420)(__dict_Applicative_421)(_564)(_564)(_565.value0));
+            return function (_572) {
+                return function (_573) {
+                    return Prelude["<$>"]((__dict_Applicative_421["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Join.create)(Data_Bitraversable.bitraverse(__dict_Bitraversable_420)(__dict_Applicative_421)(_572)(_572)(_573.value0));
                 };
             };
         });
     };
     var joinApply = function (__dict_Biapply_426) {
-        return new Prelude.Apply(function (_562) {
-            return function (_563) {
-                return new Join(Control_Biapply["<<*>>"](__dict_Biapply_426)(_562.value0)(_563.value0));
+        return new Prelude.Apply(function (_570) {
+            return function (_571) {
+                return new Join(Control_Biapply["<<*>>"](__dict_Biapply_426)(_570.value0)(_571.value0));
             };
         }, function () {
             return joinFunctor(__dict_Biapply_426["__superclass_Data.Bifunctor.Bifunctor_0"]());
@@ -8688,8 +9036,8 @@ PS.Data_Bifunctor_Joker = (function () {
         };
         return Joker;
     })();
-    var runJoker = function (_566) {
-        return _566.value0;
+    var runJoker = function (_574) {
+        return _574.value0;
     };
     var jokerFunctor = function (__dict_Functor_431) {
         return new Prelude.Functor(function (g) {
@@ -8725,29 +9073,29 @@ PS.Data_Bifunctor_Joker = (function () {
         });
     };
     var jokerBifunctor = function (__dict_Functor_437) {
-        return new Data_Bifunctor.Bifunctor(function (_567) {
-            return function (_568) {
-                return Prelude["<<<"](Prelude.semigroupoidArr)(Joker.create)(Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["<$>"](__dict_Functor_437)(_568))(runJoker));
+        return new Data_Bifunctor.Bifunctor(function (_575) {
+            return function (_576) {
+                return Prelude["<<<"](Prelude.semigroupoidArr)(Joker.create)(Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["<$>"](__dict_Functor_437)(_576))(runJoker));
             };
         });
     };
     var jokerBifoldable = function (__dict_Foldable_438) {
         return new Data_Bifoldable.Bifoldable(function (__dict_Monoid_439) {
-            return function (_579) {
-                return function (_580) {
-                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldMap(__dict_Foldable_438)(__dict_Monoid_439)(_580))(runJoker);
+            return function (_587) {
+                return function (_588) {
+                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldMap(__dict_Foldable_438)(__dict_Monoid_439)(_588))(runJoker);
                 };
             };
-        }, function (_576) {
-            return function (_577) {
-                return function (_578) {
-                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldl(__dict_Foldable_438)(_577)(_578))(runJoker);
+        }, function (_584) {
+            return function (_585) {
+                return function (_586) {
+                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldl(__dict_Foldable_438)(_585)(_586))(runJoker);
                 };
             };
-        }, function (_573) {
-            return function (_574) {
-                return function (_575) {
-                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldr(__dict_Foldable_438)(_574)(_575))(runJoker);
+        }, function (_581) {
+            return function (_582) {
+                return function (_583) {
+                    return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Foldable.foldr(__dict_Foldable_438)(_582)(_583))(runJoker);
                 };
             };
         });
@@ -8760,17 +9108,17 @@ PS.Data_Bifunctor_Joker = (function () {
         }, function (__dict_Applicative_436) {
             return Data_Bitraversable.bitraverse(jokerBitraversable(__dict_Traversable_434))(__dict_Applicative_436)(Prelude.id(Prelude.categoryArr))(Prelude.id(Prelude.categoryArr));
         }, function (__dict_Applicative_435) {
-            return function (_581) {
-                return function (_582) {
-                    return Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["<$>"]((__dict_Applicative_435["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Joker.create))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Traversable.traverse(__dict_Traversable_434)(__dict_Applicative_435)(_582))(runJoker));
+            return function (_589) {
+                return function (_590) {
+                    return Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["<$>"]((__dict_Applicative_435["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Joker.create))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Traversable.traverse(__dict_Traversable_434)(__dict_Applicative_435)(_590))(runJoker));
                 };
             };
         });
     };
     var jokerBiapply = function (__dict_Apply_440) {
-        return new Control_Biapply.Biapply(function (_569) {
-            return function (_570) {
-                return new Joker(Prelude["<*>"](__dict_Apply_440)(_569.value0)(_570.value0));
+        return new Control_Biapply.Biapply(function (_577) {
+            return function (_578) {
+                return new Joker(Prelude["<*>"](__dict_Apply_440)(_577.value0)(_578.value0));
             };
         }, function () {
             return jokerBifunctor(__dict_Apply_440["__superclass_Prelude.Functor_0"]());
@@ -8779,9 +9127,9 @@ PS.Data_Bifunctor_Joker = (function () {
     var jokerBiapplicative = function (__dict_Applicative_441) {
         return new Control_Biapplicative.Biapplicative(function () {
             return jokerBiapply(__dict_Applicative_441["__superclass_Prelude.Apply_0"]());
-        }, function (_571) {
-            return function (_572) {
-                return new Joker(Prelude.pure(__dict_Applicative_441)(_572));
+        }, function (_579) {
+            return function (_580) {
+                return new Joker(Prelude.pure(__dict_Applicative_441)(_580));
             };
         });
     };
@@ -8827,10 +9175,10 @@ PS.Data_Bifunctor_Product = (function () {
     })();
     var productBifunctor = function (__dict_Bifunctor_446) {
         return function (__dict_Bifunctor_447) {
-            return new Data_Bifunctor.Bifunctor(function (_583) {
-                return function (_584) {
-                    return function (_585) {
-                        return new Pair(Data_Bifunctor.bimap(__dict_Bifunctor_446)(_583)(_584)(_585.value0), Data_Bifunctor.bimap(__dict_Bifunctor_447)(_583)(_584)(_585.value1));
+            return new Data_Bifunctor.Bifunctor(function (_591) {
+                return function (_592) {
+                    return function (_593) {
+                        return new Pair(Data_Bifunctor.bimap(__dict_Bifunctor_446)(_591)(_592)(_593.value0), Data_Bifunctor.bimap(__dict_Bifunctor_447)(_591)(_592)(_593.value1));
                     };
                 };
             });
@@ -8843,10 +9191,10 @@ PS.Data_Bifunctor_Product = (function () {
     var productBifoldable = function (__dict_Bifoldable_448) {
         return function (__dict_Bifoldable_449) {
             return new Data_Bifoldable.Bifoldable(function (__dict_Monoid_450) {
-                return function (_588) {
-                    return function (_589) {
-                        return function (_590) {
-                            return Prelude["<>"](__dict_Monoid_450["__superclass_Prelude.Semigroup_0"]())(Data_Bifoldable.bifoldMap(__dict_Bifoldable_448)(__dict_Monoid_450)(_588)(_589)(_590.value0))(Data_Bifoldable.bifoldMap(__dict_Bifoldable_449)(__dict_Monoid_450)(_588)(_589)(_590.value1));
+                return function (_596) {
+                    return function (_597) {
+                        return function (_598) {
+                            return Prelude["<>"](__dict_Monoid_450["__superclass_Prelude.Semigroup_0"]())(Data_Bifoldable.bifoldMap(__dict_Bifoldable_448)(__dict_Monoid_450)(_596)(_597)(_598.value0))(Data_Bifoldable.bifoldMap(__dict_Bifoldable_449)(__dict_Monoid_450)(_596)(_597)(_598.value1));
                         };
                     };
                 };
@@ -8878,10 +9226,10 @@ PS.Data_Bifunctor_Product = (function () {
             }, function (__dict_Applicative_445) {
                 return Data_Bitraversable.bitraverse(productBitraversable(__dict_Bitraversable_442)(__dict_Bitraversable_443))(__dict_Applicative_445)(Prelude.id(Prelude.categoryArr))(Prelude.id(Prelude.categoryArr));
             }, function (__dict_Applicative_444) {
-                return function (_591) {
-                    return function (_592) {
-                        return function (_593) {
-                            return Prelude["<*>"](__dict_Applicative_444["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_444["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Pair.create)(Data_Bitraversable.bitraverse(__dict_Bitraversable_442)(__dict_Applicative_444)(_591)(_592)(_593.value0)))(Data_Bitraversable.bitraverse(__dict_Bitraversable_443)(__dict_Applicative_444)(_591)(_592)(_593.value1));
+                return function (_599) {
+                    return function (_600) {
+                        return function (_601) {
+                            return Prelude["<*>"](__dict_Applicative_444["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_444["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Pair.create)(Data_Bitraversable.bitraverse(__dict_Bitraversable_442)(__dict_Applicative_444)(_599)(_600)(_601.value0)))(Data_Bitraversable.bitraverse(__dict_Bitraversable_443)(__dict_Applicative_444)(_599)(_600)(_601.value1));
                         };
                     };
                 };
@@ -8890,9 +9238,9 @@ PS.Data_Bifunctor_Product = (function () {
     };
     var productBiapply = function (__dict_Biapply_451) {
         return function (__dict_Biapply_452) {
-            return new Control_Biapply.Biapply(function (_586) {
-                return function (_587) {
-                    return new Pair(Control_Biapply["<<*>>"](__dict_Biapply_451)(_586.value0)(_587.value0), Control_Biapply["<<*>>"](__dict_Biapply_452)(_586.value1)(_587.value1));
+            return new Control_Biapply.Biapply(function (_594) {
+                return function (_595) {
+                    return new Pair(Control_Biapply["<<*>>"](__dict_Biapply_451)(_594.value0)(_595.value0), Control_Biapply["<<*>>"](__dict_Biapply_452)(_594.value1)(_595.value1));
                 };
             }, function () {
                 return productBifunctor(__dict_Biapply_451["__superclass_Data.Bifunctor.Bifunctor_0"]())(__dict_Biapply_452["__superclass_Data.Bifunctor.Bifunctor_0"]());
@@ -8941,8 +9289,8 @@ PS.Data_Bifunctor_Wrap = (function () {
         };
         return Wrap;
     })();
-    var unwrap = function (_594) {
-        return _594.value0;
+    var unwrap = function (_602) {
+        return _602.value0;
     };
     var wrapBifoldable = function (__dict_Bifoldable_457) {
         return new Data_Bifoldable.Bifoldable(function (__dict_Monoid_458) {
@@ -8973,9 +9321,9 @@ PS.Data_Bifunctor_Wrap = (function () {
         });
     };
     var wrapBiapply = function (__dict_Biapply_455) {
-        return new Control_Biapply.Biapply(function (_595) {
-            return function (_596) {
-                return new Wrap(Control_Biapply["<<*>>"](__dict_Biapply_455)(_595.value0)(_596.value0));
+        return new Control_Biapply.Biapply(function (_603) {
+            return function (_604) {
+                return new Wrap(Control_Biapply["<<*>>"](__dict_Biapply_455)(_603.value0)(_604.value0));
             };
         }, function () {
             return wrapBifunctor(__dict_Biapply_455["__superclass_Data.Bifunctor.Bifunctor_0"]());
@@ -9061,8 +9409,8 @@ PS.Data_Functor_Coproduct = (function () {
     var Coproduct = function (x) {
         return x;
     };
-    var runCoproduct = function (_597) {
-        return _597;
+    var runCoproduct = function (_605) {
+        return _605;
     };
     var right = Prelude["<<<"](Prelude.semigroupoidArr)(Coproduct)(Data_Either.Right.create);
     var left = Prelude["<<<"](Prelude.semigroupoidArr)(Coproduct)(Data_Either.Left.create);
@@ -9205,15 +9553,15 @@ PS.Control_Monad_Free = (function () {
     var wrap = function (dict) {
         return dict.wrap;
     };
-    var unsafeRight = function (_602) {
-        if (_602 instanceof Data_Either.Right) {
-            return _602.value0;
+    var unsafeRight = function (_610) {
+        if (_610 instanceof Data_Either.Right) {
+            return _610.value0;
         };
         throw new Error("Failed pattern match");
     };
-    var unsafeLeft = function (_601) {
-        if (_601 instanceof Data_Either.Left) {
-            return _601.value0;
+    var unsafeLeft = function (_609) {
+        if (_609 instanceof Data_Either.Left) {
+            return _609.value0;
         };
         throw new Error("Failed pattern match");
     };
@@ -9222,8 +9570,8 @@ PS.Control_Monad_Free = (function () {
     };
     var monadTransFree = new Control_Monad_Trans.MonadTrans(function (__dict_Monad_482) {
         return function (f) {
-            return Free.create(Prelude[">>="](__dict_Monad_482["__superclass_Prelude.Bind_1"]())(f)(function (_23) {
-                return Prelude["return"](__dict_Monad_482)(new Pure(_23));
+            return Free.create(Prelude[">>="](__dict_Monad_482["__superclass_Prelude.Bind_1"]())(f)(function (_25) {
+                return Prelude["return"](__dict_Monad_482)(new Pure(_25));
             }));
         };
     });
@@ -9243,18 +9591,18 @@ PS.Control_Monad_Free = (function () {
      */
     var iterM = function (__dict_Functor_491) {
         return function (__dict_Monad_492) {
-            return function (_598) {
-                return function (_599) {
-                    if (_599 instanceof Pure) {
-                        return Prelude["return"](__dict_Monad_492)(_599.value0);
+            return function (_606) {
+                return function (_607) {
+                    if (_607 instanceof Pure) {
+                        return Prelude["return"](__dict_Monad_492)(_607.value0);
                     };
-                    if (_599 instanceof Free) {
-                        return _598(Prelude["<$>"](__dict_Functor_491)(iterM(__dict_Functor_491)(__dict_Monad_492)(_598))(_599.value0));
+                    if (_607 instanceof Free) {
+                        return _606(Prelude["<$>"](__dict_Functor_491)(iterM(__dict_Functor_491)(__dict_Monad_492)(_606))(_607.value0));
                     };
-                    if (_599 instanceof Gosub) {
-                        return _599.value0(function (req) {
+                    if (_607 instanceof Gosub) {
+                        return _607.value0(function (req) {
                             return function (recv) {
-                                return Prelude[">>="](__dict_Monad_492["__superclass_Prelude.Bind_1"]())(iterM(__dict_Functor_491)(__dict_Monad_492)(_598)(req(Prelude.unit)))(Prelude["<<<"](Prelude.semigroupoidArr)(iterM(__dict_Functor_491)(__dict_Monad_492)(_598))(recv));
+                                return Prelude[">>="](__dict_Monad_492["__superclass_Prelude.Bind_1"]())(iterM(__dict_Functor_491)(__dict_Monad_492)(_606)(req(Prelude.unit)))(Prelude["<<<"](Prelude.semigroupoidArr)(iterM(__dict_Functor_491)(__dict_Monad_492)(_606))(recv));
                             };
                         });
                     };
@@ -9271,25 +9619,25 @@ PS.Control_Monad_Free = (function () {
         });
     };
     var functorFree = function (__dict_Functor_499) {
-        return new Prelude.Functor(function (_603) {
-            return function (_604) {
-                if (_604 instanceof Pure) {
-                    return new Pure(_603(_604.value0));
+        return new Prelude.Functor(function (_611) {
+            return function (_612) {
+                if (_612 instanceof Pure) {
+                    return new Pure(_611(_612.value0));
                 };
-                return Prelude.liftA1(applicativeFree(__dict_Functor_499))(_603)(_604);
+                return Prelude.liftA1(applicativeFree(__dict_Functor_499))(_611)(_612);
             };
         });
     };
     var bindFree = function (__dict_Functor_500) {
-        return new Prelude.Bind(function (_605) {
-            return function (_606) {
-                if (_605 instanceof Gosub) {
+        return new Prelude.Bind(function (_613) {
+            return function (_614) {
+                if (_613 instanceof Gosub) {
                     return new Gosub(function (h) {
-                        return _605.value0(function (a) {
+                        return _613.value0(function (a) {
                             return function (i) {
                                 return h(a)(function (x) {
                                     return new Gosub(function (j) {
-                                        return j(Prelude["const"](i(x)))(_606);
+                                        return j(Prelude["const"](i(x)))(_614);
                                     });
                                 });
                             };
@@ -9297,7 +9645,7 @@ PS.Control_Monad_Free = (function () {
                     });
                 };
                 return new Gosub(function (h) {
-                    return h(Prelude["const"](_605))(_606);
+                    return h(Prelude["const"](_613))(_614);
                 });
             };
         }, function () {
@@ -9315,21 +9663,21 @@ PS.Control_Monad_Free = (function () {
         }, Pure.create);
     };
     var resumeGosub = function (__dict_Functor_479) {
-        return function (_600) {
-            if (_600 instanceof Gosub) {
-                return _600.value0(function (a) {
+        return function (_608) {
+            if (_608 instanceof Gosub) {
+                return _608.value0(function (a) {
                     return function (g) {
-                        var _2147 = a(Prelude.unit);
-                        if (_2147 instanceof Pure) {
-                            return new Data_Either.Right(g(_2147.value0));
+                        var _2168 = a(Prelude.unit);
+                        if (_2168 instanceof Pure) {
+                            return new Data_Either.Right(g(_2168.value0));
                         };
-                        if (_2147 instanceof Free) {
+                        if (_2168 instanceof Free) {
                             return new Data_Either.Left(Prelude["<$>"](__dict_Functor_479)(function (h) {
                                 return Prelude[">>="](bindFree(__dict_Functor_479))(h)(g);
-                            })(_2147.value0));
+                            })(_2168.value0));
                         };
-                        if (_2147 instanceof Gosub) {
-                            return new Data_Either.Right(_2147.value0(function (b) {
+                        if (_2168 instanceof Gosub) {
+                            return new Data_Either.Right(_2168.value0(function (b) {
                                 return function (i) {
                                     return Prelude[">>="](bindFree(__dict_Functor_479))(b(Prelude.unit))(function (x) {
                                         return Prelude[">>="](bindFree(__dict_Functor_479))(i(x))(g);
@@ -9355,14 +9703,14 @@ PS.Control_Monad_Free = (function () {
                 if (f instanceof Free) {
                     return new Data_Either.Left(f.value0);
                 };
-                var _2155 = resumeGosub(__dict_Functor_480)(f);
-                if (_2155 instanceof Data_Either.Left) {
-                    return new Data_Either.Left(_2155.value0);
+                var _2176 = resumeGosub(__dict_Functor_480)(f);
+                if (_2176 instanceof Data_Either.Left) {
+                    return new Data_Either.Left(_2176.value0);
                 };
-                if (_2155 instanceof Data_Either.Right) {
+                if (_2176 instanceof Data_Either.Right) {
                     var __tco___dict_Functor_480 = __dict_Functor_480;
                     __dict_Functor_480 = __tco___dict_Functor_480;
-                    f = _2155.value0;
+                    f = _2176.value0;
                     continue tco;
                 };
                 throw new Error("Failed pattern match");
@@ -9376,18 +9724,18 @@ PS.Control_Monad_Free = (function () {
                 var fn = __copy_fn;
                 var f = __copy_f;
                 tco: while (true) {
-                    var _2158 = resume(__dict_Functor_498)(f);
-                    if (_2158 instanceof Data_Either.Left) {
+                    var _2179 = resume(__dict_Functor_498)(f);
+                    if (_2179 instanceof Data_Either.Left) {
                         var __tco___dict_Functor_498 = __dict_Functor_498;
                         var __tco_fn = fn;
-                        var __tco_f = fn(_2158.value0);
+                        var __tco_f = fn(_2179.value0);
                         __dict_Functor_498 = __tco___dict_Functor_498;
                         fn = __tco_fn;
                         f = __tco_f;
                         continue tco;
                     };
-                    if (_2158 instanceof Data_Either.Right) {
-                        return _2158.value0;
+                    if (_2179 instanceof Data_Either.Right) {
+                        return _2179.value0;
                     };
                     throw new Error("Failed pattern match");
                 };
@@ -9412,12 +9760,12 @@ PS.Control_Monad_Free = (function () {
         return function (__dict_Monad_495) {
             return function (k) {
                 return function (f) {
-                    var _2161 = resume(__dict_Functor_494)(f);
-                    if (_2161 instanceof Data_Either.Left) {
-                        return Prelude[">>="](__dict_Monad_495["__superclass_Prelude.Bind_1"]())(k(_2161.value0))(goM(__dict_Functor_494)(__dict_Monad_495)(k));
+                    var _2182 = resume(__dict_Functor_494)(f);
+                    if (_2182 instanceof Data_Either.Left) {
+                        return Prelude[">>="](__dict_Monad_495["__superclass_Prelude.Bind_1"]())(k(_2182.value0))(goM(__dict_Functor_494)(__dict_Monad_495)(k));
                     };
-                    if (_2161 instanceof Data_Either.Right) {
-                        return Prelude["return"](__dict_Monad_495)(_2161.value0);
+                    if (_2182 instanceof Data_Either.Right) {
+                        return Prelude["return"](__dict_Monad_495)(_2182.value0);
                     };
                     throw new Error("Failed pattern match");
                 };
@@ -9530,16 +9878,16 @@ PS.Control_Comonad_Cofree = (function () {
         };
         return Cofree;
     })();
-    var tail = function (_608) {
-        return Control_Monad_Trampoline.runTrampoline(_608.value1);
+    var tail = function (_616) {
+        return Control_Monad_Trampoline.runTrampoline(_616.value1);
     };
     var mkCofree = function (a) {
         return function (t) {
             return new Cofree(a, Prelude.pure(Control_Monad_Free.applicativeFree(Data_Lazy.functorLazy))(t));
         };
     };
-    var head = function (_607) {
-        return _607.value0;
+    var head = function (_615) {
+        return _615.value0;
     };
     var foldableCofree = function (__dict_Foldable_507) {
         return new Data_Foldable.Foldable(function (__dict_Monoid_508) {
@@ -9569,8 +9917,8 @@ PS.Control_Comonad_Cofree = (function () {
             return Prelude.flip(go);
         });
     };
-    var _tail = function (_609) {
-        return _609.value1;
+    var _tail = function (_617) {
+        return _617.value1;
     };
     var _lift = function (__dict_Functor_513) {
         return function (f) {
@@ -9681,34 +10029,34 @@ PS.Data_Identity = (function () {
         return x;
     };
     var showConst = function (__dict_Show_518) {
-        return new Prelude.Show(function (_615) {
-            return "Identity (" + (Prelude.show(__dict_Show_518)(_615) + ")");
+        return new Prelude.Show(function (_623) {
+            return "Identity (" + (Prelude.show(__dict_Show_518)(_623) + ")");
         });
     };
-    var runIdentity = function (_610) {
-        return _610;
+    var runIdentity = function (_618) {
+        return _618;
     };
-    var functorIdentity = new Prelude.Functor(function (_616) {
-        return function (_617) {
-            return _616(_617);
+    var functorIdentity = new Prelude.Functor(function (_624) {
+        return function (_625) {
+            return _624(_625);
         };
     });
     var foldableIdentity = new Data_Foldable.Foldable(function (__dict_Monoid_520) {
-        return function (_627) {
-            return function (_628) {
-                return _627(_628);
+        return function (_635) {
+            return function (_636) {
+                return _635(_636);
             };
         };
-    }, function (_624) {
-        return function (_625) {
-            return function (_626) {
-                return _624(_625)(_626);
+    }, function (_632) {
+        return function (_633) {
+            return function (_634) {
+                return _632(_633)(_634);
             };
         };
-    }, function (_621) {
-        return function (_622) {
-            return function (_623) {
-                return _621(_623)(_622);
+    }, function (_629) {
+        return function (_630) {
+            return function (_631) {
+                return _629(_631)(_630);
             };
         };
     });
@@ -9717,13 +10065,13 @@ PS.Data_Identity = (function () {
     }, function () {
         return functorIdentity;
     }, function (__dict_Applicative_517) {
-        return function (_631) {
-            return Prelude["<$>"]((__dict_Applicative_517["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Identity)(_631);
+        return function (_639) {
+            return Prelude["<$>"]((__dict_Applicative_517["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Identity)(_639);
         };
     }, function (__dict_Applicative_516) {
-        return function (_629) {
-            return function (_630) {
-                return Prelude["<$>"]((__dict_Applicative_516["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Identity)(_629(_630));
+        return function (_637) {
+            return function (_638) {
+                return Prelude["<$>"]((__dict_Applicative_516["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Identity)(_637(_638));
             };
         };
     });
@@ -9739,29 +10087,29 @@ PS.Data_Identity = (function () {
             return function (y) {
                 return !Prelude["=="](eqIdentity(__dict_Eq_521))(x)(y);
             };
-        }, function (_611) {
-            return function (_612) {
-                return Prelude["=="](__dict_Eq_521)(_611)(_612);
+        }, function (_619) {
+            return function (_620) {
+                return Prelude["=="](__dict_Eq_521)(_619)(_620);
             };
         });
     };
     var ordIdentity = function (__dict_Ord_519) {
         return new Prelude.Ord(function () {
             return eqIdentity(__dict_Ord_519["__superclass_Prelude.Eq_0"]());
-        }, function (_613) {
-            return function (_614) {
-                return Prelude.compare(__dict_Ord_519)(_613)(_614);
+        }, function (_621) {
+            return function (_622) {
+                return Prelude.compare(__dict_Ord_519)(_621)(_622);
             };
         });
     };
     var comonadIdentity = new Control_Comonad.Comonad(function () {
         return extendIdentity;
-    }, function (_620) {
-        return _620;
+    }, function (_628) {
+        return _628;
     });
-    var applyIdentity = new Prelude.Apply(function (_618) {
-        return function (_619) {
-            return _618(_619);
+    var applyIdentity = new Prelude.Apply(function (_626) {
+        return function (_627) {
+            return _626(_627);
         };
     }, function () {
         return functorIdentity;
@@ -9840,9 +10188,9 @@ PS.Control_Comonad_Env_Class = (function () {
     };
     var comonadEnvTuple = new ComonadEnv(function () {
         return Data_Tuple.comonadTuple;
-    }, Data_Tuple.fst, function (_632) {
-        return function (_633) {
-            return new Data_Tuple.Tuple(_632(_633.value0), _633.value1);
+    }, Data_Tuple.fst, function (_640) {
+        return function (_641) {
+            return new Data_Tuple.Tuple(_640(_641.value0), _641.value1);
         };
     });
     var comonadEnvEnvT = function (__dict_Comonad_522) {
@@ -9853,8 +10201,8 @@ PS.Control_Comonad_Env_Class = (function () {
         }, function (f) {
             return function (x) {
                 return Control_Comonad_Env_Trans.EnvT((function () {
-                    var _2199 = Control_Comonad_Env_Trans.runEnvT(x);
-                    return new Data_Tuple.Tuple(f(_2199.value0), _2199.value1);
+                    var _2220 = Control_Comonad_Env_Trans.runEnvT(x);
+                    return new Data_Tuple.Tuple(f(_2220.value0), _2220.value1);
                 })());
             };
         });
@@ -9924,13 +10272,13 @@ PS.Control_Monad_RWS = (function () {
      *  | Writer operations
      */
     var writer = function (__dict_Applicative_524) {
-        return function (_637) {
+        return function (_645) {
             return function (_) {
                 return function (s) {
                     return Prelude.pure(__dict_Applicative_524)({
                         state: s, 
-                        result: _637.value0, 
-                        log: _637.value1
+                        result: _645.value0, 
+                        log: _645.value1
                     });
                 };
             };
@@ -9951,8 +10299,8 @@ PS.Control_Monad_RWS = (function () {
             return function (f) {
                 return function (_) {
                     return function (s) {
-                        var _2205 = f(s);
-                        return Prelude.pure(__dict_Applicative_526)(Control_Monad_RWS_Trans.mkSee(__dict_Monoid_527)(_2205.value1)(_2205.value0)(Data_Monoid.mempty(__dict_Monoid_527)));
+                        var _2226 = f(s);
+                        return Prelude.pure(__dict_Applicative_526)(Control_Monad_RWS_Trans.mkSee(__dict_Monoid_527)(_2226.value1)(_2226.value0)(Data_Monoid.mempty(__dict_Monoid_527)));
                     };
                 };
             };
@@ -9996,11 +10344,11 @@ PS.Control_Monad_RWS = (function () {
         return function (m) {
             return function (r) {
                 return function (s) {
-                    return Prelude[">>="](__dict_Monad_532["__superclass_Prelude.Bind_1"]())(Control_Monad_RWS_Trans.runRWST(m)(r)(s))(function (_635) {
+                    return Prelude[">>="](__dict_Monad_532["__superclass_Prelude.Bind_1"]())(Control_Monad_RWS_Trans.runRWST(m)(r)(s))(function (_643) {
                         return Prelude.pure(__dict_Monad_532["__superclass_Prelude.Applicative_0"]())({
-                            state: _635.state, 
-                            result: _635.result.value0, 
-                            log: _635.result.value1(_635.log)
+                            state: _643.state, 
+                            result: _643.result.value0, 
+                            log: _643.result.value1(_643.log)
                         });
                     });
                 };
@@ -10033,11 +10381,11 @@ PS.Control_Monad_RWS = (function () {
             return function (m) {
                 return function (r) {
                     return function (s) {
-                        return Prelude[">>="](__dict_Monad_535["__superclass_Prelude.Bind_1"]())(Control_Monad_RWS_Trans.runRWST(m)(r)(s))(function (_636) {
+                        return Prelude[">>="](__dict_Monad_535["__superclass_Prelude.Bind_1"]())(Control_Monad_RWS_Trans.runRWST(m)(r)(s))(function (_644) {
                             return Prelude.pure(__dict_Monad_535["__superclass_Prelude.Applicative_0"]())({
-                                state: _636.state, 
-                                result: new Data_Tuple.Tuple(_636.result, f(_636.log)), 
-                                log: _636.log
+                                state: _644.state, 
+                                result: new Data_Tuple.Tuple(_644.result, f(_644.log)), 
+                                log: _644.log
                             });
                         });
                     };
@@ -10049,11 +10397,11 @@ PS.Control_Monad_RWS = (function () {
         return function (m) {
             return function (r) {
                 return function (s) {
-                    return Prelude[">>="](__dict_Monad_536["__superclass_Prelude.Bind_1"]())(Control_Monad_RWS_Trans.runRWST(m)(r)(s))(function (_634) {
+                    return Prelude[">>="](__dict_Monad_536["__superclass_Prelude.Bind_1"]())(Control_Monad_RWS_Trans.runRWST(m)(r)(s))(function (_642) {
                         return Prelude.pure(__dict_Monad_536["__superclass_Prelude.Applicative_0"]())({
-                            state: _634.state, 
-                            result: new Data_Tuple.Tuple(_634.result, _634.log), 
-                            log: _634.log
+                            state: _642.state, 
+                            result: new Data_Tuple.Tuple(_642.result, _642.log), 
+                            log: _642.log
                         });
                     });
                 };
@@ -10097,14 +10445,14 @@ PS.Control_Monad_RWS = (function () {
                     return function (s) {
                         return Prelude[">>="](__dict_Monad_541["__superclass_Prelude.Bind_1"]())(Control_Monad_RWS_Trans.runRWST(m)(r)(s))(function (see) {
                             return Prelude.pure(__dict_Monad_541["__superclass_Prelude.Applicative_0"]())((function () {
-                                var _2222 = {};
-                                for (var _2223 in see) {
-                                    if (see.hasOwnProperty(_2223)) {
-                                        _2222[_2223] = see[_2223];
+                                var _2243 = {};
+                                for (var _2244 in see) {
+                                    if (see.hasOwnProperty(_2244)) {
+                                        _2243[_2244] = see[_2244];
                                     };
                                 };
-                                _2222.log = f(see.log);
-                                return _2222;
+                                _2243.log = f(see.log);
+                                return _2243;
                             })());
                         });
                     };
@@ -10392,12 +10740,12 @@ PS.Control_Monad_Writer_Class = (function () {
     var monadWriterWriterT = function (__dict_Monoid_585) {
         return function (__dict_Monad_586) {
             return new MonadWriter(function (m) {
-                return Control_Monad_Writer_Trans.WriterT(Prelude[">>="](__dict_Monad_586["__superclass_Prelude.Bind_1"]())(Control_Monad_Writer_Trans.runWriterT(m))(function (_26) {
-                    return Prelude["return"](__dict_Monad_586)(new Data_Tuple.Tuple(new Data_Tuple.Tuple(_26.value0, _26.value1), _26.value1));
+                return Control_Monad_Writer_Trans.WriterT(Prelude[">>="](__dict_Monad_586["__superclass_Prelude.Bind_1"]())(Control_Monad_Writer_Trans.runWriterT(m))(function (_28) {
+                    return Prelude["return"](__dict_Monad_586)(new Data_Tuple.Tuple(new Data_Tuple.Tuple(_28.value0, _28.value1), _28.value1));
                 }));
             }, function (m) {
-                return Control_Monad_Writer_Trans.WriterT(Prelude[">>="](__dict_Monad_586["__superclass_Prelude.Bind_1"]())(Control_Monad_Writer_Trans.runWriterT(m))(function (_27) {
-                    return Prelude["return"](__dict_Monad_586)(new Data_Tuple.Tuple(_27.value0.value0, _27.value0.value1(_27.value1)));
+                return Control_Monad_Writer_Trans.WriterT(Prelude[">>="](__dict_Monad_586["__superclass_Prelude.Bind_1"]())(Control_Monad_Writer_Trans.runWriterT(m))(function (_29) {
+                    return Prelude["return"](__dict_Monad_586)(new Data_Tuple.Tuple(_29.value0.value0, _29.value0.value1(_29.value1)));
                 }));
             }, Prelude["<<<"](Prelude.semigroupoidArr)(Control_Monad_Writer_Trans.WriterT)(Prelude["return"](__dict_Monad_586)));
         };
@@ -10415,8 +10763,8 @@ PS.Control_Monad_Writer_Class = (function () {
             return function (__dict_MonadWriter_591) {
                 return function (f) {
                     return function (m) {
-                        return Prelude[">>="](__dict_Monad_590["__superclass_Prelude.Bind_1"]())(listen(__dict_MonadWriter_591)(m))(function (_24) {
-                            return Prelude["return"](__dict_Monad_590)(new Data_Tuple.Tuple(_24.value0, f(_24.value1)));
+                        return Prelude[">>="](__dict_Monad_590["__superclass_Prelude.Bind_1"]())(listen(__dict_MonadWriter_591)(m))(function (_26) {
+                            return Prelude["return"](__dict_Monad_590)(new Data_Tuple.Tuple(_26.value0, f(_26.value1)));
                         });
                     };
                 };
@@ -10458,8 +10806,8 @@ PS.Control_Monad_Writer_Class = (function () {
             return function (__dict_MonadWriter_603) {
                 return function (f) {
                     return function (m) {
-                        return pass(__dict_MonadWriter_603)(Prelude[">>="](__dict_Monad_602["__superclass_Prelude.Bind_1"]())(m)(function (_25) {
-                            return Prelude["return"](__dict_Monad_602)(new Data_Tuple.Tuple(_25, f));
+                        return pass(__dict_MonadWriter_603)(Prelude[">>="](__dict_Monad_602["__superclass_Prelude.Bind_1"]())(m)(function (_27) {
+                            return Prelude["return"](__dict_Monad_602)(new Data_Tuple.Tuple(_27, f));
                         }));
                     };
                 };
@@ -10752,39 +11100,39 @@ PS.Data_Lazy_List = (function () {
         };
         return Cons;
     })();
-    var $less$dot$greater = function (_638) {
-        return function (_639) {
-            if (_638 instanceof Nil) {
-                return Data_Lazy.force(_639);
+    var $less$dot$greater = function (_646) {
+        return function (_647) {
+            if (_646 instanceof Nil) {
+                return Data_Lazy.force(_647);
             };
-            if (_638 instanceof Cons) {
-                return new Cons(_638.value0, Prelude["<$>"](Data_Lazy.functorLazy)(function (xs$prime) {
-                    return $less$dot$greater(xs$prime)(_639);
-                })(_638.value1));
+            if (_646 instanceof Cons) {
+                return new Cons(_646.value0, Prelude["<$>"](Data_Lazy.functorLazy)(function (xs$prime) {
+                    return $less$dot$greater(xs$prime)(_647);
+                })(_646.value1));
             };
             throw new Error("Failed pattern match");
         };
     };
-    var toArray = function (_640) {
-        if (_640 instanceof Nil) {
+    var toArray = function (_648) {
+        if (_648 instanceof Nil) {
             return [  ];
         };
-        if (_640 instanceof Cons) {
-            return Prelude[":"](_640.value0)(toArray(Data_Lazy.force(_640.value1)));
+        if (_648 instanceof Cons) {
+            return Prelude[":"](_648.value0)(toArray(Data_Lazy.force(_648.value1)));
         };
         throw new Error("Failed pattern match");
     };
-    var take = function (_642) {
-        return function (_643) {
-            if (_642 < 1) {
+    var take = function (_650) {
+        return function (_651) {
+            if (_650 < 1) {
                 return Nil.value;
             };
-            if (_643 instanceof Nil) {
+            if (_651 instanceof Nil) {
                 return Nil.value;
             };
-            if (_643 instanceof Cons) {
-                return new Cons(_643.value0, Data_Lazy.defer(function (_) {
-                    return take(_642 - 1)(Data_Lazy.force(_643.value1));
+            if (_651 instanceof Cons) {
+                return new Cons(_651.value0, Data_Lazy.defer(function (_) {
+                    return take(_650 - 1)(Data_Lazy.force(_651.value1));
                 }));
             };
             throw new Error("Failed pattern match");
@@ -10810,25 +11158,25 @@ PS.Data_Lazy_List = (function () {
     var monoidList = new Data_Monoid.Monoid(function () {
         return semigroupList;
     }, Nil.value);
-    var functorList = new Prelude.Functor(function (_648) {
-        return function (_649) {
-            if (_649 instanceof Nil) {
+    var functorList = new Prelude.Functor(function (_656) {
+        return function (_657) {
+            if (_657 instanceof Nil) {
                 return Nil.value;
             };
-            if (_649 instanceof Cons) {
-                return new Cons(_648(_649.value0), Prelude["<$>"](Data_Lazy.functorLazy)(Prelude["<$>"](functorList)(_648))(_649.value1));
+            if (_657 instanceof Cons) {
+                return new Cons(_656(_657.value0), Prelude["<$>"](Data_Lazy.functorLazy)(Prelude["<$>"](functorList)(_656))(_657.value1));
             };
             throw new Error("Failed pattern match");
         };
     });
-    var fromArray = function (_641) {
-        if (_641.length === 0) {
+    var fromArray = function (_649) {
+        if (_649.length === 0) {
             return Nil.value;
         };
-        if (_641.length >= 1) {
-            var _2253 = _641.slice(1);
-            return new Cons(_641[0], Data_Lazy.defer(function (_) {
-                return fromArray(_2253);
+        if (_649.length >= 1) {
+            var _2274 = _649.slice(1);
+            return new Cons(_649[0], Data_Lazy.defer(function (_) {
+                return fromArray(_2274);
             }));
         };
         throw new Error("Failed pattern match");
@@ -10838,34 +11186,34 @@ PS.Data_Lazy_List = (function () {
             return function (l$prime) {
                 return !Prelude["=="](eqList(__dict_Eq_624))(l)(l$prime);
             };
-        }, function (_646) {
-            return function (_647) {
-                if (_646 instanceof Nil && _647 instanceof Nil) {
+        }, function (_654) {
+            return function (_655) {
+                if (_654 instanceof Nil && _655 instanceof Nil) {
                     return true;
                 };
-                if (_646 instanceof Cons && _647 instanceof Cons) {
-                    return Prelude["=="](__dict_Eq_624)(_646.value0)(_647.value0) && Prelude["=="](eqList(__dict_Eq_624))(Data_Lazy.force(_646.value1))(Data_Lazy.force(_647.value1));
+                if (_654 instanceof Cons && _655 instanceof Cons) {
+                    return Prelude["=="](__dict_Eq_624)(_654.value0)(_655.value0) && Prelude["=="](eqList(__dict_Eq_624))(Data_Lazy.force(_654.value1))(Data_Lazy.force(_655.value1));
                 };
                 return false;
             };
         });
     };
-    var drop = function (__copy__644) {
-        return function (__copy__645) {
-            var _644 = __copy__644;
-            var _645 = __copy__645;
+    var drop = function (__copy__652) {
+        return function (__copy__653) {
+            var _652 = __copy__652;
+            var _653 = __copy__653;
             tco: while (true) {
-                if (_644 < 1) {
-                    return _645;
+                if (_652 < 1) {
+                    return _653;
                 };
-                if (_645 instanceof Nil) {
+                if (_653 instanceof Nil) {
                     return Nil.value;
                 };
-                if (_645 instanceof Cons) {
-                    var __tco__644 = _644 - 1;
-                    var __tco__645 = Data_Lazy.force(_645.value1);
-                    _644 = __tco__644;
-                    _645 = __tco__645;
+                if (_653 instanceof Cons) {
+                    var __tco__652 = _652 - 1;
+                    var __tco__653 = Data_Lazy.force(_653.value1);
+                    _652 = __tco__652;
+                    _653 = __tco__653;
                     continue tco;
                 };
                 throw new Error("Failed pattern match");
@@ -10877,15 +11225,15 @@ PS.Data_Lazy_List = (function () {
     }, function () {
         return bindList;
     });
-    var bindList = new Prelude.Bind(function (_650) {
-        return function (_651) {
-            if (_650 instanceof Nil) {
+    var bindList = new Prelude.Bind(function (_658) {
+        return function (_659) {
+            if (_658 instanceof Nil) {
                 return Nil.value;
             };
-            if (_650 instanceof Cons) {
-                return $less$dot$greater(_651(_650.value0))(Prelude["<$>"](Data_Lazy.functorLazy)(function (xs$prime) {
-                    return Prelude[">>="](bindList)(xs$prime)(_651);
-                })(_650.value1));
+            if (_658 instanceof Cons) {
+                return $less$dot$greater(_659(_658.value0))(Prelude["<$>"](Data_Lazy.functorLazy)(function (xs$prime) {
+                    return Prelude[">>="](bindList)(xs$prime)(_659);
+                })(_658.value1));
             };
             throw new Error("Failed pattern match");
         };
@@ -11103,27 +11451,27 @@ PS.Data_Map = (function () {
         };
         return KickUp;
     })();
-    var values = function (_661) {
-        if (_661 instanceof Leaf) {
+    var values = function (_669) {
+        if (_669 instanceof Leaf) {
             return [  ];
         };
-        if (_661 instanceof Two) {
-            return Prelude["++"](Data_Array.semigroupArray)(values(_661.value0))(Prelude["++"](Data_Array.semigroupArray)([ _661.value2 ])(values(_661.value3)));
+        if (_669 instanceof Two) {
+            return Prelude["++"](Data_Array.semigroupArray)(values(_669.value0))(Prelude["++"](Data_Array.semigroupArray)([ _669.value2 ])(values(_669.value3)));
         };
-        if (_661 instanceof Three) {
-            return Prelude["++"](Data_Array.semigroupArray)(values(_661.value0))(Prelude["++"](Data_Array.semigroupArray)([ _661.value2 ])(Prelude["++"](Data_Array.semigroupArray)(values(_661.value3))(Prelude["++"](Data_Array.semigroupArray)([ _661.value5 ])(values(_661.value6)))));
+        if (_669 instanceof Three) {
+            return Prelude["++"](Data_Array.semigroupArray)(values(_669.value0))(Prelude["++"](Data_Array.semigroupArray)([ _669.value2 ])(Prelude["++"](Data_Array.semigroupArray)(values(_669.value3))(Prelude["++"](Data_Array.semigroupArray)([ _669.value5 ])(values(_669.value6)))));
         };
         throw new Error("Failed pattern match");
     };
-    var toList = function (_659) {
-        if (_659 instanceof Leaf) {
+    var toList = function (_667) {
+        if (_667 instanceof Leaf) {
             return [  ];
         };
-        if (_659 instanceof Two) {
-            return Prelude["++"](Data_Array.semigroupArray)(toList(_659.value0))(Prelude["++"](Data_Array.semigroupArray)([ new Data_Tuple.Tuple(_659.value1, _659.value2) ])(toList(_659.value3)));
+        if (_667 instanceof Two) {
+            return Prelude["++"](Data_Array.semigroupArray)(toList(_667.value0))(Prelude["++"](Data_Array.semigroupArray)([ new Data_Tuple.Tuple(_667.value1, _667.value2) ])(toList(_667.value3)));
         };
-        if (_659 instanceof Three) {
-            return Prelude["++"](Data_Array.semigroupArray)(toList(_659.value0))(Prelude["++"](Data_Array.semigroupArray)([ new Data_Tuple.Tuple(_659.value1, _659.value2) ])(Prelude["++"](Data_Array.semigroupArray)(toList(_659.value3))(Prelude["++"](Data_Array.semigroupArray)([ new Data_Tuple.Tuple(_659.value4, _659.value5) ])(toList(_659.value6)))));
+        if (_667 instanceof Three) {
+            return Prelude["++"](Data_Array.semigroupArray)(toList(_667.value0))(Prelude["++"](Data_Array.semigroupArray)([ new Data_Tuple.Tuple(_667.value1, _667.value2) ])(Prelude["++"](Data_Array.semigroupArray)(toList(_667.value3))(Prelude["++"](Data_Array.semigroupArray)([ new Data_Tuple.Tuple(_667.value4, _667.value5) ])(toList(_667.value6)))));
         };
         throw new Error("Failed pattern match");
     };
@@ -11135,15 +11483,15 @@ PS.Data_Map = (function () {
     };
     var showTree = function (__dict_Show_625) {
         return function (__dict_Show_626) {
-            return function (_653) {
-                if (_653 instanceof Leaf) {
+            return function (_661) {
+                if (_661 instanceof Leaf) {
                     return "Leaf";
                 };
-                if (_653 instanceof Two) {
-                    return "Two (" + (showTree(__dict_Show_625)(__dict_Show_626)(_653.value0) + (") (" + (Prelude.show(__dict_Show_625)(_653.value1) + (") (" + (Prelude.show(__dict_Show_626)(_653.value2) + (") (" + (showTree(__dict_Show_625)(__dict_Show_626)(_653.value3) + ")")))))));
+                if (_661 instanceof Two) {
+                    return "Two (" + (showTree(__dict_Show_625)(__dict_Show_626)(_661.value0) + (") (" + (Prelude.show(__dict_Show_625)(_661.value1) + (") (" + (Prelude.show(__dict_Show_626)(_661.value2) + (") (" + (showTree(__dict_Show_625)(__dict_Show_626)(_661.value3) + ")")))))));
                 };
-                if (_653 instanceof Three) {
-                    return "Three (" + (showTree(__dict_Show_625)(__dict_Show_626)(_653.value0) + (") (" + (Prelude.show(__dict_Show_625)(_653.value1) + (") (" + (Prelude.show(__dict_Show_626)(_653.value2) + (") (" + (showTree(__dict_Show_625)(__dict_Show_626)(_653.value3) + (") (" + (Prelude.show(__dict_Show_625)(_653.value4) + (") (" + (Prelude.show(__dict_Show_626)(_653.value5) + (") (" + (showTree(__dict_Show_625)(__dict_Show_626)(_653.value6) + ")")))))))))))));
+                if (_661 instanceof Three) {
+                    return "Three (" + (showTree(__dict_Show_625)(__dict_Show_626)(_661.value0) + (") (" + (Prelude.show(__dict_Show_625)(_661.value1) + (") (" + (Prelude.show(__dict_Show_626)(_661.value2) + (") (" + (showTree(__dict_Show_625)(__dict_Show_626)(_661.value3) + (") (" + (Prelude.show(__dict_Show_625)(_661.value4) + (") (" + (Prelude.show(__dict_Show_626)(_661.value5) + (") (" + (showTree(__dict_Show_625)(__dict_Show_626)(_661.value6) + ")")))))))))))));
                 };
                 throw new Error("Failed pattern match");
             };
@@ -11157,67 +11505,67 @@ PS.Data_Map = (function () {
         };
     };
     var lookup = function (__copy___dict_Ord_629) {
-        return function (__copy__655) {
-            return function (__copy__656) {
+        return function (__copy__663) {
+            return function (__copy__664) {
                 var __dict_Ord_629 = __copy___dict_Ord_629;
-                var _655 = __copy__655;
-                var _656 = __copy__656;
+                var _663 = __copy__663;
+                var _664 = __copy__664;
                 tco: while (true) {
-                    if (_656 instanceof Leaf) {
+                    if (_664 instanceof Leaf) {
                         return Data_Maybe.Nothing.value;
                     };
-                    if (_656 instanceof Two && Prelude["=="](__dict_Ord_629["__superclass_Prelude.Eq_0"]())(_655)(_656.value1)) {
-                        return new Data_Maybe.Just(_656.value2);
+                    if (_664 instanceof Two && Prelude["=="](__dict_Ord_629["__superclass_Prelude.Eq_0"]())(_663)(_664.value1)) {
+                        return new Data_Maybe.Just(_664.value2);
                     };
-                    if (_656 instanceof Two && Prelude["<"](__dict_Ord_629)(_655)(_656.value1)) {
+                    if (_664 instanceof Two && Prelude["<"](__dict_Ord_629)(_663)(_664.value1)) {
                         var __tco___dict_Ord_629 = __dict_Ord_629;
-                        var __tco__655 = _655;
-                        var __tco__656 = _656.value0;
+                        var __tco__663 = _663;
+                        var __tco__664 = _664.value0;
                         __dict_Ord_629 = __tco___dict_Ord_629;
-                        _655 = __tco__655;
-                        _656 = __tco__656;
+                        _663 = __tco__663;
+                        _664 = __tco__664;
                         continue tco;
                     };
-                    if (_656 instanceof Two) {
+                    if (_664 instanceof Two) {
                         var __tco___dict_Ord_629 = __dict_Ord_629;
-                        var __tco__655 = _655;
-                        var __tco__656 = _656.value3;
+                        var __tco__663 = _663;
+                        var __tco__664 = _664.value3;
                         __dict_Ord_629 = __tco___dict_Ord_629;
-                        _655 = __tco__655;
-                        _656 = __tco__656;
+                        _663 = __tco__663;
+                        _664 = __tco__664;
                         continue tco;
                     };
-                    if (_656 instanceof Three && Prelude["=="](__dict_Ord_629["__superclass_Prelude.Eq_0"]())(_655)(_656.value1)) {
-                        return new Data_Maybe.Just(_656.value2);
+                    if (_664 instanceof Three && Prelude["=="](__dict_Ord_629["__superclass_Prelude.Eq_0"]())(_663)(_664.value1)) {
+                        return new Data_Maybe.Just(_664.value2);
                     };
-                    if (_656 instanceof Three && Prelude["=="](__dict_Ord_629["__superclass_Prelude.Eq_0"]())(_655)(_656.value4)) {
-                        return new Data_Maybe.Just(_656.value5);
+                    if (_664 instanceof Three && Prelude["=="](__dict_Ord_629["__superclass_Prelude.Eq_0"]())(_663)(_664.value4)) {
+                        return new Data_Maybe.Just(_664.value5);
                     };
-                    if (_656 instanceof Three && Prelude["<"](__dict_Ord_629)(_655)(_656.value1)) {
+                    if (_664 instanceof Three && Prelude["<"](__dict_Ord_629)(_663)(_664.value1)) {
                         var __tco___dict_Ord_629 = __dict_Ord_629;
-                        var __tco__655 = _655;
-                        var __tco__656 = _656.value0;
+                        var __tco__663 = _663;
+                        var __tco__664 = _664.value0;
                         __dict_Ord_629 = __tco___dict_Ord_629;
-                        _655 = __tco__655;
-                        _656 = __tco__656;
+                        _663 = __tco__663;
+                        _664 = __tco__664;
                         continue tco;
                     };
-                    if (_656 instanceof Three && (Prelude["<"](__dict_Ord_629)(_656.value1)(_655) && Prelude["<="](__dict_Ord_629)(_655)(_656.value4))) {
+                    if (_664 instanceof Three && (Prelude["<"](__dict_Ord_629)(_664.value1)(_663) && Prelude["<="](__dict_Ord_629)(_663)(_664.value4))) {
                         var __tco___dict_Ord_629 = __dict_Ord_629;
-                        var __tco__655 = _655;
-                        var __tco__656 = _656.value3;
+                        var __tco__663 = _663;
+                        var __tco__664 = _664.value3;
                         __dict_Ord_629 = __tco___dict_Ord_629;
-                        _655 = __tco__655;
-                        _656 = __tco__656;
+                        _663 = __tco__663;
+                        _664 = __tco__664;
                         continue tco;
                     };
-                    if (_656 instanceof Three) {
+                    if (_664 instanceof Three) {
                         var __tco___dict_Ord_629 = __dict_Ord_629;
-                        var __tco__655 = _655;
-                        var __tco__656 = _656.value6;
+                        var __tco__663 = _663;
+                        var __tco__664 = _664.value6;
                         __dict_Ord_629 = __tco___dict_Ord_629;
-                        _655 = __tco__655;
-                        _656 = __tco__656;
+                        _663 = __tco__663;
+                        _664 = __tco__664;
                         continue tco;
                     };
                     throw new Error("Failed pattern match");
@@ -11232,101 +11580,101 @@ PS.Data_Map = (function () {
             };
         };
     };
-    var keys = function (_660) {
-        if (_660 instanceof Leaf) {
+    var keys = function (_668) {
+        if (_668 instanceof Leaf) {
             return [  ];
         };
-        if (_660 instanceof Two) {
-            return Prelude["++"](Data_Array.semigroupArray)(keys(_660.value0))(Prelude["++"](Data_Array.semigroupArray)([ _660.value1 ])(keys(_660.value3)));
+        if (_668 instanceof Two) {
+            return Prelude["++"](Data_Array.semigroupArray)(keys(_668.value0))(Prelude["++"](Data_Array.semigroupArray)([ _668.value1 ])(keys(_668.value3)));
         };
-        if (_660 instanceof Three) {
-            return Prelude["++"](Data_Array.semigroupArray)(keys(_660.value0))(Prelude["++"](Data_Array.semigroupArray)([ _660.value1 ])(Prelude["++"](Data_Array.semigroupArray)(keys(_660.value3))(Prelude["++"](Data_Array.semigroupArray)([ _660.value4 ])(keys(_660.value6)))));
+        if (_668 instanceof Three) {
+            return Prelude["++"](Data_Array.semigroupArray)(keys(_668.value0))(Prelude["++"](Data_Array.semigroupArray)([ _668.value1 ])(Prelude["++"](Data_Array.semigroupArray)(keys(_668.value3))(Prelude["++"](Data_Array.semigroupArray)([ _668.value4 ])(keys(_668.value6)))));
         };
         throw new Error("Failed pattern match");
     };
-    var isEmpty = function (_654) {
-        if (_654 instanceof Leaf) {
+    var isEmpty = function (_662) {
+        if (_662 instanceof Leaf) {
             return true;
         };
         return false;
     };
-    var functorMap = new Prelude.Functor(function (_662) {
-        return function (_663) {
-            if (_663 instanceof Leaf) {
+    var functorMap = new Prelude.Functor(function (_670) {
+        return function (_671) {
+            if (_671 instanceof Leaf) {
                 return Leaf.value;
             };
-            if (_663 instanceof Two) {
-                return new Two(Prelude["<$>"](functorMap)(_662)(_663.value0), _663.value1, _662(_663.value2), Prelude["<$>"](functorMap)(_662)(_663.value3));
+            if (_671 instanceof Two) {
+                return new Two(Prelude["<$>"](functorMap)(_670)(_671.value0), _671.value1, _670(_671.value2), Prelude["<$>"](functorMap)(_670)(_671.value3));
             };
-            if (_663 instanceof Three) {
-                return new Three(Prelude["<$>"](functorMap)(_662)(_663.value0), _663.value1, _662(_663.value2), Prelude["<$>"](functorMap)(_662)(_663.value3), _663.value4, _662(_663.value5), Prelude["<$>"](functorMap)(_662)(_663.value6));
+            if (_671 instanceof Three) {
+                return new Three(Prelude["<$>"](functorMap)(_670)(_671.value0), _671.value1, _670(_671.value2), Prelude["<$>"](functorMap)(_670)(_671.value3), _671.value4, _670(_671.value5), Prelude["<$>"](functorMap)(_670)(_671.value6));
             };
             throw new Error("Failed pattern match");
         };
     });
     var map = Prelude["<$>"](functorMap);
     var fromZipper = function (__copy___dict_Ord_631) {
-        return function (__copy__657) {
-            return function (__copy__658) {
+        return function (__copy__665) {
+            return function (__copy__666) {
                 var __dict_Ord_631 = __copy___dict_Ord_631;
-                var _657 = __copy__657;
-                var _658 = __copy__658;
+                var _665 = __copy__665;
+                var _666 = __copy__666;
                 tco: while (true) {
-                    if (_657.length === 0) {
-                        return _658;
+                    if (_665.length === 0) {
+                        return _666;
                     };
-                    if (_657.length >= 1) {
-                        var _2385 = _657.slice(1);
-                        if (_657[0] instanceof TwoLeft) {
+                    if (_665.length >= 1) {
+                        var _2406 = _665.slice(1);
+                        if (_665[0] instanceof TwoLeft) {
                             var __tco___dict_Ord_631 = __dict_Ord_631;
-                            var __tco__658 = new Two(_658, (_657[0]).value0, (_657[0]).value1, (_657[0]).value2);
+                            var __tco__666 = new Two(_666, (_665[0]).value0, (_665[0]).value1, (_665[0]).value2);
                             __dict_Ord_631 = __tco___dict_Ord_631;
-                            _657 = _2385;
-                            _658 = __tco__658;
+                            _665 = _2406;
+                            _666 = __tco__666;
                             continue tco;
                         };
                     };
-                    if (_657.length >= 1) {
-                        var _2390 = _657.slice(1);
-                        if (_657[0] instanceof TwoRight) {
+                    if (_665.length >= 1) {
+                        var _2411 = _665.slice(1);
+                        if (_665[0] instanceof TwoRight) {
                             var __tco___dict_Ord_631 = __dict_Ord_631;
-                            var __tco__658 = new Two((_657[0]).value0, (_657[0]).value1, (_657[0]).value2, _658);
+                            var __tco__666 = new Two((_665[0]).value0, (_665[0]).value1, (_665[0]).value2, _666);
                             __dict_Ord_631 = __tco___dict_Ord_631;
-                            _657 = _2390;
-                            _658 = __tco__658;
+                            _665 = _2411;
+                            _666 = __tco__666;
                             continue tco;
                         };
                     };
-                    if (_657.length >= 1) {
-                        var _2398 = _657.slice(1);
-                        if (_657[0] instanceof ThreeLeft) {
+                    if (_665.length >= 1) {
+                        var _2419 = _665.slice(1);
+                        if (_665[0] instanceof ThreeLeft) {
                             var __tco___dict_Ord_631 = __dict_Ord_631;
-                            var __tco__658 = new Three(_658, (_657[0]).value0, (_657[0]).value1, (_657[0]).value2, (_657[0]).value3, (_657[0]).value4, (_657[0]).value5);
+                            var __tco__666 = new Three(_666, (_665[0]).value0, (_665[0]).value1, (_665[0]).value2, (_665[0]).value3, (_665[0]).value4, (_665[0]).value5);
                             __dict_Ord_631 = __tco___dict_Ord_631;
-                            _657 = _2398;
-                            _658 = __tco__658;
+                            _665 = _2419;
+                            _666 = __tco__666;
                             continue tco;
                         };
                     };
-                    if (_657.length >= 1) {
-                        var _2406 = _657.slice(1);
-                        if (_657[0] instanceof ThreeMiddle) {
+                    if (_665.length >= 1) {
+                        var _2427 = _665.slice(1);
+                        if (_665[0] instanceof ThreeMiddle) {
                             var __tco___dict_Ord_631 = __dict_Ord_631;
-                            var __tco__658 = new Three((_657[0]).value0, (_657[0]).value1, (_657[0]).value2, _658, (_657[0]).value3, (_657[0]).value4, (_657[0]).value5);
+                            var __tco__666 = new Three((_665[0]).value0, (_665[0]).value1, (_665[0]).value2, _666, (_665[0]).value3, (_665[0]).value4, (_665[0]).value5);
                             __dict_Ord_631 = __tco___dict_Ord_631;
-                            _657 = _2406;
-                            _658 = __tco__658;
+                            _665 = _2427;
+                            _666 = __tco__666;
                             continue tco;
                         };
                     };
-                    if (_657.length >= 1) {
-                        var _2414 = _657.slice(1);
-                        if (_657[0] instanceof ThreeRight) {
+                    if (_665.length >= 1) {
+                        var _2435 = _665.slice(1);
+                        if (_665[0] instanceof ThreeRight) {
                             var __tco___dict_Ord_631 = __dict_Ord_631;
-                            var __tco__658 = new Three((_657[0]).value0, (_657[0]).value1, (_657[0]).value2, (_657[0]).value3, (_657[0]).value4, (_657[0]).value5, _658);
+                            var __tco__666 = new Three((_665[0]).value0, (_665[0]).value1, (_665[0]).value2, (_665[0]).value3, (_665[0]).value4, (_665[0]).value5, _666);
                             __dict_Ord_631 = __tco___dict_Ord_631;
-                            _657 = _2414;
-                            _658 = __tco__658;
+                            _665 = _2435;
+                            _666 = __tco__666;
                             continue tco;
                         };
                     };
@@ -11337,57 +11685,57 @@ PS.Data_Map = (function () {
     };
     var insert = function (__dict_Ord_632) {
         var up = function (__copy___dict_Ord_633) {
-            return function (__copy__669) {
-                return function (__copy__670) {
+            return function (__copy__677) {
+                return function (__copy__678) {
                     var __dict_Ord_633 = __copy___dict_Ord_633;
-                    var _669 = __copy__669;
-                    var _670 = __copy__670;
+                    var _677 = __copy__677;
+                    var _678 = __copy__678;
                     tco: while (true) {
-                        if (_669.length === 0) {
-                            return new Two(_670.value0, _670.value1, _670.value2, _670.value3);
+                        if (_677.length === 0) {
+                            return new Two(_678.value0, _678.value1, _678.value2, _678.value3);
                         };
-                        if (_669.length >= 1) {
-                            var _2429 = _669.slice(1);
-                            if (_669[0] instanceof TwoLeft) {
-                                return fromZipper(__dict_Ord_633)(_2429)(new Three(_670.value0, _670.value1, _670.value2, _670.value3, (_669[0]).value0, (_669[0]).value1, (_669[0]).value2));
+                        if (_677.length >= 1) {
+                            var _2450 = _677.slice(1);
+                            if (_677[0] instanceof TwoLeft) {
+                                return fromZipper(__dict_Ord_633)(_2450)(new Three(_678.value0, _678.value1, _678.value2, _678.value3, (_677[0]).value0, (_677[0]).value1, (_677[0]).value2));
                             };
                         };
-                        if (_669.length >= 1) {
-                            var _2438 = _669.slice(1);
-                            if (_669[0] instanceof TwoRight) {
-                                return fromZipper(__dict_Ord_633)(_2438)(new Three((_669[0]).value0, (_669[0]).value1, (_669[0]).value2, _670.value0, _670.value1, _670.value2, _670.value3));
+                        if (_677.length >= 1) {
+                            var _2459 = _677.slice(1);
+                            if (_677[0] instanceof TwoRight) {
+                                return fromZipper(__dict_Ord_633)(_2459)(new Three((_677[0]).value0, (_677[0]).value1, (_677[0]).value2, _678.value0, _678.value1, _678.value2, _678.value3));
                             };
                         };
-                        if (_669.length >= 1) {
-                            var _2450 = _669.slice(1);
-                            if (_669[0] instanceof ThreeLeft) {
+                        if (_677.length >= 1) {
+                            var _2471 = _677.slice(1);
+                            if (_677[0] instanceof ThreeLeft) {
                                 var __tco___dict_Ord_633 = __dict_Ord_633;
-                                var __tco__670 = new KickUp(new Two(_670.value0, _670.value1, _670.value2, _670.value3), (_669[0]).value0, (_669[0]).value1, new Two((_669[0]).value2, (_669[0]).value3, (_669[0]).value4, (_669[0]).value5));
+                                var __tco__678 = new KickUp(new Two(_678.value0, _678.value1, _678.value2, _678.value3), (_677[0]).value0, (_677[0]).value1, new Two((_677[0]).value2, (_677[0]).value3, (_677[0]).value4, (_677[0]).value5));
                                 __dict_Ord_633 = __tco___dict_Ord_633;
-                                _669 = _2450;
-                                _670 = __tco__670;
+                                _677 = _2471;
+                                _678 = __tco__678;
                                 continue tco;
                             };
                         };
-                        if (_669.length >= 1) {
-                            var _2462 = _669.slice(1);
-                            if (_669[0] instanceof ThreeMiddle) {
+                        if (_677.length >= 1) {
+                            var _2483 = _677.slice(1);
+                            if (_677[0] instanceof ThreeMiddle) {
                                 var __tco___dict_Ord_633 = __dict_Ord_633;
-                                var __tco__670 = new KickUp(new Two((_669[0]).value0, (_669[0]).value1, (_669[0]).value2, _670.value0), _670.value1, _670.value2, new Two(_670.value3, (_669[0]).value3, (_669[0]).value4, (_669[0]).value5));
+                                var __tco__678 = new KickUp(new Two((_677[0]).value0, (_677[0]).value1, (_677[0]).value2, _678.value0), _678.value1, _678.value2, new Two(_678.value3, (_677[0]).value3, (_677[0]).value4, (_677[0]).value5));
                                 __dict_Ord_633 = __tco___dict_Ord_633;
-                                _669 = _2462;
-                                _670 = __tco__670;
+                                _677 = _2483;
+                                _678 = __tco__678;
                                 continue tco;
                             };
                         };
-                        if (_669.length >= 1) {
-                            var _2474 = _669.slice(1);
-                            if (_669[0] instanceof ThreeRight) {
+                        if (_677.length >= 1) {
+                            var _2495 = _677.slice(1);
+                            if (_677[0] instanceof ThreeRight) {
                                 var __tco___dict_Ord_633 = __dict_Ord_633;
-                                var __tco__670 = new KickUp(new Two((_669[0]).value0, (_669[0]).value1, (_669[0]).value2, (_669[0]).value3), (_669[0]).value4, (_669[0]).value5, new Two(_670.value0, _670.value1, _670.value2, _670.value3));
+                                var __tco__678 = new KickUp(new Two((_677[0]).value0, (_677[0]).value1, (_677[0]).value2, (_677[0]).value3), (_677[0]).value4, (_677[0]).value5, new Two(_678.value0, _678.value1, _678.value2, _678.value3));
                                 __dict_Ord_633 = __tco___dict_Ord_633;
-                                _669 = _2474;
-                                _670 = __tco__670;
+                                _677 = _2495;
+                                _678 = __tco__678;
                                 continue tco;
                             };
                         };
@@ -11397,91 +11745,91 @@ PS.Data_Map = (function () {
             };
         };
         var down = function (__copy___dict_Ord_634) {
-            return function (__copy__665) {
-                return function (__copy__666) {
-                    return function (__copy__667) {
-                        return function (__copy__668) {
+            return function (__copy__673) {
+                return function (__copy__674) {
+                    return function (__copy__675) {
+                        return function (__copy__676) {
                             var __dict_Ord_634 = __copy___dict_Ord_634;
-                            var _665 = __copy__665;
-                            var _666 = __copy__666;
-                            var _667 = __copy__667;
-                            var _668 = __copy__668;
+                            var _673 = __copy__673;
+                            var _674 = __copy__674;
+                            var _675 = __copy__675;
+                            var _676 = __copy__676;
                             tco: while (true) {
-                                if (_668 instanceof Leaf) {
-                                    return up(__dict_Ord_634)(_665)(new KickUp(Leaf.value, _666, _667, Leaf.value));
+                                if (_676 instanceof Leaf) {
+                                    return up(__dict_Ord_634)(_673)(new KickUp(Leaf.value, _674, _675, Leaf.value));
                                 };
-                                if (_668 instanceof Two && Prelude["=="](__dict_Ord_634["__superclass_Prelude.Eq_0"]())(_666)(_668.value1)) {
-                                    return fromZipper(__dict_Ord_634)(_665)(new Two(_668.value0, _666, _667, _668.value3));
+                                if (_676 instanceof Two && Prelude["=="](__dict_Ord_634["__superclass_Prelude.Eq_0"]())(_674)(_676.value1)) {
+                                    return fromZipper(__dict_Ord_634)(_673)(new Two(_676.value0, _674, _675, _676.value3));
                                 };
-                                if (_668 instanceof Two && Prelude["<"](__dict_Ord_634)(_666)(_668.value1)) {
+                                if (_676 instanceof Two && Prelude["<"](__dict_Ord_634)(_674)(_676.value1)) {
                                     var __tco___dict_Ord_634 = __dict_Ord_634;
-                                    var __tco__665 = Prelude[":"](new TwoLeft(_668.value1, _668.value2, _668.value3))(_665);
-                                    var __tco__666 = _666;
-                                    var __tco__667 = _667;
-                                    var __tco__668 = _668.value0;
+                                    var __tco__673 = Prelude[":"](new TwoLeft(_676.value1, _676.value2, _676.value3))(_673);
+                                    var __tco__674 = _674;
+                                    var __tco__675 = _675;
+                                    var __tco__676 = _676.value0;
                                     __dict_Ord_634 = __tco___dict_Ord_634;
-                                    _665 = __tco__665;
-                                    _666 = __tco__666;
-                                    _667 = __tco__667;
-                                    _668 = __tco__668;
+                                    _673 = __tco__673;
+                                    _674 = __tco__674;
+                                    _675 = __tco__675;
+                                    _676 = __tco__676;
                                     continue tco;
                                 };
-                                if (_668 instanceof Two) {
+                                if (_676 instanceof Two) {
                                     var __tco___dict_Ord_634 = __dict_Ord_634;
-                                    var __tco__665 = Prelude[":"](new TwoRight(_668.value0, _668.value1, _668.value2))(_665);
-                                    var __tco__666 = _666;
-                                    var __tco__667 = _667;
-                                    var __tco__668 = _668.value3;
+                                    var __tco__673 = Prelude[":"](new TwoRight(_676.value0, _676.value1, _676.value2))(_673);
+                                    var __tco__674 = _674;
+                                    var __tco__675 = _675;
+                                    var __tco__676 = _676.value3;
                                     __dict_Ord_634 = __tco___dict_Ord_634;
-                                    _665 = __tco__665;
-                                    _666 = __tco__666;
-                                    _667 = __tco__667;
-                                    _668 = __tco__668;
+                                    _673 = __tco__673;
+                                    _674 = __tco__674;
+                                    _675 = __tco__675;
+                                    _676 = __tco__676;
                                     continue tco;
                                 };
-                                if (_668 instanceof Three && Prelude["=="](__dict_Ord_634["__superclass_Prelude.Eq_0"]())(_666)(_668.value1)) {
-                                    return fromZipper(__dict_Ord_634)(_665)(new Three(_668.value0, _666, _667, _668.value3, _668.value4, _668.value5, _668.value6));
+                                if (_676 instanceof Three && Prelude["=="](__dict_Ord_634["__superclass_Prelude.Eq_0"]())(_674)(_676.value1)) {
+                                    return fromZipper(__dict_Ord_634)(_673)(new Three(_676.value0, _674, _675, _676.value3, _676.value4, _676.value5, _676.value6));
                                 };
-                                if (_668 instanceof Three && Prelude["=="](__dict_Ord_634["__superclass_Prelude.Eq_0"]())(_666)(_668.value4)) {
-                                    return fromZipper(__dict_Ord_634)(_665)(new Three(_668.value0, _668.value1, _668.value2, _668.value3, _666, _667, _668.value6));
+                                if (_676 instanceof Three && Prelude["=="](__dict_Ord_634["__superclass_Prelude.Eq_0"]())(_674)(_676.value4)) {
+                                    return fromZipper(__dict_Ord_634)(_673)(new Three(_676.value0, _676.value1, _676.value2, _676.value3, _674, _675, _676.value6));
                                 };
-                                if (_668 instanceof Three && Prelude["<"](__dict_Ord_634)(_666)(_668.value1)) {
+                                if (_676 instanceof Three && Prelude["<"](__dict_Ord_634)(_674)(_676.value1)) {
                                     var __tco___dict_Ord_634 = __dict_Ord_634;
-                                    var __tco__665 = Prelude[":"](new ThreeLeft(_668.value1, _668.value2, _668.value3, _668.value4, _668.value5, _668.value6))(_665);
-                                    var __tco__666 = _666;
-                                    var __tco__667 = _667;
-                                    var __tco__668 = _668.value0;
+                                    var __tco__673 = Prelude[":"](new ThreeLeft(_676.value1, _676.value2, _676.value3, _676.value4, _676.value5, _676.value6))(_673);
+                                    var __tco__674 = _674;
+                                    var __tco__675 = _675;
+                                    var __tco__676 = _676.value0;
                                     __dict_Ord_634 = __tco___dict_Ord_634;
-                                    _665 = __tco__665;
-                                    _666 = __tco__666;
-                                    _667 = __tco__667;
-                                    _668 = __tco__668;
+                                    _673 = __tco__673;
+                                    _674 = __tco__674;
+                                    _675 = __tco__675;
+                                    _676 = __tco__676;
                                     continue tco;
                                 };
-                                if (_668 instanceof Three && (Prelude["<"](__dict_Ord_634)(_668.value1)(_666) && Prelude["<="](__dict_Ord_634)(_666)(_668.value4))) {
+                                if (_676 instanceof Three && (Prelude["<"](__dict_Ord_634)(_676.value1)(_674) && Prelude["<="](__dict_Ord_634)(_674)(_676.value4))) {
                                     var __tco___dict_Ord_634 = __dict_Ord_634;
-                                    var __tco__665 = Prelude[":"](new ThreeMiddle(_668.value0, _668.value1, _668.value2, _668.value4, _668.value5, _668.value6))(_665);
-                                    var __tco__666 = _666;
-                                    var __tco__667 = _667;
-                                    var __tco__668 = _668.value3;
+                                    var __tco__673 = Prelude[":"](new ThreeMiddle(_676.value0, _676.value1, _676.value2, _676.value4, _676.value5, _676.value6))(_673);
+                                    var __tco__674 = _674;
+                                    var __tco__675 = _675;
+                                    var __tco__676 = _676.value3;
                                     __dict_Ord_634 = __tco___dict_Ord_634;
-                                    _665 = __tco__665;
-                                    _666 = __tco__666;
-                                    _667 = __tco__667;
-                                    _668 = __tco__668;
+                                    _673 = __tco__673;
+                                    _674 = __tco__674;
+                                    _675 = __tco__675;
+                                    _676 = __tco__676;
                                     continue tco;
                                 };
-                                if (_668 instanceof Three) {
+                                if (_676 instanceof Three) {
                                     var __tco___dict_Ord_634 = __dict_Ord_634;
-                                    var __tco__665 = Prelude[":"](new ThreeRight(_668.value0, _668.value1, _668.value2, _668.value3, _668.value4, _668.value5))(_665);
-                                    var __tco__666 = _666;
-                                    var __tco__667 = _667;
-                                    var __tco__668 = _668.value6;
+                                    var __tco__673 = Prelude[":"](new ThreeRight(_676.value0, _676.value1, _676.value2, _676.value3, _676.value4, _676.value5))(_673);
+                                    var __tco__674 = _674;
+                                    var __tco__675 = _675;
+                                    var __tco__676 = _676.value6;
                                     __dict_Ord_634 = __tco___dict_Ord_634;
-                                    _665 = __tco__665;
-                                    _666 = __tco__666;
-                                    _667 = __tco__667;
-                                    _668 = __tco__668;
+                                    _673 = __tco__673;
+                                    _674 = __tco__674;
+                                    _675 = __tco__675;
+                                    _676 = __tco__676;
                                     continue tco;
                                 };
                                 throw new Error("Failed pattern match");
@@ -11528,132 +11876,132 @@ PS.Data_Map = (function () {
     var empty = Leaf.value;
     var fromList = function (__dict_Ord_638) {
         return Data_Foldable.foldl(Data_Foldable.foldableArray)(function (m) {
-            return function (_652) {
-                return insert(__dict_Ord_638)(_652.value0)(_652.value1)(m);
+            return function (_660) {
+                return insert(__dict_Ord_638)(_660.value0)(_660.value1)(m);
             };
         })(empty);
     };
     var $$delete = function (__dict_Ord_640) {
         var up = function (__copy___dict_Ord_641) {
-            return function (__copy__674) {
-                return function (__copy__675) {
+            return function (__copy__682) {
+                return function (__copy__683) {
                     var __dict_Ord_641 = __copy___dict_Ord_641;
-                    var _674 = __copy__674;
-                    var _675 = __copy__675;
+                    var _682 = __copy__682;
+                    var _683 = __copy__683;
                     tco: while (true) {
-                        if (_674.length === 0) {
-                            return _675;
+                        if (_682.length === 0) {
+                            return _683;
                         };
-                        if (_674.length >= 1) {
-                            var _2535 = _674.slice(1);
-                            if (_674[0] instanceof TwoLeft && ((_674[0]).value2 instanceof Leaf && _675 instanceof Leaf)) {
-                                return fromZipper(__dict_Ord_641)(_2535)(new Two(Leaf.value, (_674[0]).value0, (_674[0]).value1, Leaf.value));
+                        if (_682.length >= 1) {
+                            var _2556 = _682.slice(1);
+                            if (_682[0] instanceof TwoLeft && ((_682[0]).value2 instanceof Leaf && _683 instanceof Leaf)) {
+                                return fromZipper(__dict_Ord_641)(_2556)(new Two(Leaf.value, (_682[0]).value0, (_682[0]).value1, Leaf.value));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2540 = _674.slice(1);
-                            if (_674[0] instanceof TwoRight && ((_674[0]).value0 instanceof Leaf && _675 instanceof Leaf)) {
-                                return fromZipper(__dict_Ord_641)(_2540)(new Two(Leaf.value, (_674[0]).value1, (_674[0]).value2, Leaf.value));
+                        if (_682.length >= 1) {
+                            var _2561 = _682.slice(1);
+                            if (_682[0] instanceof TwoRight && ((_682[0]).value0 instanceof Leaf && _683 instanceof Leaf)) {
+                                return fromZipper(__dict_Ord_641)(_2561)(new Two(Leaf.value, (_682[0]).value1, (_682[0]).value2, Leaf.value));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2549 = _674.slice(1);
-                            if (_674[0] instanceof TwoLeft && (_674[0]).value2 instanceof Two) {
+                        if (_682.length >= 1) {
+                            var _2570 = _682.slice(1);
+                            if (_682[0] instanceof TwoLeft && (_682[0]).value2 instanceof Two) {
                                 var __tco___dict_Ord_641 = __dict_Ord_641;
-                                var __tco__675 = new Three(_675, (_674[0]).value0, (_674[0]).value1, (_674[0]).value2.value0, (_674[0]).value2.value1, (_674[0]).value2.value2, (_674[0]).value2.value3);
+                                var __tco__683 = new Three(_683, (_682[0]).value0, (_682[0]).value1, (_682[0]).value2.value0, (_682[0]).value2.value1, (_682[0]).value2.value2, (_682[0]).value2.value3);
                                 __dict_Ord_641 = __tco___dict_Ord_641;
-                                _674 = _2549;
-                                _675 = __tco__675;
+                                _682 = _2570;
+                                _683 = __tco__683;
                                 continue tco;
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2558 = _674.slice(1);
-                            if (_674[0] instanceof TwoRight && (_674[0]).value0 instanceof Two) {
+                        if (_682.length >= 1) {
+                            var _2579 = _682.slice(1);
+                            if (_682[0] instanceof TwoRight && (_682[0]).value0 instanceof Two) {
                                 var __tco___dict_Ord_641 = __dict_Ord_641;
-                                var __tco__675 = new Three((_674[0]).value0.value0, (_674[0]).value0.value1, (_674[0]).value0.value2, (_674[0]).value0.value3, (_674[0]).value1, (_674[0]).value2, _675);
+                                var __tco__683 = new Three((_682[0]).value0.value0, (_682[0]).value0.value1, (_682[0]).value0.value2, (_682[0]).value0.value3, (_682[0]).value1, (_682[0]).value2, _683);
                                 __dict_Ord_641 = __tco___dict_Ord_641;
-                                _674 = _2558;
-                                _675 = __tco__675;
+                                _682 = _2579;
+                                _683 = __tco__683;
                                 continue tco;
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2570 = _674.slice(1);
-                            if (_674[0] instanceof TwoLeft && (_674[0]).value2 instanceof Three) {
-                                return fromZipper(__dict_Ord_641)(_2570)(new Two(new Two(_675, (_674[0]).value0, (_674[0]).value1, (_674[0]).value2.value0), (_674[0]).value2.value1, (_674[0]).value2.value2, new Two((_674[0]).value2.value3, (_674[0]).value2.value4, (_674[0]).value2.value5, (_674[0]).value2.value6)));
+                        if (_682.length >= 1) {
+                            var _2591 = _682.slice(1);
+                            if (_682[0] instanceof TwoLeft && (_682[0]).value2 instanceof Three) {
+                                return fromZipper(__dict_Ord_641)(_2591)(new Two(new Two(_683, (_682[0]).value0, (_682[0]).value1, (_682[0]).value2.value0), (_682[0]).value2.value1, (_682[0]).value2.value2, new Two((_682[0]).value2.value3, (_682[0]).value2.value4, (_682[0]).value2.value5, (_682[0]).value2.value6)));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2582 = _674.slice(1);
-                            if (_674[0] instanceof TwoRight && (_674[0]).value0 instanceof Three) {
-                                return fromZipper(__dict_Ord_641)(_2582)(new Two(new Two((_674[0]).value0.value0, (_674[0]).value0.value1, (_674[0]).value0.value2, (_674[0]).value0.value3), (_674[0]).value0.value4, (_674[0]).value0.value5, new Two((_674[0]).value0.value6, (_674[0]).value1, (_674[0]).value2, _675)));
+                        if (_682.length >= 1) {
+                            var _2603 = _682.slice(1);
+                            if (_682[0] instanceof TwoRight && (_682[0]).value0 instanceof Three) {
+                                return fromZipper(__dict_Ord_641)(_2603)(new Two(new Two((_682[0]).value0.value0, (_682[0]).value0.value1, (_682[0]).value0.value2, (_682[0]).value0.value3), (_682[0]).value0.value4, (_682[0]).value0.value5, new Two((_682[0]).value0.value6, (_682[0]).value1, (_682[0]).value2, _683)));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2590 = _674.slice(1);
-                            if (_674[0] instanceof ThreeLeft && ((_674[0]).value2 instanceof Leaf && ((_674[0]).value5 instanceof Leaf && _675 instanceof Leaf))) {
-                                return fromZipper(__dict_Ord_641)(_2590)(new Three(Leaf.value, (_674[0]).value0, (_674[0]).value1, Leaf.value, (_674[0]).value3, (_674[0]).value4, Leaf.value));
+                        if (_682.length >= 1) {
+                            var _2611 = _682.slice(1);
+                            if (_682[0] instanceof ThreeLeft && ((_682[0]).value2 instanceof Leaf && ((_682[0]).value5 instanceof Leaf && _683 instanceof Leaf))) {
+                                return fromZipper(__dict_Ord_641)(_2611)(new Three(Leaf.value, (_682[0]).value0, (_682[0]).value1, Leaf.value, (_682[0]).value3, (_682[0]).value4, Leaf.value));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2598 = _674.slice(1);
-                            if (_674[0] instanceof ThreeMiddle && ((_674[0]).value0 instanceof Leaf && ((_674[0]).value5 instanceof Leaf && _675 instanceof Leaf))) {
-                                return fromZipper(__dict_Ord_641)(_2598)(new Three(Leaf.value, (_674[0]).value1, (_674[0]).value2, Leaf.value, (_674[0]).value3, (_674[0]).value4, Leaf.value));
+                        if (_682.length >= 1) {
+                            var _2619 = _682.slice(1);
+                            if (_682[0] instanceof ThreeMiddle && ((_682[0]).value0 instanceof Leaf && ((_682[0]).value5 instanceof Leaf && _683 instanceof Leaf))) {
+                                return fromZipper(__dict_Ord_641)(_2619)(new Three(Leaf.value, (_682[0]).value1, (_682[0]).value2, Leaf.value, (_682[0]).value3, (_682[0]).value4, Leaf.value));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2606 = _674.slice(1);
-                            if (_674[0] instanceof ThreeRight && ((_674[0]).value0 instanceof Leaf && ((_674[0]).value3 instanceof Leaf && _675 instanceof Leaf))) {
-                                return fromZipper(__dict_Ord_641)(_2606)(new Three(Leaf.value, (_674[0]).value1, (_674[0]).value2, Leaf.value, (_674[0]).value4, (_674[0]).value5, Leaf.value));
+                        if (_682.length >= 1) {
+                            var _2627 = _682.slice(1);
+                            if (_682[0] instanceof ThreeRight && ((_682[0]).value0 instanceof Leaf && ((_682[0]).value3 instanceof Leaf && _683 instanceof Leaf))) {
+                                return fromZipper(__dict_Ord_641)(_2627)(new Three(Leaf.value, (_682[0]).value1, (_682[0]).value2, Leaf.value, (_682[0]).value4, (_682[0]).value5, Leaf.value));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2618 = _674.slice(1);
-                            if (_674[0] instanceof ThreeLeft && (_674[0]).value2 instanceof Two) {
-                                return fromZipper(__dict_Ord_641)(_2618)(new Two(new Three(_675, (_674[0]).value0, (_674[0]).value1, (_674[0]).value2.value0, (_674[0]).value2.value1, (_674[0]).value2.value2, (_674[0]).value2.value3), (_674[0]).value3, (_674[0]).value4, (_674[0]).value5));
+                        if (_682.length >= 1) {
+                            var _2639 = _682.slice(1);
+                            if (_682[0] instanceof ThreeLeft && (_682[0]).value2 instanceof Two) {
+                                return fromZipper(__dict_Ord_641)(_2639)(new Two(new Three(_683, (_682[0]).value0, (_682[0]).value1, (_682[0]).value2.value0, (_682[0]).value2.value1, (_682[0]).value2.value2, (_682[0]).value2.value3), (_682[0]).value3, (_682[0]).value4, (_682[0]).value5));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2630 = _674.slice(1);
-                            if (_674[0] instanceof ThreeMiddle && (_674[0]).value0 instanceof Two) {
-                                return fromZipper(__dict_Ord_641)(_2630)(new Two(new Three((_674[0]).value0.value0, (_674[0]).value0.value1, (_674[0]).value0.value2, (_674[0]).value0.value3, (_674[0]).value1, (_674[0]).value2, _675), (_674[0]).value3, (_674[0]).value4, (_674[0]).value5));
+                        if (_682.length >= 1) {
+                            var _2651 = _682.slice(1);
+                            if (_682[0] instanceof ThreeMiddle && (_682[0]).value0 instanceof Two) {
+                                return fromZipper(__dict_Ord_641)(_2651)(new Two(new Three((_682[0]).value0.value0, (_682[0]).value0.value1, (_682[0]).value0.value2, (_682[0]).value0.value3, (_682[0]).value1, (_682[0]).value2, _683), (_682[0]).value3, (_682[0]).value4, (_682[0]).value5));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2642 = _674.slice(1);
-                            if (_674[0] instanceof ThreeMiddle && (_674[0]).value5 instanceof Two) {
-                                return fromZipper(__dict_Ord_641)(_2642)(new Two((_674[0]).value0, (_674[0]).value1, (_674[0]).value2, new Three(_675, (_674[0]).value3, (_674[0]).value4, (_674[0]).value5.value0, (_674[0]).value5.value1, (_674[0]).value5.value2, (_674[0]).value5.value3)));
+                        if (_682.length >= 1) {
+                            var _2663 = _682.slice(1);
+                            if (_682[0] instanceof ThreeMiddle && (_682[0]).value5 instanceof Two) {
+                                return fromZipper(__dict_Ord_641)(_2663)(new Two((_682[0]).value0, (_682[0]).value1, (_682[0]).value2, new Three(_683, (_682[0]).value3, (_682[0]).value4, (_682[0]).value5.value0, (_682[0]).value5.value1, (_682[0]).value5.value2, (_682[0]).value5.value3)));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2654 = _674.slice(1);
-                            if (_674[0] instanceof ThreeRight && (_674[0]).value3 instanceof Two) {
-                                return fromZipper(__dict_Ord_641)(_2654)(new Two((_674[0]).value0, (_674[0]).value1, (_674[0]).value2, new Three((_674[0]).value3.value0, (_674[0]).value3.value1, (_674[0]).value3.value2, (_674[0]).value3.value3, (_674[0]).value4, (_674[0]).value5, _675)));
+                        if (_682.length >= 1) {
+                            var _2675 = _682.slice(1);
+                            if (_682[0] instanceof ThreeRight && (_682[0]).value3 instanceof Two) {
+                                return fromZipper(__dict_Ord_641)(_2675)(new Two((_682[0]).value0, (_682[0]).value1, (_682[0]).value2, new Three((_682[0]).value3.value0, (_682[0]).value3.value1, (_682[0]).value3.value2, (_682[0]).value3.value3, (_682[0]).value4, (_682[0]).value5, _683)));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2669 = _674.slice(1);
-                            if (_674[0] instanceof ThreeLeft && (_674[0]).value2 instanceof Three) {
-                                return fromZipper(__dict_Ord_641)(_2669)(new Three(new Two(_675, (_674[0]).value0, (_674[0]).value1, (_674[0]).value2.value0), (_674[0]).value2.value1, (_674[0]).value2.value2, new Two((_674[0]).value2.value3, (_674[0]).value2.value4, (_674[0]).value2.value5, (_674[0]).value2.value6), (_674[0]).value3, (_674[0]).value4, (_674[0]).value5));
+                        if (_682.length >= 1) {
+                            var _2690 = _682.slice(1);
+                            if (_682[0] instanceof ThreeLeft && (_682[0]).value2 instanceof Three) {
+                                return fromZipper(__dict_Ord_641)(_2690)(new Three(new Two(_683, (_682[0]).value0, (_682[0]).value1, (_682[0]).value2.value0), (_682[0]).value2.value1, (_682[0]).value2.value2, new Two((_682[0]).value2.value3, (_682[0]).value2.value4, (_682[0]).value2.value5, (_682[0]).value2.value6), (_682[0]).value3, (_682[0]).value4, (_682[0]).value5));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2684 = _674.slice(1);
-                            if (_674[0] instanceof ThreeMiddle && (_674[0]).value0 instanceof Three) {
-                                return fromZipper(__dict_Ord_641)(_2684)(new Three(new Two((_674[0]).value0.value0, (_674[0]).value0.value1, (_674[0]).value0.value2, (_674[0]).value0.value3), (_674[0]).value0.value4, (_674[0]).value0.value5, new Two((_674[0]).value0.value6, (_674[0]).value1, (_674[0]).value2, _675), (_674[0]).value3, (_674[0]).value4, (_674[0]).value5));
+                        if (_682.length >= 1) {
+                            var _2705 = _682.slice(1);
+                            if (_682[0] instanceof ThreeMiddle && (_682[0]).value0 instanceof Three) {
+                                return fromZipper(__dict_Ord_641)(_2705)(new Three(new Two((_682[0]).value0.value0, (_682[0]).value0.value1, (_682[0]).value0.value2, (_682[0]).value0.value3), (_682[0]).value0.value4, (_682[0]).value0.value5, new Two((_682[0]).value0.value6, (_682[0]).value1, (_682[0]).value2, _683), (_682[0]).value3, (_682[0]).value4, (_682[0]).value5));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2699 = _674.slice(1);
-                            if (_674[0] instanceof ThreeMiddle && (_674[0]).value5 instanceof Three) {
-                                return fromZipper(__dict_Ord_641)(_2699)(new Three((_674[0]).value0, (_674[0]).value1, (_674[0]).value2, new Two(_675, (_674[0]).value3, (_674[0]).value4, (_674[0]).value5.value0), (_674[0]).value5.value1, (_674[0]).value5.value2, new Two((_674[0]).value5.value3, (_674[0]).value5.value4, (_674[0]).value5.value5, (_674[0]).value5.value6)));
+                        if (_682.length >= 1) {
+                            var _2720 = _682.slice(1);
+                            if (_682[0] instanceof ThreeMiddle && (_682[0]).value5 instanceof Three) {
+                                return fromZipper(__dict_Ord_641)(_2720)(new Three((_682[0]).value0, (_682[0]).value1, (_682[0]).value2, new Two(_683, (_682[0]).value3, (_682[0]).value4, (_682[0]).value5.value0), (_682[0]).value5.value1, (_682[0]).value5.value2, new Two((_682[0]).value5.value3, (_682[0]).value5.value4, (_682[0]).value5.value5, (_682[0]).value5.value6)));
                             };
                         };
-                        if (_674.length >= 1) {
-                            var _2714 = _674.slice(1);
-                            if (_674[0] instanceof ThreeRight && (_674[0]).value3 instanceof Three) {
-                                return fromZipper(__dict_Ord_641)(_2714)(new Three((_674[0]).value0, (_674[0]).value1, (_674[0]).value2, new Two((_674[0]).value3.value0, (_674[0]).value3.value1, (_674[0]).value3.value2, (_674[0]).value3.value3), (_674[0]).value3.value4, (_674[0]).value3.value5, new Two((_674[0]).value3.value6, (_674[0]).value4, (_674[0]).value5, _675)));
+                        if (_682.length >= 1) {
+                            var _2735 = _682.slice(1);
+                            if (_682[0] instanceof ThreeRight && (_682[0]).value3 instanceof Three) {
+                                return fromZipper(__dict_Ord_641)(_2735)(new Three((_682[0]).value0, (_682[0]).value1, (_682[0]).value2, new Two((_682[0]).value3.value0, (_682[0]).value3.value1, (_682[0]).value3.value2, (_682[0]).value3.value3), (_682[0]).value3.value4, (_682[0]).value3.value5, new Two((_682[0]).value3.value6, (_682[0]).value4, (_682[0]).value5, _683)));
                             };
                         };
                         throw new Error("Failed pattern match");
@@ -11662,34 +12010,34 @@ PS.Data_Map = (function () {
             };
         };
         var removeMaxNode = function (__copy___dict_Ord_642) {
-            return function (__copy__677) {
-                return function (__copy__678) {
+            return function (__copy__685) {
+                return function (__copy__686) {
                     var __dict_Ord_642 = __copy___dict_Ord_642;
-                    var _677 = __copy__677;
-                    var _678 = __copy__678;
+                    var _685 = __copy__685;
+                    var _686 = __copy__686;
                     tco: while (true) {
-                        if (_678 instanceof Two && (_678.value0 instanceof Leaf && _678.value3 instanceof Leaf)) {
-                            return up(__dict_Ord_642)(_677)(Leaf.value);
+                        if (_686 instanceof Two && (_686.value0 instanceof Leaf && _686.value3 instanceof Leaf)) {
+                            return up(__dict_Ord_642)(_685)(Leaf.value);
                         };
-                        if (_678 instanceof Two) {
+                        if (_686 instanceof Two) {
                             var __tco___dict_Ord_642 = __dict_Ord_642;
-                            var __tco__677 = Prelude[":"](new TwoRight(_678.value0, _678.value1, _678.value2))(_677);
-                            var __tco__678 = _678.value3;
+                            var __tco__685 = Prelude[":"](new TwoRight(_686.value0, _686.value1, _686.value2))(_685);
+                            var __tco__686 = _686.value3;
                             __dict_Ord_642 = __tco___dict_Ord_642;
-                            _677 = __tco__677;
-                            _678 = __tco__678;
+                            _685 = __tco__685;
+                            _686 = __tco__686;
                             continue tco;
                         };
-                        if (_678 instanceof Three && (_678.value0 instanceof Leaf && (_678.value3 instanceof Leaf && _678.value6 instanceof Leaf))) {
-                            return up(__dict_Ord_642)(Prelude[":"](new TwoRight(Leaf.value, _678.value1, _678.value2))(_677))(Leaf.value);
+                        if (_686 instanceof Three && (_686.value0 instanceof Leaf && (_686.value3 instanceof Leaf && _686.value6 instanceof Leaf))) {
+                            return up(__dict_Ord_642)(Prelude[":"](new TwoRight(Leaf.value, _686.value1, _686.value2))(_685))(Leaf.value);
                         };
-                        if (_678 instanceof Three) {
+                        if (_686 instanceof Three) {
                             var __tco___dict_Ord_642 = __dict_Ord_642;
-                            var __tco__677 = Prelude[":"](new ThreeRight(_678.value0, _678.value1, _678.value2, _678.value3, _678.value4, _678.value5))(_677);
-                            var __tco__678 = _678.value6;
+                            var __tco__685 = Prelude[":"](new ThreeRight(_686.value0, _686.value1, _686.value2, _686.value3, _686.value4, _686.value5))(_685);
+                            var __tco__686 = _686.value6;
                             __dict_Ord_642 = __tco___dict_Ord_642;
-                            _677 = __tco__677;
-                            _678 = __tco__678;
+                            _685 = __tco__685;
+                            _686 = __tco__686;
                             continue tco;
                         };
                         throw new Error("Failed pattern match");
@@ -11698,34 +12046,34 @@ PS.Data_Map = (function () {
             };
         };
         var maxNode = function (__copy___dict_Ord_643) {
-            return function (__copy__676) {
+            return function (__copy__684) {
                 var __dict_Ord_643 = __copy___dict_Ord_643;
-                var _676 = __copy__676;
+                var _684 = __copy__684;
                 tco: while (true) {
-                    if (_676 instanceof Two && _676.value3 instanceof Leaf) {
+                    if (_684 instanceof Two && _684.value3 instanceof Leaf) {
                         return {
-                            key: _676.value1, 
-                            value: _676.value2
+                            key: _684.value1, 
+                            value: _684.value2
                         };
                     };
-                    if (_676 instanceof Two) {
+                    if (_684 instanceof Two) {
                         var __tco___dict_Ord_643 = __dict_Ord_643;
-                        var __tco__676 = _676.value3;
+                        var __tco__684 = _684.value3;
                         __dict_Ord_643 = __tco___dict_Ord_643;
-                        _676 = __tco__676;
+                        _684 = __tco__684;
                         continue tco;
                     };
-                    if (_676 instanceof Three && _676.value6 instanceof Leaf) {
+                    if (_684 instanceof Three && _684.value6 instanceof Leaf) {
                         return {
-                            key: _676.value4, 
-                            value: _676.value5
+                            key: _684.value4, 
+                            value: _684.value5
                         };
                     };
-                    if (_676 instanceof Three) {
+                    if (_684 instanceof Three) {
                         var __tco___dict_Ord_643 = __dict_Ord_643;
-                        var __tco__676 = _676.value6;
+                        var __tco__684 = _684.value6;
                         __dict_Ord_643 = __tco___dict_Ord_643;
-                        _676 = __tco__676;
+                        _684 = __tco__684;
                         continue tco;
                     };
                     throw new Error("Failed pattern match");
@@ -11733,96 +12081,96 @@ PS.Data_Map = (function () {
             };
         };
         var down = function (__copy___dict_Ord_644) {
-            return function (__copy__671) {
-                return function (__copy__672) {
-                    return function (__copy__673) {
+            return function (__copy__679) {
+                return function (__copy__680) {
+                    return function (__copy__681) {
                         var __dict_Ord_644 = __copy___dict_Ord_644;
-                        var _671 = __copy__671;
-                        var _672 = __copy__672;
-                        var _673 = __copy__673;
+                        var _679 = __copy__679;
+                        var _680 = __copy__680;
+                        var _681 = __copy__681;
                         tco: while (true) {
-                            if (_673 instanceof Leaf) {
-                                return fromZipper(__dict_Ord_644)(_671)(Leaf.value);
+                            if (_681 instanceof Leaf) {
+                                return fromZipper(__dict_Ord_644)(_679)(Leaf.value);
                             };
-                            if (_673 instanceof Two && (_673.value0 instanceof Leaf && (_673.value3 instanceof Leaf && Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_672)(_673.value1)))) {
-                                return up(__dict_Ord_644)(_671)(Leaf.value);
+                            if (_681 instanceof Two && (_681.value0 instanceof Leaf && (_681.value3 instanceof Leaf && Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_680)(_681.value1)))) {
+                                return up(__dict_Ord_644)(_679)(Leaf.value);
                             };
-                            if (_673 instanceof Two) {
-                                if (Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_672)(_673.value1)) {
-                                    var max = maxNode(__dict_Ord_644)(_673.value0);
-                                    return removeMaxNode(__dict_Ord_644)(Prelude[":"](new TwoLeft(max.key, max.value, _673.value3))(_671))(_673.value0);
+                            if (_681 instanceof Two) {
+                                if (Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_680)(_681.value1)) {
+                                    var max = maxNode(__dict_Ord_644)(_681.value0);
+                                    return removeMaxNode(__dict_Ord_644)(Prelude[":"](new TwoLeft(max.key, max.value, _681.value3))(_679))(_681.value0);
                                 };
-                                if (Prelude["<"](__dict_Ord_644)(_672)(_673.value1)) {
+                                if (Prelude["<"](__dict_Ord_644)(_680)(_681.value1)) {
                                     var __tco___dict_Ord_644 = __dict_Ord_644;
-                                    var __tco__671 = Prelude[":"](new TwoLeft(_673.value1, _673.value2, _673.value3))(_671);
-                                    var __tco__672 = _672;
-                                    var __tco__673 = _673.value0;
+                                    var __tco__679 = Prelude[":"](new TwoLeft(_681.value1, _681.value2, _681.value3))(_679);
+                                    var __tco__680 = _680;
+                                    var __tco__681 = _681.value0;
                                     __dict_Ord_644 = __tco___dict_Ord_644;
-                                    _671 = __tco__671;
-                                    _672 = __tco__672;
-                                    _673 = __tco__673;
+                                    _679 = __tco__679;
+                                    _680 = __tco__680;
+                                    _681 = __tco__681;
                                     continue tco;
                                 };
                                 if (Prelude.otherwise) {
                                     var __tco___dict_Ord_644 = __dict_Ord_644;
-                                    var __tco__671 = Prelude[":"](new TwoRight(_673.value0, _673.value1, _673.value2))(_671);
-                                    var __tco__672 = _672;
-                                    var __tco__673 = _673.value3;
+                                    var __tco__679 = Prelude[":"](new TwoRight(_681.value0, _681.value1, _681.value2))(_679);
+                                    var __tco__680 = _680;
+                                    var __tco__681 = _681.value3;
                                     __dict_Ord_644 = __tco___dict_Ord_644;
-                                    _671 = __tco__671;
-                                    _672 = __tco__672;
-                                    _673 = __tco__673;
+                                    _679 = __tco__679;
+                                    _680 = __tco__680;
+                                    _681 = __tco__681;
                                     continue tco;
                                 };
                             };
-                            if (_673 instanceof Three && (_673.value0 instanceof Leaf && (_673.value3 instanceof Leaf && _673.value6 instanceof Leaf))) {
-                                if (Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_672)(_673.value1)) {
-                                    return fromZipper(__dict_Ord_644)(_671)(new Two(Leaf.value, _673.value4, _673.value5, Leaf.value));
+                            if (_681 instanceof Three && (_681.value0 instanceof Leaf && (_681.value3 instanceof Leaf && _681.value6 instanceof Leaf))) {
+                                if (Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_680)(_681.value1)) {
+                                    return fromZipper(__dict_Ord_644)(_679)(new Two(Leaf.value, _681.value4, _681.value5, Leaf.value));
                                 };
-                                if (Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_672)(_673.value4)) {
-                                    return fromZipper(__dict_Ord_644)(_671)(new Two(Leaf.value, _673.value1, _673.value2, Leaf.value));
+                                if (Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_680)(_681.value4)) {
+                                    return fromZipper(__dict_Ord_644)(_679)(new Two(Leaf.value, _681.value1, _681.value2, Leaf.value));
                                 };
                             };
-                            if (_673 instanceof Three) {
-                                if (Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_672)(_673.value1)) {
-                                    var max = maxNode(__dict_Ord_644)(_673.value0);
-                                    return removeMaxNode(__dict_Ord_644)(Prelude[":"](new ThreeLeft(max.key, max.value, _673.value3, _673.value4, _673.value5, _673.value6))(_671))(_673.value0);
+                            if (_681 instanceof Three) {
+                                if (Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_680)(_681.value1)) {
+                                    var max = maxNode(__dict_Ord_644)(_681.value0);
+                                    return removeMaxNode(__dict_Ord_644)(Prelude[":"](new ThreeLeft(max.key, max.value, _681.value3, _681.value4, _681.value5, _681.value6))(_679))(_681.value0);
                                 };
-                                if (Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_672)(_673.value4)) {
-                                    var max = maxNode(__dict_Ord_644)(_673.value3);
-                                    return removeMaxNode(__dict_Ord_644)(Prelude[":"](new ThreeMiddle(_673.value0, _673.value1, _673.value2, max.key, max.value, _673.value6))(_671))(_673.value3);
+                                if (Prelude["=="](__dict_Ord_644["__superclass_Prelude.Eq_0"]())(_680)(_681.value4)) {
+                                    var max = maxNode(__dict_Ord_644)(_681.value3);
+                                    return removeMaxNode(__dict_Ord_644)(Prelude[":"](new ThreeMiddle(_681.value0, _681.value1, _681.value2, max.key, max.value, _681.value6))(_679))(_681.value3);
                                 };
-                                if (Prelude["<"](__dict_Ord_644)(_672)(_673.value1)) {
+                                if (Prelude["<"](__dict_Ord_644)(_680)(_681.value1)) {
                                     var __tco___dict_Ord_644 = __dict_Ord_644;
-                                    var __tco__671 = Prelude[":"](new ThreeLeft(_673.value1, _673.value2, _673.value3, _673.value4, _673.value5, _673.value6))(_671);
-                                    var __tco__672 = _672;
-                                    var __tco__673 = _673.value0;
+                                    var __tco__679 = Prelude[":"](new ThreeLeft(_681.value1, _681.value2, _681.value3, _681.value4, _681.value5, _681.value6))(_679);
+                                    var __tco__680 = _680;
+                                    var __tco__681 = _681.value0;
                                     __dict_Ord_644 = __tco___dict_Ord_644;
-                                    _671 = __tco__671;
-                                    _672 = __tco__672;
-                                    _673 = __tco__673;
+                                    _679 = __tco__679;
+                                    _680 = __tco__680;
+                                    _681 = __tco__681;
                                     continue tco;
                                 };
-                                if (Prelude["<"](__dict_Ord_644)(_673.value1)(_672) && Prelude["<"](__dict_Ord_644)(_672)(_673.value4)) {
+                                if (Prelude["<"](__dict_Ord_644)(_681.value1)(_680) && Prelude["<"](__dict_Ord_644)(_680)(_681.value4)) {
                                     var __tco___dict_Ord_644 = __dict_Ord_644;
-                                    var __tco__671 = Prelude[":"](new ThreeMiddle(_673.value0, _673.value1, _673.value2, _673.value4, _673.value5, _673.value6))(_671);
-                                    var __tco__672 = _672;
-                                    var __tco__673 = _673.value3;
+                                    var __tco__679 = Prelude[":"](new ThreeMiddle(_681.value0, _681.value1, _681.value2, _681.value4, _681.value5, _681.value6))(_679);
+                                    var __tco__680 = _680;
+                                    var __tco__681 = _681.value3;
                                     __dict_Ord_644 = __tco___dict_Ord_644;
-                                    _671 = __tco__671;
-                                    _672 = __tco__672;
-                                    _673 = __tco__673;
+                                    _679 = __tco__679;
+                                    _680 = __tco__680;
+                                    _681 = __tco__681;
                                     continue tco;
                                 };
                                 if (Prelude.otherwise) {
                                     var __tco___dict_Ord_644 = __dict_Ord_644;
-                                    var __tco__671 = Prelude[":"](new ThreeRight(_673.value0, _673.value1, _673.value2, _673.value3, _673.value4, _673.value5))(_671);
-                                    var __tco__672 = _672;
-                                    var __tco__673 = _673.value6;
+                                    var __tco__679 = Prelude[":"](new ThreeRight(_681.value0, _681.value1, _681.value2, _681.value3, _681.value4, _681.value5))(_679);
+                                    var __tco__680 = _680;
+                                    var __tco__681 = _681.value6;
                                     __dict_Ord_644 = __tco___dict_Ord_644;
-                                    _671 = __tco__671;
-                                    _672 = __tco__672;
-                                    _673 = __tco__673;
+                                    _679 = __tco__679;
+                                    _680 = __tco__680;
+                                    _681 = __tco__681;
                                     continue tco;
                                 };
                             };
@@ -11835,19 +12183,19 @@ PS.Data_Map = (function () {
         return down(__dict_Ord_640)([  ]);
     };
     var checkValid = function (tree) {
-        var allHeights = function (_664) {
-            if (_664 instanceof Leaf) {
+        var allHeights = function (_672) {
+            if (_672 instanceof Leaf) {
                 return [ 0 ];
             };
-            if (_664 instanceof Two) {
+            if (_672 instanceof Two) {
                 return Data_Array.map(function (n) {
                     return n + 1;
-                })(Prelude["++"](Data_Array.semigroupArray)(allHeights(_664.value0))(allHeights(_664.value3)));
+                })(Prelude["++"](Data_Array.semigroupArray)(allHeights(_672.value0))(allHeights(_672.value3)));
             };
-            if (_664 instanceof Three) {
+            if (_672 instanceof Three) {
                 return Data_Array.map(function (n) {
                     return n + 1;
-                })(Prelude["++"](Data_Array.semigroupArray)(allHeights(_664.value0))(Prelude["++"](Data_Array.semigroupArray)(allHeights(_664.value3))(allHeights(_664.value6))));
+                })(Prelude["++"](Data_Array.semigroupArray)(allHeights(_672.value0))(Prelude["++"](Data_Array.semigroupArray)(allHeights(_672.value3))(allHeights(_672.value6))));
             };
             throw new Error("Failed pattern match");
         };
@@ -11857,12 +12205,12 @@ PS.Data_Map = (function () {
         return function (f) {
             return function (k) {
                 return function (m) {
-                    var _2799 = f(lookup(__dict_Ord_645)(k)(m));
-                    if (_2799 instanceof Data_Maybe.Nothing) {
+                    var _2820 = f(lookup(__dict_Ord_645)(k)(m));
+                    if (_2820 instanceof Data_Maybe.Nothing) {
                         return $$delete(__dict_Ord_645)(k)(m);
                     };
-                    if (_2799 instanceof Data_Maybe.Just) {
-                        return insert(__dict_Ord_645)(k)(_2799.value0)(m);
+                    if (_2820 instanceof Data_Maybe.Just) {
+                        return insert(__dict_Ord_645)(k)(_2820.value0)(m);
                     };
                     throw new Error("Failed pattern match");
                 };
@@ -11878,9 +12226,9 @@ PS.Data_Map = (function () {
         return function (f) {
             return function (m1) {
                 return function (m2) {
-                    var go = function (_679) {
-                        return function (_680) {
-                            return alter(__dict_Ord_646)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Maybe.maybe(_680.value1)(f(_680.value1))))(_680.value0)(_679);
+                    var go = function (_687) {
+                        return function (_688) {
+                            return alter(__dict_Ord_646)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Maybe.maybe(_688.value1)(f(_688.value1))))(_688.value0)(_687);
                         };
                     };
                     return Data_Foldable.foldl(Data_Foldable.foldableArray)(go)(m2)(toList(m1));
@@ -11979,14 +12327,14 @@ PS.Data_Set = (function () {
         return Set;
     })();
     var union = function (__dict_Ord_654) {
-        return function (_690) {
-            return function (_691) {
-                return new Set(Data_Map.union(__dict_Ord_654)(_690.value0)(_691.value0));
+        return function (_698) {
+            return function (_699) {
+                return new Set(Data_Map.union(__dict_Ord_654)(_698.value0)(_699.value0));
             };
         };
     };
-    var toList = function (_689) {
-        return Data_Array.map(Data_Tuple.fst)(Data_Map.toList(_689.value0));
+    var toList = function (_697) {
+        return Data_Array.map(Data_Tuple.fst)(Data_Map.toList(_697.value0));
     };
     var singleton = function (a) {
         return new Set(Data_Map.singleton(a)(Prelude.unit));
@@ -11997,30 +12345,30 @@ PS.Data_Set = (function () {
         });
     };
     var member = function (__dict_Ord_656) {
-        return function (_683) {
-            return function (_684) {
-                return Data_Map.member(__dict_Ord_656)(_683)(_684.value0);
+        return function (_691) {
+            return function (_692) {
+                return Data_Map.member(__dict_Ord_656)(_691)(_692.value0);
             };
         };
     };
-    var isEmpty = function (_681) {
-        return Data_Map.isEmpty(_681.value0);
+    var isEmpty = function (_689) {
+        return Data_Map.isEmpty(_689.value0);
     };
     var insert = function (__dict_Ord_657) {
-        return function (_685) {
-            return function (_686) {
-                return new Set(Data_Map.insert(__dict_Ord_657)(_685)(Prelude.unit)(_686.value0));
+        return function (_693) {
+            return function (_694) {
+                return new Set(Data_Map.insert(__dict_Ord_657)(_693)(Prelude.unit)(_694.value0));
             };
         };
     };
     var eqSet = function (__dict_Eq_658) {
-        return new Prelude.Eq(function (_694) {
-            return function (_695) {
-                return Prelude["/="](Data_Map.eqMap(__dict_Eq_658)(Prelude.eqUnit))(_694.value0)(_695.value0);
+        return new Prelude.Eq(function (_702) {
+            return function (_703) {
+                return Prelude["/="](Data_Map.eqMap(__dict_Eq_658)(Prelude.eqUnit))(_702.value0)(_703.value0);
             };
-        }, function (_692) {
-            return function (_693) {
-                return Prelude["=="](Data_Map.eqMap(__dict_Eq_658)(Prelude.eqUnit))(_692.value0)(_693.value0);
+        }, function (_700) {
+            return function (_701) {
+                return Prelude["=="](Data_Map.eqMap(__dict_Eq_658)(Prelude.eqUnit))(_700.value0)(_701.value0);
             };
         });
     };
@@ -12036,9 +12384,9 @@ PS.Data_Set = (function () {
         return Data_Foldable.foldl(Data_Foldable.foldableArray)(union(__dict_Ord_660))(empty);
     };
     var $$delete = function (__dict_Ord_661) {
-        return function (_687) {
-            return function (_688) {
-                return new Set(Data_Map["delete"](__dict_Ord_661)(_687)(_688.value0));
+        return function (_695) {
+            return function (_696) {
+                return new Set(Data_Map["delete"](__dict_Ord_661)(_695)(_696.value0));
             };
         };
     };
@@ -12049,8 +12397,8 @@ PS.Data_Set = (function () {
             };
         };
     };
-    var checkValid = function (_682) {
-        return Data_Map.checkValid(_682.value0);
+    var checkValid = function (_690) {
+        return Data_Map.checkValid(_690.value0);
     };
     return {
         difference: difference, 
@@ -12213,18 +12561,18 @@ PS.Data_StrMap = (function () {
     var singleton = function (k) {
         return function (v) {
             return pureST(function __do() {
-                var _29 = Data_StrMap_ST["new"]();
-                Data_StrMap_ST.poke(_29)(k)(v)();
-                return _29;
+                var _31 = Data_StrMap_ST["new"]();
+                Data_StrMap_ST.poke(_31)(k)(v)();
+                return _31;
             });
         };
     };
     var mutate = function (f) {
         return function (m) {
             return pureST(function __do() {
-                var _28 = thawST(m)();
-                f(_28)();
-                return _28;
+                var _30 = thawST(m)();
+                f(_30)();
+                return _30;
             });
         };
     };
@@ -12262,11 +12610,11 @@ PS.Data_StrMap = (function () {
     var map = Prelude["<$>"](functorStrMap);
     var fromList = function (l) {
         return pureST(function __do() {
-            var _30 = Data_StrMap_ST["new"]();
-            Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(l)(function (_696) {
-                return Data_StrMap_ST.poke(_30)(_696.value0)(_696.value1);
+            var _32 = Data_StrMap_ST["new"]();
+            Data_Foldable.for_(Control_Monad_Eff.applicativeEff)(Data_Foldable.foldableArray)(l)(function (_704) {
+                return Data_StrMap_ST.poke(_32)(_704.value0)(_704.value1);
             })();
-            return _30;
+            return _32;
         });
     };
     var freezeST = _copyEff;
@@ -12376,12 +12724,12 @@ PS.Data_StrMap = (function () {
     var alter = function (f) {
         return function (k) {
             return function (m) {
-                var _2838 = f(lookup(k)(m));
-                if (_2838 instanceof Data_Maybe.Nothing) {
+                var _2859 = f(lookup(k)(m));
+                if (_2859 instanceof Data_Maybe.Nothing) {
                     return $$delete(k)(m);
                 };
-                if (_2838 instanceof Data_Maybe.Just) {
-                    return insert(k)(_2838.value0)(m);
+                if (_2859 instanceof Data_Maybe.Just) {
+                    return insert(k)(_2859.value0)(m);
                 };
                 throw new Error("Failed pattern match");
             };
@@ -12484,31 +12832,31 @@ PS.Data_Tagged = (function () {
     var Tagged = function (x) {
         return x;
     };
-    var unTagged = function (_697) {
-        return _697;
+    var unTagged = function (_705) {
+        return _705;
     };
     var untag = unTagged;
     var untagSelf = unTagged;
     var tagSelf = Tagged;
-    var semigroupoidTagged = new Prelude.Semigroupoid(function (_707) {
-        return function (_708) {
-            return _707;
+    var semigroupoidTagged = new Prelude.Semigroupoid(function (_715) {
+        return function (_716) {
+            return _715;
         };
     });
     var semigroupTagged = function (__dict_Semigroup_674) {
-        return new Prelude.Semigroup(function (_705) {
-            return function (_706) {
-                return Tagged(Prelude["<>"](__dict_Semigroup_674)(_705)(_706));
+        return new Prelude.Semigroup(function (_713) {
+            return function (_714) {
+                return Tagged(Prelude["<>"](__dict_Semigroup_674)(_713)(_714));
             };
         });
     };
-    var retag = function (_698) {
-        return _698;
+    var retag = function (_706) {
+        return _706;
     };
-    var profunctorTagged = new Data_Profunctor.Profunctor(function (_741) {
-        return function (_742) {
-            return function (_743) {
-                return Tagged(_742(_743));
+    var profunctorTagged = new Data_Profunctor.Profunctor(function (_749) {
+        return function (_750) {
+            return function (_751) {
+                return Tagged(_750(_751));
             };
         };
     });
@@ -12517,27 +12865,27 @@ PS.Data_Tagged = (function () {
             return semigroupTagged(__dict_Monoid_675["__superclass_Prelude.Semigroup_0"]());
         }, Tagged(Data_Monoid.mempty(__dict_Monoid_675)));
     };
-    var functorTagged = new Prelude.Functor(function (_699) {
-        return function (_700) {
-            return Tagged(_699(_700));
+    var functorTagged = new Prelude.Functor(function (_707) {
+        return function (_708) {
+            return Tagged(_707(_708));
         };
     });
     var foldableTagged = new Data_Foldable.Foldable(function (__dict_Monoid_676) {
-        return function (_715) {
-            return function (_716) {
-                return _715(_716);
+        return function (_723) {
+            return function (_724) {
+                return _723(_724);
             };
         };
-    }, function (_712) {
-        return function (_713) {
-            return function (_714) {
-                return _712(_713)(_714);
+    }, function (_720) {
+        return function (_721) {
+            return function (_722) {
+                return _720(_721)(_722);
             };
         };
-    }, function (_709) {
-        return function (_710) {
-            return function (_711) {
-                return _709(_711)(_710);
+    }, function (_717) {
+        return function (_718) {
+            return function (_719) {
+                return _717(_719)(_718);
             };
         };
     });
@@ -12546,13 +12894,13 @@ PS.Data_Tagged = (function () {
     }, function () {
         return functorTagged;
     }, function (__dict_Applicative_673) {
-        return function (_719) {
-            return Prelude["<$>"]((__dict_Applicative_673["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Tagged)(_719);
+        return function (_727) {
+            return Prelude["<$>"]((__dict_Applicative_673["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Tagged)(_727);
         };
     }, function (__dict_Applicative_672) {
-        return function (_717) {
-            return function (_718) {
-                return Prelude["<$>"]((__dict_Applicative_672["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Tagged)(_717(_718));
+        return function (_725) {
+            return function (_726) {
+                return Prelude["<$>"]((__dict_Applicative_672["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Tagged)(_725(_726));
             };
         };
     });
@@ -12568,39 +12916,39 @@ PS.Data_Tagged = (function () {
     }, unTagged);
     var choiceTagged = new Data_Profunctor_Choice.Choice(function () {
         return profunctorTagged;
-    }, function (_744) {
-        return Tagged(new Data_Either.Left(_744));
-    }, function (_745) {
-        return Tagged(new Data_Either.Right(_745));
+    }, function (_752) {
+        return Tagged(new Data_Either.Left(_752));
+    }, function (_753) {
+        return Tagged(new Data_Either.Right(_753));
     });
-    var bifunctorTagged = new Data_Bifunctor.Bifunctor(function (_720) {
-        return function (_721) {
-            return function (_722) {
-                return Tagged(_721(_722));
+    var bifunctorTagged = new Data_Bifunctor.Bifunctor(function (_728) {
+        return function (_729) {
+            return function (_730) {
+                return Tagged(_729(_730));
             };
         };
     });
     var bifoldableTagged = new Data_Bifoldable.Bifoldable(function (__dict_Monoid_679) {
-        return function (_734) {
-            return function (_735) {
-                return function (_736) {
-                    return _735(_736);
+        return function (_742) {
+            return function (_743) {
+                return function (_744) {
+                    return _743(_744);
                 };
             };
         };
-    }, function (_730) {
-        return function (_731) {
-            return function (_732) {
-                return function (_733) {
-                    return _731(_732)(_733);
+    }, function (_738) {
+        return function (_739) {
+            return function (_740) {
+                return function (_741) {
+                    return _739(_740)(_741);
                 };
             };
         };
-    }, function (_726) {
-        return function (_727) {
-            return function (_728) {
-                return function (_729) {
-                    return _727(_729)(_728);
+    }, function (_734) {
+        return function (_735) {
+            return function (_736) {
+                return function (_737) {
+                    return _735(_737)(_736);
                 };
             };
         };
@@ -12610,40 +12958,40 @@ PS.Data_Tagged = (function () {
     }, function () {
         return bifunctorTagged;
     }, function (__dict_Applicative_678) {
-        return function (_740) {
-            return Prelude["<$>"]((__dict_Applicative_678["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Tagged)(_740);
+        return function (_748) {
+            return Prelude["<$>"]((__dict_Applicative_678["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Tagged)(_748);
         };
     }, function (__dict_Applicative_677) {
-        return function (_737) {
-            return function (_738) {
-                return function (_739) {
-                    return Prelude["<$>"]((__dict_Applicative_677["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Tagged)(_738(_739));
+        return function (_745) {
+            return function (_746) {
+                return function (_747) {
+                    return Prelude["<$>"]((__dict_Applicative_677["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Tagged)(_746(_747));
                 };
             };
         };
     });
-    var biapplyTagged = new Control_Biapply.Biapply(function (_723) {
-        return function (_724) {
-            return Tagged(_723(_724));
+    var biapplyTagged = new Control_Biapply.Biapply(function (_731) {
+        return function (_732) {
+            return Tagged(_731(_732));
         };
     }, function () {
         return bifunctorTagged;
     });
     var biapplicativeTagged = new Control_Biapplicative.Biapplicative(function () {
         return biapplyTagged;
-    }, function (_725) {
+    }, function (_733) {
         return Tagged;
     });
-    var applyTagged = new Prelude.Apply(function (_701) {
-        return function (_702) {
-            return Tagged(_701(_702));
+    var applyTagged = new Prelude.Apply(function (_709) {
+        return function (_710) {
+            return Tagged(_709(_710));
         };
     }, function () {
         return functorTagged;
     });
-    var bindTagged = new Prelude.Bind(function (_703) {
-        return function (_704) {
-            return _704(_703);
+    var bindTagged = new Prelude.Bind(function (_711) {
+        return function (_712) {
+            return _712(_711);
         };
     }, function () {
         return applyTagged;
@@ -12717,8 +13065,8 @@ PS.Optic_Internal_Setter = (function () {
         return Data_Identity.applicativeIdentity;
     }, function (__dict_Profunctor_681) {
         return Data_Profunctor.rmap(__dict_Profunctor_681)(Data_Identity.Identity);
-    }, function (_746) {
-        return _746;
+    }, function (_754) {
+        return _754;
     }, function (__dict_Profunctor_680) {
         return Data_Profunctor.rmap(__dict_Profunctor_680)(Data_Identity.runIdentity);
     });
@@ -12752,11 +13100,11 @@ PS.Optic_Getter = (function () {
         };
     };
     var absurd = function (a) {
-        var spin = function (__copy__747) {
-            var _747 = __copy__747;
+        var spin = function (__copy__755) {
+            var _755 = __copy__755;
             tco: while (true) {
-                var __tco__747 = _747;
-                _747 = __tco__747;
+                var __tco__755 = _755;
+                _755 = __tco__755;
                 continue tco;
             };
         };
@@ -12913,11 +13261,11 @@ PS.Optic_Review = (function () {
         };
     };
     var absurd = function (a) {
-        var spin = function (__copy__748) {
-            var _748 = __copy__748;
+        var spin = function (__copy__756) {
+            var _756 = __copy__756;
             tco: while (true) {
-                var __tco__748 = _748;
-                _748 = __tco__748;
+                var __tco__756 = _756;
+                _756 = __tco__756;
                 continue tco;
             };
         };
@@ -12994,20 +13342,20 @@ PS.Data_Unfoldable = (function () {
     var unfoldableArray = new Unfoldable(function (f) {
         return function (b) {
             return Control_Monad_Eff.runPure(Data_Array_ST.runSTArray(function __do() {
-                var _33 = Data_Array_ST.emptySTArray();
-                var _32 = Control_Monad_ST.newSTRef(b)();
+                var _35 = Data_Array_ST.emptySTArray();
+                var _34 = Control_Monad_ST.newSTRef(b)();
                 (function () {
                     while (!(function __do() {
-                        var _31 = Control_Monad_ST.readSTRef(_32)();
+                        var _33 = Control_Monad_ST.readSTRef(_34)();
                         return (function () {
-                            var _2895 = f(_31);
-                            if (_2895 instanceof Data_Maybe.Nothing) {
+                            var _2916 = f(_33);
+                            if (_2916 instanceof Data_Maybe.Nothing) {
                                 return Prelude["return"](Control_Monad_Eff.monadEff)(true);
                             };
-                            if (_2895 instanceof Data_Maybe.Just) {
+                            if (_2916 instanceof Data_Maybe.Just) {
                                 return function __do() {
-                                    Data_Array_ST.pushSTArray(_33)(_2895.value0.value0)();
-                                    Control_Monad_ST.writeSTRef(_32)(_2895.value0.value1)();
+                                    Data_Array_ST.pushSTArray(_35)(_2916.value0.value0)();
+                                    Control_Monad_ST.writeSTRef(_34)(_2916.value0.value1)();
                                     return false;
                                 };
                             };
@@ -13018,7 +13366,7 @@ PS.Data_Unfoldable = (function () {
                     };
                     return {};
                 })();
-                return _33;
+                return _35;
             }));
         };
     });
@@ -13094,13 +13442,13 @@ PS.Control_Monad_ListT = (function () {
     var unfold = function (__dict_Monad_713) {
         return function (f) {
             return function (z) {
-                var g = function (_756) {
-                    if (_756 instanceof Data_Maybe.Just) {
-                        return new Yield(_756.value0.value1, Data_Lazy.defer(function (_) {
-                            return unfold(__dict_Monad_713)(f)(_756.value0.value0);
+                var g = function (_764) {
+                    if (_764 instanceof Data_Maybe.Just) {
+                        return new Yield(_764.value0.value1, Data_Lazy.defer(function (_) {
+                            return unfold(__dict_Monad_713)(f)(_764.value0.value0);
                         }));
                     };
-                    if (_756 instanceof Data_Maybe.Nothing) {
+                    if (_764 instanceof Data_Maybe.Nothing) {
                         return Done.value;
                     };
                     throw new Error("Failed pattern match");
@@ -13109,28 +13457,28 @@ PS.Control_Monad_ListT = (function () {
             };
         };
     };
-    var runListT = function (_749) {
-        return _749.value0;
+    var runListT = function (_757) {
+        return _757.value0;
     };
     var scanl = function (__dict_Monad_714) {
         return function (f) {
             return function (b) {
                 return function (l) {
-                    var g = function (_766) {
-                        var h = function (_767) {
-                            if (_767 instanceof Yield) {
-                                var b$prime = f(_766.value0)(_767.value0);
-                                return Data_Maybe.Just.create(new Data_Tuple.Tuple(new Data_Tuple.Tuple(b$prime, Data_Lazy.force(_767.value1)), b$prime));
+                    var g = function (_774) {
+                        var h = function (_775) {
+                            if (_775 instanceof Yield) {
+                                var b$prime = f(_774.value0)(_775.value0);
+                                return Data_Maybe.Just.create(new Data_Tuple.Tuple(new Data_Tuple.Tuple(b$prime, Data_Lazy.force(_775.value1)), b$prime));
                             };
-                            if (_767 instanceof Skip) {
-                                return Data_Maybe.Just.create(new Data_Tuple.Tuple(new Data_Tuple.Tuple(_766.value0, Data_Lazy.force(_767.value0)), _766.value0));
+                            if (_775 instanceof Skip) {
+                                return Data_Maybe.Just.create(new Data_Tuple.Tuple(new Data_Tuple.Tuple(_774.value0, Data_Lazy.force(_775.value0)), _774.value0));
                             };
-                            if (_767 instanceof Done) {
+                            if (_775 instanceof Done) {
                                 return Data_Maybe.Nothing.value;
                             };
                             throw new Error("Failed pattern match");
                         };
-                        return Prelude["<$>"](((__dict_Monad_714["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(h)(runListT(_766.value1));
+                        return Prelude["<$>"](((__dict_Monad_714["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(h)(runListT(_774.value1));
                     };
                     return unfold(__dict_Monad_714)(g)(new Data_Tuple.Tuple(b, l));
                 };
@@ -13150,8 +13498,8 @@ PS.Control_Monad_ListT = (function () {
             /**
              *  FIXME: type inferencer bug with if/then/else
              */
-            var g = function (_758) {
-                if (_758 instanceof Yield) {
+            var g = function (_766) {
+                if (_766 instanceof Yield) {
                     var ifThenElse = function (p) {
                         return function (a_1) {
                             return function (b) {
@@ -13165,12 +13513,12 @@ PS.Control_Monad_ListT = (function () {
                             };
                         };
                     };
-                    return ifThenElse(f(_758.value0))(new Yield(_758.value0, Prelude["<$>"](Data_Lazy.functorLazy)(takeWhile(__dict_Applicative_716)(f))(_758.value1)))(Done.value);
+                    return ifThenElse(f(_766.value0))(new Yield(_766.value0, Prelude["<$>"](Data_Lazy.functorLazy)(takeWhile(__dict_Applicative_716)(f))(_766.value1)))(Done.value);
                 };
-                if (_758 instanceof Skip) {
-                    return Skip.create(Prelude["<$>"](Data_Lazy.functorLazy)(takeWhile(__dict_Applicative_716)(f))(_758.value0));
+                if (_766 instanceof Skip) {
+                    return Skip.create(Prelude["<$>"](Data_Lazy.functorLazy)(takeWhile(__dict_Applicative_716)(f))(_766.value0));
                 };
-                if (_758 instanceof Done) {
+                if (_766 instanceof Done) {
                     return Done.value;
                 };
                 throw new Error("Failed pattern match");
@@ -13180,14 +13528,14 @@ PS.Control_Monad_ListT = (function () {
     };
     var uncons = function (__dict_Monad_717) {
         return function (l) {
-            var g = function (_763) {
-                if (_763 instanceof Yield) {
-                    return Prelude.pure(__dict_Monad_717["__superclass_Prelude.Applicative_0"]())(Data_Maybe.Just.create(new Data_Tuple.Tuple(_763.value0, Data_Lazy.force(_763.value1))));
+            var g = function (_771) {
+                if (_771 instanceof Yield) {
+                    return Prelude.pure(__dict_Monad_717["__superclass_Prelude.Applicative_0"]())(Data_Maybe.Just.create(new Data_Tuple.Tuple(_771.value0, Data_Lazy.force(_771.value1))));
                 };
-                if (_763 instanceof Skip) {
-                    return uncons(__dict_Monad_717)(Data_Lazy.force(_763.value0));
+                if (_771 instanceof Skip) {
+                    return uncons(__dict_Monad_717)(Data_Lazy.force(_771.value0));
                 };
-                if (_763 instanceof Done) {
+                if (_771 instanceof Done) {
                     return Prelude.pure(__dict_Monad_717["__superclass_Prelude.Applicative_0"]())(Data_Maybe.Nothing.value);
                 };
                 throw new Error("Failed pattern match");
@@ -13223,26 +13571,26 @@ PS.Control_Monad_ListT = (function () {
         };
     };
     var take = function (__dict_Applicative_724) {
-        return function (_750) {
-            return function (_751) {
-                if (_750 === 0) {
+        return function (_758) {
+            return function (_759) {
+                if (_758 === 0) {
                     return nil(__dict_Applicative_724);
                 };
-                var f = function (_757) {
-                    if (_757 instanceof Yield) {
-                        var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(take(__dict_Applicative_724)(_750 - 1))(_757.value1);
-                        return new Yield(_757.value0, s$prime);
+                var f = function (_765) {
+                    if (_765 instanceof Yield) {
+                        var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(take(__dict_Applicative_724)(_758 - 1))(_765.value1);
+                        return new Yield(_765.value0, s$prime);
                     };
-                    if (_757 instanceof Skip) {
-                        var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(take(__dict_Applicative_724)(_750))(_757.value0);
+                    if (_765 instanceof Skip) {
+                        var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(take(__dict_Applicative_724)(_758))(_765.value0);
                         return new Skip(s$prime);
                     };
-                    if (_757 instanceof Done) {
+                    if (_765 instanceof Done) {
                         return Done.value;
                     };
                     throw new Error("Failed pattern match");
                 };
-                return stepMap((__dict_Applicative_724["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(f)(_751);
+                return stepMap((__dict_Applicative_724["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(f)(_759);
             };
         };
     };
@@ -13250,25 +13598,25 @@ PS.Control_Monad_ListT = (function () {
         return function (f) {
             var loop = function (fa) {
                 return function (fb) {
-                    var g = function (_768) {
-                        return function (_769) {
-                            if (_769 instanceof Data_Maybe.Nothing) {
+                    var g = function (_776) {
+                        return function (_777) {
+                            if (_777 instanceof Data_Maybe.Nothing) {
                                 return Prelude.pure(__dict_Monad_725["__superclass_Prelude.Applicative_0"]())(nil(__dict_Monad_725["__superclass_Prelude.Applicative_0"]()));
                             };
-                            if (_768 instanceof Data_Maybe.Nothing) {
+                            if (_776 instanceof Data_Maybe.Nothing) {
                                 return Prelude.pure(__dict_Monad_725["__superclass_Prelude.Applicative_0"]())(nil(__dict_Monad_725["__superclass_Prelude.Applicative_0"]()));
                             };
-                            if (_768 instanceof Data_Maybe.Just && _769 instanceof Data_Maybe.Just) {
+                            if (_776 instanceof Data_Maybe.Just && _777 instanceof Data_Maybe.Just) {
                                 return Prelude["<$>"](((__dict_Monad_725["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Prelude.flip(prepend$prime(__dict_Monad_725["__superclass_Prelude.Applicative_0"]()))(Data_Lazy.defer(function (_) {
-                                    return zipWith$prime(__dict_Monad_725)(f)(_768.value0.value1)(_769.value0.value1);
-                                })))(f(_768.value0.value0)(_769.value0.value0));
+                                    return zipWith$prime(__dict_Monad_725)(f)(_776.value0.value1)(_777.value0.value1);
+                                })))(f(_776.value0.value0)(_777.value0.value0));
                             };
                             throw new Error("Failed pattern match");
                         };
                     };
-                    return wrapEffect(__dict_Monad_725)(Prelude[">>="](__dict_Monad_725["__superclass_Prelude.Bind_1"]())(uncons(__dict_Monad_725)(fa))(function (_35) {
-                        return Prelude[">>="](__dict_Monad_725["__superclass_Prelude.Bind_1"]())(uncons(__dict_Monad_725)(fb))(function (_34) {
-                            return g(_35)(_34);
+                    return wrapEffect(__dict_Monad_725)(Prelude[">>="](__dict_Monad_725["__superclass_Prelude.Bind_1"]())(uncons(__dict_Monad_725)(fa))(function (_37) {
+                        return Prelude[">>="](__dict_Monad_725["__superclass_Prelude.Bind_1"]())(uncons(__dict_Monad_725)(fb))(function (_36) {
+                            return g(_37)(_36);
                         });
                     }));
                 };
@@ -13288,14 +13636,14 @@ PS.Control_Monad_ListT = (function () {
     };
     var mapMaybe = function (__dict_Functor_730) {
         return function (f) {
-            var g = function (_762) {
-                if (_762 instanceof Yield) {
-                    return Data_Maybe.fromMaybe(Skip.create)(Prelude["<$>"](Data_Maybe.functorMaybe)(Yield.create)(f(_762.value0)))(Prelude["<$>"](Data_Lazy.functorLazy)(mapMaybe(__dict_Functor_730)(f))(_762.value1));
+            var g = function (_770) {
+                if (_770 instanceof Yield) {
+                    return Data_Maybe.fromMaybe(Skip.create)(Prelude["<$>"](Data_Maybe.functorMaybe)(Yield.create)(f(_770.value0)))(Prelude["<$>"](Data_Lazy.functorLazy)(mapMaybe(__dict_Functor_730)(f))(_770.value1));
                 };
-                if (_762 instanceof Skip) {
-                    return Skip.create(Prelude["<$>"](Data_Lazy.functorLazy)(mapMaybe(__dict_Functor_730)(f))(_762.value0));
+                if (_770 instanceof Skip) {
+                    return Skip.create(Prelude["<$>"](Data_Lazy.functorLazy)(mapMaybe(__dict_Functor_730)(f))(_770.value0));
                 };
-                if (_762 instanceof Done) {
+                if (_770 instanceof Done) {
                     return Done.value;
                 };
                 throw new Error("Failed pattern match");
@@ -13323,14 +13671,14 @@ PS.Control_Monad_ListT = (function () {
     };
     var functorListT = function (__dict_Functor_734) {
         return new Prelude.Functor(function (f) {
-            var g = function (_770) {
-                if (_770 instanceof Yield) {
-                    return new Yield(f(_770.value0), Prelude["<$>"](Data_Lazy.functorLazy)(Prelude["<$>"](functorListT(__dict_Functor_734))(f))(_770.value1));
+            var g = function (_778) {
+                if (_778 instanceof Yield) {
+                    return new Yield(f(_778.value0), Prelude["<$>"](Data_Lazy.functorLazy)(Prelude["<$>"](functorListT(__dict_Functor_734))(f))(_778.value1));
                 };
-                if (_770 instanceof Skip) {
-                    return new Skip(Prelude["<$>"](Data_Lazy.functorLazy)(Prelude["<$>"](functorListT(__dict_Functor_734))(f))(_770.value0));
+                if (_778 instanceof Skip) {
+                    return new Skip(Prelude["<$>"](Data_Lazy.functorLazy)(Prelude["<$>"](functorListT(__dict_Functor_734))(f))(_778.value0));
                 };
-                if (_770 instanceof Done) {
+                if (_778 instanceof Done) {
                     return Done.value;
                 };
                 throw new Error("Failed pattern match");
@@ -13360,12 +13708,12 @@ PS.Control_Monad_ListT = (function () {
         return function (f) {
             var loop = function (b) {
                 return function (l) {
-                    var g = function (_764) {
-                        if (_764 instanceof Data_Maybe.Nothing) {
+                    var g = function (_772) {
+                        if (_772 instanceof Data_Maybe.Nothing) {
                             return Prelude.pure(__dict_Monad_738["__superclass_Prelude.Applicative_0"]())(b);
                         };
-                        if (_764 instanceof Data_Maybe.Just) {
-                            return Prelude[">>="](__dict_Monad_738["__superclass_Prelude.Bind_1"]())(f(b)(_764.value0.value0))(Prelude.flip(loop)(_764.value0.value1));
+                        if (_772 instanceof Data_Maybe.Just) {
+                            return Prelude[">>="](__dict_Monad_738["__superclass_Prelude.Bind_1"]())(f(b)(_772.value0.value0))(Prelude.flip(loop)(_772.value0.value1));
                         };
                         throw new Error("Failed pattern match");
                     };
@@ -13379,12 +13727,12 @@ PS.Control_Monad_ListT = (function () {
         return function (f) {
             var loop = function (b) {
                 return function (l) {
-                    var g = function (_765) {
-                        if (_765 instanceof Data_Maybe.Nothing) {
+                    var g = function (_773) {
+                        if (_773 instanceof Data_Maybe.Nothing) {
                             return Prelude.pure(__dict_Monad_739["__superclass_Prelude.Applicative_0"]())(b);
                         };
-                        if (_765 instanceof Data_Maybe.Just) {
-                            return loop(f(b)(_765.value0.value0))(_765.value0.value1);
+                        if (_773 instanceof Data_Maybe.Just) {
+                            return loop(f(b)(_773.value0.value0))(_773.value0.value1);
                         };
                         throw new Error("Failed pattern match");
                     };
@@ -13399,23 +13747,23 @@ PS.Control_Monad_ListT = (function () {
     };
     var filter = function (__dict_Functor_741) {
         return function (f) {
-            var g = function (_761) {
-                if (_761 instanceof Yield) {
-                    var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(filter(__dict_Functor_741)(f))(_761.value1);
-                    var _2954 = f(_761.value0);
-                    if (_2954) {
-                        return new Yield(_761.value0, s$prime);
+            var g = function (_769) {
+                if (_769 instanceof Yield) {
+                    var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(filter(__dict_Functor_741)(f))(_769.value1);
+                    var _2975 = f(_769.value0);
+                    if (_2975) {
+                        return new Yield(_769.value0, s$prime);
                     };
-                    if (!_2954) {
+                    if (!_2975) {
                         return new Skip(s$prime);
                     };
                     throw new Error("Failed pattern match");
                 };
-                if (_761 instanceof Skip) {
-                    var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(filter(__dict_Functor_741)(f))(_761.value0);
+                if (_769 instanceof Skip) {
+                    var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(filter(__dict_Functor_741)(f))(_769.value0);
                     return new Skip(s$prime);
                 };
-                if (_761 instanceof Done) {
+                if (_769 instanceof Done) {
                     return Done.value;
                 };
                 throw new Error("Failed pattern match");
@@ -13425,21 +13773,21 @@ PS.Control_Monad_ListT = (function () {
     };
     var dropWhile = function (__dict_Applicative_742) {
         return function (f) {
-            var g = function (_760) {
-                if (_760 instanceof Yield) {
-                    var _2959 = f(_760.value0);
-                    if (_2959) {
-                        return new Skip(Prelude["<$>"](Data_Lazy.functorLazy)(dropWhile(__dict_Applicative_742)(f))(_760.value1));
+            var g = function (_768) {
+                if (_768 instanceof Yield) {
+                    var _2980 = f(_768.value0);
+                    if (_2980) {
+                        return new Skip(Prelude["<$>"](Data_Lazy.functorLazy)(dropWhile(__dict_Applicative_742)(f))(_768.value1));
                     };
-                    if (!_2959) {
-                        return new Yield(_760.value0, _760.value1);
+                    if (!_2980) {
+                        return new Yield(_768.value0, _768.value1);
                     };
                     throw new Error("Failed pattern match");
                 };
-                if (_760 instanceof Skip) {
-                    return Skip.create(Prelude["<$>"](Data_Lazy.functorLazy)(dropWhile(__dict_Applicative_742)(f))(_760.value0));
+                if (_768 instanceof Skip) {
+                    return Skip.create(Prelude["<$>"](Data_Lazy.functorLazy)(dropWhile(__dict_Applicative_742)(f))(_768.value0));
                 };
-                if (_760 instanceof Done) {
+                if (_768 instanceof Done) {
                     return Done.value;
                 };
                 throw new Error("Failed pattern match");
@@ -13448,33 +13796,33 @@ PS.Control_Monad_ListT = (function () {
         };
     };
     var drop = function (__dict_Applicative_743) {
-        return function (_752) {
-            return function (_753) {
-                if (_752 === 0) {
-                    return _753;
+        return function (_760) {
+            return function (_761) {
+                if (_760 === 0) {
+                    return _761;
                 };
-                var f = function (_759) {
-                    if (_759 instanceof Yield) {
-                        var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(drop(__dict_Applicative_743)(_752 - 1))(_759.value1);
+                var f = function (_767) {
+                    if (_767 instanceof Yield) {
+                        var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(drop(__dict_Applicative_743)(_760 - 1))(_767.value1);
                         return new Skip(s$prime);
                     };
-                    if (_759 instanceof Skip) {
-                        var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(drop(__dict_Applicative_743)(_752))(_759.value0);
+                    if (_767 instanceof Skip) {
+                        var s$prime = Prelude["<$>"](Data_Lazy.functorLazy)(drop(__dict_Applicative_743)(_760))(_767.value0);
                         return new Skip(s$prime);
                     };
-                    if (_759 instanceof Done) {
+                    if (_767 instanceof Done) {
                         return Done.value;
                     };
                     throw new Error("Failed pattern match");
                 };
-                return stepMap((__dict_Applicative_743["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(f)(_753);
+                return stepMap((__dict_Applicative_743["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(f)(_761);
             };
         };
     };
     var cons$prime = function (__dict_Applicative_744) {
         return function (lh) {
             return function (t) {
-                var f = function (_754) {
+                var f = function (_762) {
                     return new Yield(Data_Lazy.force(lh), t);
                 };
                 return ListT.create(Prelude["<$>"]((__dict_Applicative_744["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(f)(Prelude.pure(__dict_Applicative_744)(Prelude.unit)));
@@ -13484,13 +13832,13 @@ PS.Control_Monad_ListT = (function () {
     var unfoldableListT = function (__dict_Monad_745) {
         return new Data_Unfoldable.Unfoldable(function (f) {
             return function (b) {
-                var go = function (_771) {
-                    if (_771 instanceof Data_Maybe.Nothing) {
+                var go = function (_779) {
+                    if (_779 instanceof Data_Maybe.Nothing) {
                         return nil(__dict_Monad_745["__superclass_Prelude.Applicative_0"]());
                     };
-                    if (_771 instanceof Data_Maybe.Just) {
-                        return cons$prime(__dict_Monad_745["__superclass_Prelude.Applicative_0"]())(Prelude.pure(Data_Lazy.applicativeLazy)(_771.value0.value0))(Data_Lazy.defer(function (_) {
-                            return go(f(_771.value0.value1));
+                    if (_779 instanceof Data_Maybe.Just) {
+                        return cons$prime(__dict_Monad_745["__superclass_Prelude.Applicative_0"]())(Prelude.pure(Data_Lazy.applicativeLazy)(_779.value0.value0))(Data_Lazy.defer(function (_) {
+                            return go(f(_779.value0.value1));
                         }));
                     };
                     throw new Error("Failed pattern match");
@@ -13505,14 +13853,14 @@ PS.Control_Monad_ListT = (function () {
     var concat = function (__dict_Applicative_746) {
         return function (x) {
             return function (y) {
-                var f = function (_755) {
-                    if (_755 instanceof Yield) {
-                        return new Yield(_755.value0, Prelude["<$>"](Data_Lazy.functorLazy)(Prelude.flip(Prelude["<>"](semigroupListT(__dict_Applicative_746)))(y))(_755.value1));
+                var f = function (_763) {
+                    if (_763 instanceof Yield) {
+                        return new Yield(_763.value0, Prelude["<$>"](Data_Lazy.functorLazy)(Prelude.flip(Prelude["<>"](semigroupListT(__dict_Applicative_746)))(y))(_763.value1));
                     };
-                    if (_755 instanceof Skip) {
-                        return new Skip(Prelude["<$>"](Data_Lazy.functorLazy)(Prelude.flip(Prelude["<>"](semigroupListT(__dict_Applicative_746)))(y))(_755.value0));
+                    if (_763 instanceof Skip) {
+                        return new Skip(Prelude["<$>"](Data_Lazy.functorLazy)(Prelude.flip(Prelude["<>"](semigroupListT(__dict_Applicative_746)))(y))(_763.value0));
                     };
-                    if (_755 instanceof Done) {
+                    if (_763 instanceof Done) {
                         return new Skip(Data_Lazy.defer(Prelude["const"](y)));
                     };
                     throw new Error("Failed pattern match");
@@ -13544,20 +13892,20 @@ PS.Control_Monad_ListT = (function () {
     var bindListT = function (__dict_Monad_749) {
         return new Prelude.Bind(function (fa) {
             return function (f) {
-                var g = function (_772) {
-                    if (_772 instanceof Yield) {
+                var g = function (_780) {
+                    if (_780 instanceof Yield) {
                         var h = function (s_1) {
-                            return concat(__dict_Monad_749["__superclass_Prelude.Applicative_0"]())(f(_772.value0))(Prelude[">>="](bindListT(__dict_Monad_749))(s_1)(f));
+                            return concat(__dict_Monad_749["__superclass_Prelude.Applicative_0"]())(f(_780.value0))(Prelude[">>="](bindListT(__dict_Monad_749))(s_1)(f));
                         };
-                        return new Skip(Prelude["<$>"](Data_Lazy.functorLazy)(h)(_772.value1));
+                        return new Skip(Prelude["<$>"](Data_Lazy.functorLazy)(h)(_780.value1));
                     };
-                    if (_772 instanceof Skip) {
+                    if (_780 instanceof Skip) {
                         var h = function (s_2) {
                             return Prelude[">>="](bindListT(__dict_Monad_749))(s_2)(f);
                         };
-                        return new Skip(Prelude["<$>"](Data_Lazy.functorLazy)(h)(_772.value0));
+                        return new Skip(Prelude["<$>"](Data_Lazy.functorLazy)(h)(_780.value0));
                     };
-                    if (_772 instanceof Done) {
+                    if (_780 instanceof Done) {
                         return Done.value;
                     };
                     throw new Error("Failed pattern match");
@@ -13751,8 +14099,8 @@ PS.Data_Enum = (function () {
     var succ = function (dict) {
         return dict.succ;
     };
-    var runCardinality = function (_773) {
-        return _773;
+    var runCardinality = function (_781) {
+        return _781;
     };
     var tupleCardinality = function (__dict_Enum_754) {
         return function (__dict_Enum_755) {
@@ -13796,15 +14144,15 @@ PS.Data_Enum = (function () {
         };
     };
     var maybeToEnum = function (__dict_Enum_757) {
-        return function (_778) {
-            return function (_779) {
-                if (_779 <= runCardinality(maybeCardinality(__dict_Enum_757)(_778))) {
-                    var _2985 = _779 === 0;
-                    if (_2985) {
+        return function (_786) {
+            return function (_787) {
+                if (_787 <= runCardinality(maybeCardinality(__dict_Enum_757)(_786))) {
+                    var _3006 = _787 === 0;
+                    if (_3006) {
                         return Data_Maybe.Just.create(Data_Maybe.Nothing.value);
                     };
-                    if (!_2985) {
-                        return Data_Maybe.Just.create(toEnum(__dict_Enum_757)(_779 - 1));
+                    if (!_3006) {
+                        return Data_Maybe.Just.create(toEnum(__dict_Enum_757)(_787 - 1));
                     };
                     throw new Error("Failed pattern match");
                 };
@@ -13848,11 +14196,11 @@ PS.Data_Enum = (function () {
         return function (from) {
             return function (to) {
                 return Data_Unfoldable.unfoldr(Data_Unfoldable.unfoldableArray)(function (e) {
-                    var _2986 = e <= to;
-                    if (_2986) {
+                    var _3007 = e <= to;
+                    if (_3007) {
                         return Data_Maybe.Just.create(new Data_Tuple.Tuple(e, e + step));
                     };
-                    if (!_2986) {
+                    if (!_3007) {
                         return Data_Maybe.Nothing.value;
                     };
                     throw new Error("Failed pattern match");
@@ -13895,9 +14243,9 @@ PS.Data_Enum = (function () {
     };
     var tupleFromEnum = function (__dict_Enum_758) {
         return function (__dict_Enum_759) {
-            return function (_782) {
-                return function (_783) {
-                    return fromEnum(__dict_Enum_758)(_783.value0) * runCardinality(_782) + fromEnum(__dict_Enum_759)(_783.value1);
+            return function (_790) {
+                return function (_791) {
+                    return fromEnum(__dict_Enum_758)(_791.value0) * runCardinality(_790) + fromEnum(__dict_Enum_759)(_791.value1);
                 };
             };
         };
@@ -13962,13 +14310,13 @@ PS.Data_Enum = (function () {
     };
     var eitherFromEnum = function (__dict_Enum_762) {
         return function (__dict_Enum_763) {
-            return function (_784) {
-                return function (_785) {
-                    if (_785 instanceof Data_Either.Left) {
-                        return fromEnum(__dict_Enum_762)(_785.value0);
+            return function (_792) {
+                return function (_793) {
+                    if (_793 instanceof Data_Either.Left) {
+                        return fromEnum(__dict_Enum_762)(_793.value0);
                     };
-                    if (_785 instanceof Data_Either.Right) {
-                        return fromEnum(__dict_Enum_763)(_785.value0) + runCardinality(_784);
+                    if (_793 instanceof Data_Either.Right) {
+                        return fromEnum(__dict_Enum_763)(_793.value0) + runCardinality(_792);
                     };
                     throw new Error("Failed pattern match");
                 };
@@ -13989,16 +14337,16 @@ PS.Data_Enum = (function () {
             return function (carda) {
                 return function (cardb) {
                     return function (n) {
-                        var _2995 = n >= 0 && n < runCardinality(carda);
-                        if (_2995) {
+                        var _3016 = n >= 0 && n < runCardinality(carda);
+                        if (_3016) {
                             return Prelude["<$>"](Data_Maybe.functorMaybe)(Data_Either.Left.create)(toEnum(__dict_Enum_766)(n));
                         };
-                        if (!_2995) {
-                            var _2996 = n >= runCardinality(carda) && n < runCardinality(eitherCardinality(__dict_Enum_766)(__dict_Enum_767)(carda)(cardb));
-                            if (_2996) {
+                        if (!_3016) {
+                            var _3017 = n >= runCardinality(carda) && n < runCardinality(eitherCardinality(__dict_Enum_766)(__dict_Enum_767)(carda)(cardb));
+                            if (_3017) {
                                 return Prelude["<$>"](Data_Maybe.functorMaybe)(Data_Either.Right.create)(toEnum(__dict_Enum_767)(n - runCardinality(carda)));
                             };
-                            if (!_2996) {
+                            if (!_3017) {
                                 return Data_Maybe.Nothing.value;
                             };
                             throw new Error("Failed pattern match");
@@ -14032,16 +14380,16 @@ PS.Data_Enum = (function () {
      *  | Runs in O(n) where n is (fromEnum a)
      *  | defaultToEnum succ firstEnum = toEnum
      */
-    var defaultToEnum = function (_774) {
-        return function (_775) {
-            return function (_776) {
-                if (_776 < 0) {
+    var defaultToEnum = function (_782) {
+        return function (_783) {
+            return function (_784) {
+                if (_784 < 0) {
                     return Data_Maybe.Nothing.value;
                 };
-                if (_776 === 0) {
-                    return new Data_Maybe.Just(_775);
+                if (_784 === 0) {
+                    return new Data_Maybe.Just(_783);
                 };
-                return Prelude[">>="](Data_Maybe.bindMaybe)(defaultToEnum(_774)(_775)(_776 - 1))(_774);
+                return Prelude[">>="](Data_Maybe.bindMaybe)(defaultToEnum(_782)(_783)(_784 - 1))(_782);
             };
         };
     };
@@ -14083,9 +14431,9 @@ PS.Data_Enum = (function () {
     /**
      *  To avoid a compiler bug - can't pass self-class functions, workaround: need to make a concrete function.
      */
-    var charToEnum = function (_777) {
-        if (_777 >= 0 && _777 <= 65535) {
-            return Data_Maybe.Just.create(Data_Char.fromCharCode(_777));
+    var charToEnum = function (_785) {
+        if (_785 >= 0 && _785 <= 65535) {
+            return Data_Maybe.Just.create(Data_Char.fromCharCode(_785));
         };
         return Data_Maybe.Nothing.value;
     };
@@ -14129,20 +14477,20 @@ PS.Data_Enum = (function () {
         return function (__dict_Enum_771) {
             return new Enum(function () {
                 return Data_Either.ordEither(__dict_Enum_770["__superclass_Prelude.Ord_0"]())(__dict_Enum_771["__superclass_Prelude.Ord_0"]());
-            }, eitherCardinality(__dict_Enum_770)(__dict_Enum_771)(cardinality(__dict_Enum_770))(cardinality(__dict_Enum_771)), new Data_Either.Left(firstEnum(__dict_Enum_770)), eitherFromEnum(__dict_Enum_770)(__dict_Enum_771)(cardinality(__dict_Enum_770)), new Data_Either.Right(lastEnum(__dict_Enum_771)), function (_792) {
-                if (_792 instanceof Data_Either.Left) {
-                    return Data_Maybe.maybe(Data_Maybe.Nothing.value)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Either.Left.create))(pred(__dict_Enum_770)(_792.value0));
+            }, eitherCardinality(__dict_Enum_770)(__dict_Enum_771)(cardinality(__dict_Enum_770))(cardinality(__dict_Enum_771)), new Data_Either.Left(firstEnum(__dict_Enum_770)), eitherFromEnum(__dict_Enum_770)(__dict_Enum_771)(cardinality(__dict_Enum_770)), new Data_Either.Right(lastEnum(__dict_Enum_771)), function (_800) {
+                if (_800 instanceof Data_Either.Left) {
+                    return Data_Maybe.maybe(Data_Maybe.Nothing.value)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Either.Left.create))(pred(__dict_Enum_770)(_800.value0));
                 };
-                if (_792 instanceof Data_Either.Right) {
-                    return Data_Maybe.maybe(Data_Maybe.Just.create(new Data_Either.Left(lastEnum(__dict_Enum_770))))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Either.Right.create))(pred(__dict_Enum_771)(_792.value0));
+                if (_800 instanceof Data_Either.Right) {
+                    return Data_Maybe.maybe(Data_Maybe.Just.create(new Data_Either.Left(lastEnum(__dict_Enum_770))))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Either.Right.create))(pred(__dict_Enum_771)(_800.value0));
                 };
                 throw new Error("Failed pattern match");
-            }, function (_791) {
-                if (_791 instanceof Data_Either.Left) {
-                    return Data_Maybe.maybe(Data_Maybe.Just.create(new Data_Either.Right(firstEnum(__dict_Enum_771))))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Either.Left.create))(succ(__dict_Enum_770)(_791.value0));
+            }, function (_799) {
+                if (_799 instanceof Data_Either.Left) {
+                    return Data_Maybe.maybe(Data_Maybe.Just.create(new Data_Either.Right(firstEnum(__dict_Enum_771))))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Either.Left.create))(succ(__dict_Enum_770)(_799.value0));
                 };
-                if (_791 instanceof Data_Either.Right) {
-                    return Data_Maybe.maybe(Data_Maybe.Nothing.value)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Either.Right.create))(succ(__dict_Enum_771)(_791.value0));
+                if (_799 instanceof Data_Either.Right) {
+                    return Data_Maybe.maybe(Data_Maybe.Nothing.value)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Either.Right.create))(succ(__dict_Enum_771)(_799.value0));
                 };
                 throw new Error("Failed pattern match");
             }, eitherToEnum(__dict_Enum_770)(__dict_Enum_771)(cardinality(__dict_Enum_770))(cardinality(__dict_Enum_771)));
@@ -14151,28 +14499,28 @@ PS.Data_Enum = (function () {
     var enumMaybe = function (__dict_Enum_772) {
         return new Enum(function () {
             return Data_Maybe.ordMaybe(__dict_Enum_772["__superclass_Prelude.Ord_0"]());
-        }, maybeCardinality(__dict_Enum_772)(cardinality(__dict_Enum_772)), Data_Maybe.Nothing.value, function (_788) {
-            if (_788 instanceof Data_Maybe.Nothing) {
+        }, maybeCardinality(__dict_Enum_772)(cardinality(__dict_Enum_772)), Data_Maybe.Nothing.value, function (_796) {
+            if (_796 instanceof Data_Maybe.Nothing) {
                 return 0;
             };
-            if (_788 instanceof Data_Maybe.Just) {
-                return fromEnum(__dict_Enum_772)(_788.value0) + 1;
+            if (_796 instanceof Data_Maybe.Just) {
+                return fromEnum(__dict_Enum_772)(_796.value0) + 1;
             };
             throw new Error("Failed pattern match");
-        }, Data_Maybe.Just.create(lastEnum(__dict_Enum_772)), function (_787) {
-            if (_787 instanceof Data_Maybe.Nothing) {
+        }, Data_Maybe.Just.create(lastEnum(__dict_Enum_772)), function (_795) {
+            if (_795 instanceof Data_Maybe.Nothing) {
                 return Data_Maybe.Nothing.value;
             };
-            if (_787 instanceof Data_Maybe.Just) {
-                return Prelude["<$>"](Data_Maybe.functorMaybe)(Data_Maybe.Just.create)(pred(__dict_Enum_772)(_787.value0));
+            if (_795 instanceof Data_Maybe.Just) {
+                return Prelude["<$>"](Data_Maybe.functorMaybe)(Data_Maybe.Just.create)(pred(__dict_Enum_772)(_795.value0));
             };
             throw new Error("Failed pattern match");
-        }, function (_786) {
-            if (_786 instanceof Data_Maybe.Nothing) {
+        }, function (_794) {
+            if (_794 instanceof Data_Maybe.Nothing) {
                 return Data_Maybe.Just.create(firstEnum(enumMaybe(__dict_Enum_772)));
             };
-            if (_786 instanceof Data_Maybe.Just) {
-                return Prelude["<$>"](Data_Maybe.functorMaybe)(Data_Maybe.Just.create)(succ(__dict_Enum_772)(_786.value0));
+            if (_794 instanceof Data_Maybe.Just) {
+                return Prelude["<$>"](Data_Maybe.functorMaybe)(Data_Maybe.Just.create)(succ(__dict_Enum_772)(_794.value0));
             };
             throw new Error("Failed pattern match");
         }, maybeToEnum(__dict_Enum_772)(cardinality(__dict_Enum_772)));
@@ -14181,21 +14529,21 @@ PS.Data_Enum = (function () {
         return function (__dict_Enum_774) {
             return new Enum(function () {
                 return Data_Tuple.ordTuple(__dict_Enum_773["__superclass_Prelude.Ord_0"]())(__dict_Enum_774["__superclass_Prelude.Ord_0"]());
-            }, tupleCardinality(__dict_Enum_773)(__dict_Enum_774)(cardinality(__dict_Enum_773))(cardinality(__dict_Enum_774)), new Data_Tuple.Tuple(firstEnum(__dict_Enum_773), firstEnum(__dict_Enum_774)), tupleFromEnum(__dict_Enum_773)(__dict_Enum_774)(cardinality(__dict_Enum_774)), new Data_Tuple.Tuple(lastEnum(__dict_Enum_773), lastEnum(__dict_Enum_774)), function (_790) {
-                return Data_Maybe.maybe(Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude.flip(Data_Tuple.Tuple.create)(firstEnum(__dict_Enum_774)))(pred(__dict_Enum_773)(_790.value0)))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Tuple.Tuple.create(_790.value0)))(pred(__dict_Enum_774)(_790.value1));
-            }, function (_789) {
-                return Data_Maybe.maybe(Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude.flip(Data_Tuple.Tuple.create)(firstEnum(__dict_Enum_774)))(succ(__dict_Enum_773)(_789.value0)))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Tuple.Tuple.create(_789.value0)))(succ(__dict_Enum_774)(_789.value1));
+            }, tupleCardinality(__dict_Enum_773)(__dict_Enum_774)(cardinality(__dict_Enum_773))(cardinality(__dict_Enum_774)), new Data_Tuple.Tuple(firstEnum(__dict_Enum_773), firstEnum(__dict_Enum_774)), tupleFromEnum(__dict_Enum_773)(__dict_Enum_774)(cardinality(__dict_Enum_774)), new Data_Tuple.Tuple(lastEnum(__dict_Enum_773), lastEnum(__dict_Enum_774)), function (_798) {
+                return Data_Maybe.maybe(Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude.flip(Data_Tuple.Tuple.create)(firstEnum(__dict_Enum_774)))(pred(__dict_Enum_773)(_798.value0)))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Tuple.Tuple.create(_798.value0)))(pred(__dict_Enum_774)(_798.value1));
+            }, function (_797) {
+                return Data_Maybe.maybe(Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude.flip(Data_Tuple.Tuple.create)(firstEnum(__dict_Enum_774)))(succ(__dict_Enum_773)(_797.value0)))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Tuple.Tuple.create(_797.value0)))(succ(__dict_Enum_774)(_797.value1));
             }, tupleToEnum(__dict_Enum_773)(__dict_Enum_774)(cardinality(__dict_Enum_774)));
         };
     };
-    var booleanSucc = function (_780) {
-        if (!_780) {
+    var booleanSucc = function (_788) {
+        if (!_788) {
             return new Data_Maybe.Just(true);
         };
         return Data_Maybe.Nothing.value;
     };
-    var booleanPred = function (_781) {
-        if (_781) {
+    var booleanPred = function (_789) {
+        if (_789) {
             return new Data_Maybe.Just(false);
         };
         return Data_Maybe.Nothing.value;
@@ -14401,154 +14749,154 @@ PS.Data_Date = (function () {
         };
         return DateTime;
     })();
-    var toJSDate = function (_797) {
-        return _797.value0;
+    var toJSDate = function (_805) {
+        return _805.value0;
     };
-    var showMonth = new Prelude.Show(function (_802) {
-        if (_802 instanceof January) {
+    var showMonth = new Prelude.Show(function (_810) {
+        if (_810 instanceof January) {
             return "January";
         };
-        if (_802 instanceof February) {
+        if (_810 instanceof February) {
             return "February";
         };
-        if (_802 instanceof March) {
+        if (_810 instanceof March) {
             return "March";
         };
-        if (_802 instanceof April) {
+        if (_810 instanceof April) {
             return "April";
         };
-        if (_802 instanceof May) {
+        if (_810 instanceof May) {
             return "May";
         };
-        if (_802 instanceof June) {
+        if (_810 instanceof June) {
             return "June";
         };
-        if (_802 instanceof July) {
+        if (_810 instanceof July) {
             return "July";
         };
-        if (_802 instanceof August) {
+        if (_810 instanceof August) {
             return "August";
         };
-        if (_802 instanceof September) {
+        if (_810 instanceof September) {
             return "September";
         };
-        if (_802 instanceof October) {
+        if (_810 instanceof October) {
             return "October";
         };
-        if (_802 instanceof November) {
+        if (_810 instanceof November) {
             return "November";
         };
-        if (_802 instanceof December) {
+        if (_810 instanceof December) {
             return "December";
         };
         throw new Error("Failed pattern match");
     });
-    var showDayOfWeek = new Prelude.Show(function (_805) {
-        if (_805 instanceof Sunday) {
+    var showDayOfWeek = new Prelude.Show(function (_813) {
+        if (_813 instanceof Sunday) {
             return "Sunday";
         };
-        if (_805 instanceof Monday) {
+        if (_813 instanceof Monday) {
             return "Monday";
         };
-        if (_805 instanceof Tuesday) {
+        if (_813 instanceof Tuesday) {
             return "Tuesday";
         };
-        if (_805 instanceof Wednesday) {
+        if (_813 instanceof Wednesday) {
             return "Wednesday";
         };
-        if (_805 instanceof Thursday) {
+        if (_813 instanceof Thursday) {
             return "Thursday";
         };
-        if (_805 instanceof Friday) {
+        if (_813 instanceof Friday) {
             return "Friday";
         };
-        if (_805 instanceof Saturday) {
+        if (_813 instanceof Saturday) {
             return "Saturday";
         };
         throw new Error("Failed pattern match");
     });
     var now = nowImpl(DateTime.create);
-    var monthToEnum = function (_793) {
-        if (_793 === 0) {
+    var monthToEnum = function (_801) {
+        if (_801 === 0) {
             return new Data_Maybe.Just(January.value);
         };
-        if (_793 === 1) {
+        if (_801 === 1) {
             return new Data_Maybe.Just(February.value);
         };
-        if (_793 === 2) {
+        if (_801 === 2) {
             return new Data_Maybe.Just(March.value);
         };
-        if (_793 === 3) {
+        if (_801 === 3) {
             return new Data_Maybe.Just(April.value);
         };
-        if (_793 === 4) {
+        if (_801 === 4) {
             return new Data_Maybe.Just(May.value);
         };
-        if (_793 === 5) {
+        if (_801 === 5) {
             return new Data_Maybe.Just(June.value);
         };
-        if (_793 === 6) {
+        if (_801 === 6) {
             return new Data_Maybe.Just(July.value);
         };
-        if (_793 === 7) {
+        if (_801 === 7) {
             return new Data_Maybe.Just(August.value);
         };
-        if (_793 === 8) {
+        if (_801 === 8) {
             return new Data_Maybe.Just(September.value);
         };
-        if (_793 === 9) {
+        if (_801 === 9) {
             return new Data_Maybe.Just(October.value);
         };
-        if (_793 === 10) {
+        if (_801 === 10) {
             return new Data_Maybe.Just(November.value);
         };
-        if (_793 === 11) {
+        if (_801 === 11) {
             return new Data_Maybe.Just(December.value);
         };
         return Data_Maybe.Nothing.value;
     };
-    var monthFromEnum = function (_794) {
-        if (_794 instanceof January) {
+    var monthFromEnum = function (_802) {
+        if (_802 instanceof January) {
             return 0;
         };
-        if (_794 instanceof February) {
+        if (_802 instanceof February) {
             return 1;
         };
-        if (_794 instanceof March) {
+        if (_802 instanceof March) {
             return 2;
         };
-        if (_794 instanceof April) {
+        if (_802 instanceof April) {
             return 3;
         };
-        if (_794 instanceof May) {
+        if (_802 instanceof May) {
             return 4;
         };
-        if (_794 instanceof June) {
+        if (_802 instanceof June) {
             return 5;
         };
-        if (_794 instanceof July) {
+        if (_802 instanceof July) {
             return 6;
         };
-        if (_794 instanceof August) {
+        if (_802 instanceof August) {
             return 7;
         };
-        if (_794 instanceof September) {
+        if (_802 instanceof September) {
             return 8;
         };
-        if (_794 instanceof October) {
+        if (_802 instanceof October) {
             return 9;
         };
-        if (_794 instanceof November) {
+        if (_802 instanceof November) {
             return 10;
         };
-        if (_794 instanceof December) {
+        if (_802 instanceof December) {
             return 11;
         };
         throw new Error("Failed pattern match");
     };
-    var liftDate = function (_798) {
-        return function (_799) {
-            return _798(_799.value0);
+    var liftDate = function (_806) {
+        return function (_807) {
+            return _806(_807.value0);
         };
     };
     var millisecond = liftDate(jsDateMethod("getMilliseconds"));
@@ -14572,11 +14920,11 @@ PS.Data_Date = (function () {
     var hourUTC = liftDate(jsDateMethod("getUTCHours"));
     var hour = liftDate(jsDateMethod("getHours"));
     var fromJSDate = function (d) {
-        var _3030 = Global.isNaN(jsDateMethod("getTime")(d));
-        if (_3030) {
+        var _3051 = Global.isNaN(jsDateMethod("getTime")(d));
+        if (_3051) {
             return Data_Maybe.Nothing.value;
         };
-        if (!_3030) {
+        if (!_3051) {
             return Data_Maybe.Just.create(new DateTime(d));
         };
         throw new Error("Failed pattern match");
@@ -14590,42 +14938,42 @@ PS.Data_Date = (function () {
         return function (b) {
             return !Prelude["=="](eqMonth)(a)(b);
         };
-    }, function (_800) {
-        return function (_801) {
-            if (_800 instanceof January && _801 instanceof January) {
+    }, function (_808) {
+        return function (_809) {
+            if (_808 instanceof January && _809 instanceof January) {
                 return true;
             };
-            if (_800 instanceof February && _801 instanceof February) {
+            if (_808 instanceof February && _809 instanceof February) {
                 return true;
             };
-            if (_800 instanceof March && _801 instanceof March) {
+            if (_808 instanceof March && _809 instanceof March) {
                 return true;
             };
-            if (_800 instanceof April && _801 instanceof April) {
+            if (_808 instanceof April && _809 instanceof April) {
                 return true;
             };
-            if (_800 instanceof May && _801 instanceof May) {
+            if (_808 instanceof May && _809 instanceof May) {
                 return true;
             };
-            if (_800 instanceof June && _801 instanceof June) {
+            if (_808 instanceof June && _809 instanceof June) {
                 return true;
             };
-            if (_800 instanceof July && _801 instanceof July) {
+            if (_808 instanceof July && _809 instanceof July) {
                 return true;
             };
-            if (_800 instanceof August && _801 instanceof August) {
+            if (_808 instanceof August && _809 instanceof August) {
                 return true;
             };
-            if (_800 instanceof September && _801 instanceof September) {
+            if (_808 instanceof September && _809 instanceof September) {
                 return true;
             };
-            if (_800 instanceof October && _801 instanceof October) {
+            if (_808 instanceof October && _809 instanceof October) {
                 return true;
             };
-            if (_800 instanceof November && _801 instanceof November) {
+            if (_808 instanceof November && _809 instanceof November) {
                 return true;
             };
-            if (_800 instanceof December && _801 instanceof December) {
+            if (_808 instanceof December && _809 instanceof December) {
                 return true;
             };
             return false;
@@ -14635,27 +14983,27 @@ PS.Data_Date = (function () {
         return function (b) {
             return !Prelude["=="](eqDayOfWeek)(a)(b);
         };
-    }, function (_803) {
-        return function (_804) {
-            if (_803 instanceof Sunday && _804 instanceof Sunday) {
+    }, function (_811) {
+        return function (_812) {
+            if (_811 instanceof Sunday && _812 instanceof Sunday) {
                 return true;
             };
-            if (_803 instanceof Monday && _804 instanceof Monday) {
+            if (_811 instanceof Monday && _812 instanceof Monday) {
                 return true;
             };
-            if (_803 instanceof Tuesday && _804 instanceof Tuesday) {
+            if (_811 instanceof Tuesday && _812 instanceof Tuesday) {
                 return true;
             };
-            if (_803 instanceof Wednesday && _804 instanceof Wednesday) {
+            if (_811 instanceof Wednesday && _812 instanceof Wednesday) {
                 return true;
             };
-            if (_803 instanceof Thursday && _804 instanceof Thursday) {
+            if (_811 instanceof Thursday && _812 instanceof Thursday) {
                 return true;
             };
-            if (_803 instanceof Friday && _804 instanceof Friday) {
+            if (_811 instanceof Friday && _812 instanceof Friday) {
                 return true;
             };
-            if (_803 instanceof Saturday && _804 instanceof Saturday) {
+            if (_811 instanceof Saturday && _812 instanceof Saturday) {
                 return true;
             };
             return false;
@@ -14678,50 +15026,50 @@ PS.Data_Date = (function () {
     var month = Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe_Unsafe.fromJust)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Enum.toEnum(enumMonth))(liftDate(jsDateMethod("getMonth"))));
     var monthUTC = Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe_Unsafe.fromJust)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Enum.toEnum(enumMonth))(liftDate(jsDateMethod("getUTCMonth"))));
     var dayUTC = liftDate(jsDateMethod("getUTCDate"));
-    var dayOfWeekToEnum = function (_795) {
-        if (_795 === 0) {
+    var dayOfWeekToEnum = function (_803) {
+        if (_803 === 0) {
             return new Data_Maybe.Just(Sunday.value);
         };
-        if (_795 === 1) {
+        if (_803 === 1) {
             return new Data_Maybe.Just(Monday.value);
         };
-        if (_795 === 2) {
+        if (_803 === 2) {
             return new Data_Maybe.Just(Tuesday.value);
         };
-        if (_795 === 3) {
+        if (_803 === 3) {
             return new Data_Maybe.Just(Wednesday.value);
         };
-        if (_795 === 4) {
+        if (_803 === 4) {
             return new Data_Maybe.Just(Thursday.value);
         };
-        if (_795 === 5) {
+        if (_803 === 5) {
             return new Data_Maybe.Just(Friday.value);
         };
-        if (_795 === 6) {
+        if (_803 === 6) {
             return new Data_Maybe.Just(Saturday.value);
         };
         return Data_Maybe.Nothing.value;
     };
-    var dayOfWeekFromEnum = function (_796) {
-        if (_796 instanceof Sunday) {
+    var dayOfWeekFromEnum = function (_804) {
+        if (_804 instanceof Sunday) {
             return 0;
         };
-        if (_796 instanceof Monday) {
+        if (_804 instanceof Monday) {
             return 1;
         };
-        if (_796 instanceof Tuesday) {
+        if (_804 instanceof Tuesday) {
             return 2;
         };
-        if (_796 instanceof Wednesday) {
+        if (_804 instanceof Wednesday) {
             return 3;
         };
-        if (_796 instanceof Thursday) {
+        if (_804 instanceof Thursday) {
             return 4;
         };
-        if (_796 instanceof Friday) {
+        if (_804 instanceof Friday) {
             return 5;
         };
-        if (_796 instanceof Saturday) {
+        if (_804 instanceof Saturday) {
             return 6;
         };
         throw new Error("Failed pattern match");
@@ -14854,39 +15202,39 @@ PS.Data_List = (function () {
         };
         return Cons;
     })();
-    var $bang = function (__copy__806) {
-        return function (__copy__807) {
-            var _806 = __copy__806;
-            var _807 = __copy__807;
+    var $bang = function (__copy__814) {
+        return function (__copy__815) {
+            var _814 = __copy__814;
+            var _815 = __copy__815;
             tco: while (true) {
-                if (_806 instanceof Nil) {
+                if (_814 instanceof Nil) {
                     return Data_Maybe.Nothing.value;
                 };
-                if (_806 instanceof Cons && _807 === 0) {
-                    return new Data_Maybe.Just(_806.value0);
+                if (_814 instanceof Cons && _815 === 0) {
+                    return new Data_Maybe.Just(_814.value0);
                 };
-                if (_806 instanceof Cons) {
-                    var __tco__806 = _806.value1;
-                    var __tco__807 = _807 - 1;
-                    _806 = __tco__806;
-                    _807 = __tco__807;
+                if (_814 instanceof Cons) {
+                    var __tco__814 = _814.value1;
+                    var __tco__815 = _815 - 1;
+                    _814 = __tco__814;
+                    _815 = __tco__815;
                     continue tco;
                 };
                 throw new Error("Failed pattern match");
             };
         };
     };
-    var zipWith = function (_822) {
-        return function (_823) {
-            return function (_824) {
-                if (_823 instanceof Nil) {
+    var zipWith = function (_830) {
+        return function (_831) {
+            return function (_832) {
+                if (_831 instanceof Nil) {
                     return Nil.value;
                 };
-                if (_824 instanceof Nil) {
+                if (_832 instanceof Nil) {
                     return Nil.value;
                 };
-                if (_823 instanceof Cons && _824 instanceof Cons) {
-                    return new Cons(_822(_823.value0)(_824.value0), zipWith(_822)(_823.value1)(_824.value1));
+                if (_831 instanceof Cons && _832 instanceof Cons) {
+                    return new Cons(_830(_831.value0)(_832.value0), zipWith(_830)(_831.value1)(_832.value1));
                 };
                 throw new Error("Failed pattern match");
             };
@@ -14894,71 +15242,71 @@ PS.Data_List = (function () {
     };
     var unfoldableList = new Data_Unfoldable.Unfoldable(function (f) {
         return function (b) {
-            var go = function (_866) {
-                if (_866 instanceof Data_Maybe.Nothing) {
+            var go = function (_874) {
+                if (_874 instanceof Data_Maybe.Nothing) {
                     return Nil.value;
                 };
-                if (_866 instanceof Data_Maybe.Just) {
-                    return new Cons(_866.value0.value0, go(f(_866.value0.value1)));
+                if (_874 instanceof Data_Maybe.Just) {
+                    return new Cons(_874.value0.value0, go(f(_874.value0.value1)));
                 };
                 throw new Error("Failed pattern match");
             };
             return go(f(b));
         };
     });
-    var uncons = function (_819) {
-        if (_819 instanceof Nil) {
+    var uncons = function (_827) {
+        if (_827 instanceof Nil) {
             return Data_Maybe.Nothing.value;
         };
-        if (_819 instanceof Cons) {
-            return Data_Maybe.Just.create(new Data_Tuple.Tuple(_819.value0, _819.value1));
+        if (_827 instanceof Cons) {
+            return Data_Maybe.Just.create(new Data_Tuple.Tuple(_827.value0, _827.value1));
         };
         throw new Error("Failed pattern match");
     };
     var toArray = (function () {
-        var step = function (_874) {
-            if (_874 instanceof Nil) {
+        var step = function (_882) {
+            if (_882 instanceof Nil) {
                 return Data_Maybe.Nothing.value;
             };
-            if (_874 instanceof Cons) {
-                return new Data_Maybe.Just(new Data_Tuple.Tuple(_874.value0, _874.value1));
+            if (_882 instanceof Cons) {
+                return new Data_Maybe.Just(new Data_Tuple.Tuple(_882.value0, _882.value1));
             };
             throw new Error("Failed pattern match");
         };
         return Data_Unfoldable.unfoldr(Data_Unfoldable.unfoldableArray)(step);
     })();
-    var take = function (_810) {
-        return function (_811) {
-            if (_810 === 0) {
+    var take = function (_818) {
+        return function (_819) {
+            if (_818 === 0) {
                 return Nil.value;
             };
-            if (_811 instanceof Nil) {
+            if (_819 instanceof Nil) {
                 return Nil.value;
             };
-            if (_811 instanceof Cons) {
-                return new Cons(_811.value0, take(_810 - 1)(_811.value1));
+            if (_819 instanceof Cons) {
+                return new Cons(_819.value0, take(_818 - 1)(_819.value1));
             };
             throw new Error("Failed pattern match");
         };
     };
-    var tail = function (_818) {
-        if (_818 instanceof Nil) {
+    var tail = function (_826) {
+        if (_826 instanceof Nil) {
             return Data_Maybe.Nothing.value;
         };
-        if (_818 instanceof Cons) {
-            return new Data_Maybe.Just(_818.value1);
+        if (_826 instanceof Cons) {
+            return new Data_Maybe.Just(_826.value1);
         };
         throw new Error("Failed pattern match");
     };
-    var span = function (_826) {
-        return function (_827) {
-            if (_827 instanceof Cons) {
-                if (_826(_827.value0)) {
-                    var _3069 = span(_826)(_827.value1);
-                    return new Data_Tuple.Tuple(new Cons(_827.value0, _3069.value0), _3069.value1);
+    var span = function (_834) {
+        return function (_835) {
+            if (_835 instanceof Cons) {
+                if (_834(_835.value0)) {
+                    var _3090 = span(_834)(_835.value1);
+                    return new Data_Tuple.Tuple(new Cons(_835.value0, _3090.value0), _3090.value1);
                 };
                 if (Prelude.otherwise) {
-                    return new Data_Tuple.Tuple(Nil.value, _827);
+                    return new Data_Tuple.Tuple(Nil.value, _835);
                 };
             };
             throw new Error("Failed pattern match");
@@ -14968,41 +15316,41 @@ PS.Data_List = (function () {
         return new Cons(a, Nil.value);
     };
     var showList = function (__dict_Show_777) {
-        return new Prelude.Show(function (_849) {
-            if (_849 instanceof Nil) {
+        return new Prelude.Show(function (_857) {
+            if (_857 instanceof Nil) {
                 return "Nil";
             };
-            if (_849 instanceof Cons) {
-                return "Cons (" + (Prelude.show(__dict_Show_777)(_849.value0) + (") (" + (Prelude.show(showList(__dict_Show_777))(_849.value1) + ")")));
+            if (_857 instanceof Cons) {
+                return "Cons (" + (Prelude.show(__dict_Show_777)(_857.value0) + (") (" + (Prelude.show(showList(__dict_Show_777))(_857.value1) + ")")));
             };
             throw new Error("Failed pattern match");
         });
     };
-    var semigroupList = new Prelude.Semigroup(function (_854) {
-        return function (_855) {
-            if (_854 instanceof Nil) {
-                return _855;
+    var semigroupList = new Prelude.Semigroup(function (_862) {
+        return function (_863) {
+            if (_862 instanceof Nil) {
+                return _863;
             };
-            if (_854 instanceof Cons) {
-                return new Cons(_854.value0, Prelude["<>"](semigroupList)(_854.value1)(_855));
+            if (_862 instanceof Cons) {
+                return new Cons(_862.value0, Prelude["<>"](semigroupList)(_862.value1)(_863));
             };
             throw new Error("Failed pattern match");
         };
     });
     var reverse = (function () {
-        var go = function (__copy__875) {
-            return function (__copy__876) {
-                var _875 = __copy__875;
-                var _876 = __copy__876;
+        var go = function (__copy__883) {
+            return function (__copy__884) {
+                var _883 = __copy__883;
+                var _884 = __copy__884;
                 tco: while (true) {
-                    if (_876 instanceof Nil) {
-                        return _875;
+                    if (_884 instanceof Nil) {
+                        return _883;
                     };
-                    if (_876 instanceof Cons) {
-                        var __tco__875 = new Cons(_876.value0, _875);
-                        var __tco__876 = _876.value1;
-                        _875 = __tco__875;
-                        _876 = __tco__876;
+                    if (_884 instanceof Cons) {
+                        var __tco__883 = new Cons(_884.value0, _883);
+                        var __tco__884 = _884.value1;
+                        _883 = __tco__883;
+                        _884 = __tco__884;
                         continue tco;
                     };
                     throw new Error("Failed pattern match");
@@ -15011,8 +15359,8 @@ PS.Data_List = (function () {
         };
         return go(Nil.value);
     })();
-    var $$null = function (_825) {
-        if (_825 instanceof Nil) {
+    var $$null = function (_833) {
+        if (_833 instanceof Nil) {
             return true;
         };
         return false;
@@ -15020,72 +15368,72 @@ PS.Data_List = (function () {
     var monoidList = new Data_Monoid.Monoid(function () {
         return semigroupList;
     }, Nil.value);
-    var mapMaybe = function (_815) {
-        return function (_816) {
-            if (_816 instanceof Nil) {
+    var mapMaybe = function (_823) {
+        return function (_824) {
+            if (_824 instanceof Nil) {
                 return Nil.value;
             };
-            if (_816 instanceof Cons) {
-                var _3088 = _815(_816.value0);
-                if (_3088 instanceof Data_Maybe.Nothing) {
-                    return mapMaybe(_815)(_816.value1);
+            if (_824 instanceof Cons) {
+                var _3109 = _823(_824.value0);
+                if (_3109 instanceof Data_Maybe.Nothing) {
+                    return mapMaybe(_823)(_824.value1);
                 };
-                if (_3088 instanceof Data_Maybe.Just) {
-                    return new Cons(_3088.value0, mapMaybe(_815)(_816.value1));
+                if (_3109 instanceof Data_Maybe.Just) {
+                    return new Cons(_3109.value0, mapMaybe(_823)(_824.value1));
                 };
                 throw new Error("Failed pattern match");
             };
             throw new Error("Failed pattern match");
         };
     };
-    var length = function (_812) {
-        if (_812 instanceof Nil) {
+    var length = function (_820) {
+        if (_820 instanceof Nil) {
             return 0;
         };
-        if (_812 instanceof Cons) {
-            return 1 + length(_812.value1);
+        if (_820 instanceof Cons) {
+            return 1 + length(_820.value1);
         };
         throw new Error("Failed pattern match");
     };
-    var last = function (__copy__820) {
-        var _820 = __copy__820;
+    var last = function (__copy__828) {
+        var _828 = __copy__828;
         tco: while (true) {
-            if (_820 instanceof Cons && _820.value1 instanceof Nil) {
-                return new Data_Maybe.Just(_820.value0);
+            if (_828 instanceof Cons && _828.value1 instanceof Nil) {
+                return new Data_Maybe.Just(_828.value0);
             };
-            if (_820 instanceof Cons) {
-                var __tco__820 = _820.value1;
-                _820 = __tco__820;
+            if (_828 instanceof Cons) {
+                var __tco__828 = _828.value1;
+                _828 = __tco__828;
                 continue tco;
             };
             return Data_Maybe.Nothing.value;
         };
     };
-    var insertBy = function (_830) {
-        return function (_831) {
-            return function (_832) {
-                if (_832 instanceof Nil) {
-                    return new Cons(_831, Nil.value);
+    var insertBy = function (_838) {
+        return function (_839) {
+            return function (_840) {
+                if (_840 instanceof Nil) {
+                    return new Cons(_839, Nil.value);
                 };
-                if (_832 instanceof Cons) {
-                    var _3103 = _830(_831)(_832.value0);
-                    if (_3103 instanceof Prelude.GT) {
-                        return new Cons(_832.value0, insertBy(_830)(_831)(_832.value1));
+                if (_840 instanceof Cons) {
+                    var _3124 = _838(_839)(_840.value0);
+                    if (_3124 instanceof Prelude.GT) {
+                        return new Cons(_840.value0, insertBy(_838)(_839)(_840.value1));
                     };
-                    return new Cons(_831, _832);
+                    return new Cons(_839, _840);
                 };
                 throw new Error("Failed pattern match");
             };
         };
     };
-    var insertAt = function (_833) {
-        return function (_834) {
-            return function (_835) {
-                if (_833 === 0) {
-                    return new Data_Maybe.Just(new Cons(_834, _835));
+    var insertAt = function (_841) {
+        return function (_842) {
+            return function (_843) {
+                if (_841 === 0) {
+                    return new Data_Maybe.Just(new Cons(_842, _843));
                 };
-                if (_835 instanceof Cons) {
-                    return Prelude["<$>"](Data_Maybe.functorMaybe)(Cons.create(_835.value0))(insertAt(_833 - 1)(_834)(_835.value1));
+                if (_843 instanceof Cons) {
+                    return Prelude["<$>"](Data_Maybe.functorMaybe)(Cons.create(_843.value0))(insertAt(_841 - 1)(_842)(_843.value1));
                 };
                 return Data_Maybe.Nothing.value;
             };
@@ -15094,32 +15442,32 @@ PS.Data_List = (function () {
     var insert = function (__dict_Ord_779) {
         return insertBy(Prelude.compare(__dict_Ord_779));
     };
-    var init = function (_821) {
-        if (_821 instanceof Cons && _821.value1 instanceof Nil) {
+    var init = function (_829) {
+        if (_829 instanceof Cons && _829.value1 instanceof Nil) {
             return new Data_Maybe.Just(Nil.value);
         };
-        if (_821 instanceof Cons) {
-            return Prelude["<$>"](Data_Maybe.functorMaybe)(Cons.create(_821.value0))(init(_821.value1));
+        if (_829 instanceof Cons) {
+            return Prelude["<$>"](Data_Maybe.functorMaybe)(Cons.create(_829.value0))(init(_829.value1));
         };
         return Data_Maybe.Nothing.value;
     };
-    var head = function (_817) {
-        if (_817 instanceof Nil) {
+    var head = function (_825) {
+        if (_825 instanceof Nil) {
             return Data_Maybe.Nothing.value;
         };
-        if (_817 instanceof Cons) {
-            return new Data_Maybe.Just(_817.value0);
+        if (_825 instanceof Cons) {
+            return new Data_Maybe.Just(_825.value0);
         };
         throw new Error("Failed pattern match");
     };
-    var groupBy = function (_828) {
-        return function (_829) {
-            if (_829 instanceof Nil) {
+    var groupBy = function (_836) {
+        return function (_837) {
+            if (_837 instanceof Nil) {
                 return Nil.value;
             };
-            if (_829 instanceof Cons) {
-                var _3121 = span(_828(_829.value0))(_829.value1);
-                return new Cons(new Cons(_829.value0, _3121.value0), groupBy(_828)(_3121.value1));
+            if (_837 instanceof Cons) {
+                var _3142 = span(_836(_837.value0))(_837.value1);
+                return new Cons(new Cons(_837.value0, _3142.value0), groupBy(_836)(_3142.value1));
             };
             throw new Error("Failed pattern match");
         };
@@ -15127,50 +15475,50 @@ PS.Data_List = (function () {
     var group = function (__dict_Eq_780) {
         return groupBy(Prelude["=="](__dict_Eq_780));
     };
-    var functorList = new Prelude.Functor(function (_856) {
-        return function (_857) {
-            if (_857 instanceof Nil) {
+    var functorList = new Prelude.Functor(function (_864) {
+        return function (_865) {
+            if (_865 instanceof Nil) {
                 return Nil.value;
             };
-            if (_857 instanceof Cons) {
-                return new Cons(_856(_857.value0), Prelude["<$>"](functorList)(_856)(_857.value1));
+            if (_865 instanceof Cons) {
+                return new Cons(_864(_865.value0), Prelude["<$>"](functorList)(_864)(_865.value1));
             };
             throw new Error("Failed pattern match");
         };
     });
     var fromArray = Data_Foldable.foldr(Data_Foldable.foldableArray)(Cons.create)(Nil.value);
     var foldableList = new Data_Foldable.Foldable(function (__dict_Monoid_781) {
-        return function (_864) {
-            return function (_865) {
-                if (_865 instanceof Nil) {
+        return function (_872) {
+            return function (_873) {
+                if (_873 instanceof Nil) {
                     return Data_Monoid.mempty(__dict_Monoid_781);
                 };
-                if (_865 instanceof Cons) {
-                    return Prelude["<>"](__dict_Monoid_781["__superclass_Prelude.Semigroup_0"]())(_864(_865.value0))(Data_Foldable.foldMap(foldableList)(__dict_Monoid_781)(_864)(_865.value1));
+                if (_873 instanceof Cons) {
+                    return Prelude["<>"](__dict_Monoid_781["__superclass_Prelude.Semigroup_0"]())(_872(_873.value0))(Data_Foldable.foldMap(foldableList)(__dict_Monoid_781)(_872)(_873.value1));
                 };
                 throw new Error("Failed pattern match");
             };
         };
-    }, function (_861) {
-        return function (_862) {
-            return function (_863) {
-                if (_863 instanceof Nil) {
-                    return _862;
+    }, function (_869) {
+        return function (_870) {
+            return function (_871) {
+                if (_871 instanceof Nil) {
+                    return _870;
                 };
-                if (_863 instanceof Cons) {
-                    return Data_Foldable.foldl(foldableList)(_861)(_861(_862)(_863.value0))(_863.value1);
+                if (_871 instanceof Cons) {
+                    return Data_Foldable.foldl(foldableList)(_869)(_869(_870)(_871.value0))(_871.value1);
                 };
                 throw new Error("Failed pattern match");
             };
         };
-    }, function (_858) {
-        return function (_859) {
-            return function (_860) {
-                if (_860 instanceof Nil) {
-                    return _859;
+    }, function (_866) {
+        return function (_867) {
+            return function (_868) {
+                if (_868 instanceof Nil) {
+                    return _867;
                 };
-                if (_860 instanceof Cons) {
-                    return _858(_860.value0)(Data_Foldable.foldr(foldableList)(_858)(_859)(_860.value1));
+                if (_868 instanceof Cons) {
+                    return _866(_868.value0)(Data_Foldable.foldr(foldableList)(_866)(_867)(_868.value1));
                 };
                 throw new Error("Failed pattern match");
             };
@@ -15181,69 +15529,69 @@ PS.Data_List = (function () {
     }, function () {
         return functorList;
     }, function (__dict_Applicative_776) {
-        return function (_869) {
-            if (_869 instanceof Nil) {
+        return function (_877) {
+            if (_877 instanceof Nil) {
                 return Prelude.pure(__dict_Applicative_776)(Nil.value);
             };
-            if (_869 instanceof Cons) {
-                return Prelude["<*>"](__dict_Applicative_776["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_776["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Cons.create)(_869.value0))(Data_Traversable.sequence(traversableList)(__dict_Applicative_776)(_869.value1));
+            if (_877 instanceof Cons) {
+                return Prelude["<*>"](__dict_Applicative_776["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_776["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Cons.create)(_877.value0))(Data_Traversable.sequence(traversableList)(__dict_Applicative_776)(_877.value1));
             };
             throw new Error("Failed pattern match");
         };
     }, function (__dict_Applicative_775) {
-        return function (_867) {
-            return function (_868) {
-                if (_868 instanceof Nil) {
+        return function (_875) {
+            return function (_876) {
+                if (_876 instanceof Nil) {
                     return Prelude.pure(__dict_Applicative_775)(Nil.value);
                 };
-                if (_868 instanceof Cons) {
-                    return Prelude["<*>"](__dict_Applicative_775["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_775["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Cons.create)(_867(_868.value0)))(Data_Traversable.traverse(traversableList)(__dict_Applicative_775)(_867)(_868.value1));
+                if (_876 instanceof Cons) {
+                    return Prelude["<*>"](__dict_Applicative_775["__superclass_Prelude.Apply_0"]())(Prelude["<$>"]((__dict_Applicative_775["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Cons.create)(_875(_876.value0)))(Data_Traversable.traverse(traversableList)(__dict_Applicative_775)(_875)(_876.value1));
                 };
                 throw new Error("Failed pattern match");
             };
         };
     });
-    var filter = function (_813) {
-        return function (_814) {
-            if (_814 instanceof Nil) {
+    var filter = function (_821) {
+        return function (_822) {
+            if (_822 instanceof Nil) {
                 return Nil.value;
             };
-            if (_814 instanceof Cons && _813(_814.value0)) {
-                return new Cons(_814.value0, filter(_813)(_814.value1));
+            if (_822 instanceof Cons && _821(_822.value0)) {
+                return new Cons(_822.value0, filter(_821)(_822.value1));
             };
-            if (_814 instanceof Cons) {
-                return filter(_813)(_814.value1);
+            if (_822 instanceof Cons) {
+                return filter(_821)(_822.value1);
             };
             throw new Error("Failed pattern match");
         };
     };
-    var intersectBy = function (_846) {
-        return function (_847) {
-            return function (_848) {
-                if (_847 instanceof Nil) {
+    var intersectBy = function (_854) {
+        return function (_855) {
+            return function (_856) {
+                if (_855 instanceof Nil) {
                     return Nil.value;
                 };
-                if (_848 instanceof Nil) {
+                if (_856 instanceof Nil) {
                     return Nil.value;
                 };
                 return filter(function (x) {
-                    return Data_Foldable.any(foldableList)(_846(x))(_848);
-                })(_847);
+                    return Data_Foldable.any(foldableList)(_854(x))(_856);
+                })(_855);
             };
         };
     };
     var intersect = function (__dict_Eq_782) {
         return intersectBy(Prelude["=="](__dict_Eq_782));
     };
-    var nubBy = function (_844) {
-        return function (_845) {
-            if (_845 instanceof Nil) {
+    var nubBy = function (_852) {
+        return function (_853) {
+            if (_853 instanceof Nil) {
                 return Nil.value;
             };
-            if (_845 instanceof Cons) {
-                return new Cons(_845.value0, nubBy(_844)(filter(function (y) {
-                    return !_844(_845.value0)(y);
-                })(_845.value1)));
+            if (_853 instanceof Cons) {
+                return new Cons(_853.value0, nubBy(_852)(filter(function (y) {
+                    return !_852(_853.value0)(y);
+                })(_853.value1)));
             };
             throw new Error("Failed pattern match");
         };
@@ -15256,13 +15604,13 @@ PS.Data_List = (function () {
             return function (ys) {
                 return !Prelude["=="](eqList(__dict_Eq_784))(xs)(ys);
             };
-        }, function (_850) {
-            return function (_851) {
-                if (_850 instanceof Nil && _851 instanceof Nil) {
+        }, function (_858) {
+            return function (_859) {
+                if (_858 instanceof Nil && _859 instanceof Nil) {
                     return true;
                 };
-                if (_850 instanceof Cons && _851 instanceof Cons) {
-                    return Prelude["=="](__dict_Eq_784)(_850.value0)(_851.value0) && Prelude["=="](eqList(__dict_Eq_784))(_850.value1)(_851.value1);
+                if (_858 instanceof Cons && _859 instanceof Cons) {
+                    return Prelude["=="](__dict_Eq_784)(_858.value0)(_859.value0) && Prelude["=="](eqList(__dict_Eq_784))(_858.value1)(_859.value1);
                 };
                 return false;
             };
@@ -15271,61 +15619,61 @@ PS.Data_List = (function () {
     var ordList = function (__dict_Ord_778) {
         return new Prelude.Ord(function () {
             return eqList(__dict_Ord_778["__superclass_Prelude.Eq_0"]());
-        }, function (_852) {
-            return function (_853) {
-                if (_852 instanceof Nil && _853 instanceof Nil) {
+        }, function (_860) {
+            return function (_861) {
+                if (_860 instanceof Nil && _861 instanceof Nil) {
                     return Prelude.EQ.value;
                 };
-                if (_852 instanceof Nil) {
+                if (_860 instanceof Nil) {
                     return Prelude.LT.value;
                 };
-                if (_853 instanceof Nil) {
+                if (_861 instanceof Nil) {
                     return Prelude.GT.value;
                 };
-                if (_852 instanceof Cons && _853 instanceof Cons) {
-                    var _3172 = Prelude.compare(__dict_Ord_778)(_852.value0)(_853.value0);
-                    if (_3172 instanceof Prelude.EQ) {
-                        return Prelude.compare(ordList(__dict_Ord_778))(_852.value1)(_853.value1);
+                if (_860 instanceof Cons && _861 instanceof Cons) {
+                    var _3193 = Prelude.compare(__dict_Ord_778)(_860.value0)(_861.value0);
+                    if (_3193 instanceof Prelude.EQ) {
+                        return Prelude.compare(ordList(__dict_Ord_778))(_860.value1)(_861.value1);
                     };
-                    return _3172;
+                    return _3193;
                 };
                 throw new Error("Failed pattern match");
             };
         });
     };
-    var drop = function (__copy__808) {
-        return function (__copy__809) {
-            var _808 = __copy__808;
-            var _809 = __copy__809;
+    var drop = function (__copy__816) {
+        return function (__copy__817) {
+            var _816 = __copy__816;
+            var _817 = __copy__817;
             tco: while (true) {
-                if (_808 === 0) {
-                    return _809;
+                if (_816 === 0) {
+                    return _817;
                 };
-                if (_809 instanceof Nil) {
+                if (_817 instanceof Nil) {
                     return Nil.value;
                 };
-                if (_809 instanceof Cons) {
-                    var __tco__808 = _808 - 1;
-                    var __tco__809 = _809.value1;
-                    _808 = __tco__808;
-                    _809 = __tco__809;
+                if (_817 instanceof Cons) {
+                    var __tco__816 = _816 - 1;
+                    var __tco__817 = _817.value1;
+                    _816 = __tco__816;
+                    _817 = __tco__817;
                     continue tco;
                 };
                 throw new Error("Failed pattern match");
             };
         };
     };
-    var deleteBy = function (_836) {
-        return function (_837) {
-            return function (_838) {
-                if (_838 instanceof Nil) {
+    var deleteBy = function (_844) {
+        return function (_845) {
+            return function (_846) {
+                if (_846 instanceof Nil) {
                     return Nil.value;
                 };
-                if (_838 instanceof Cons && _836(_837)(_838.value0)) {
-                    return _838.value1;
+                if (_846 instanceof Cons && _844(_845)(_846.value0)) {
+                    return _846.value1;
                 };
-                if (_838 instanceof Cons) {
-                    return new Cons(_838.value0, deleteBy(_836)(_837)(_838.value1));
+                if (_846 instanceof Cons) {
+                    return new Cons(_846.value0, deleteBy(_844)(_845)(_846.value1));
                 };
                 throw new Error("Failed pattern match");
             };
@@ -15341,13 +15689,13 @@ PS.Data_List = (function () {
     var union = function (__dict_Eq_785) {
         return unionBy(Prelude["=="](__dict_Eq_785));
     };
-    var deleteAt = function (_839) {
-        return function (_840) {
-            if (_839 === 0 && _840 instanceof Cons) {
-                return new Data_Maybe.Just(_840.value1);
+    var deleteAt = function (_847) {
+        return function (_848) {
+            if (_847 === 0 && _848 instanceof Cons) {
+                return new Data_Maybe.Just(_848.value1);
             };
-            if (_840 instanceof Cons) {
-                return Prelude["<$>"](Data_Maybe.functorMaybe)(Cons.create(_840.value0))(deleteAt(_839 - 1)(_840.value1));
+            if (_848 instanceof Cons) {
+                return Prelude["<$>"](Data_Maybe.functorMaybe)(Cons.create(_848.value0))(deleteAt(_847 - 1)(_848.value1));
             };
             return Data_Maybe.Nothing.value;
         };
@@ -15359,26 +15707,26 @@ PS.Data_List = (function () {
         return Data_Foldable.foldl(foldableList)(Prelude.flip($$delete(__dict_Eq_787)));
     };
     var catMaybes = mapMaybe(Prelude.id(Prelude.categoryArr));
-    var applyList = new Prelude.Apply(function (_870) {
-        return function (_871) {
-            if (_870 instanceof Nil) {
+    var applyList = new Prelude.Apply(function (_878) {
+        return function (_879) {
+            if (_878 instanceof Nil) {
                 return Nil.value;
             };
-            if (_870 instanceof Cons) {
-                return Prelude["<>"](semigroupList)(Prelude["<$>"](functorList)(_870.value0)(_871))(Prelude["<*>"](applyList)(_870.value1)(_871));
+            if (_878 instanceof Cons) {
+                return Prelude["<>"](semigroupList)(Prelude["<$>"](functorList)(_878.value0)(_879))(Prelude["<*>"](applyList)(_878.value1)(_879));
             };
             throw new Error("Failed pattern match");
         };
     }, function () {
         return functorList;
     });
-    var bindList = new Prelude.Bind(function (_872) {
-        return function (_873) {
-            if (_872 instanceof Nil) {
+    var bindList = new Prelude.Bind(function (_880) {
+        return function (_881) {
+            if (_880 instanceof Nil) {
                 return Nil.value;
             };
-            if (_872 instanceof Cons) {
-                return Prelude["<>"](semigroupList)(_873(_872.value0))(Prelude[">>="](bindList)(_872.value1)(_873));
+            if (_880 instanceof Cons) {
+                return Prelude["<>"](semigroupList)(_881(_880.value0))(Prelude[">>="](bindList)(_880.value1)(_881));
             };
             throw new Error("Failed pattern match");
         };
@@ -15395,23 +15743,23 @@ PS.Data_List = (function () {
     }, function () {
         return bindList;
     });
-    var alterAt = function (_841) {
-        return function (_842) {
-            return function (_843) {
-                if (_841 === 0 && _843 instanceof Cons) {
+    var alterAt = function (_849) {
+        return function (_850) {
+            return function (_851) {
+                if (_849 === 0 && _851 instanceof Cons) {
                     return Data_Maybe.Just.create((function () {
-                        var _3205 = _842(_843.value0);
-                        if (_3205 instanceof Data_Maybe.Nothing) {
-                            return _843.value1;
+                        var _3226 = _850(_851.value0);
+                        if (_3226 instanceof Data_Maybe.Nothing) {
+                            return _851.value1;
                         };
-                        if (_3205 instanceof Data_Maybe.Just) {
-                            return new Cons(_3205.value0, _843.value1);
+                        if (_3226 instanceof Data_Maybe.Just) {
+                            return new Cons(_3226.value0, _851.value1);
                         };
                         throw new Error("Failed pattern match");
                     })());
                 };
-                if (_843 instanceof Cons) {
-                    return Prelude["<$>"](Data_Maybe.functorMaybe)(Cons.create(_843.value0))(alterAt(_841 - 1)(_842)(_843.value1));
+                if (_851 instanceof Cons) {
+                    return Prelude["<$>"](Data_Maybe.functorMaybe)(Cons.create(_851.value0))(alterAt(_849 - 1)(_850)(_851.value1));
                 };
                 return Data_Maybe.Nothing.value;
             };
@@ -15494,38 +15842,38 @@ PS.Data_List_Unsafe = (function () {
     "use strict";
     var Prelude = PS.Prelude;
     var Data_List = PS.Data_List;
-    var tail = function (_878) {
-        if (_878 instanceof Data_List.Cons) {
-            return _878.value1;
+    var tail = function (_886) {
+        if (_886 instanceof Data_List.Cons) {
+            return _886.value1;
         };
         throw new Error("Failed pattern match");
     };
-    var last = function (__copy__879) {
-        var _879 = __copy__879;
+    var last = function (__copy__887) {
+        var _887 = __copy__887;
         tco: while (true) {
-            if (_879 instanceof Data_List.Cons && _879.value1 instanceof Data_List.Nil) {
-                return _879.value0;
+            if (_887 instanceof Data_List.Cons && _887.value1 instanceof Data_List.Nil) {
+                return _887.value0;
             };
-            if (_879 instanceof Data_List.Cons) {
-                var __tco__879 = _879.value1;
-                _879 = __tco__879;
+            if (_887 instanceof Data_List.Cons) {
+                var __tco__887 = _887.value1;
+                _887 = __tco__887;
                 continue tco;
             };
             throw new Error("Failed pattern match");
         };
     };
-    var init = function (_880) {
-        if (_880 instanceof Data_List.Cons && _880.value1 instanceof Data_List.Nil) {
+    var init = function (_888) {
+        if (_888 instanceof Data_List.Cons && _888.value1 instanceof Data_List.Nil) {
             return Data_List.Nil.value;
         };
-        if (_880 instanceof Data_List.Cons) {
-            return new Data_List.Cons(_880.value0, init(_880.value1));
+        if (_888 instanceof Data_List.Cons) {
+            return new Data_List.Cons(_888.value0, init(_888.value1));
         };
         throw new Error("Failed pattern match");
     };
-    var head = function (_877) {
-        if (_877 instanceof Data_List.Cons) {
-            return _877.value0;
+    var head = function (_885) {
+        if (_885 instanceof Data_List.Cons) {
+            return _885.value0;
         };
         throw new Error("Failed pattern match");
     };
@@ -15557,8 +15905,8 @@ PS.Data_List_Lazy = (function () {
     var wrapEffect = Control_Monad_ListT.wrapEffect;
     var unfold = Control_Monad_ListT.unfold;
     var uncons = Control_Monad_ListT.uncons;
-    var unLazyList = function (_881) {
-        return _881;
+    var unLazyList = function (_889) {
+        return _889;
     };
     var toArray = Control_Monad_ListT.toArray;
     var takeWhile = Control_Monad_ListT.takeWhile;
@@ -15575,61 +15923,61 @@ PS.Data_List_Lazy = (function () {
     var fromEffect = Control_Monad_ListT.fromEffect;
     var fromArray = Control_Monad_ListT.fromArray;
     var foldableLazyList = new Data_Foldable.Foldable(function (__dict_Monoid_788) {
-        return function (_888) {
-            return function (_889) {
+        return function (_896) {
+            return function (_897) {
                 var foldMap$prime = function (l_1) {
-                    var g = function (_892) {
-                        if (_892 instanceof Data_Maybe.Nothing) {
+                    var g = function (_900) {
+                        if (_900 instanceof Data_Maybe.Nothing) {
                             return Data_Monoid.mempty(__dict_Monoid_788);
                         };
-                        if (_892 instanceof Data_Maybe.Just) {
-                            return Prelude["<>"](__dict_Monoid_788["__superclass_Prelude.Semigroup_0"]())(_888(_892.value0.value0))(foldMap$prime(_892.value0.value1));
+                        if (_900 instanceof Data_Maybe.Just) {
+                            return Prelude["<>"](__dict_Monoid_788["__superclass_Prelude.Semigroup_0"]())(_896(_900.value0.value0))(foldMap$prime(_900.value0.value1));
                         };
                         throw new Error("Failed pattern match");
                     };
                     return g(Data_Lazy.force(uncons(Data_Lazy.monadLazy)(l_1)));
                 };
-                return foldMap$prime(_889);
+                return foldMap$prime(_897);
             };
         };
-    }, function (_885) {
-        return function (_886) {
-            return function (_887) {
+    }, function (_893) {
+        return function (_894) {
+            return function (_895) {
                 var foldl$prime = function (b_1) {
                     return function (l_1) {
-                        var g = function (_891) {
-                            if (_891 instanceof Data_Maybe.Nothing) {
+                        var g = function (_899) {
+                            if (_899 instanceof Data_Maybe.Nothing) {
                                 return b_1;
                             };
-                            if (_891 instanceof Data_Maybe.Just) {
-                                return foldl$prime(_885(b_1)(_891.value0.value0))(_891.value0.value1);
+                            if (_899 instanceof Data_Maybe.Just) {
+                                return foldl$prime(_893(b_1)(_899.value0.value0))(_899.value0.value1);
                             };
                             throw new Error("Failed pattern match");
                         };
                         return g(Data_Lazy.force(uncons(Data_Lazy.monadLazy)(l_1)));
                     };
                 };
-                return foldl$prime(_886)(_887);
+                return foldl$prime(_894)(_895);
             };
         };
-    }, function (_882) {
-        return function (_883) {
-            return function (_884) {
+    }, function (_890) {
+        return function (_891) {
+            return function (_892) {
                 var foldr$prime = function (b_1) {
                     return function (l_1) {
-                        var g = function (_890) {
-                            if (_890 instanceof Data_Maybe.Nothing) {
+                        var g = function (_898) {
+                            if (_898 instanceof Data_Maybe.Nothing) {
                                 return Prelude.pure(Data_Lazy.applicativeLazy)(b_1);
                             };
-                            if (_890 instanceof Data_Maybe.Just) {
-                                return Prelude["<$>"](Data_Lazy.functorLazy)(_882(_890.value0.value0))(foldr$prime(b_1)(_890.value0.value1));
+                            if (_898 instanceof Data_Maybe.Just) {
+                                return Prelude["<$>"](Data_Lazy.functorLazy)(_890(_898.value0.value0))(foldr$prime(b_1)(_898.value0.value1));
                             };
                             throw new Error("Failed pattern match");
                         };
                         return Prelude[">>="](Data_Lazy.bindLazy)(uncons(Data_Lazy.monadLazy)(l_1))(g);
                     };
                 };
-                return Data_Lazy.force(foldr$prime(_883)(_884));
+                return Data_Lazy.force(foldr$prime(_891)(_892));
             };
         };
     });
@@ -15736,11 +16084,11 @@ PS.Optic_Fold = (function () {
         return function (__dict_Choice_792) {
             return function (p) {
                 return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Profunctor.dimap(__dict_Choice_792["__superclass_Data.Profunctor.Profunctor_0"]())(function (x) {
-                    var _3248 = p(x);
-                    if (_3248) {
+                    var _3269 = p(x);
+                    if (_3269) {
                         return new Data_Either.Right(x);
                     };
-                    if (!_3248) {
+                    if (!_3269) {
                         return new Data_Either.Left(x);
                     };
                     throw new Error("Failed pattern match");
@@ -15891,11 +16239,11 @@ PS.Optic_Index = (function () {
             return function (__dict_Applicative_797) {
                 return function (u2fu) {
                     return function (s) {
-                        var _3250 = Data_Set.member(__dict_Ord_796)(a)(s);
-                        if (_3250) {
+                        var _3271 = Data_Set.member(__dict_Ord_796)(a)(s);
+                        if (_3271) {
                             return Prelude.pure(__dict_Applicative_797)(Data_Set.insert(__dict_Ord_796)(a)(s));
                         };
-                        if (!_3250) {
+                        if (!_3271) {
                             return Prelude.pure(__dict_Applicative_797)(s);
                         };
                         throw new Error("Failed pattern match");
@@ -15908,15 +16256,15 @@ PS.Optic_Index = (function () {
         return Optic_Index_Class.indexKeyMaybe;
     }, function () {
         return Optic_Index_Class.indexValueMaybe;
-    }, function (_893) {
+    }, function (_901) {
         return function (__dict_Applicative_798) {
-            return function (_894) {
-                return function (_895) {
-                    if (_895 instanceof Data_Maybe.Nothing) {
+            return function (_902) {
+                return function (_903) {
+                    if (_903 instanceof Data_Maybe.Nothing) {
                         return Prelude.pure(__dict_Applicative_798)(Data_Maybe.Nothing.value);
                     };
-                    if (_895 instanceof Data_Maybe.Just) {
-                        return Prelude["<$>"]((__dict_Applicative_798["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Maybe.Just.create)(_894(_895.value0));
+                    if (_903 instanceof Data_Maybe.Just) {
+                        return Prelude["<$>"]((__dict_Applicative_798["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Maybe.Just.create)(_902(_903.value0));
                     };
                     throw new Error("Failed pattern match");
                 };
@@ -15946,11 +16294,11 @@ PS.Optic_Index = (function () {
         return Optic_Index_Class.indexKeyIdentity;
     }, function () {
         return Optic_Index_Class.indexValueIdentity;
-    }, function (_896) {
+    }, function (_904) {
         return function (__dict_Applicative_801) {
-            return function (_897) {
-                return function (_898) {
-                    return Prelude["<$>"]((__dict_Applicative_801["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Identity.Identity)(_897(_898));
+            return function (_905) {
+                return function (_906) {
+                    return Prelude["<$>"]((__dict_Applicative_801["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Data_Identity.Identity)(_905(_906));
                 };
             };
         };
@@ -15959,25 +16307,25 @@ PS.Optic_Index = (function () {
         return Optic_Index_Class.indexKeyArray;
     }, function () {
         return Optic_Index_Class.indexValueArray;
-    }, function (_899) {
+    }, function (_907) {
         return function (__dict_Applicative_802) {
-            return function (_900) {
-                return function (_901) {
-                    if (_899 < 0) {
-                        return Prelude.pure(__dict_Applicative_802)(_901);
+            return function (_908) {
+                return function (_909) {
+                    if (_907 < 0) {
+                        return Prelude.pure(__dict_Applicative_802)(_909);
                     };
-                    if (_901.length === 0) {
+                    if (_909.length === 0) {
                         return Prelude.pure(__dict_Applicative_802)([  ]);
                     };
-                    if (_899 === 0 && _901.length >= 1) {
-                        var _3262 = _901.slice(1);
-                        return Prelude["<#>"]((__dict_Applicative_802["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(_900(_901[0]))(function (a$prime) {
-                            return Prelude[":"](a$prime)(_3262);
+                    if (_907 === 0 && _909.length >= 1) {
+                        var _3283 = _909.slice(1);
+                        return Prelude["<#>"]((__dict_Applicative_802["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(_908(_909[0]))(function (a$prime) {
+                            return Prelude[":"](a$prime)(_3283);
                         });
                     };
-                    if (_901.length >= 1) {
-                        var _3264 = _901.slice(1);
-                        return Prelude["<$>"]((__dict_Applicative_802["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Prelude[":"](_901[0]))(ix(indexArray)(_899 - 1)(__dict_Applicative_802)(_900)(_3264));
+                    if (_909.length >= 1) {
+                        var _3285 = _909.slice(1);
+                        return Prelude["<$>"]((__dict_Applicative_802["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(Prelude[":"](_909[0]))(ix(indexArray)(_907 - 1)(__dict_Applicative_802)(_908)(_3285));
                     };
                     throw new Error("Failed pattern match");
                 };
@@ -15995,11 +16343,11 @@ PS.Optic_Index = (function () {
                     return function (e2a) {
                         return Prelude["<$>"]((__dict_Applicative_804["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(function (a) {
                             return function (e$prime) {
-                                var _3265 = Prelude["=="](__dict_Eq_803)(e)(e$prime);
-                                if (_3265) {
+                                var _3286 = Prelude["=="](__dict_Eq_803)(e)(e$prime);
+                                if (_3286) {
                                     return a;
                                 };
-                                if (!_3265) {
+                                if (!_3286) {
                                     return e2a(e$prime);
                                 };
                                 throw new Error("Failed pattern match");
@@ -16044,14 +16392,14 @@ PS.Optic_At = (function () {
             return function (mv2fMv) {
                 return function (sm) {
                     var sm$prime = Data_StrMap.lookup(k)(sm);
-                    var go = function (_908) {
-                        if (_908 instanceof Data_Maybe.Nothing) {
+                    var go = function (_916) {
+                        if (_916 instanceof Data_Maybe.Nothing) {
                             return Data_Maybe.maybe(sm)(function (_) {
                                 return Data_StrMap["delete"](k)(sm);
                             })(sm$prime);
                         };
-                        if (_908 instanceof Data_Maybe.Just) {
-                            return Data_StrMap.insert(k)(_908.value0)(sm);
+                        if (_916 instanceof Data_Maybe.Just) {
+                            return Data_StrMap.insert(k)(_916.value0)(sm);
                         };
                         throw new Error("Failed pattern match");
                     };
@@ -16068,22 +16416,22 @@ PS.Optic_At = (function () {
                 return function (mu2fMu) {
                     return function (s) {
                         var s$prime = (function () {
-                            var _3268 = Data_Set.member(__dict_Ord_806)(v)(s);
-                            if (_3268) {
+                            var _3289 = Data_Set.member(__dict_Ord_806)(v)(s);
+                            if (_3289) {
                                 return new Data_Maybe.Just(Prelude.unit);
                             };
-                            if (!_3268) {
+                            if (!_3289) {
                                 return Data_Maybe.Nothing.value;
                             };
                             throw new Error("Failed pattern match");
                         })();
-                        var go = function (_906) {
-                            if (_906 instanceof Data_Maybe.Nothing) {
+                        var go = function (_914) {
+                            if (_914 instanceof Data_Maybe.Nothing) {
                                 return Data_Maybe.maybe(s)(function (_) {
                                     return Data_Set["delete"](__dict_Ord_806)(v)(s);
                                 })(s$prime);
                             };
-                            if (_906 instanceof Data_Maybe.Just) {
+                            if (_914 instanceof Data_Maybe.Just) {
                                 return Data_Set.insert(__dict_Ord_806)(v)(s);
                             };
                             throw new Error("Failed pattern match");
@@ -16096,7 +16444,7 @@ PS.Optic_At = (function () {
     };
     var atMaybe = new At(function () {
         return Optic_Index.indexMaybe;
-    }, function (_905) {
+    }, function (_913) {
         return function (__dict_Functor_808) {
             return Prelude["$"];
         };
@@ -16109,14 +16457,14 @@ PS.Optic_At = (function () {
                 return function (mv2fMv) {
                     return function (m) {
                         var m$prime = Data_Map.lookup(__dict_Ord_809)(k)(m);
-                        var go = function (_907) {
-                            if (_907 instanceof Data_Maybe.Nothing) {
+                        var go = function (_915) {
+                            if (_915 instanceof Data_Maybe.Nothing) {
                                 return Data_Maybe.maybe(m)(function (_) {
                                     return Data_Map["delete"](__dict_Ord_809)(k)(m);
                                 })(m$prime);
                             };
-                            if (_907 instanceof Data_Maybe.Just) {
-                                return Data_Map.insert(__dict_Ord_809)(k)(_907.value0)(m);
+                            if (_915 instanceof Data_Maybe.Just) {
+                                return Data_Map.insert(__dict_Ord_809)(k)(_915.value0)(m);
                             };
                             throw new Error("Failed pattern match");
                         };
@@ -16128,11 +16476,11 @@ PS.Optic_At = (function () {
     };
     var atIdentity = new At(function () {
         return Optic_Index.indexIdentity;
-    }, function (_902) {
+    }, function (_910) {
         return function (__dict_Functor_811) {
-            return function (_903) {
-                return function (_904) {
-                    return Prelude["<$>"](__dict_Functor_811)(Data_Maybe.maybe(_904)(Data_Identity.Identity))(_903(new Data_Maybe.Just(_904)));
+            return function (_911) {
+                return function (_912) {
+                    return Prelude["<$>"](__dict_Functor_811)(Data_Maybe.maybe(_912)(Data_Identity.Identity))(_911(new Data_Maybe.Just(_912)));
                 };
             };
         };
@@ -16164,8 +16512,8 @@ PS.Optic_Iso = (function () {
     var Optic_Types_Extended = PS.Optic_Types_Extended;
     var withIso = function (stab) {
         return function (f) {
-            var _3277 = stab(new Optic_Internal_Iso.Exchange(Prelude.id(Prelude.categoryArr), Data_Identity.Identity));
-            return f(_3277.value0)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Identity.runIdentity)(_3277.value1));
+            var _3298 = stab(new Optic_Internal_Iso.Exchange(Prelude.id(Prelude.categoryArr), Data_Identity.Identity));
+            return f(_3298.value0)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Identity.runIdentity)(_3298.value1));
         };
     };
     var under = function (stab) {
@@ -16300,8 +16648,8 @@ PS.Optic_Prism = (function () {
     var Optic_Types = PS.Optic_Types;
     var withPrism = function (stab) {
         return function (f) {
-            var _3280 = stab(new Optic_Internal_Prism.Market(Data_Identity.Identity, Data_Either.Right.create));
-            return f(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Identity.runIdentity)(_3280.value0))(Prelude[">>>"](Prelude.semigroupoidArr)(_3280.value1)(Data_Either.either(Prelude[">>>"](Prelude.semigroupoidArr)(Data_Identity.runIdentity)(Data_Either.Left.create))(Data_Either.Right.create)));
+            var _3301 = stab(new Optic_Internal_Prism.Market(Data_Identity.Identity, Data_Either.Right.create));
+            return f(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Identity.runIdentity)(_3301.value0))(Prelude[">>>"](Prelude.semigroupoidArr)(_3301.value1)(Data_Either.either(Prelude[">>>"](Prelude.semigroupoidArr)(Data_Identity.runIdentity)(Data_Either.Left.create))(Data_Either.Right.create)));
         };
     };
     var prism = function (__dict_Applicative_832) {
@@ -16330,11 +16678,11 @@ PS.Optic_Prism = (function () {
         return function (p) {
             return function (__dict_Applicative_836) {
                 return function (__dict_Choice_837) {
-                    var guard = function (_909) {
-                        if (_909) {
+                    var guard = function (_917) {
+                        if (_917) {
                             return new Data_Maybe.Just(Prelude.unit);
                         };
-                        if (!_909) {
+                        if (!_917) {
                             return Data_Maybe.Nothing.value;
                         };
                         throw new Error("Failed pattern match");
@@ -17285,32 +17633,32 @@ PS.Data_Argonaut_Encode = (function () {
     var encodeJsonChar = new EncodeJson(Prelude["<<<"](Prelude.semigroupoidArr)(encodeJson(encodeJsonJString))(Data_Char.charString));
     var encodeJsonEither = function (__dict_EncodeJson_914) {
         return function (__dict_EncodeJson_915) {
-            return new EncodeJson(function (_912) {
-                if (_912 instanceof Data_Either.Left) {
-                    return encodeJson(__dict_EncodeJson_914)(_912.value0);
+            return new EncodeJson(function (_920) {
+                if (_920 instanceof Data_Either.Left) {
+                    return encodeJson(__dict_EncodeJson_914)(_920.value0);
                 };
-                if (_912 instanceof Data_Either.Right) {
-                    return encodeJson(__dict_EncodeJson_915)(_912.value0);
+                if (_920 instanceof Data_Either.Right) {
+                    return encodeJson(__dict_EncodeJson_915)(_920.value0);
                 };
                 throw new Error("Failed pattern match");
             });
         };
     };
     var encodeJsonMaybe = function (__dict_EncodeJson_916) {
-        return new EncodeJson(function (_910) {
-            if (_910 instanceof Data_Maybe.Nothing) {
+        return new EncodeJson(function (_918) {
+            if (_918 instanceof Data_Maybe.Nothing) {
                 return Data_Argonaut_Core.jsonNull;
             };
-            if (_910 instanceof Data_Maybe.Just) {
-                return encodeJson(__dict_EncodeJson_916)(_910.value0);
+            if (_918 instanceof Data_Maybe.Just) {
+                return encodeJson(__dict_EncodeJson_916)(_918.value0);
             };
             throw new Error("Failed pattern match");
         });
     };
     var encodeJsonTuple = function (__dict_EncodeJson_917) {
         return function (__dict_EncodeJson_918) {
-            return new EncodeJson(function (_911) {
-                return encodeJson(encodeJsonArray(encodeJsonJson))([ encodeJson(__dict_EncodeJson_917)(_911.value0), encodeJson(__dict_EncodeJson_918)(_911.value1) ]);
+            return new EncodeJson(function (_919) {
+                return encodeJson(encodeJsonArray(encodeJsonJson))([ encodeJson(__dict_EncodeJson_917)(_919.value0), encodeJson(__dict_EncodeJson_918)(_919.value1) ]);
             });
         };
     };
@@ -17410,12 +17758,12 @@ PS.Data_Argonaut_Decode = (function () {
         return dict.decodeJson;
     };
     var decodeJsonChar = new DecodeJson(function (j) {
-        var go = function (_914) {
-            if (_914 instanceof Data_Maybe.Nothing) {
+        var go = function (_922) {
+            if (_922 instanceof Data_Maybe.Nothing) {
                 return Data_Either.Left.create("Expected character but found: " + Prelude.show(Data_Argonaut_Core.showJson)(j));
             };
-            if (_914 instanceof Data_Maybe.Just) {
-                return new Data_Either.Right(_914.value0);
+            if (_922 instanceof Data_Maybe.Just) {
+                return new Data_Either.Right(_922.value0);
             };
             throw new Error("Failed pattern match");
         };
@@ -17458,26 +17806,26 @@ PS.Data_Argonaut_Decode = (function () {
     };
     var decodeStrMap = function (__dict_DecodeJson_939) {
         return new DecodeJson(function (json) {
-            return Data_Maybe.maybe(new Data_Either.Left("Couldn't decode."))(Data_Either.Right.create)(Prelude[">>="](Data_Maybe.bindMaybe)(Data_Argonaut_Core.toObject(json))(function (_36) {
-                return Data_Traversable.traverse(Data_StrMap.traversableStrMap)(Data_Maybe.applicativeMaybe)(decodeMaybe(__dict_DecodeJson_939))(_36);
+            return Data_Maybe.maybe(new Data_Either.Left("Couldn't decode."))(Data_Either.Right.create)(Prelude[">>="](Data_Maybe.bindMaybe)(Data_Argonaut_Core.toObject(json))(function (_38) {
+                return Data_Traversable.traverse(Data_StrMap.traversableStrMap)(Data_Maybe.applicativeMaybe)(decodeMaybe(__dict_DecodeJson_939))(_38);
             }));
         });
     };
     var decodeArray = function (__dict_DecodeJson_940) {
         return new DecodeJson(function (json) {
-            return Data_Maybe.maybe(new Data_Either.Left("Couldn't decode."))(Data_Either.Right.create)(Prelude[">>="](Data_Maybe.bindMaybe)(Data_Argonaut_Core.toArray(json))(function (_37) {
-                return Data_Traversable.traverse(Data_Traversable.traversableArray)(Data_Maybe.applicativeMaybe)(decodeMaybe(__dict_DecodeJson_940))(_37);
+            return Data_Maybe.maybe(new Data_Either.Left("Couldn't decode."))(Data_Either.Right.create)(Prelude[">>="](Data_Maybe.bindMaybe)(Data_Argonaut_Core.toArray(json))(function (_39) {
+                return Data_Traversable.traverse(Data_Traversable.traversableArray)(Data_Maybe.applicativeMaybe)(decodeMaybe(__dict_DecodeJson_940))(_39);
             }));
         });
     };
     var decodeJsonTuple = function (__dict_DecodeJson_926) {
         return function (__dict_DecodeJson_927) {
             return new DecodeJson(function (j) {
-                var f = function (_913) {
-                    if (_913.length >= 2) {
-                        var _3299 = _913.slice(2);
-                        if (_3299.length === 0) {
-                            return Prelude["<*>"](Data_Either.applyEither)(Prelude["<$>"](Data_Either.functorEither)(Data_Tuple.Tuple.create)(decodeJson(__dict_DecodeJson_926)(_913[0])))(decodeJson(__dict_DecodeJson_927)(_913[1]));
+                var f = function (_921) {
+                    if (_921.length >= 2) {
+                        var _3320 = _921.slice(2);
+                        if (_3320.length === 0) {
+                            return Prelude["<*>"](Data_Either.applyEither)(Prelude["<$>"](Data_Either.functorEither)(Data_Tuple.Tuple.create)(decodeJson(__dict_DecodeJson_926)(_921[0])))(decodeJson(__dict_DecodeJson_927)(_921[1]));
                         };
                     };
                     throw new Error("Failed pattern match");
@@ -17537,18 +17885,18 @@ PS.Data_Argonaut_Combinators = (function () {
     var Data_Either = PS.Data_Either;
     var Data_Tuple = PS.Data_Tuple;
     var $tilde$greater = function (__dict_EncodeJson_944) {
-        return function (_915) {
-            return function (_916) {
-                return Data_Argonaut_Core.foldJsonObject(Data_Argonaut_Core.jsonSingletonObject(_915.value0)(_915.value1))(Prelude[">>>"](Prelude.semigroupoidArr)(Data_StrMap.insert(_915.value0)(_915.value1))(Data_Argonaut_Core.fromObject))(Data_Argonaut_Encode.encodeJson(__dict_EncodeJson_944)(_916));
+        return function (_923) {
+            return function (_924) {
+                return Data_Argonaut_Core.foldJsonObject(Data_Argonaut_Core.jsonSingletonObject(_923.value0)(_923.value1))(Prelude[">>>"](Prelude.semigroupoidArr)(Data_StrMap.insert(_923.value0)(_923.value1))(Data_Argonaut_Core.fromObject))(Data_Argonaut_Encode.encodeJson(__dict_EncodeJson_944)(_924));
             };
         };
     };
-    var $qmark$greater$greater$eq = function (_917) {
-        return function (_918) {
-            if (_917 instanceof Data_Maybe.Just) {
-                return new Data_Either.Right(_917.value0);
+    var $qmark$greater$greater$eq = function (_925) {
+        return function (_926) {
+            if (_925 instanceof Data_Maybe.Just) {
+                return new Data_Either.Right(_925.value0);
             };
-            return Data_Either.Left.create("Couldn't decode " + _918);
+            return Data_Either.Left.create("Couldn't decode " + _926);
         };
     };
     var $colon$eq = function (__dict_EncodeJson_945) {
@@ -17627,37 +17975,37 @@ PS.Data_Argonaut_JCursor = (function () {
         };
         return JIndex;
     })();
-    var showJCursor = new Prelude.Show(function (_931) {
-        if (_931 instanceof JCursorTop) {
+    var showJCursor = new Prelude.Show(function (_939) {
+        if (_939 instanceof JCursorTop) {
             return "";
         };
-        if (_931 instanceof JField) {
-            return "." + (_931.value0 + Prelude.show(showJCursor)(_931.value1));
+        if (_939 instanceof JField) {
+            return "." + (_939.value0 + Prelude.show(showJCursor)(_939.value1));
         };
-        if (_931 instanceof JIndex) {
-            return "[" + (Prelude.show(Prelude.showNumber)(_931.value0) + ("]" + Prelude.show(showJCursor)(_931.value1)));
+        if (_939 instanceof JIndex) {
+            return "[" + (Prelude.show(Prelude.showNumber)(_939.value0) + ("]" + Prelude.show(showJCursor)(_939.value1)));
         };
         throw new Error("Failed pattern match");
     });
-    var semigroupJCursor = new Prelude.Semigroup(function (_936) {
-        return function (_937) {
-            if (_937 instanceof JCursorTop) {
-                return _936;
+    var semigroupJCursor = new Prelude.Semigroup(function (_944) {
+        return function (_945) {
+            if (_945 instanceof JCursorTop) {
+                return _944;
             };
-            if (_936 instanceof JCursorTop) {
-                return _937;
+            if (_944 instanceof JCursorTop) {
+                return _945;
             };
-            if (_936 instanceof JField) {
-                return new JField(_936.value0, Prelude["<>"](semigroupJCursor)(_936.value1)(_937));
+            if (_944 instanceof JField) {
+                return new JField(_944.value0, Prelude["<>"](semigroupJCursor)(_944.value1)(_945));
             };
-            if (_936 instanceof JIndex) {
-                return new JIndex(_936.value0, Prelude["<>"](semigroupJCursor)(_936.value1)(_937));
+            if (_944 instanceof JIndex) {
+                return new JIndex(_944.value0, Prelude["<>"](semigroupJCursor)(_944.value1)(_945));
             };
             throw new Error("Failed pattern match");
         };
     });
-    var runJsonPrim = function (_919) {
-        return _919;
+    var runJsonPrim = function (_927) {
+        return _927;
     };
     var showJsonPrim = new Prelude.Show(function (p) {
         return runJsonPrim(p)(Prelude.show(Data_Argonaut_Core.showJsonNull))(Prelude.show(Prelude.showBoolean))(Prelude.show(Prelude.showNumber))(Prelude.show(Prelude.showString));
@@ -17715,31 +18063,31 @@ PS.Data_Argonaut_JCursor = (function () {
         return [ Data_Tuple.Tuple.create(JCursorTop.value)(primStr(s)) ];
     })(function (a) {
         var zipped = Data_Array.zipWith(Data_Tuple.Tuple.create)(Data_Array.range(0)(Data_Array.length(a) - 1))(a);
-        var f = function (_927) {
+        var f = function (_935) {
             return Prelude["<$>"](Data_Array.functorArray)(function (t) {
-                return new Data_Tuple.Tuple(new JIndex(_927.value0, Data_Tuple.fst(t)), Data_Tuple.snd(t));
-            })(toPrims(_927.value1));
+                return new Data_Tuple.Tuple(new JIndex(_935.value0, Data_Tuple.fst(t)), Data_Tuple.snd(t));
+            })(toPrims(_935.value1));
         };
         return Prelude[">>="](Data_Array.bindArray)(zipped)(f);
     })(function (o) {
-        var f = function (_928) {
+        var f = function (_936) {
             return Prelude["<$>"](Data_Array.functorArray)(function (t) {
-                return new Data_Tuple.Tuple(new JField(_928.value0, Data_Tuple.fst(t)), Data_Tuple.snd(t));
-            })(toPrims(_928.value1));
+                return new Data_Tuple.Tuple(new JField(_936.value0, Data_Tuple.fst(t)), Data_Tuple.snd(t));
+            })(toPrims(_936.value1));
         };
         return Prelude[">>="](Data_Array.bindArray)(Data_StrMap.toList(o))(f);
     });
     var monoidJCursor = new Data_Monoid.Monoid(function () {
         return semigroupJCursor;
     }, JCursorTop.value);
-    var inferEmpty = function (_922) {
-        if (_922 instanceof JCursorTop) {
+    var inferEmpty = function (_930) {
+        if (_930 instanceof JCursorTop) {
             return Data_Argonaut_Core.jsonNull;
         };
-        if (_922 instanceof JField) {
+        if (_930 instanceof JField) {
             return Data_Argonaut_Core.jsonEmptyObject;
         };
-        if (_922 instanceof JIndex) {
+        if (_930 instanceof JIndex) {
             return Data_Argonaut_Core.jsonEmptyArray;
         };
         throw new Error("Failed pattern match");
@@ -17753,141 +18101,141 @@ PS.Data_Argonaut_JCursor = (function () {
         return function (b) {
             return !Prelude["=="](eqJCursor)(a)(b);
         };
-    }, function (_932) {
-        return function (_933) {
-            if (_932 instanceof JCursorTop && _933 instanceof JCursorTop) {
+    }, function (_940) {
+        return function (_941) {
+            if (_940 instanceof JCursorTop && _941 instanceof JCursorTop) {
                 return true;
             };
-            if (_932 instanceof JField && _933 instanceof JField) {
-                return _932.value0 === _933.value0 && Prelude["=="](eqJCursor)(_932.value1)(_933.value1);
+            if (_940 instanceof JField && _941 instanceof JField) {
+                return _940.value0 === _941.value0 && Prelude["=="](eqJCursor)(_940.value1)(_941.value1);
             };
-            if (_932 instanceof JIndex && _933 instanceof JIndex) {
-                return _932.value0 === _933.value0 && Prelude["=="](eqJCursor)(_932.value1)(_933.value1);
+            if (_940 instanceof JIndex && _941 instanceof JIndex) {
+                return _940.value0 === _941.value0 && Prelude["=="](eqJCursor)(_940.value1)(_941.value1);
             };
             return false;
         };
     });
     var ordJCursor = new Prelude.Ord(function () {
         return eqJCursor;
-    }, function (_934) {
-        return function (_935) {
-            if (_934 instanceof JCursorTop && _935 instanceof JCursorTop) {
+    }, function (_942) {
+        return function (_943) {
+            if (_942 instanceof JCursorTop && _943 instanceof JCursorTop) {
                 return Prelude.EQ.value;
             };
-            if (_934 instanceof JCursorTop) {
+            if (_942 instanceof JCursorTop) {
                 return Prelude.LT.value;
             };
-            if (_935 instanceof JCursorTop) {
+            if (_943 instanceof JCursorTop) {
                 return Prelude.GT.value;
             };
-            if (_934 instanceof JField && _935 instanceof JIndex) {
+            if (_942 instanceof JField && _943 instanceof JIndex) {
                 return Prelude.LT.value;
             };
-            if (_934 instanceof JIndex && _935 instanceof JField) {
+            if (_942 instanceof JIndex && _943 instanceof JField) {
                 return Prelude.GT.value;
             };
-            if (_934 instanceof JField && _935 instanceof JField) {
-                var _3350 = Prelude.compare(Prelude.ordString)(_934.value0)(_935.value0);
-                if (_3350 instanceof Prelude.EQ) {
-                    return Prelude.compare(ordJCursor)(_934.value1)(_935.value1);
+            if (_942 instanceof JField && _943 instanceof JField) {
+                var _3371 = Prelude.compare(Prelude.ordString)(_942.value0)(_943.value0);
+                if (_3371 instanceof Prelude.EQ) {
+                    return Prelude.compare(ordJCursor)(_942.value1)(_943.value1);
                 };
-                return _3350;
+                return _3371;
             };
-            if (_934 instanceof JIndex && _935 instanceof JIndex) {
-                var _3355 = Prelude.compare(Prelude.ordNumber)(_934.value0)(_935.value0);
-                if (_3355 instanceof Prelude.EQ) {
-                    return Prelude.compare(ordJCursor)(_934.value1)(_935.value1);
+            if (_942 instanceof JIndex && _943 instanceof JIndex) {
+                var _3376 = Prelude.compare(Prelude.ordNumber)(_942.value0)(_943.value0);
+                if (_3376 instanceof Prelude.EQ) {
+                    return Prelude.compare(ordJCursor)(_942.value1)(_943.value1);
                 };
-                return _3355;
+                return _3376;
             };
             throw new Error("Failed pattern match");
         };
     });
     var encodeJsonJCursor = new Data_Argonaut_Encode.EncodeJson((function () {
-        var loop = function (_938) {
-            if (_938 instanceof JCursorTop) {
+        var loop = function (_946) {
+            if (_946 instanceof JCursorTop) {
                 return [  ];
             };
-            if (_938 instanceof JField) {
-                return Prelude["<>"](Data_Array.semigroupArray)([ Data_Argonaut_Encode.encodeJson(Data_Argonaut_Encode.encodeJsonJString)(_938.value0) ])(loop(_938.value1));
+            if (_946 instanceof JField) {
+                return Prelude["<>"](Data_Array.semigroupArray)([ Data_Argonaut_Encode.encodeJson(Data_Argonaut_Encode.encodeJsonJString)(_946.value0) ])(loop(_946.value1));
             };
-            if (_938 instanceof JIndex) {
-                return Prelude["<>"](Data_Array.semigroupArray)([ Data_Argonaut_Encode.encodeJson(Data_Argonaut_Encode.encodeJsonJNumber)(_938.value0) ])(loop(_938.value1));
+            if (_946 instanceof JIndex) {
+                return Prelude["<>"](Data_Array.semigroupArray)([ Data_Argonaut_Encode.encodeJson(Data_Argonaut_Encode.encodeJsonJNumber)(_946.value0) ])(loop(_946.value1));
             };
             throw new Error("Failed pattern match");
         };
         return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Argonaut_Encode.encodeJson(Data_Argonaut_Encode.encodeJsonArray(Data_Argonaut_Encode.encodeJsonJson)))(loop);
     })());
     var downIndex = function (i) {
-        var downIndex$prime = function (_926) {
-            if (_926 instanceof JCursorTop) {
+        var downIndex$prime = function (_934) {
+            if (_934 instanceof JCursorTop) {
                 return new JIndex(i, JCursorTop.value);
             };
-            if (_926 instanceof JField) {
-                return new JField(_926.value0, downIndex$prime(_926.value1));
+            if (_934 instanceof JField) {
+                return new JField(_934.value0, downIndex$prime(_934.value1));
             };
-            if (_926 instanceof JIndex) {
-                return new JIndex(_926.value0, downIndex$prime(_926.value1));
+            if (_934 instanceof JIndex) {
+                return new JIndex(_934.value0, downIndex$prime(_934.value1));
             };
             throw new Error("Failed pattern match");
         };
         return downIndex$prime;
     };
     var downField = function (i) {
-        var downField$prime = function (_925) {
-            if (_925 instanceof JCursorTop) {
+        var downField$prime = function (_933) {
+            if (_933 instanceof JCursorTop) {
                 return new JField(i, JCursorTop.value);
             };
-            if (_925 instanceof JField) {
-                return new JField(_925.value0, downField$prime(_925.value1));
+            if (_933 instanceof JField) {
+                return new JField(_933.value0, downField$prime(_933.value1));
             };
-            if (_925 instanceof JIndex) {
-                return new JIndex(_925.value0, downField$prime(_925.value1));
+            if (_933 instanceof JIndex) {
+                return new JIndex(_933.value0, downField$prime(_933.value1));
             };
             throw new Error("Failed pattern match");
         };
         return downField$prime;
     };
-    var insideOut = function (_920) {
-        if (_920 instanceof JCursorTop) {
+    var insideOut = function (_928) {
+        if (_928 instanceof JCursorTop) {
             return JCursorTop.value;
         };
-        if (_920 instanceof JField) {
-            return downField(_920.value0)(insideOut(_920.value1));
+        if (_928 instanceof JField) {
+            return downField(_928.value0)(insideOut(_928.value1));
         };
-        if (_920 instanceof JIndex) {
-            return downIndex(_920.value0)(insideOut(_920.value1));
+        if (_928 instanceof JIndex) {
+            return downIndex(_928.value0)(insideOut(_928.value1));
         };
         throw new Error("Failed pattern match");
     };
     var decodeJsonJCursor = new Data_Argonaut_Decode.DecodeJson(function (j) {
-        var loop = function (_939) {
-            if (_939.length === 0) {
+        var loop = function (_947) {
+            if (_947.length === 0) {
                 return new Data_Either.Right(JCursorTop.value);
             };
-            if (_939.length >= 1) {
-                var _3383 = _939.slice(1);
-                return Prelude[">>="](Data_Either.bindEither)(loop(_3383))(function (_38) {
-                    return Data_Argonaut_Core.foldJson(fail(Data_Argonaut_Core.showJsonNull))(fail(Prelude.showBoolean))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Either.Right.create)(Prelude.flip(JIndex.create)(_38)))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Either.Right.create)(Prelude.flip(JField.create)(_38)))(fail(Prelude.showArray(Data_Argonaut_Core.showJson)))(fail(Data_StrMap.showStrMap(Data_Argonaut_Core.showJson)))(_939[0]);
+            if (_947.length >= 1) {
+                var _3404 = _947.slice(1);
+                return Prelude[">>="](Data_Either.bindEither)(loop(_3404))(function (_40) {
+                    return Data_Argonaut_Core.foldJson(fail(Data_Argonaut_Core.showJsonNull))(fail(Prelude.showBoolean))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Either.Right.create)(Prelude.flip(JIndex.create)(_40)))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Either.Right.create)(Prelude.flip(JField.create)(_40)))(fail(Prelude.showArray(Data_Argonaut_Core.showJson)))(fail(Data_StrMap.showStrMap(Data_Argonaut_Core.showJson)))(_947[0]);
                 });
             };
             throw new Error("Failed pattern match");
         };
         return Prelude[">>="](Data_Either.bindEither)(Data_Argonaut_Decode.decodeJson(Data_Argonaut_Decode.decodeArray(Data_Argonaut_Decode.decodeJsonJson))(j))(loop);
     });
-    var cursorSet = function (_923) {
-        return function (_924) {
-            if (_923 instanceof JCursorTop) {
-                return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Prelude["const"](_924));
+    var cursorSet = function (_931) {
+        return function (_932) {
+            if (_931 instanceof JCursorTop) {
+                return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Prelude["const"](_932));
             };
-            if (_923 instanceof JField) {
+            if (_931 instanceof JField) {
                 var g = function (m) {
-                    return Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Argonaut_Core.fromObject)(Prelude.flip(Data_StrMap.insert(_923.value0))(m)))(cursorSet(_923.value1)(_924)(Data_Maybe.fromMaybe(inferEmpty(_923.value1))(Data_StrMap.lookup(_923.value0)(m))));
+                    return Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Argonaut_Core.fromObject)(Prelude.flip(Data_StrMap.insert(_931.value0))(m)))(cursorSet(_931.value1)(_932)(Data_Maybe.fromMaybe(inferEmpty(_931.value1))(Data_StrMap.lookup(_931.value0)(m))));
                 };
-                var d = Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Argonaut_Core.fromObject)(Data_StrMap.singleton(_923.value0)))(cursorSet(_923.value1)(_924)(inferEmpty(_923.value1)));
+                var d = Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Argonaut_Core.fromObject)(Data_StrMap.singleton(_931.value0)))(cursorSet(_931.value1)(_932)(inferEmpty(_931.value1)));
                 return Data_Argonaut_Core.foldJson(Prelude["const"](d))(Prelude["const"](d))(Prelude["const"](d))(Prelude["const"](d))(Prelude["const"](d))(g);
             };
-            if (_923 instanceof JIndex) {
+            if (_931 instanceof JIndex) {
                 var setArr = function (__copy_xs) {
                     return function (__copy_i_2) {
                         return function (__copy_v_3) {
@@ -17896,13 +18244,13 @@ PS.Data_Argonaut_JCursor = (function () {
                             var v_3 = __copy_v_3;
                             tco: while (true) {
                                 var len = Data_Array.length(xs);
-                                var _3388 = i_2 < 0;
-                                if (_3388) {
+                                var _3409 = i_2 < 0;
+                                if (_3409) {
                                     return Data_Maybe.Nothing.value;
                                 };
-                                if (!_3388) {
-                                    var _3389 = i_2 >= len;
-                                    if (_3389) {
+                                if (!_3409) {
+                                    var _3410 = i_2 >= len;
+                                    if (_3410) {
                                         var __tco_xs = Prelude["<>"](Data_Array.semigroupArray)(xs)(Prelude["<$>"](Data_Array.functorArray)(Prelude["const"](Data_Argonaut_Core.jsonNull))(Data_Array.range(0)(i_2 - len)));
                                         var __tco_i_2 = i_2;
                                         var __tco_v_3 = v_3;
@@ -17911,7 +18259,7 @@ PS.Data_Argonaut_JCursor = (function () {
                                         v_3 = __tco_v_3;
                                         continue tco;
                                     };
-                                    if (!_3389) {
+                                    if (!_3410) {
                                         return Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe.Just.create)(Data_Argonaut_Core.fromArray)(Data_Array.updateAt(i_2)(v_3)(xs));
                                     };
                                     throw new Error("Failed pattern match");
@@ -17922,35 +18270,35 @@ PS.Data_Argonaut_JCursor = (function () {
                     };
                 };
                 var g = function (a) {
-                    return Prelude[">>="](Data_Maybe.bindMaybe)(cursorSet(_923.value1)(_924)(Data_Maybe.fromMaybe(inferEmpty(_923.value1))(Data_Array["!!"](a)(_923.value0))))(setArr(a)(_923.value0));
+                    return Prelude[">>="](Data_Maybe.bindMaybe)(cursorSet(_931.value1)(_932)(Data_Maybe.fromMaybe(inferEmpty(_931.value1))(Data_Array["!!"](a)(_931.value0))))(setArr(a)(_931.value0));
                 };
-                var d = Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Argonaut_Core.fromArray)(Prelude.flip(Data_Array.updateAt(_923.value0))(Prelude["<$>"](Data_Array.functorArray)(Prelude["const"](Data_Argonaut_Core.jsonNull))(Data_Array.range(0)(_923.value0)))))(cursorSet(_923.value1)(_924)(inferEmpty(_923.value1)));
+                var d = Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Argonaut_Core.fromArray)(Prelude.flip(Data_Array.updateAt(_931.value0))(Prelude["<$>"](Data_Array.functorArray)(Prelude["const"](Data_Argonaut_Core.jsonNull))(Data_Array.range(0)(_931.value0)))))(cursorSet(_931.value1)(_932)(inferEmpty(_931.value1)));
                 return Data_Argonaut_Core.foldJson(Prelude["const"](d))(Prelude["const"](d))(Prelude["const"](d))(Prelude["const"](d))(g)(Prelude["const"](d));
             };
             throw new Error("Failed pattern match");
         };
     };
     var fromPrims = function (a) {
-        var f = function (_929) {
-            return function (_930) {
-                return Prelude[">>="](Data_Maybe.bindMaybe)(_929)(cursorSet(_930.value0)(runJsonPrim(_930.value1)(Data_Argonaut_Core.fromNull)(Data_Argonaut_Core.fromBoolean)(Data_Argonaut_Core.fromNumber)(Data_Argonaut_Core.fromString)));
+        var f = function (_937) {
+            return function (_938) {
+                return Prelude[">>="](Data_Maybe.bindMaybe)(_937)(cursorSet(_938.value0)(runJsonPrim(_938.value1)(Data_Argonaut_Core.fromNull)(Data_Argonaut_Core.fromBoolean)(Data_Argonaut_Core.fromNumber)(Data_Argonaut_Core.fromString)));
             };
         };
         return Data_Foldable.foldlArray(f)(Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude["<<<"](Prelude.semigroupoidArr)(inferEmpty)(Data_Tuple.fst))(Data_Array.head(a)))(a);
     };
-    var cursorGet = function (_921) {
-        if (_921 instanceof JCursorTop) {
+    var cursorGet = function (_929) {
+        if (_929 instanceof JCursorTop) {
             return Data_Maybe.Just.create;
         };
-        if (_921 instanceof JField) {
+        if (_929 instanceof JField) {
             var g = function (m) {
-                return Prelude[">>="](Data_Maybe.bindMaybe)(Data_StrMap.lookup(_921.value0)(m))(cursorGet(_921.value1));
+                return Prelude[">>="](Data_Maybe.bindMaybe)(Data_StrMap.lookup(_929.value0)(m))(cursorGet(_929.value1));
             };
             return Data_Argonaut_Core.foldJsonObject(Data_Maybe.Nothing.value)(g);
         };
-        if (_921 instanceof JIndex) {
+        if (_929 instanceof JIndex) {
             var g = function (a) {
-                return Prelude[">>="](Data_Maybe.bindMaybe)(Data_Array["!!"](a)(_921.value0))(cursorGet(_921.value1));
+                return Prelude[">>="](Data_Maybe.bindMaybe)(Data_Array["!!"](a)(_929.value0))(cursorGet(_929.value1));
             };
             return Data_Argonaut_Core.foldJsonArray(Data_Maybe.Nothing.value)(g);
         };
@@ -18296,38 +18644,38 @@ PS.Data_Json_JSemantic = (function () {
         NA.value = new NA();
         return NA;
     })();
-    var showSemantic = new Prelude.Show(function (_941) {
-        if (_941 instanceof Integral) {
-            return Prelude.show(Prelude.showNumber)(_941.value0);
+    var showSemantic = new Prelude.Show(function (_949) {
+        if (_949 instanceof Integral) {
+            return Prelude.show(Prelude.showNumber)(_949.value0);
         };
-        if (_941 instanceof Fractional) {
-            return Prelude.show(Prelude.showNumber)(_941.value0);
+        if (_949 instanceof Fractional) {
+            return Prelude.show(Prelude.showNumber)(_949.value0);
         };
-        if (_941 instanceof Date) {
-            return Prelude.show(Data_Date.showDate)(_941.value0);
+        if (_949 instanceof Date) {
+            return Prelude.show(Data_Date.showDate)(_949.value0);
         };
-        if (_941 instanceof DateTime) {
-            return Prelude.show(Data_Date.showDate)(_941.value0);
+        if (_949 instanceof DateTime) {
+            return Prelude.show(Data_Date.showDate)(_949.value0);
         };
-        if (_941 instanceof Time) {
-            return Prelude.show(Data_Date.showDate)(_941.value0);
+        if (_949 instanceof Time) {
+            return Prelude.show(Data_Date.showDate)(_949.value0);
         };
-        if (_941 instanceof Interval) {
-            return Prelude.show(Data_Date.showDate)(_941.value0) + (" - " + Prelude.show(Data_Date.showDate)(_941.value1));
+        if (_949 instanceof Interval) {
+            return Prelude.show(Data_Date.showDate)(_949.value0) + (" - " + Prelude.show(Data_Date.showDate)(_949.value1));
         };
-        if (_941 instanceof Text) {
-            return _941.value0;
+        if (_949 instanceof Text) {
+            return _949.value0;
         };
-        if (_941 instanceof Bool) {
-            return Prelude.show(Prelude.showBoolean)(_941.value0);
+        if (_949 instanceof Bool) {
+            return Prelude.show(Prelude.showBoolean)(_949.value0);
         };
-        if (_941 instanceof Percent) {
-            return Prelude.show(Prelude.showNumber)(_941.value0) + "%";
+        if (_949 instanceof Percent) {
+            return Prelude.show(Prelude.showNumber)(_949.value0) + "%";
         };
-        if (_941 instanceof Currency) {
-            return "$" + Prelude.show(Prelude.showNumber)(_941.value0);
+        if (_949 instanceof Currency) {
+            return "$" + Prelude.show(Prelude.showNumber)(_949.value0);
         };
-        if (_941 instanceof NA) {
+        if (_949 instanceof NA) {
             return "";
         };
         throw new Error("Failed pattern match");
@@ -18347,28 +18695,28 @@ PS.Data_Json_JSemantic = (function () {
     var dateRegex = Data_String_Regex.test(Data_String_Regex.regex("^(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2})\\:(\\d{2})\\:(\\d{2})[+-](\\d{2})\\:(\\d{2})$")(noFlags));
     var currencyRegex = Data_String_Regex.test(Data_String_Regex.regex("^\\$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$")(noFlags));
     var analyzeStr = function (s) {
-        var _3413 = percentRegex(s);
-        if (_3413) {
+        var _3434 = percentRegex(s);
+        if (_3434) {
             return Percent.create(parsePercent(s));
         };
-        if (!_3413) {
-            var _3414 = currencyRegex(s);
-            if (_3414) {
+        if (!_3434) {
+            var _3435 = currencyRegex(s);
+            if (_3435) {
                 return Currency.create(parseCurrency(s));
             };
-            if (!_3414) {
-                var _3415 = dateRegex(s);
-                if (_3415) {
-                    var _3416 = Data_Date.fromString(s);
-                    if (_3416 instanceof Data_Maybe.Just) {
-                        return new DateTime(_3416.value0);
+            if (!_3435) {
+                var _3436 = dateRegex(s);
+                if (_3436) {
+                    var _3437 = Data_Date.fromString(s);
+                    if (_3437 instanceof Data_Maybe.Just) {
+                        return new DateTime(_3437.value0);
                     };
-                    if (_3416 instanceof Data_Maybe.Nothing) {
+                    if (_3437 instanceof Data_Maybe.Nothing) {
                         return NA.value;
                     };
                     throw new Error("Failed pattern match");
                 };
-                if (!_3415) {
+                if (!_3436) {
                     return new Text(s);
                 };
                 throw new Error("Failed pattern match");
@@ -18377,11 +18725,11 @@ PS.Data_Json_JSemantic = (function () {
         };
         throw new Error("Failed pattern match");
     };
-    var analyzeNum = function (_940) {
-        if (Math.floor(_940) === _940) {
-            return new Integral(_940);
+    var analyzeNum = function (_948) {
+        if (Math.floor(_948) === _948) {
+            return new Integral(_948);
         };
-        return new Fractional(_940);
+        return new Fractional(_948);
     };
     var toSemantic = function (p) {
         return Data_Argonaut_JCursor.runJsonPrim(p)(Prelude["const"](NA.value))(Bool.create)(analyzeNum)(analyzeStr);
@@ -18494,9 +18842,9 @@ PS.Text_Smolder_Markup = (function () {
     var text = function (s) {
         return new Content(s, new Return(Prelude.unit));
     };
-    var semigroupAttribute = new Prelude.Semigroup(function (_946) {
-        return function (_947) {
-            return new Attribute(Prelude["<>"](Data_Array.semigroupArray)(_946.value0)(_947.value0));
+    var semigroupAttribute = new Prelude.Semigroup(function (_954) {
+        return function (_955) {
+            return new Attribute(Prelude["<>"](Data_Array.semigroupArray)(_954.value0)(_955.value0));
         };
     });
     var parent = function (el) {
@@ -18510,16 +18858,16 @@ PS.Text_Smolder_Markup = (function () {
     var leaf = function (el) {
         return new Element(el, Data_Maybe.Nothing.value, [  ], new Return(Prelude.unit));
     };
-    var functorMarkupM = new Prelude.Functor(function (_942) {
-        return function (_943) {
-            if (_943 instanceof Element) {
-                return new Element(_943.value0, _943.value1, _943.value2, Prelude["<$>"](functorMarkupM)(_942)(_943.value3));
+    var functorMarkupM = new Prelude.Functor(function (_950) {
+        return function (_951) {
+            if (_951 instanceof Element) {
+                return new Element(_951.value0, _951.value1, _951.value2, Prelude["<$>"](functorMarkupM)(_950)(_951.value3));
             };
-            if (_943 instanceof Content) {
-                return new Content(_943.value0, Prelude["<$>"](functorMarkupM)(_942)(_943.value1));
+            if (_951 instanceof Content) {
+                return new Content(_951.value0, Prelude["<$>"](functorMarkupM)(_950)(_951.value1));
             };
-            if (_943 instanceof Return) {
-                return new Return(_942(_943.value0));
+            if (_951 instanceof Return) {
+                return new Return(_950(_951.value0));
             };
             throw new Error("Failed pattern match");
         };
@@ -18529,10 +18877,10 @@ PS.Text_Smolder_Markup = (function () {
             return new Attribute([ new Attr(key, value) ]);
         };
     };
-    var attributableMarkupM = new Attributable(function (_948) {
-        return function (_949) {
-            if (_948 instanceof Element) {
-                return new Element(_948.value0, _948.value1, Prelude["<>"](Data_Array.semigroupArray)(_948.value2)(_949.value0), _948.value3);
+    var attributableMarkupM = new Attributable(function (_956) {
+        return function (_957) {
+            if (_956 instanceof Element) {
+                return new Element(_956.value0, _956.value1, Prelude["<>"](Data_Array.semigroupArray)(_956.value2)(_957.value0), _956.value3);
             };
             throw new Error("Failed pattern match");
         };
@@ -18549,16 +18897,16 @@ PS.Text_Smolder_Markup = (function () {
     }, function () {
         return bindMarkupM;
     });
-    var bindMarkupM = new Prelude.Bind(function (_944) {
-        return function (_945) {
-            if (_944 instanceof Element) {
-                return new Element(_944.value0, _944.value1, _944.value2, Prelude[">>="](bindMarkupM)(_944.value3)(_945));
+    var bindMarkupM = new Prelude.Bind(function (_952) {
+        return function (_953) {
+            if (_952 instanceof Element) {
+                return new Element(_952.value0, _952.value1, _952.value2, Prelude[">>="](bindMarkupM)(_952.value3)(_953));
             };
-            if (_944 instanceof Content) {
-                return new Content(_944.value0, Prelude[">>="](bindMarkupM)(_944.value1)(_945));
+            if (_952 instanceof Content) {
+                return new Content(_952.value0, Prelude[">>="](bindMarkupM)(_952.value1)(_953));
             };
-            if (_944 instanceof Return) {
-                return _945(_944.value0);
+            if (_952 instanceof Return) {
+                return _953(_952.value0);
             };
             throw new Error("Failed pattern match");
         };
@@ -18846,6 +19194,10 @@ PS.Data_Json_JTable_Internal = (function () {
     var localeCompare =
 function (s1) { return function (s2) {
   return s1.localeCompare(s2) } };
+    
+    /**
+     *  header data
+     */
     var T = (function () {
         function T(value0, value1, value2, value3) {
             this.value0 = value0;
@@ -18864,6 +19216,10 @@ function (s1) { return function (s2) {
         };
         return T;
     })();
+    
+    /**
+     *  cell data
+     */
     var C = (function () {
         function C(value0, value1, value2, value3) {
             this.value0 = value0;
@@ -18882,24 +19238,28 @@ function (s1) { return function (s2) {
         };
         return C;
     })();
+    
+    /**
+     *  maybe return the width of a tuple composed of primitive values
+     */
     var widthOfPrimTuple = function (path) {
         return function (ja) {
-            var _3449 = Data_Array["null"](path) || Data_Array.length(ja) <= 1;
-            if (_3449) {
+            var _3470 = Data_Array["null"](path) || Data_Array.length(ja) <= 1;
+            if (_3470) {
                 return Data_Maybe.Nothing.value;
             };
-            if (!_3449) {
+            if (!_3470) {
                 var f = Data_Argonaut_Core.foldJson(Prelude["const"](0))(Prelude["const"](1))(Prelude["const"](2))(Prelude["const"](3))(Prelude["const"](4))(Prelude["const"](5));
                 var types = Prelude["<#>"](Data_Array.functorArray)(ja)(f);
                 var has_arr_or_obj = Data_Foldable.any(Data_Foldable.foldableArray)(function (x) {
                     return x >= 4;
                 })(types);
                 var all_eq = Data_Foldable.all(Data_Foldable.foldableArray)(Prelude["=="](Prelude.eqNumber)(Data_Array_Unsafe.head(types)))(types);
-                var _3450 = has_arr_or_obj || all_eq && Data_Array.length(ja) > 2;
-                if (_3450) {
+                var _3471 = has_arr_or_obj || all_eq && Data_Array.length(ja) > 2;
+                if (_3471) {
                     return Data_Maybe.Nothing.value;
                 };
-                if (!_3450) {
+                if (!_3471) {
                     return Data_Maybe.Just.create(Data_Array.length(ja));
                 };
                 throw new Error("Failed pattern match");
@@ -18907,89 +19267,101 @@ function (s1) { return function (s2) {
             throw new Error("Failed pattern match");
         };
     };
-    var tWidth = function (_953) {
-        return _953.value1;
+    var tWidth = function (_961) {
+        return _961.value1;
     };
-    var tPath = function (_952) {
-        return _952.value0;
+    var tPath = function (_960) {
+        return _960.value0;
     };
-    var tMergeArray = function (_960) {
-        return function (_961) {
+    
+    /**
+     *  add child to tree, unify if exists
+     */
+    var tMergeArray = function (_968) {
+        return function (_969) {
             var i = Data_Array.findIndex(function (n) {
-                return Prelude["=="](Data_Maybe.eqMaybe(Prelude.eqString))(Data_Array.last(_961.value0))(Data_Array.last(tPath(n)));
-            })(_960.value3);
-            var _3463 = Data_Array["!!"](_960.value3)(i);
-            if (_3463 instanceof Data_Maybe.Just) {
-                var _3464 = Data_Foldable.foldl(Data_Foldable.foldableArray)(tMergeArray)(_3463.value0)(_961.value3);
-                var w$prime = (_960.value1 - _3463.value0.value1) + _3464.value1;
-                var k$prime = Data_Array.updateAt(i)(new T(_3463.value0.value0, _3464.value1, _3464.value2, _3464.value3))(_960.value3);
-                var h$prime = Math.max(_960.value2)(_3464.value2 + 1);
-                return new T(_960.value0, w$prime, h$prime, k$prime);
+                return Prelude["=="](Data_Maybe.eqMaybe(Prelude.eqString))(Data_Array.last(_969.value0))(Data_Array.last(tPath(n)));
+            })(_968.value3);
+            var _3484 = Data_Array["!!"](_968.value3)(i);
+            if (_3484 instanceof Data_Maybe.Just) {
+                var _3485 = Data_Foldable.foldl(Data_Foldable.foldableArray)(tMergeArray)(_3484.value0)(_969.value3);
+                var w$prime = (_968.value1 - _3484.value0.value1) + _3485.value1;
+                var k$prime = Data_Array.updateAt(i)(new T(_3484.value0.value0, _3485.value1, _3485.value2, _3485.value3))(_968.value3);
+                var h$prime = Math.max(_968.value2)(_3485.value2 + 1);
+                return new T(_968.value0, w$prime, h$prime, k$prime);
             };
-            if (_3463 instanceof Data_Maybe.Nothing) {
+            if (_3484 instanceof Data_Maybe.Nothing) {
                 var w$prime = (function () {
-                    var _3474 = Data_Array["null"](_960.value3);
-                    if (_3474) {
-                        return _961.value1;
+                    var _3495 = Data_Array["null"](_968.value3);
+                    if (_3495) {
+                        return _969.value1;
                     };
-                    if (!_3474) {
-                        return _960.value1 + _961.value1;
+                    if (!_3495) {
+                        return _968.value1 + _969.value1;
                     };
                     throw new Error("Failed pattern match");
                 })();
-                var k$prime = Data_Array.snoc(_960.value3)(new T(_961.value0, _961.value1, _961.value2, _961.value3));
-                var h$prime = Math.max(_960.value2)(_961.value2 + 1);
-                return new T(_960.value0, w$prime, h$prime, k$prime);
+                var k$prime = Data_Array.snoc(_968.value3)(new T(_969.value0, _969.value1, _969.value2, _969.value3));
+                var h$prime = Math.max(_968.value2)(_969.value2 + 1);
+                return new T(_968.value0, w$prime, h$prime, k$prime);
             };
             throw new Error("Failed pattern match");
         };
     };
-    var tKids = function (_955) {
-        return _955.value3;
+    var tKids = function (_963) {
+        return _963.value3;
     };
+    
+    /**
+     *  produce header rows from header tree
+     */
     var tsToRows = function (ts) {
-        var _3488 = Data_Array["null"](ts);
-        if (_3488) {
+        var _3509 = Data_Array["null"](ts);
+        if (_3509) {
             return [  ];
         };
-        if (!_3488) {
+        if (!_3509) {
             return Prelude[":"](ts)(tsToRows(Prelude[">>="](Data_Array.bindArray)(ts)(tKids)));
         };
         throw new Error("Failed pattern match");
     };
-    var tHeight = function (_954) {
-        return _954.value2;
+    var tHeight = function (_962) {
+        return _962.value2;
     };
+    
+    /**
+     *  produce a tree of header data from json
+     */
     var tFromJson = function (path) {
         return function (json) {
-            var _3494 = Data_Argonaut_Core.toObject(json);
-            if (_3494 instanceof Data_Maybe.Just) {
-                var _3495 = Data_StrMap.isEmpty(_3494.value0);
-                if (_3495) {
+            var _3515 = Data_Argonaut_Core.toObject(json);
+            if (_3515 instanceof Data_Maybe.Just) {
+                var _3516 = Data_StrMap.isEmpty(_3515.value0);
+                if (_3516) {
                     return new T(path, 1, 0, [  ]);
                 };
-                if (!_3495) {
-                    var k = Data_Array.map(function (_950) {
-                        return tFromJson(Data_Array.snoc(path)(_950.value0))(_950.value1);
-                    })(Data_StrMap.toList(_3494.value0));
+                if (!_3516) {
+                    var k = Data_Array.map(function (_958) {
+                        return tFromJson(Data_Array.snoc(path)(_958.value0))(_958.value1);
+                    })(Data_StrMap.toList(_3515.value0));
                     var w = Data_Foldable.foldl(Data_Foldable.foldableArray)(Prelude["+"](Prelude.numNumber))(0)(Prelude["<#>"](Data_Array.functorArray)(k)(tWidth));
                     var h = 1 + Data_Foldable.foldl(Data_Foldable.foldableArray)(Math.max)(0)(Prelude["<#>"](Data_Array.functorArray)(k)(tHeight));
                     return new T(path, w, h, k);
                 };
                 throw new Error("Failed pattern match");
             };
-            if (_3494 instanceof Data_Maybe.Nothing) {
-                var _3500 = Data_Argonaut_Core.toArray(json);
-                if (_3500 instanceof Data_Maybe.Nothing) {
+            if (_3515 instanceof Data_Maybe.Nothing) {
+                var _3521 = Data_Argonaut_Core.toArray(json);
+                if (_3521 instanceof Data_Maybe.Nothing) {
                     return new T(path, 1, 0, [  ]);
                 };
-                if (_3500 instanceof Data_Maybe.Just) {
-                    var _3501 = widthOfPrimTuple(path)(_3500.value0);
-                    if (_3501 instanceof Data_Maybe.Just) {
-                        return new T(path, _3501.value0, 0, [  ]);
+                if (_3521 instanceof Data_Maybe.Just) {
+                    var _3522 = widthOfPrimTuple(path)(_3521.value0);
+                    if (_3522 instanceof Data_Maybe.Just) {
+                        return new T(path, _3522.value0, 0, [  ]);
                     };
-                    if (_3501 instanceof Data_Maybe.Nothing) {
-                        var ts = Prelude["<#>"](Data_Array.functorArray)(_3500.value0)(tFromJson(path));
+                    if (_3522 instanceof Data_Maybe.Nothing) {
+                        var ts = Prelude["<#>"](Data_Array.functorArray)(_3521.value0)(tFromJson(path));
                         var tk = Prelude[">>="](Data_Array.bindArray)(ts)(tKids);
                         var t$prime = Data_Foldable.foldl(Data_Foldable.foldableArray)(tMergeArray)(new T(path, 0, 0, [  ]))(tk);
                         var w = Math.max(1)(tWidth(t$prime));
@@ -19007,54 +19379,70 @@ function (s1) { return function (s2) {
             return Prelude.compare(Prelude.ordNumber)(localeCompare(s1)(s2))(0);
         };
     };
-    var sortTree = function (_971) {
-        return function (_972) {
-            return new T(_972.value0, _972.value1, _972.value2, Data_Array.sortBy(function (t1) {
+    
+    /**
+     *  sort header tree by ColumnOrdering
+     */
+    var sortTree = function (_979) {
+        return function (_980) {
+            return new T(_980.value0, _980.value1, _980.value2, Data_Array.sortBy(function (t1) {
                 return function (t2) {
-                    return _971(tPath(t1))(tPath(t2));
+                    return _979(tPath(t1))(tPath(t2));
                 };
-            })(Prelude["<#>"](Data_Array.functorArray)(_972.value3)(sortTree(_971))));
+            })(Prelude["<#>"](Data_Array.functorArray)(_980.value3)(sortTree(_979))));
         };
     };
-    var showTree = new Prelude.Show(function (_975) {
-        return Data_String.joinWith(" ")([ "<T", Prelude.show(Prelude.showArray(Prelude.showString))(_975.value0), Prelude.show(Prelude.showNumber)(_975.value1), Prelude.show(Prelude.showNumber)(_975.value2), Prelude.show(Prelude.showArray(showTree))(_975.value3), ">" ]);
+    var showTree = new Prelude.Show(function (_983) {
+        return Data_String.joinWith(" ")([ "<T", Prelude.show(Prelude.showArray(Prelude.showString))(_983.value0), Prelude.show(Prelude.showNumber)(_983.value1), Prelude.show(Prelude.showNumber)(_983.value2), Prelude.show(Prelude.showArray(showTree))(_983.value3), ">" ]);
     });
-    var showCell = new Prelude.Show(function (_976) {
-        return Data_String.joinWith(" ")([ "<T", Prelude.show(Prelude.showNumber)(_976.value1), Prelude.show(Prelude.showNumber)(_976.value2), Prelude.show(Data_Argonaut_JCursor.showJCursor)(_976.value0), Prelude.show(Data_Argonaut_JCursor.showJsonPrim)(_976.value3), ">" ]);
+    var showCell = new Prelude.Show(function (_984) {
+        return Data_String.joinWith(" ")([ "<T", Prelude.show(Prelude.showNumber)(_984.value1), Prelude.show(Prelude.showNumber)(_984.value2), Prelude.show(Data_Argonaut_JCursor.showJCursor)(_984.value0), Prelude.show(Data_Argonaut_JCursor.showJsonPrim)(_984.value3), ">" ]);
     });
+    
+    /**
+     *  render a grid from an array of arrays
+     */
     var renderRows = function (tr$prime) {
         return function (cellf) {
             return function (rows) {
-                return Data_Foldable.mconcat(Data_Foldable.foldableArray)(Text_Smolder_Markup.monoidMarkup)(Prelude[">>="](Data_Array.bindArray)(Data_Tuple.zip(rows)(Data_Array[".."](0)(Data_Array.length(rows))))(function (_46) {
-                    return Prelude["return"](Data_Array.monadArray)(tr$prime(Data_Foldable.mconcat(Data_Foldable.foldableArray)(Text_Smolder_Markup.monoidMarkup)(Prelude[">>="](Data_Array.bindArray)(Data_Tuple.zip(_46.value0)(Data_Array[".."](0)(Data_Array.length(_46.value0))))(function (_45) {
-                        return Prelude["return"](Data_Array.monadArray)(cellf(_46.value1)(_45.value1)(_45.value0));
+                return Data_Foldable.mconcat(Data_Foldable.foldableArray)(Text_Smolder_Markup.monoidMarkup)(Prelude[">>="](Data_Array.bindArray)(Data_Tuple.zip(rows)(Data_Array[".."](0)(Data_Array.length(rows))))(function (_48) {
+                    return Prelude["return"](Data_Array.monadArray)(tr$prime(Data_Foldable.mconcat(Data_Foldable.foldableArray)(Text_Smolder_Markup.monoidMarkup)(Prelude[">>="](Data_Array.bindArray)(Data_Tuple.zip(_48.value0)(Data_Array[".."](0)(Data_Array.length(_48.value0))))(function (_47) {
+                        return Prelude["return"](Data_Array.monadArray)(cellf(_48.value1)(_47.value1)(_47.value0));
                     }))));
                 }));
             };
         };
     };
-    var insertHeaderCells = function (_973) {
-        return function (_974) {
-            var _3528 = Data_Array["null"](_974.value3);
-            if (_3528) {
-                var _3529 = _973 > 0;
-                if (_3529) {
-                    return new T([  ], _974.value1, 1, [ insertHeaderCells(_973 - 1)(_974) ]);
+    
+    /**
+     *  pad tall header cells from above
+     */
+    var insertHeaderCells = function (_981) {
+        return function (_982) {
+            var _3549 = Data_Array["null"](_982.value3);
+            if (_3549) {
+                var _3550 = _981 > 0;
+                if (_3550) {
+                    return new T([  ], _982.value1, 1, [ insertHeaderCells(_981 - 1)(_982) ]);
                 };
-                if (!_3529) {
-                    return new T(_974.value0, _974.value1, 1, _974.value3);
+                if (!_3550) {
+                    return new T(_982.value0, _982.value1, 1, _982.value3);
                 };
                 throw new Error("Failed pattern match");
             };
-            if (!_3528) {
-                return new T(_974.value0, _974.value1, _974.value2, Prelude["<#>"](Data_Array.functorArray)(_974.value3)(insertHeaderCells(_973 - 1)));
+            if (!_3549) {
+                return new T(_982.value0, _982.value1, _982.value2, Prelude["<#>"](Data_Array.functorArray)(_982.value3)(insertHeaderCells(_981 - 1)));
             };
             throw new Error("Failed pattern match");
         };
     };
-    var cWidth = function (_957) {
-        return _957.value1;
+    var cWidth = function (_965) {
+        return _965.value1;
     };
+    
+    /**
+     *  merge table segments for each key of an object into one
+     */
     var cMergeObj = function (rss) {
         var maxh = Data_Foldable.foldl(Data_Foldable.foldableArray)(function (n) {
             return function (l) {
@@ -19069,47 +19457,47 @@ function (s1) { return function (s2) {
         var maxws = Prelude["<#>"](Data_Array.functorArray)(rss)(function (rs) {
             return Data_Foldable.foldl(Data_Foldable.foldableArray)(fol)(0)(rs);
         });
-        return Prelude[">>="](Data_Array.bindArray)(Data_Array[".."](0)(maxh - 1))(function (_40) {
-            return Prelude["return"](Data_Array.monadArray)(Data_Array.concat(Prelude[">>="](Data_Array.bindArray)(Data_Tuple.zip(rss)(maxws))(function (_39) {
+        return Prelude[">>="](Data_Array.bindArray)(Data_Array[".."](0)(maxh - 1))(function (_42) {
+            return Prelude["return"](Data_Array.monadArray)(Data_Array.concat(Prelude[">>="](Data_Array.bindArray)(Data_Tuple.zip(rss)(maxws))(function (_41) {
                 return Prelude["return"](Data_Array.monadArray)((function () {
-                    var _3541 = Data_Array.length(_39.value0) === 1;
-                    if (_3541) {
-                        var _3542 = _40 === 0;
-                        if (_3542) {
-                            return Data_Array.map(function (_951) {
-                                return new C(_951.value0, _951.value1, maxh, _951.value3);
-                            })(Data_Array_Unsafe.head(_39.value0));
+                    var _3562 = Data_Array.length(_41.value0) === 1;
+                    if (_3562) {
+                        var _3563 = _42 === 0;
+                        if (_3563) {
+                            return Data_Array.map(function (_959) {
+                                return new C(_959.value0, _959.value1, maxh, _959.value3);
+                            })(Data_Array_Unsafe.head(_41.value0));
                         };
-                        if (!_3542) {
-                            return Data_Maybe.fromMaybe([  ])(Data_Array["!!"](_39.value0)(_40));
+                        if (!_3563) {
+                            return Data_Maybe.fromMaybe([  ])(Data_Array["!!"](_41.value0)(_42));
                         };
                         throw new Error("Failed pattern match");
                     };
-                    if (!_3541) {
-                        return Data_Maybe.fromMaybe([ new C(Data_Argonaut_JCursor.JCursorTop.value, _39.value1, 1, Data_Argonaut_JCursor.primNull) ])(Data_Array["!!"](_39.value0)(_40));
+                    if (!_3562) {
+                        return Data_Maybe.fromMaybe([ new C(Data_Argonaut_JCursor.JCursorTop.value, _41.value1, 1, Data_Argonaut_JCursor.primNull) ])(Data_Array["!!"](_41.value0)(_42));
                     };
                     throw new Error("Failed pattern match");
                 })());
             })));
         });
     };
-    var cJsonPrim = function (_959) {
-        return _959.value3;
+    var cJsonPrim = function (_967) {
+        return _967.value3;
     };
-    var cHeight = function (_958) {
-        return _958.value2;
+    var cHeight = function (_966) {
+        return _966.value2;
     };
-    var cCursor = function (_956) {
-        return _956.value0;
+    var cCursor = function (_964) {
+        return _964.value0;
     };
     var _nattr = function (attr) {
         return function (n) {
             return function (m) {
-                var _3565 = n > 1;
-                if (_3565) {
+                var _3586 = n > 1;
+                if (_3586) {
                     return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupM)(m)(Text_Smolder_Markup.attribute(attr)(Prelude.show(Prelude.showNumber)(n)));
                 };
-                if (!_3565) {
+                if (!_3586) {
                     return m;
                 };
                 throw new Error("Failed pattern match");
@@ -19118,59 +19506,59 @@ function (s1) { return function (s2) {
     };
     var _rspan = _nattr("rowspan");
     var _cspan = _nattr("colspan");
-    var renderThead = function (_968) {
-        return function (_969) {
-            return function (_970) {
+    var renderThead = function (_976) {
+        return function (_977) {
+            return function (_978) {
                 var rs = function (i) {
                     return function (k_1) {
-                        var _3569 = Data_Array["null"](k_1);
-                        if (_3569) {
-                            return _970.value2 - i;
+                        var _3590 = Data_Array["null"](k_1);
+                        if (_3590) {
+                            return _978.value2 - i;
                         };
-                        if (!_3569) {
+                        if (!_3590) {
                             return 1;
                         };
                         throw new Error("Failed pattern match");
                     };
                 };
-                var tdf$prime = function (_977) {
-                    return function (_978) {
-                        return function (_979) {
-                            return Prelude[">>>"](Prelude.semigroupoidArr)(_cspan(_979.value1))(_rspan(rs(_977)(_979.value3)))(_969(_979));
+                var tdf$prime = function (_985) {
+                    return function (_986) {
+                        return function (_987) {
+                            return Prelude[">>>"](Prelude.semigroupoidArr)(_cspan(_987.value1))(_rspan(rs(_985)(_987.value3)))(_977(_987));
                         };
                     };
                 };
-                return renderRows(_968)(tdf$prime)(tsToRows(_970.value3));
+                return renderRows(_976)(tdf$prime)(tsToRows(_978.value3));
             };
         };
     };
     var _cN = Prelude["const"](Data_Argonaut_JCursor.primNull);
     var toPrim = Data_Argonaut_Core.foldJson(_cN)(Data_Argonaut_JCursor.primBool)(Data_Argonaut_JCursor.primNum)(Data_Argonaut_JCursor.primStr)(_cN)(_cN);
-    var mergeObjTuple = function (_962) {
-        return function (_963) {
-            return function (_964) {
-                var joms = Prelude["<#>"](Data_Array.functorArray)(_964)(Data_Argonaut_Core.toObject);
-                var _3584 = !Data_Foldable.all(Data_Foldable.foldableArray)(Data_Maybe.isJust)(joms);
-                if (_3584) {
+    var mergeObjTuple = function (_970) {
+        return function (_971) {
+            return function (_972) {
+                var joms = Prelude["<#>"](Data_Array.functorArray)(_972)(Data_Argonaut_Core.toObject);
+                var _3605 = !Data_Foldable.all(Data_Foldable.foldableArray)(Data_Maybe.isJust)(joms);
+                if (_3605) {
                     return Data_Maybe.Nothing.value;
                 };
-                if (!_3584) {
+                if (!_3605) {
                     var jos = Data_Array.catMaybes(joms);
                     var keyss = Prelude["<#>"](Data_Array.functorArray)(jos)(Data_StrMap.keys);
                     var all_keys = Data_Array.concat(keyss);
-                    var _3585 = Data_Array.length(Data_Array.nub(Prelude.eqString)(all_keys)) !== Data_Array.length(all_keys);
-                    if (_3585) {
+                    var _3606 = Data_Array.length(Data_Array.nub(Prelude.eqString)(all_keys)) !== Data_Array.length(all_keys);
+                    if (_3606) {
                         return Data_Maybe.Nothing.value;
                     };
-                    if (!_3585) {
-                        return Data_Maybe.Just.create(cMergeObj(Prelude[">>="](Data_Array.bindArray)(_962.value3)(function (_41) {
-                            var label = Data_Array_Unsafe.last(_41.value0);
+                    if (!_3606) {
+                        return Data_Maybe.Just.create(cMergeObj(Prelude[">>="](Data_Array.bindArray)(_970.value3)(function (_43) {
+                            var label = Data_Array_Unsafe.last(_43.value0);
                             var i = Data_Array.findIndex(function (ks) {
                                 return Data_Array.elemIndex(Prelude.eqString)(label)(ks) > (-1);
                             })(keyss);
                             var jo = Data_Maybe.fromMaybe(Data_StrMap.empty)(Data_Array["!!"](jos)(i));
                             var j = Data_Maybe.fromMaybe(jnull)(Data_StrMap.lookup(label)(jo));
-                            return Prelude["return"](Data_Array.monadArray)(cFromJson(_41)(Data_Argonaut_JCursor.downField(label)(Data_Argonaut_JCursor.downIndex(i)(_963)))(j));
+                            return Prelude["return"](Data_Array.monadArray)(cFromJson(_43)(Data_Argonaut_JCursor.downField(label)(Data_Argonaut_JCursor.downIndex(i)(_971)))(j));
                         })));
                     };
                     throw new Error("Failed pattern match");
@@ -19179,45 +19567,45 @@ function (s1) { return function (s2) {
             };
         };
     };
-    var cFromJson = function (_965) {
-        return function (_966) {
-            return function (_967) {
-                var _3598 = Data_Argonaut_Core.toObject(_967);
-                if (_3598 instanceof Data_Maybe.Just) {
-                    var _3599 = Data_StrMap.isEmpty(_3598.value0);
-                    if (_3599) {
-                        return [ [ new C(_966, _965.value1, 1, Data_Argonaut_JCursor.primNull) ] ];
+    var cFromJson = function (_973) {
+        return function (_974) {
+            return function (_975) {
+                var _3619 = Data_Argonaut_Core.toObject(_975);
+                if (_3619 instanceof Data_Maybe.Just) {
+                    var _3620 = Data_StrMap.isEmpty(_3619.value0);
+                    if (_3620) {
+                        return [ [ new C(_974, _973.value1, 1, Data_Argonaut_JCursor.primNull) ] ];
                     };
-                    if (!_3599) {
-                        return cMergeObj(Prelude[">>="](Data_Array.bindArray)(_965.value3)(function (_42) {
-                            var label = Data_Array_Unsafe.last(_42.value0);
-                            var j = Data_Maybe.fromMaybe(jnull)(Data_StrMap.lookup(label)(_3598.value0));
-                            return Prelude["return"](Data_Array.monadArray)(cFromJson(_42)(Data_Argonaut_JCursor.downField(label)(_966))(j));
+                    if (!_3620) {
+                        return cMergeObj(Prelude[">>="](Data_Array.bindArray)(_973.value3)(function (_44) {
+                            var label = Data_Array_Unsafe.last(_44.value0);
+                            var j = Data_Maybe.fromMaybe(jnull)(Data_StrMap.lookup(label)(_3619.value0));
+                            return Prelude["return"](Data_Array.monadArray)(cFromJson(_44)(Data_Argonaut_JCursor.downField(label)(_974))(j));
                         }));
                     };
                     throw new Error("Failed pattern match");
                 };
-                if (_3598 instanceof Data_Maybe.Nothing) {
-                    var _3606 = Data_Argonaut_Core.toArray(_967);
-                    if (_3606 instanceof Data_Maybe.Nothing) {
-                        return [ [ C.create(_966)(_965.value1)(1)(toPrim(_967)) ] ];
+                if (_3619 instanceof Data_Maybe.Nothing) {
+                    var _3627 = Data_Argonaut_Core.toArray(_975);
+                    if (_3627 instanceof Data_Maybe.Nothing) {
+                        return [ [ C.create(_974)(_973.value1)(1)(toPrim(_975)) ] ];
                     };
-                    if (_3606 instanceof Data_Maybe.Just) {
-                        var _3607 = mergeObjTuple(_965)(_966)(_3606.value0);
-                        if (_3607 instanceof Data_Maybe.Just) {
-                            return _3607.value0;
+                    if (_3627 instanceof Data_Maybe.Just) {
+                        var _3628 = mergeObjTuple(_973)(_974)(_3627.value0);
+                        if (_3628 instanceof Data_Maybe.Just) {
+                            return _3628.value0;
                         };
-                        if (_3607 instanceof Data_Maybe.Nothing) {
-                            var _3609 = _965.value2 <= 0 && (_965.value1 > 1 && Data_Maybe.isJust(widthOfPrimTuple(_965.value0)(_3606.value0)));
-                            if (_3609) {
-                                return Data_Array.singleton(Prelude[">>="](Data_Array.bindArray)(Data_Array[".."](0)(_965.value1 - 1))(function (_43) {
-                                    var j = Data_Maybe.fromMaybe(jnull)(Data_Array["!!"](_3606.value0)(_43));
-                                    return Prelude["return"](Data_Array.monadArray)(C.create(Data_Argonaut_JCursor.downIndex(_43)(_966))(1)(1)(toPrim(j)));
+                        if (_3628 instanceof Data_Maybe.Nothing) {
+                            var _3630 = _973.value2 <= 0 && (_973.value1 > 1 && Data_Maybe.isJust(widthOfPrimTuple(_973.value0)(_3627.value0)));
+                            if (_3630) {
+                                return Data_Array.singleton(Prelude[">>="](Data_Array.bindArray)(Data_Array[".."](0)(_973.value1 - 1))(function (_45) {
+                                    var j = Data_Maybe.fromMaybe(jnull)(Data_Array["!!"](_3627.value0)(_45));
+                                    return Prelude["return"](Data_Array.monadArray)(C.create(Data_Argonaut_JCursor.downIndex(_45)(_974))(1)(1)(toPrim(j)));
                                 }));
                             };
-                            if (!_3609) {
-                                return Data_Array.concat(Prelude[">>="](Data_Array.bindArray)(Data_Tuple.zip(_3606.value0)(Data_Array[".."](0)(Data_Array.length(_3606.value0))))(function (_44) {
-                                    return Prelude["return"](Data_Array.monadArray)(cFromJson(_965)(Data_Argonaut_JCursor.downIndex(_44.value1)(_966))(_44.value0));
+                            if (!_3630) {
+                                return Data_Array.concat(Prelude[">>="](Data_Array.bindArray)(Data_Tuple.zip(_3627.value0)(Data_Array[".."](0)(Data_Array.length(_3627.value0))))(function (_46) {
+                                    return Prelude["return"](Data_Array.monadArray)(cFromJson(_973)(Data_Argonaut_JCursor.downIndex(_46.value1)(_974))(_46.value0));
                                 }));
                             };
                             throw new Error("Failed pattern match");
@@ -19234,10 +19622,10 @@ function (s1) { return function (s2) {
         return function (tdf) {
             return function (t) {
                 return function (json) {
-                    var tdf$prime = function (_980) {
-                        return function (_981) {
-                            return function (_982) {
-                                return Prelude[">>>"](Prelude.semigroupoidArr)(_cspan(_982.value1))(_rspan(_982.value2))(tdf(_982));
+                    var tdf$prime = function (_988) {
+                        return function (_989) {
+                            return function (_990) {
+                                return Prelude[">>>"](Prelude.semigroupoidArr)(_cspan(_990.value1))(_rspan(_990.value2))(tdf(_990));
                             };
                         };
                     };
@@ -19662,28 +20050,28 @@ PS.Data_Json_JTable = (function () {
     };
     var renderJTable = function (o) {
         return Data_Json_JTable_Internal.renderJTableRaw((function () {
-            var _3629 = {};
-            for (var _3630 in o) {
-                if (o.hasOwnProperty(_3630)) {
-                    _3629[_3630] = o[_3630];
+            var _3650 = {};
+            for (var _3651 in o) {
+                if (o.hasOwnProperty(_3651)) {
+                    _3650[_3651] = o[_3651];
                 };
             };
-            _3629.style = (function () {
-                var _3627 = {};
-                for (var _3628 in o.style) {
-                    if (o.style.hasOwnProperty(_3628)) {
-                        _3627[_3628] = o.style[_3628];
+            _3650.style = (function () {
+                var _3648 = {};
+                for (var _3649 in o.style) {
+                    if (o.style.hasOwnProperty(_3649)) {
+                        _3648[_3649] = o.style[_3649];
                     };
                 };
-                _3627.th = function (t) {
+                _3648.th = function (t) {
                     return o.style.th(Data_Json_JTable_Internal.tPath(t));
                 };
-                _3627.td = function (c) {
+                _3648.td = function (c) {
                     return o.style.td(Data_Json_JTable_Internal.cCursor(c))(Data_Json_JTable_Internal.cJsonPrim(c));
                 };
-                return _3627;
+                return _3648;
             })();
-            return _3629;
+            return _3650;
         })());
     };
     var renderJTableArray = function (opt) {
@@ -19715,33 +20103,33 @@ PS.Data_Json_JTable = (function () {
     };
     var renderJTableDef = renderJTable(defJTableOpts);
     var debugStyle = (function () {
-        var _3631 = {};
-        for (var _3632 in noStyle) {
-            if (noStyle.hasOwnProperty(_3632)) {
-                _3631[_3632] = noStyle[_3632];
+        var _3652 = {};
+        for (var _3653 in noStyle) {
+            if (noStyle.hasOwnProperty(_3653)) {
+                _3652[_3653] = noStyle[_3653];
             };
         };
-        _3631.th = function (p) {
+        _3652.th = function (p) {
             return Text_Smolder_HTML.th(Text_Smolder_Markup.text(Data_String.joinWith(".")(p)));
         };
-        _3631.td = function (c) {
+        _3652.td = function (c) {
             return function (j) {
                 return Text_Smolder_HTML.td(Data_Foldable.mconcat(Data_Foldable.foldableArray)(Text_Smolder_Markup.monoidMarkup)([ Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.small)(Text_Smolder_HTML_Attributes.className("grey"))(Text_Smolder_Markup.text(Prelude.show(Data_Argonaut_JCursor.showJCursor)(c))), Text_Smolder_HTML.br, Text_Smolder_Markup.text(Prelude.show(Data_Argonaut_JCursor.showJsonPrim)(j)) ]));
             };
         };
-        return _3631;
+        return _3652;
     })();
     var bootstrapStyle = (function () {
-        var _3633 = {};
-        for (var _3634 in noStyle) {
-            if (noStyle.hasOwnProperty(_3634)) {
-                _3633[_3634] = noStyle[_3634];
+        var _3654 = {};
+        for (var _3655 in noStyle) {
+            if (noStyle.hasOwnProperty(_3655)) {
+                _3654[_3655] = noStyle[_3655];
             };
         };
-        _3633.table = function (m) {
+        _3654.table = function (m) {
             return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.table)(Text_Smolder_Markup.attribute("class")("table"))(m);
         };
-        return _3633;
+        return _3654;
     })();
     var alphaOrdering = function (p1) {
         return function (p2) {
@@ -19776,122 +20164,122 @@ PS.Data_Json_JTable_Examples = (function () {
     var Data_Argonaut_Core = PS.Data_Argonaut_Core;
     var Data_Date = PS.Data_Date;
     var exampleRendererSemantic = Data_Json_JTable.renderJTable((function () {
-        var _3652 = {};
-        for (var _3653 in Data_Json_JTable.defJTableOpts) {
-            if (Data_Json_JTable.defJTableOpts.hasOwnProperty(_3653)) {
-                _3652[_3653] = Data_Json_JTable.defJTableOpts[_3653];
+        var _3673 = {};
+        for (var _3674 in Data_Json_JTable.defJTableOpts) {
+            if (Data_Json_JTable.defJTableOpts.hasOwnProperty(_3674)) {
+                _3673[_3674] = Data_Json_JTable.defJTableOpts[_3674];
             };
         };
-        _3652.style = (function () {
-            var _3650 = {};
-            for (var _3651 in Data_Json_JTable.noStyle) {
-                if (Data_Json_JTable.noStyle.hasOwnProperty(_3651)) {
-                    _3650[_3651] = Data_Json_JTable.noStyle[_3651];
+        _3673.style = (function () {
+            var _3671 = {};
+            for (var _3672 in Data_Json_JTable.noStyle) {
+                if (Data_Json_JTable.noStyle.hasOwnProperty(_3672)) {
+                    _3671[_3672] = Data_Json_JTable.noStyle[_3672];
                 };
             };
-            _3650.td = function (c) {
+            _3671.td = function (c) {
                 return function (j) {
-                    var _3635 = Data_Json_JSemantic.toSemantic(j);
-                    if (_3635 instanceof Data_Json_JSemantic.Integral) {
-                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Prelude.showNumber)(_3635.value0)));
+                    var _3656 = Data_Json_JSemantic.toSemantic(j);
+                    if (_3656 instanceof Data_Json_JSemantic.Integral) {
+                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Prelude.showNumber)(_3656.value0)));
                     };
-                    if (_3635 instanceof Data_Json_JSemantic.Fractional) {
+                    if (_3656 instanceof Data_Json_JSemantic.Fractional) {
                         return Text_Smolder_HTML.td((function () {
-                            var s = Data_String.split(".")(Prelude.show(Prelude.showNumber)(_3635.value0));
+                            var s = Data_String.split(".")(Prelude.show(Prelude.showNumber)(_3656.value0));
                             return Prelude[">>="](Text_Smolder_Markup.bindMarkupM)(Text_Smolder_Markup.text(Data_Array_Unsafe.head(s)))(function () {
-                                var _3637 = Data_Array.length(s) > 1;
-                                if (_3637) {
+                                var _3658 = Data_Array.length(s) > 1;
+                                if (_3658) {
                                     return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.small)(Text_Smolder_HTML_Attributes.style("color:#aaa"))(Text_Smolder_Markup.text("." + Data_Array_Unsafe.head(Data_Array_Unsafe.tail(s))));
                                 };
-                                if (!_3637) {
+                                if (!_3658) {
                                     return Text_Smolder_Markup.text("");
                                 };
                                 throw new Error("Failed pattern match");
                             });
                         })());
                     };
-                    if (_3635 instanceof Data_Json_JSemantic.Date) {
-                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Data_Date.showDate)(_3635.value0)));
+                    if (_3656 instanceof Data_Json_JSemantic.Date) {
+                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Data_Date.showDate)(_3656.value0)));
                     };
-                    if (_3635 instanceof Data_Json_JSemantic.DateTime) {
-                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Data_Date.showDate)(_3635.value0)));
+                    if (_3656 instanceof Data_Json_JSemantic.DateTime) {
+                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Data_Date.showDate)(_3656.value0)));
                     };
-                    if (_3635 instanceof Data_Json_JSemantic.Time) {
-                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Data_Date.showDate)(_3635.value0)));
+                    if (_3656 instanceof Data_Json_JSemantic.Time) {
+                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Data_Date.showDate)(_3656.value0)));
                     };
-                    if (_3635 instanceof Data_Json_JSemantic.Interval) {
-                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Data_Date.showDate)(_3635.value0) + (" - " + Prelude.show(Data_Date.showDate)(_3635.value1))));
+                    if (_3656 instanceof Data_Json_JSemantic.Interval) {
+                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Data_Date.showDate)(_3656.value0) + (" - " + Prelude.show(Data_Date.showDate)(_3656.value1))));
                     };
-                    if (_3635 instanceof Data_Json_JSemantic.Text) {
-                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text("&laquo;" + (_3635.value0 + "&raquo;")));
+                    if (_3656 instanceof Data_Json_JSemantic.Text) {
+                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text("&laquo;" + (_3656.value0 + "&raquo;")));
                     };
-                    if (_3635 instanceof Data_Json_JSemantic.Bool) {
-                        if (_3635.value0) {
+                    if (_3656 instanceof Data_Json_JSemantic.Bool) {
+                        if (_3656.value0) {
                             return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.td)(Text_Smolder_HTML_Attributes.style("background:#cfc; text-align:center"))(Text_Smolder_Markup.text("\u2714"));
                         };
-                        if (!_3635.value0) {
+                        if (!_3656.value0) {
                             return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.td)(Text_Smolder_HTML_Attributes.style("background:#fcc; text-align:center"))(Text_Smolder_Markup.text("\u274c"));
                         };
                         throw new Error("Failed pattern match");
                     };
-                    if (_3635 instanceof Data_Json_JSemantic.Percent) {
+                    if (_3656 instanceof Data_Json_JSemantic.Percent) {
                         return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.td)(Text_Smolder_HTML_Attributes.style("text-align: right"))((function () {
-                            var _3647 = Prelude.compare(Prelude.ordNumber)(_3635.value0)(0);
-                            if (_3647 instanceof Prelude.LT) {
-                                return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.span)(Text_Smolder_HTML_Attributes.style("color:#a00"))(Text_Smolder_Markup.text(Prelude.show(Prelude.showNumber)(0 - _3635.value0) + "% \u25be"));
+                            var _3668 = Prelude.compare(Prelude.ordNumber)(_3656.value0)(0);
+                            if (_3668 instanceof Prelude.LT) {
+                                return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.span)(Text_Smolder_HTML_Attributes.style("color:#a00"))(Text_Smolder_Markup.text(Prelude.show(Prelude.showNumber)(0 - _3656.value0) + "% \u25be"));
                             };
-                            if (_3647 instanceof Prelude.EQ) {
-                                return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.span)(Text_Smolder_HTML_Attributes.style("color:#000"))(Text_Smolder_Markup.text(Prelude.show(Prelude.showNumber)(_3635.value0) + "% \u25c2"));
+                            if (_3668 instanceof Prelude.EQ) {
+                                return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.span)(Text_Smolder_HTML_Attributes.style("color:#000"))(Text_Smolder_Markup.text(Prelude.show(Prelude.showNumber)(_3656.value0) + "% \u25c2"));
                             };
-                            if (_3647 instanceof Prelude.GT) {
-                                return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.span)(Text_Smolder_HTML_Attributes.style("color:#0a0"))(Text_Smolder_Markup.text(Prelude.show(Prelude.showNumber)(_3635.value0) + "% \u25b4"));
+                            if (_3668 instanceof Prelude.GT) {
+                                return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.span)(Text_Smolder_HTML_Attributes.style("color:#0a0"))(Text_Smolder_Markup.text(Prelude.show(Prelude.showNumber)(_3656.value0) + "% \u25b4"));
                             };
                             throw new Error("Failed pattern match");
                         })());
                     };
-                    if (_3635 instanceof Data_Json_JSemantic.Currency) {
-                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Prelude.showNumber)(_3635.value0)));
+                    if (_3656 instanceof Data_Json_JSemantic.Currency) {
+                        return Text_Smolder_HTML.td(Text_Smolder_Markup.text(Prelude.show(Prelude.showNumber)(_3656.value0)));
                     };
-                    if (_3635 instanceof Data_Json_JSemantic.NA) {
+                    if (_3656 instanceof Data_Json_JSemantic.NA) {
                         return Text_Smolder_Markup["!"](Text_Smolder_Markup.attributableMarkupMF)(Text_Smolder_HTML.td)(Text_Smolder_HTML_Attributes.style("background:#ddd"))(Text_Smolder_Markup.text("&nbsp;"));
                     };
                     throw new Error("Failed pattern match");
                 };
             };
-            return _3650;
+            return _3671;
         })();
-        return _3652;
+        return _3673;
     })());
     var exampleRendererDefault = Data_Json_JTable.renderJTableDef;
     var exampleRendererDebug = Data_Json_JTable.renderJTable((function () {
-        var _3654 = {};
-        for (var _3655 in Data_Json_JTable.defJTableOpts) {
-            if (Data_Json_JTable.defJTableOpts.hasOwnProperty(_3655)) {
-                _3654[_3655] = Data_Json_JTable.defJTableOpts[_3655];
+        var _3675 = {};
+        for (var _3676 in Data_Json_JTable.defJTableOpts) {
+            if (Data_Json_JTable.defJTableOpts.hasOwnProperty(_3676)) {
+                _3675[_3676] = Data_Json_JTable.defJTableOpts[_3676];
             };
         };
-        _3654.style = Data_Json_JTable.debugStyle;
-        return _3654;
+        _3675.style = Data_Json_JTable.debugStyle;
+        return _3675;
     })());
     var exampleRendererAltHeader = Data_Json_JTable.renderJTable((function () {
-        var _3656 = {};
-        for (var _3657 in Data_Json_JTable.defJTableOpts) {
-            if (Data_Json_JTable.defJTableOpts.hasOwnProperty(_3657)) {
-                _3656[_3657] = Data_Json_JTable.defJTableOpts[_3657];
+        var _3677 = {};
+        for (var _3678 in Data_Json_JTable.defJTableOpts) {
+            if (Data_Json_JTable.defJTableOpts.hasOwnProperty(_3678)) {
+                _3677[_3678] = Data_Json_JTable.defJTableOpts[_3678];
             };
         };
-        _3656.insertHeaderCells = true;
-        return _3656;
+        _3677.insertHeaderCells = true;
+        return _3677;
     })());
     var exampleRendererAlphaColumnOrdering = Data_Json_JTable.renderJTable((function () {
-        var _3658 = {};
-        for (var _3659 in Data_Json_JTable.defJTableOpts) {
-            if (Data_Json_JTable.defJTableOpts.hasOwnProperty(_3659)) {
-                _3658[_3659] = Data_Json_JTable.defJTableOpts[_3659];
+        var _3679 = {};
+        for (var _3680 in Data_Json_JTable.defJTableOpts) {
+            if (Data_Json_JTable.defJTableOpts.hasOwnProperty(_3680)) {
+                _3679[_3680] = Data_Json_JTable.defJTableOpts[_3680];
             };
         };
-        _3658.columnOrdering = Data_Json_JTable.alphaOrdering;
-        return _3658;
+        _3679.columnOrdering = Data_Json_JTable.alphaOrdering;
+        return _3679;
     })());
     return {
         exampleRendererAltHeader: exampleRendererAltHeader, 
@@ -19935,22 +20323,22 @@ PS.Text_Smolder_Renderer_Util = (function () {
         return Text;
     })();
     var renderAttrs = function (xs) {
-        var toTuple = function (_984) {
-            return new Data_Tuple.Tuple(_984.value0, _984.value1);
+        var toTuple = function (_992) {
+            return new Data_Tuple.Tuple(_992.value0, _992.value1);
         };
         return Data_Map.fromList(Prelude.ordString)(Prelude["<$>"](Data_Array.functorArray)(toTuple)(xs));
     };
-    var renderMarkup = function (_983) {
-        if (_983 instanceof Text_Smolder_Markup.Element && _983.value1 instanceof Data_Maybe.Just) {
-            return Prelude[":"](new Element(_983.value0, renderAttrs(_983.value2), renderMarkup(_983.value1.value0)))(renderMarkup(_983.value3));
+    var renderMarkup = function (_991) {
+        if (_991 instanceof Text_Smolder_Markup.Element && _991.value1 instanceof Data_Maybe.Just) {
+            return Prelude[":"](new Element(_991.value0, renderAttrs(_991.value2), renderMarkup(_991.value1.value0)))(renderMarkup(_991.value3));
         };
-        if (_983 instanceof Text_Smolder_Markup.Element && _983.value1 instanceof Data_Maybe.Nothing) {
-            return Prelude[":"](new Element(_983.value0, renderAttrs(_983.value2), [  ]))(renderMarkup(_983.value3));
+        if (_991 instanceof Text_Smolder_Markup.Element && _991.value1 instanceof Data_Maybe.Nothing) {
+            return Prelude[":"](new Element(_991.value0, renderAttrs(_991.value2), [  ]))(renderMarkup(_991.value3));
         };
-        if (_983 instanceof Text_Smolder_Markup.Content) {
-            return Prelude[":"](new Text(_983.value0))(renderMarkup(_983.value1));
+        if (_991 instanceof Text_Smolder_Markup.Content) {
+            return Prelude[":"](new Text(_991.value0))(renderMarkup(_991.value1));
         };
-        if (_983 instanceof Text_Smolder_Markup.Return) {
+        if (_991 instanceof Text_Smolder_Markup.Return) {
             return [  ];
         };
         throw new Error("Failed pattern match");
@@ -19971,22 +20359,22 @@ PS.Text_Smolder_Renderer_String = (function () {
     var Text_Smolder_Markup = PS.Text_Smolder_Markup;
     var Data_Maybe = PS.Data_Maybe;
     var Data_Array = PS.Data_Array;
-    var renderNode = function (_985) {
-        if (_985 instanceof Text_Smolder_Renderer_Util.Element) {
-            var showTail = function (_986) {
-                if (_986.length === 0) {
+    var renderNode = function (_993) {
+        if (_993 instanceof Text_Smolder_Renderer_Util.Element) {
+            var showTail = function (_994) {
+                if (_994.length === 0) {
                     return "/>";
                 };
-                return ">" + (Data_String.joinWith("")(Prelude["<$>"](Data_Array.functorArray)(Prelude.show(showNode))(_986)) + ("</" + (_985.value0 + ">")));
+                return ">" + (Data_String.joinWith("")(Prelude["<$>"](Data_Array.functorArray)(Prelude.show(showNode))(_994)) + ("</" + (_993.value0 + ">")));
             };
             var showAttrs = function (a_1) {
                 var pair = function (k) {
                     return " " + (k + (function () {
-                        var _3678 = Data_Map.lookup(Prelude.ordString)(k)(a_1);
-                        if (_3678 instanceof Data_Maybe.Just) {
-                            return "=\"" + (_3678.value0 + "\"");
+                        var _3699 = Data_Map.lookup(Prelude.ordString)(k)(a_1);
+                        if (_3699 instanceof Data_Maybe.Just) {
+                            return "=\"" + (_3699.value0 + "\"");
                         };
-                        if (_3678 instanceof Data_Maybe.Nothing) {
+                        if (_3699 instanceof Data_Maybe.Nothing) {
                             return "";
                         };
                         throw new Error("Failed pattern match");
@@ -19994,10 +20382,10 @@ PS.Text_Smolder_Renderer_String = (function () {
                 };
                 return Data_String.joinWith("")(Prelude["<$>"](Data_Array.functorArray)(pair)(Data_Map.keys(a_1)));
             };
-            return "<" + (_985.value0 + (showAttrs(_985.value1) + showTail(_985.value2)));
+            return "<" + (_993.value0 + (showAttrs(_993.value1) + showTail(_993.value2)));
         };
-        if (_985 instanceof Text_Smolder_Renderer_Util.Text) {
-            return _985.value0;
+        if (_993 instanceof Text_Smolder_Renderer_Util.Text) {
+            return _993.value0;
         };
         throw new Error("Failed pattern match");
     };
@@ -20077,23 +20465,23 @@ PS.Test_StrongCheck_Gen = (function () {
      */
     var wrapEffect = function (__dict_Monad_949) {
         return function (fa) {
-            var g = function (_1025) {
+            var g = function (_1033) {
                 return new GenOut({
-                    state: _1025.value0, 
-                    value: _1025.value1
+                    state: _1033.value0, 
+                    value: _1033.value1
                 });
             };
             return GenT.create(Prelude["<$>"](Data_Machine_Mealy.functorMealy(__dict_Monad_949))(g)(Control_Arrow["&&&"](Data_Machine_Mealy.arrowMealy(__dict_Monad_949))(Prelude.id(Data_Machine_Mealy.categoryMealy(__dict_Monad_949)))(Data_Machine_Mealy.wrapEffect(__dict_Monad_949)(fa))));
         };
     };
-    var unGenState = function (_987) {
-        return _987.value0;
+    var unGenState = function (_995) {
+        return _995.value0;
     };
-    var unGenOut = function (_988) {
-        return _988.value0;
+    var unGenOut = function (_996) {
+        return _996.value0;
     };
-    var unGen = function (_989) {
-        return _989.value0;
+    var unGen = function (_997) {
+        return _997.value0;
     };
     
     /**
@@ -20102,26 +20490,26 @@ PS.Test_StrongCheck_Gen = (function () {
      *  | halt the transformation.
      */
     var transGen = function (__dict_Monad_950) {
-        return function (_1004) {
-            return function (_1005) {
-                return function (_1006) {
+        return function (_1012) {
+            return function (_1013) {
+                return function (_1014) {
                     var loop = function (m_1) {
                         return function (b_1) {
-                            var g = function (_1021) {
-                                if (_1021 instanceof Data_Machine_Mealy.Halt) {
+                            var g = function (_1029) {
+                                if (_1029 instanceof Data_Machine_Mealy.Halt) {
                                     return Prelude.pure(__dict_Monad_950["__superclass_Prelude.Applicative_0"]())(Data_Machine_Mealy.Halt.value);
                                 };
-                                if (_1021 instanceof Data_Machine_Mealy.Emit) {
-                                    var _3697 = _1004(b_1)(_1021.value0.value0.value);
-                                    if (_3697.value1 instanceof Data_Maybe.Nothing) {
-                                        return Data_Machine_Mealy.stepMealy(__dict_Monad_950)(_1021.value0.value0.state)(loop(_1021.value1)(_3697.value0));
+                                if (_1029 instanceof Data_Machine_Mealy.Emit) {
+                                    var _3718 = _1012(b_1)(_1029.value0.value0.value);
+                                    if (_3718.value1 instanceof Data_Maybe.Nothing) {
+                                        return Data_Machine_Mealy.stepMealy(__dict_Monad_950)(_1029.value0.value0.state)(loop(_1029.value1)(_3718.value0));
                                     };
-                                    if (_3697.value1 instanceof Data_Maybe.Just) {
+                                    if (_3718.value1 instanceof Data_Maybe.Just) {
                                         var c$prime = new GenOut({
-                                            value: _3697.value1.value0, 
-                                            state: _1021.value0.value0.state
+                                            value: _3718.value1.value0, 
+                                            state: _1029.value0.value0.state
                                         });
-                                        return Prelude.pure(__dict_Monad_950["__superclass_Prelude.Applicative_0"]())(new Data_Machine_Mealy.Emit(c$prime, loop(_1021.value1)(_3697.value0)));
+                                        return Prelude.pure(__dict_Monad_950["__superclass_Prelude.Applicative_0"]())(new Data_Machine_Mealy.Emit(c$prime, loop(_1029.value1)(_3718.value0)));
                                     };
                                     throw new Error("Failed pattern match");
                                 };
@@ -20132,7 +20520,7 @@ PS.Test_StrongCheck_Gen = (function () {
                             });
                         };
                     };
-                    return GenT.create(loop(_1006.value0)(_1005));
+                    return GenT.create(loop(_1014.value0)(_1013));
                 };
             };
         };
@@ -20142,24 +20530,24 @@ PS.Test_StrongCheck_Gen = (function () {
      *  | Converts the generator into a function that, given the initial state, 
      *  | returns a lazy list.
      */
-    var toLazyList = function (_1012) {
-        return function (_1013) {
+    var toLazyList = function (_1020) {
+        return function (_1021) {
             var loop = function (m_1) {
                 return function (s_1) {
-                    var _3711 = Control_Monad_Trampoline.runTrampoline(Data_Machine_Mealy.stepMealy(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(s_1)(m_1));
-                    if (_3711 instanceof Data_Machine_Mealy.Halt) {
+                    var _3732 = Control_Monad_Trampoline.runTrampoline(Data_Machine_Mealy.stepMealy(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(s_1)(m_1));
+                    if (_3732 instanceof Data_Machine_Mealy.Halt) {
                         return Control_Monad_ListT.nil(Data_Lazy.applicativeLazy);
                     };
-                    if (_3711 instanceof Data_Machine_Mealy.Emit) {
-                        return Control_Monad_ListT["prepend'"](Data_Lazy.applicativeLazy)(_3711.value0.value0.value)(Data_Lazy.defer(function (_) {
-                            return loop(_3711.value1)(_3711.value0.value0.state);
+                    if (_3732 instanceof Data_Machine_Mealy.Emit) {
+                        return Control_Monad_ListT["prepend'"](Data_Lazy.applicativeLazy)(_3732.value0.value0.value)(Data_Lazy.defer(function (_) {
+                            return loop(_3732.value1)(_3732.value0.value0.state);
                         }));
                     };
                     throw new Error("Failed pattern match");
                 };
             };
             return Control_Monad_ListT.wrapLazy(Data_Lazy.monadLazy)(Data_Lazy.defer(function (_) {
-                return loop(_1012.value0)(_1013);
+                return loop(_1020.value0)(_1021);
             }));
         };
     };
@@ -20169,8 +20557,8 @@ PS.Test_StrongCheck_Gen = (function () {
      */
     var stateful = function (__dict_Monad_952) {
         return function (f) {
-            return GenT.create(Prelude[">>="](Data_Machine_Mealy.bindMealy(__dict_Monad_952))(Data_Machine_Mealy.take(__dict_Monad_952)(1)(Prelude.id(Data_Machine_Mealy.categoryMealy(__dict_Monad_952))))(function (_47) {
-                return unGen(f(_47));
+            return GenT.create(Prelude[">>="](Data_Machine_Mealy.bindMealy(__dict_Monad_952))(Data_Machine_Mealy.take(__dict_Monad_952)(1)(Prelude.id(Data_Machine_Mealy.categoryMealy(__dict_Monad_952))))(function (_49) {
+                return unGen(f(_49));
             }));
         };
     };
@@ -20185,14 +20573,14 @@ PS.Test_StrongCheck_Gen = (function () {
         return function (n) {
             return function (g) {
                 return GenT.create(Data_Profunctor.lmap(Data_Machine_Mealy.profunctorMealy(__dict_Monad_953))(stateM(function (s) {
-                    var _3719 = {};
-                    for (var _3720 in s) {
-                        if (s.hasOwnProperty(_3720)) {
-                            _3719[_3720] = s[_3720];
+                    var _3740 = {};
+                    for (var _3741 in s) {
+                        if (s.hasOwnProperty(_3741)) {
+                            _3740[_3741] = s[_3741];
                         };
                     };
-                    _3719.seed = n;
-                    return _3719;
+                    _3740.seed = n;
+                    return _3740;
                 }))(unGen(g)));
             };
         };
@@ -20209,9 +20597,9 @@ PS.Test_StrongCheck_Gen = (function () {
         };
     };
     var semigroupGenT = function (__dict_Monad_955) {
-        return new Prelude.Semigroup(function (_1038) {
-            return function (_1039) {
-                return new GenT(Prelude["<>"](Data_Machine_Mealy.semigroupMealy(__dict_Monad_955))(_1038.value0)(_1039.value0));
+        return new Prelude.Semigroup(function (_1046) {
+            return function (_1047) {
+                return new GenT(Prelude["<>"](Data_Machine_Mealy.semigroupMealy(__dict_Monad_955))(_1046.value0)(_1047.value0));
             };
         });
     };
@@ -20224,14 +20612,14 @@ PS.Test_StrongCheck_Gen = (function () {
         return function (sz) {
             return function (g) {
                 return GenT.create(Data_Profunctor.lmap(Data_Machine_Mealy.profunctorMealy(__dict_Monad_957))(stateM(function (s) {
-                    var _3725 = {};
-                    for (var _3726 in s) {
-                        if (s.hasOwnProperty(_3726)) {
-                            _3725[_3726] = s[_3726];
+                    var _3746 = {};
+                    for (var _3747 in s) {
+                        if (s.hasOwnProperty(_3747)) {
+                            _3746[_3747] = s[_3747];
                         };
                     };
-                    _3725.size = sz;
-                    return _3725;
+                    _3746.size = sz;
+                    return _3746;
                 }))(unGen(g)));
             };
         };
@@ -20273,26 +20661,26 @@ PS.Test_StrongCheck_Gen = (function () {
         return Prelude["+"](Prelude.numNumber)(lcgNext(float32ToInt32(n)));
     };
     var perturbGen = function (__dict_Monad_967) {
-        return function (_992) {
-            return function (_993) {
+        return function (_1000) {
+            return function (_1001) {
                 return GenT.create(Data_Profunctor.lmap(Data_Machine_Mealy.profunctorMealy(__dict_Monad_967))(stateM(function (s) {
-                    var _3729 = {};
-                    for (var _3730 in s) {
-                        if (s.hasOwnProperty(_3730)) {
-                            _3729[_3730] = s[_3730];
+                    var _3750 = {};
+                    for (var _3751 in s) {
+                        if (s.hasOwnProperty(_3751)) {
+                            _3750[_3751] = s[_3751];
                         };
                     };
-                    _3729.seed = perturbNum(_992)(s.seed);
-                    return _3729;
-                }))(_993.value0));
+                    _3750.seed = perturbNum(_1000)(s.seed);
+                    return _3750;
+                }))(_1001.value0));
             };
         };
     };
-    var semigroupGenState = new Prelude.Semigroup(function (_1028) {
-        return function (_1029) {
+    var semigroupGenState = new Prelude.Semigroup(function (_1036) {
+        return function (_1037) {
             return new GenState({
-                seed: perturbNum(_1028.value0.seed)(_1029.value0.seed), 
-                size: _1029.value0.size
+                seed: perturbNum(_1036.value0.seed)(_1037.value0.seed), 
+                size: _1037.value0.size
             });
         };
     });
@@ -20303,11 +20691,11 @@ PS.Test_StrongCheck_Gen = (function () {
         size: 10
     }));
     var semigroupGenOut = function (__dict_Semigroup_956) {
-        return new Prelude.Semigroup(function (_1030) {
-            return function (_1031) {
+        return new Prelude.Semigroup(function (_1038) {
+            return function (_1039) {
                 return new GenOut({
-                    state: Prelude["<>"](semigroupGenState)(_1030.value0.state)(_1031.value0.state), 
-                    value: Prelude["<>"](__dict_Semigroup_956)(_1030.value0.value)(_1031.value0.value)
+                    state: Prelude["<>"](semigroupGenState)(_1038.value0.state)(_1039.value0.state), 
+                    value: Prelude["<>"](__dict_Semigroup_956)(_1038.value0.value)(_1039.value0.value)
                 });
             };
         });
@@ -20320,10 +20708,10 @@ PS.Test_StrongCheck_Gen = (function () {
             value: Data_Monoid.mempty(__dict_Monoid_962)
         }));
     };
-    var updateSeedState = function (_994) {
+    var updateSeedState = function (_1002) {
         return new GenState({
-            seed: lcgNext(_994.value0.seed), 
-            size: _994.value0.size
+            seed: lcgNext(_1002.value0.seed), 
+            size: _1002.value0.size
         });
     };
     var lcgStep = function (__dict_Monad_968) {
@@ -20335,8 +20723,8 @@ PS.Test_StrongCheck_Gen = (function () {
         }));
     };
     var updateSeedGen = function (__dict_Monad_970) {
-        return function (_995) {
-            return GenT.create(Data_Profunctor.lmap(Data_Machine_Mealy.profunctorMealy(__dict_Monad_970))(updateSeedState)(_995.value0));
+        return function (_1003) {
+            return GenT.create(Data_Profunctor.lmap(Data_Machine_Mealy.profunctorMealy(__dict_Monad_970))(updateSeedState)(_1003.value0));
         };
     };
     
@@ -20344,9 +20732,9 @@ PS.Test_StrongCheck_Gen = (function () {
      *  | Fairly interleaves two generators.
      */
     var interleave = function (__dict_Monad_971) {
-        return function (_998) {
-            return function (_999) {
-                return GenT.create(Data_Machine_Mealy.interleave(__dict_Monad_971)(_998.value0)(_999.value0));
+        return function (_1006) {
+            return function (_1007) {
+                return GenT.create(Data_Machine_Mealy.interleave(__dict_Monad_971)(_1006.value0)(_1007.value0));
             };
         };
     };
@@ -20383,9 +20771,9 @@ PS.Test_StrongCheck_Gen = (function () {
     var suchThat = function (__dict_Monad_973) {
         return function (g) {
             return function (p) {
-                var f = function (_1022) {
-                    return function (_1023) {
-                        return Data_Tuple.Tuple.create(Prelude.unit)(ifThenElse(p(_1023))(new Data_Maybe.Just(_1023))(Data_Maybe.Nothing.value));
+                var f = function (_1030) {
+                    return function (_1031) {
+                        return Data_Tuple.Tuple.create(Prelude.unit)(ifThenElse(p(_1031))(new Data_Maybe.Just(_1031))(Data_Maybe.Nothing.value));
                     };
                 };
                 return transGen(__dict_Monad_973)(f)(Prelude.unit)(g);
@@ -20412,11 +20800,11 @@ PS.Test_StrongCheck_Gen = (function () {
             };
         };
     };
-    var functorGenOut = new Prelude.Functor(function (_1032) {
-        return function (_1033) {
+    var functorGenOut = new Prelude.Functor(function (_1040) {
+        return function (_1041) {
             return new GenOut({
-                state: _1033.value0.state, 
-                value: _1032(_1033.value0.value)
+                state: _1041.value0.state, 
+                value: _1040(_1041.value0.value)
             });
         };
     });
@@ -20425,9 +20813,9 @@ PS.Test_StrongCheck_Gen = (function () {
      *  GenT instances
      */
     var functorGenT = function (__dict_Monad_975) {
-        return new Prelude.Functor(function (_1036) {
-            return function (_1037) {
-                return GenT.create(Prelude["<$>"](Data_Machine_Mealy.functorMealy(__dict_Monad_975))(Prelude["<$>"](functorGenOut)(_1036))(_1037.value0));
+        return new Prelude.Functor(function (_1044) {
+            return function (_1045) {
+                return GenT.create(Prelude["<$>"](Data_Machine_Mealy.functorMealy(__dict_Monad_975))(Prelude["<$>"](functorGenOut)(_1044))(_1045.value0));
             };
         });
     };
@@ -20437,18 +20825,18 @@ PS.Test_StrongCheck_Gen = (function () {
         })(lcgStep(__dict_Monad_969));
     };
     var stepGen = function (__dict_Monad_951) {
-        return function (_990) {
-            return function (_991) {
-                var h = function (_1014) {
-                    if (_1014 instanceof Data_Machine_Mealy.Halt) {
+        return function (_998) {
+            return function (_999) {
+                var h = function (_1022) {
+                    if (_1022 instanceof Data_Machine_Mealy.Halt) {
                         return Data_Maybe.Nothing.value;
                     };
-                    if (_1014 instanceof Data_Machine_Mealy.Emit) {
-                        return Data_Maybe.Just.create(Prelude["<$>"](functorGenOut)(Prelude.flip(Data_Tuple.Tuple.create)(new GenT(_1014.value1)))(_1014.value0));
+                    if (_1022 instanceof Data_Machine_Mealy.Emit) {
+                        return Data_Maybe.Just.create(Prelude["<$>"](functorGenOut)(Prelude.flip(Data_Tuple.Tuple.create)(new GenT(_1022.value1)))(_1022.value0));
                     };
                     throw new Error("Failed pattern match");
                 };
-                return Prelude["<$>"](((__dict_Monad_951["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(h)(Data_Machine_Mealy.stepMealy(__dict_Monad_951)(_990)(_991.value0));
+                return Prelude["<$>"](((__dict_Monad_951["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(h)(Data_Machine_Mealy.stepMealy(__dict_Monad_951)(_998)(_999.value0));
             };
         };
     };
@@ -20459,20 +20847,20 @@ PS.Test_StrongCheck_Gen = (function () {
      *  | created through folding, but also the successor generator.
      */
     var foldGen$prime = function (__dict_Monad_976) {
-        return function (_1000) {
-            return function (_1001) {
-                return function (_1002) {
-                    return function (_1003) {
+        return function (_1008) {
+            return function (_1009) {
+                return function (_1010) {
+                    return function (_1011) {
                         var loop = function (st) {
                             return function (m_1) {
                                 return function (b_1) {
-                                    var g = function (_1020) {
-                                        if (_1020 instanceof Data_Machine_Mealy.Halt) {
+                                    var g = function (_1028) {
+                                        if (_1028 instanceof Data_Machine_Mealy.Halt) {
                                             return Prelude.pure(__dict_Monad_976["__superclass_Prelude.Applicative_0"]())(new Data_Tuple.Tuple(b_1, new GenT(Data_Machine_Mealy.halt(__dict_Monad_976["__superclass_Prelude.Applicative_0"]()))));
                                         };
-                                        if (_1020 instanceof Data_Machine_Mealy.Emit) {
-                                            var b$prime = _1000(b_1)(_1020.value0.value0.value);
-                                            return Data_Maybe.maybe(Prelude.pure(__dict_Monad_976["__superclass_Prelude.Applicative_0"]())(new Data_Tuple.Tuple(b_1, new GenT(_1020.value1))))(loop(_1020.value0.value0.state)(_1020.value1))(b$prime);
+                                        if (_1028 instanceof Data_Machine_Mealy.Emit) {
+                                            var b$prime = _1008(b_1)(_1028.value0.value0.value);
+                                            return Data_Maybe.maybe(Prelude.pure(__dict_Monad_976["__superclass_Prelude.Applicative_0"]())(new Data_Tuple.Tuple(b_1, new GenT(_1028.value1))))(loop(_1028.value0.value0.state)(_1028.value1))(b$prime);
                                         };
                                         throw new Error("Failed pattern match");
                                     };
@@ -20480,7 +20868,7 @@ PS.Test_StrongCheck_Gen = (function () {
                                 };
                             };
                         };
-                        return loop(_1002)(_1003.value0)(_1001);
+                        return loop(_1010)(_1011.value0)(_1009);
                     };
                 };
             };
@@ -20508,24 +20896,24 @@ PS.Test_StrongCheck_Gen = (function () {
      *  | Will not turn a finite generator into an infinite one.
      */
     var extend = function (__dict_Monad_978) {
-        return function (_996) {
-            return function (_997) {
+        return function (_1004) {
+            return function (_1005) {
                 var loop = function (i) {
                     return function (m_1) {
                         return Data_Machine_Mealy.mealy(__dict_Monad_978["__superclass_Prelude.Applicative_0"]())(function (st) {
-                            var f = function (_1019) {
-                                if (_1019 instanceof Data_Machine_Mealy.Halt) {
-                                    var _3777 = i >= _996;
-                                    if (_3777) {
+                            var f = function (_1027) {
+                                if (_1027 instanceof Data_Machine_Mealy.Halt) {
+                                    var _3798 = i >= _1004;
+                                    if (_3798) {
                                         return Prelude.pure(__dict_Monad_978["__superclass_Prelude.Applicative_0"]())(Data_Machine_Mealy.Halt.value);
                                     };
-                                    if (!_3777) {
-                                        return Data_Machine_Mealy.stepMealy(__dict_Monad_978)(st)(loop(i)(_997.value0));
+                                    if (!_3798) {
+                                        return Data_Machine_Mealy.stepMealy(__dict_Monad_978)(st)(loop(i)(_1005.value0));
                                     };
                                     throw new Error("Failed pattern match");
                                 };
-                                if (_1019 instanceof Data_Machine_Mealy.Emit) {
-                                    return Prelude.pure(__dict_Monad_978["__superclass_Prelude.Applicative_0"]())(new Data_Machine_Mealy.Emit(_1019.value0, loop(i + 1)(_1019.value1)));
+                                if (_1027 instanceof Data_Machine_Mealy.Emit) {
+                                    return Prelude.pure(__dict_Monad_978["__superclass_Prelude.Applicative_0"]())(new Data_Machine_Mealy.Emit(_1027.value0, loop(i + 1)(_1027.value1)));
                                 };
                                 throw new Error("Failed pattern match");
                             };
@@ -20533,7 +20921,7 @@ PS.Test_StrongCheck_Gen = (function () {
                         });
                     };
                 };
-                return Prelude["<>"](semigroupGenT(__dict_Monad_978))(GenT.create(loop(0)(_997.value0)))(new GenT(_997.value0));
+                return Prelude["<>"](semigroupGenT(__dict_Monad_978))(GenT.create(loop(0)(_1005.value0)))(new GenT(_1005.value0));
             };
         };
     };
@@ -20611,11 +20999,11 @@ PS.Test_StrongCheck_Gen = (function () {
                 var f = function (b) {
                     return function (a) {
                         var b$prime = Prelude["<>"](Data_Array.semigroupArray)(b)([ a ]);
-                        var _3781 = Data_Array.length(b$prime) >= n;
-                        if (_3781) {
+                        var _3802 = Data_Array.length(b$prime) >= n;
+                        if (_3802) {
                             return new Data_Tuple.Tuple([  ], new Data_Maybe.Just(b$prime));
                         };
-                        if (!_3781) {
+                        if (!_3802) {
                             return new Data_Tuple.Tuple(b$prime, Data_Maybe.Nothing.value);
                         };
                         throw new Error("Failed pattern match");
@@ -20628,12 +21016,12 @@ PS.Test_StrongCheck_Gen = (function () {
     var evalGen = function (__dict_Monad_985) {
         return function (g) {
             return function (st) {
-                var h = function (_1015) {
-                    if (_1015 instanceof Data_Maybe.Nothing) {
+                var h = function (_1023) {
+                    if (_1023 instanceof Data_Maybe.Nothing) {
                         return Data_Maybe.Nothing.value;
                     };
-                    if (_1015 instanceof Data_Maybe.Just) {
-                        return new Data_Maybe.Just(_1015.value0.value0.value.value0);
+                    if (_1023 instanceof Data_Maybe.Just) {
+                        return new Data_Maybe.Just(_1023.value0.value0.value.value0);
                     };
                     throw new Error("Failed pattern match");
                 };
@@ -20701,11 +21089,11 @@ PS.Test_StrongCheck_Gen = (function () {
                 var f = function (xs) {
                     return function (a) {
                         var xs$prime = Prelude[":"](a)(xs);
-                        var _3788 = Data_Array.length(xs$prime) >= n;
-                        if (_3788) {
+                        var _3809 = Data_Array.length(xs$prime) >= n;
+                        if (_3809) {
                             return new Data_Tuple.Tuple([  ], new Data_Maybe.Just(xs$prime));
                         };
-                        if (!_3788) {
+                        if (!_3809) {
                             return new Data_Tuple.Tuple(xs$prime, Data_Maybe.Nothing.value);
                         };
                         throw new Error("Failed pattern match");
@@ -20750,11 +21138,11 @@ PS.Test_StrongCheck_Gen = (function () {
     var charGen = function (__dict_Monad_996) {
         return Prelude["<$>"](functorGenT(__dict_Monad_996))(Data_Char.fromCharCode)(chooseInt(__dict_Monad_996)(0)(65535));
     };
-    var applyGenOut = new Prelude.Apply(function (_1034) {
-        return function (_1035) {
+    var applyGenOut = new Prelude.Apply(function (_1042) {
+        return function (_1043) {
             return new GenOut({
-                state: _1035.value0.state, 
-                value: _1034.value0.value(_1035.value0.value)
+                state: _1043.value0.state, 
+                value: _1042.value0.value(_1043.value0.value)
             });
         };
     }, function () {
@@ -20763,9 +21151,9 @@ PS.Test_StrongCheck_Gen = (function () {
     var applyGenT = function (__dict_Monad_1000) {
         return new Prelude.Apply(function (f) {
             return function (x) {
-                return GenT.create(Prelude[">>="](Data_Machine_Mealy.bindMealy(__dict_Monad_1000))(unGen(f))(function (_60) {
-                    return Prelude[">>="](Data_Machine_Mealy.bindMealy(__dict_Monad_1000))(unGen(updateSeedGen(__dict_Monad_1000)(x)))(function (_59) {
-                        return Prelude["return"](Data_Machine_Mealy.monadMealy(__dict_Monad_1000))(Prelude["<*>"](applyGenOut)(_60)(_59));
+                return GenT.create(Prelude[">>="](Data_Machine_Mealy.bindMealy(__dict_Monad_1000))(unGen(f))(function (_62) {
+                    return Prelude[">>="](Data_Machine_Mealy.bindMealy(__dict_Monad_1000))(unGen(updateSeedGen(__dict_Monad_1000)(x)))(function (_61) {
+                        return Prelude["return"](Data_Machine_Mealy.monadMealy(__dict_Monad_1000))(Prelude["<*>"](applyGenOut)(_62)(_61));
                     });
                 }));
             };
@@ -20774,10 +21162,10 @@ PS.Test_StrongCheck_Gen = (function () {
         });
     };
     var bindGenT = function (__dict_Monad_997) {
-        return new Prelude.Bind(function (_1040) {
-            return function (_1041) {
-                return GenT.create(Prelude[">>="](Data_Machine_Mealy.bindMealy(__dict_Monad_997))(_1040.value0)(function (_61) {
-                    return unGen(updateSeedGen(__dict_Monad_997)(_1041((unGenOut(_61)).value)));
+        return new Prelude.Bind(function (_1048) {
+            return function (_1049) {
+                return GenT.create(Prelude[">>="](Data_Machine_Mealy.bindMealy(__dict_Monad_997))(_1048.value0)(function (_63) {
+                    return unGen(updateSeedGen(__dict_Monad_997)(_1049((unGenOut(_63)).value)));
                 }));
             };
         }, function () {
@@ -20791,8 +21179,8 @@ PS.Test_StrongCheck_Gen = (function () {
     var arrayOf = function (__dict_Monad_999) {
         return function (g) {
             return sized(__dict_Monad_999)(function (n) {
-                return Prelude[">>="](bindGenT(__dict_Monad_999))(chooseInt(__dict_Monad_999)(0)(n))(function (_50) {
-                    return vectorOf(__dict_Monad_999)(_50)(g);
+                return Prelude[">>="](bindGenT(__dict_Monad_999))(chooseInt(__dict_Monad_999)(0)(n))(function (_52) {
+                    return vectorOf(__dict_Monad_999)(_52)(g);
                 });
             });
         };
@@ -20806,28 +21194,28 @@ PS.Test_StrongCheck_Gen = (function () {
             return function (xs) {
                 var xxs = Prelude[":"](x)(xs);
                 var total = Data_Monoid_Sum.runSum(Data_Foldable.fold(Data_Foldable.foldableArray)(Data_Monoid_Sum.monoidSum)(Prelude["<$>"](Data_Array.functorArray)(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Monoid_Sum.Sum)(Data_Tuple.fst))(xxs)));
-                var pick = function (__copy__1016) {
-                    return function (__copy__1017) {
-                        return function (__copy__1018) {
-                            var _1016 = __copy__1016;
-                            var _1017 = __copy__1017;
-                            var _1018 = __copy__1018;
+                var pick = function (__copy__1024) {
+                    return function (__copy__1025) {
+                        return function (__copy__1026) {
+                            var _1024 = __copy__1024;
+                            var _1025 = __copy__1025;
+                            var _1026 = __copy__1026;
                             tco: while (true) {
-                                if (_1018.length === 0) {
-                                    return _1017;
+                                if (_1026.length === 0) {
+                                    return _1025;
                                 };
-                                if (_1018.length >= 1) {
-                                    var _3807 = _1018.slice(1);
-                                    var _3803 = _1016 <= (_1018[0]).value0;
-                                    if (_3803) {
-                                        return (_1018[0]).value1;
+                                if (_1026.length >= 1) {
+                                    var _3828 = _1026.slice(1);
+                                    var _3824 = _1024 <= (_1026[0]).value0;
+                                    if (_3824) {
+                                        return (_1026[0]).value1;
                                     };
-                                    if (!_3803) {
-                                        var __tco__1016 = _1016 - (_1018[0]).value0;
-                                        var __tco__1017 = _1017;
-                                        _1016 = __tco__1016;
-                                        _1017 = __tco__1017;
-                                        _1018 = _3807;
+                                    if (!_3824) {
+                                        var __tco__1024 = _1024 - (_1026[0]).value0;
+                                        var __tco__1025 = _1025;
+                                        _1024 = __tco__1024;
+                                        _1025 = __tco__1025;
+                                        _1026 = _3828;
                                         continue tco;
                                     };
                                     throw new Error("Failed pattern match");
@@ -20837,8 +21225,8 @@ PS.Test_StrongCheck_Gen = (function () {
                         };
                     };
                 };
-                return Prelude[">>="](bindGenT(__dict_Monad_992))(chooseInt(__dict_Monad_992)(1)(total))(function (_49) {
-                    return pick(_49)(Data_Tuple.snd(x))(xxs);
+                return Prelude[">>="](bindGenT(__dict_Monad_992))(chooseInt(__dict_Monad_992)(1)(total))(function (_51) {
+                    return pick(_51)(Data_Tuple.snd(x))(xxs);
                 });
             };
         };
@@ -20851,13 +21239,13 @@ PS.Test_StrongCheck_Gen = (function () {
     var oneOf = function (__dict_Monad_993) {
         return function (x) {
             return function (xs) {
-                return Prelude[">>="](bindGenT(__dict_Monad_993))(chooseInt(__dict_Monad_993)(0)(Data_Array.length(xs)))(function (_48) {
-                    var _3810 = _48 === 0;
-                    if (_3810) {
+                return Prelude[">>="](bindGenT(__dict_Monad_993))(chooseInt(__dict_Monad_993)(0)(Data_Array.length(xs)))(function (_50) {
+                    var _3831 = _50 === 0;
+                    if (_3831) {
                         return x;
                     };
-                    if (!_3810) {
-                        return Data_Maybe.fromMaybe(x)(Data_Array["!!"](xs)(_48 - 1));
+                    if (!_3831) {
+                        return Data_Maybe.fromMaybe(x)(Data_Array["!!"](xs)(_50 - 1));
                     };
                     throw new Error("Failed pattern match");
                 });
@@ -20870,21 +21258,21 @@ PS.Test_StrongCheck_Gen = (function () {
      *  | a value, and the next generator.
      */
     var applyGen = function (__dict_Monad_1001) {
-        return function (_1010) {
-            return function (_1011) {
-                var f = function (_1024) {
-                    if (_1024 instanceof Data_Machine_Mealy.Halt) {
+        return function (_1018) {
+            return function (_1019) {
+                var f = function (_1032) {
+                    if (_1032 instanceof Data_Machine_Mealy.Halt) {
                         return Data_Maybe.Nothing.value;
                     };
-                    if (_1024 instanceof Data_Machine_Mealy.Emit) {
+                    if (_1032 instanceof Data_Machine_Mealy.Emit) {
                         return Data_Maybe.Just.create(new GenOut({
-                            state: _1024.value0.value0.state, 
-                            value: new Data_Tuple.Tuple(_1024.value0.value0.value, new GenT(_1024.value1))
+                            state: _1032.value0.value0.state, 
+                            value: new Data_Tuple.Tuple(_1032.value0.value0.value, new GenT(_1032.value1))
                         }));
                     };
                     throw new Error("Failed pattern match");
                 };
-                return Prelude["<$>"](((__dict_Monad_1001["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(f)(Data_Machine_Mealy.stepMealy(__dict_Monad_1001)(_1010)(_1011.value0));
+                return Prelude["<$>"](((__dict_Monad_1001["__superclass_Prelude.Applicative_0"]())["__superclass_Prelude.Apply_0"]())["__superclass_Prelude.Functor_0"]())(f)(Data_Machine_Mealy.stepMealy(__dict_Monad_1001)(_1018)(_1019.value0));
             };
         };
     };
@@ -20907,14 +21295,14 @@ PS.Test_StrongCheck_Gen = (function () {
     var elements = function (__dict_Monad_991) {
         return function (x) {
             return function (xs) {
-                return Prelude[">>="](bindGenT(__dict_Monad_991))(chooseInt(__dict_Monad_991)(0)(Data_Array.length(xs)))(function (_54) {
+                return Prelude[">>="](bindGenT(__dict_Monad_991))(chooseInt(__dict_Monad_991)(0)(Data_Array.length(xs)))(function (_56) {
                     return Prelude.pure(applicativeGenT(__dict_Monad_991))((function () {
-                        var _3821 = _54 === 0;
-                        if (_3821) {
+                        var _3842 = _56 === 0;
+                        if (_3842) {
                             return x;
                         };
-                        if (!_3821) {
-                            return Data_Maybe.fromMaybe(x)(Data_Array["!!"](xs)(_54 - 1));
+                        if (!_3842) {
+                            return Data_Maybe.fromMaybe(x)(Data_Array["!!"](xs)(_56 - 1));
                         };
                         throw new Error("Failed pattern match");
                     })());
@@ -20936,10 +21324,10 @@ PS.Test_StrongCheck_Gen = (function () {
     var arrayOf1 = function (__dict_Monad_998) {
         return function (g) {
             return sized(__dict_Monad_998)(function (n) {
-                return Prelude[">>="](bindGenT(__dict_Monad_998))(chooseInt(__dict_Monad_998)(0)(n))(function (_53) {
-                    return Prelude[">>="](bindGenT(__dict_Monad_998))(g)(function (_52) {
-                        return Prelude[">>="](bindGenT(__dict_Monad_998))(vectorOf(__dict_Monad_998)(_53 - 1)(g))(function (_51) {
-                            return Prelude["return"](monadGenT(__dict_Monad_998))(new Data_Tuple.Tuple(_52, _51));
+                return Prelude[">>="](bindGenT(__dict_Monad_998))(chooseInt(__dict_Monad_998)(0)(n))(function (_55) {
+                    return Prelude[">>="](bindGenT(__dict_Monad_998))(g)(function (_54) {
+                        return Prelude[">>="](bindGenT(__dict_Monad_998))(vectorOf(__dict_Monad_998)(_55 - 1)(g))(function (_53) {
+                            return Prelude["return"](monadGenT(__dict_Monad_998))(new Data_Tuple.Tuple(_54, _53));
                         });
                     });
                 });
@@ -20952,17 +21340,17 @@ PS.Test_StrongCheck_Gen = (function () {
      *  | choosing exactly k elements from the specified array.
      */
     var nChooseK = function (__dict_Monad_960) {
-        return function (_1008) {
-            return function (_1009) {
-                if (_1008 === 0) {
+        return function (_1016) {
+            return function (_1017) {
+                if (_1016 === 0) {
                     return Prelude.pure(applicativeGenT(__dict_Monad_960))([  ]);
                 };
-                if (_1009.length === 0) {
+                if (_1017.length === 0) {
                     return Data_Monoid.mempty(monoidGenT(__dict_Monad_960));
                 };
-                if (_1009.length >= 1) {
-                    var _3828 = _1009.slice(1);
-                    return Prelude["<>"](semigroupGenT(__dict_Monad_960))(Prelude["<$>"](functorGenT(__dict_Monad_960))(Prelude[":"](_1009[0]))(nChooseK(__dict_Monad_960)(_1008 - 1)(_3828)))(nChooseK(__dict_Monad_960)(_1008)(_3828));
+                if (_1017.length >= 1) {
+                    var _3849 = _1017.slice(1);
+                    return Prelude["<>"](semigroupGenT(__dict_Monad_960))(Prelude["<$>"](functorGenT(__dict_Monad_960))(Prelude[":"](_1017[0]))(nChooseK(__dict_Monad_960)(_1016 - 1)(_3849)))(nChooseK(__dict_Monad_960)(_1016)(_3849));
                 };
                 throw new Error("Failed pattern match");
             };
@@ -20973,23 +21361,23 @@ PS.Test_StrongCheck_Gen = (function () {
      *  | Creates a generator that produces shuffled versions of the provided array.
      */
     var shuffleArray = function (__dict_Monad_994) {
-        var shuffle0 = function (_1026) {
-            return function (_1027) {
-                if (_1027.length === 0) {
-                    return Prelude.pure(applicativeGenT(__dict_Monad_994))(_1026);
+        var shuffle0 = function (_1034) {
+            return function (_1035) {
+                if (_1035.length === 0) {
+                    return Prelude.pure(applicativeGenT(__dict_Monad_994))(_1034);
                 };
-                return Prelude[">>="](bindGenT(__dict_Monad_994))(chooseInt(__dict_Monad_994)(0)(Data_Array.length(_1027) - 1))(function (_58) {
-                    var acc$prime = Prelude["<>"](Data_Array.semigroupArray)(_1026)(Data_Maybe.maybe([  ])(Prelude.flip(Prelude[":"])([  ]))(Data_Array["!!"](_1027)(_58)));
-                    return shuffle0(acc$prime)(Data_Array.deleteAt(_58)(1)(_1027));
+                return Prelude[">>="](bindGenT(__dict_Monad_994))(chooseInt(__dict_Monad_994)(0)(Data_Array.length(_1035) - 1))(function (_60) {
+                    var acc$prime = Prelude["<>"](Data_Array.semigroupArray)(_1034)(Data_Maybe.maybe([  ])(Prelude.flip(Prelude[":"])([  ]))(Data_Array["!!"](_1035)(_60)));
+                    return shuffle0(acc$prime)(Data_Array.deleteAt(_60)(1)(_1035));
                 });
             };
         };
         return shuffle0([  ]);
     };
     var altGenT = function (__dict_Monad_1004) {
-        return new Control_Alt.Alt(function (_1042) {
-            return function (_1043) {
-                return GenT.create(Control_Alt["<|>"](Data_Machine_Mealy.altMealy(__dict_Monad_1004))(_1042.value0)(_1043.value0));
+        return new Control_Alt.Alt(function (_1050) {
+            return function (_1051) {
+                return GenT.create(Control_Alt["<|>"](Data_Machine_Mealy.altMealy(__dict_Monad_1004))(_1050.value0)(_1051.value0));
             };
         }, function () {
             return functorGenT(__dict_Monad_1004);
@@ -21060,19 +21448,19 @@ PS.Test_StrongCheck_Gen = (function () {
      *  | the specified array.
      */
     var perms = function (__dict_Monad_1007) {
-        return function (_1007) {
-            if (_1007.length === 0) {
+        return function (_1015) {
+            if (_1015.length === 0) {
                 return Prelude.pure(applicativeGenT(__dict_Monad_1007))([  ]);
             };
-            if (_1007.length >= 1) {
-                var _3839 = _1007.slice(1);
-                return Prelude[">>="](bindGenT(__dict_Monad_1007))(perms(__dict_Monad_1007)(_3839))(function (_55) {
+            if (_1015.length >= 1) {
+                var _3860 = _1015.slice(1);
+                return Prelude[">>="](bindGenT(__dict_Monad_1007))(perms(__dict_Monad_1007)(_3860))(function (_57) {
                     var f = function (n) {
-                        var suffix = Data_Array.drop(n)(_55);
-                        var prefix = Data_Array.take(n)(_55);
-                        return Prelude["<>"](Data_Array.semigroupArray)(prefix)(Prelude["<>"](Data_Array.semigroupArray)([ _1007[0] ])(suffix));
+                        var suffix = Data_Array.drop(n)(_57);
+                        var prefix = Data_Array.take(n)(_57);
+                        return Prelude["<>"](Data_Array.semigroupArray)(prefix)(Prelude["<>"](Data_Array.semigroupArray)([ _1015[0] ])(suffix));
                     };
-                    return allInArray(__dict_Monad_1007)(Prelude["<$>"](Data_Array.functorArray)(f)(Data_Array.range(0)(Data_Array.length(_55))));
+                    return allInArray(__dict_Monad_1007)(Prelude["<$>"](Data_Array.functorArray)(f)(Data_Array.range(0)(Data_Array.length(_57))));
                 });
             };
             throw new Error("Failed pattern match");
@@ -21087,9 +21475,9 @@ PS.Test_StrongCheck_Gen = (function () {
     var shuffle$prime = function (__dict_Monad_1008) {
         return function (n) {
             return function (g) {
-                return Prelude[">>="](bindGenT(__dict_Monad_1008))(chunked(__dict_Monad_1008)(n)(g))(function (_57) {
-                    return Prelude[">>="](bindGenT(__dict_Monad_1008))(shuffleArray(__dict_Monad_1008)(_57))(function (_56) {
-                        return allInArray(__dict_Monad_1008)(_56);
+                return Prelude[">>="](bindGenT(__dict_Monad_1008))(chunked(__dict_Monad_1008)(n)(g))(function (_59) {
+                    return Prelude[">>="](bindGenT(__dict_Monad_1008))(shuffleArray(__dict_Monad_1008)(_59))(function (_58) {
+                        return allInArray(__dict_Monad_1008)(_58);
                     });
                 });
             };
@@ -21239,11 +21627,11 @@ PS.Test_StrongCheck = (function () {
     var Testable = function (test) {
         this.test = test;
     };
-    var $less$qmark$greater = function (_1044) {
-        if (_1044) {
+    var $less$qmark$greater = function (_1052) {
+        if (_1052) {
             return Prelude["const"](Success.value);
         };
-        if (!_1044) {
+        if (!_1052) {
             return Failed.create;
         };
         throw new Error("Failed pattern match");
@@ -21268,25 +21656,25 @@ PS.Test_StrongCheck = (function () {
             };
         };
     };
-    var throwOnFirstFailure = function (__copy__1045) {
-        return function (__copy__1046) {
-            var _1045 = __copy__1045;
-            var _1046 = __copy__1046;
+    var throwOnFirstFailure = function (__copy__1053) {
+        return function (__copy__1054) {
+            var _1053 = __copy__1053;
+            var _1054 = __copy__1054;
             tco: while (true) {
-                if (_1046.length === 0) {
+                if (_1054.length === 0) {
                     return Prelude["return"](Control_Monad_Eff.monadEff)(Prelude.unit);
                 };
-                if (_1046.length >= 1) {
-                    var _3847 = _1046.slice(1);
-                    if (_1046[0] instanceof Failed) {
-                        return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("Test " + (Prelude.show(Prelude.showNumber)(_1045) + (" failed: \n" + (_1046[0]).value0))));
+                if (_1054.length >= 1) {
+                    var _3868 = _1054.slice(1);
+                    if (_1054[0] instanceof Failed) {
+                        return Control_Monad_Eff_Exception.throwException(Control_Monad_Eff_Exception.error("Test " + (Prelude.show(Prelude.showNumber)(_1053) + (" failed: \n" + (_1054[0]).value0))));
                     };
                 };
-                if (_1046.length >= 1) {
-                    var _3849 = _1046.slice(1);
-                    var __tco__1045 = _1045 + 1;
-                    _1045 = __tco__1045;
-                    _1046 = _3849;
+                if (_1054.length >= 1) {
+                    var _3870 = _1054.slice(1);
+                    var __tco__1053 = _1053 + 1;
+                    _1053 = __tco__1053;
+                    _1054 = _3870;
                     continue tco;
                 };
                 throw new Error("Failed pattern match");
@@ -21294,11 +21682,11 @@ PS.Test_StrongCheck = (function () {
         };
     };
     var testableResult = new Testable(Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))));
-    var testableBoolean = new Testable(function (_1082) {
-        if (_1082) {
+    var testableBoolean = new Testable(function (_1090) {
+        if (_1090) {
             return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Success.value);
         };
-        if (!_1082) {
+        if (!_1090) {
             return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(new Failed("Test returned false"));
         };
         throw new Error("Failed pattern match");
@@ -21306,54 +21694,54 @@ PS.Test_StrongCheck = (function () {
     var test = function (dict) {
         return dict.test;
     };
-    var showResult = new Prelude.Show(function (_1058) {
-        if (_1058 instanceof Success) {
+    var showResult = new Prelude.Show(function (_1066) {
+        if (_1066 instanceof Success) {
             return "Success";
         };
-        if (_1058 instanceof Failed) {
-            return "Failed: " + _1058.value0;
+        if (_1066 instanceof Failed) {
+            return "Failed: " + _1066.value0;
         };
         throw new Error("Failed pattern match");
     });
     var showArbEnum = function (__dict_Show_1014) {
-        return new Prelude.Show(function (_1071) {
-            return "ArbEnum " + Prelude.show(__dict_Show_1014)(_1071);
+        return new Prelude.Show(function (_1079) {
+            return "ArbEnum " + Prelude.show(__dict_Show_1014)(_1079);
         });
     };
-    var semigroupResult = new Prelude.Semigroup(function (_1059) {
-        return function (_1060) {
-            if (_1059 instanceof Success && _1060 instanceof Success) {
+    var semigroupResult = new Prelude.Semigroup(function (_1067) {
+        return function (_1068) {
+            if (_1067 instanceof Success && _1068 instanceof Success) {
                 return Success.value;
             };
-            if (_1059 instanceof Failed && _1060 instanceof Success) {
-                return new Failed(_1059.value0);
+            if (_1067 instanceof Failed && _1068 instanceof Success) {
+                return new Failed(_1067.value0);
             };
-            if (_1059 instanceof Success && _1060 instanceof Failed) {
-                return new Failed(_1060.value0);
+            if (_1067 instanceof Success && _1068 instanceof Failed) {
+                return new Failed(_1068.value0);
             };
-            if (_1059 instanceof Failed && _1060 instanceof Failed) {
-                return new Failed(_1059.value0 + ("\n" + _1060.value0));
+            if (_1067 instanceof Failed && _1068 instanceof Failed) {
+                return new Failed(_1067.value0 + ("\n" + _1068.value0));
             };
             throw new Error("Failed pattern match");
         };
     });
-    var runSignum = function (_1048) {
-        return _1048;
+    var runSignum = function (_1056) {
+        return _1056;
     };
-    var runPositive = function (_1049) {
-        return _1049;
+    var runPositive = function (_1057) {
+        return _1057;
     };
-    var runNonZero = function (_1051) {
-        return _1051;
+    var runNonZero = function (_1059) {
+        return _1059;
     };
-    var runNegative = function (_1050) {
-        return _1050;
+    var runNegative = function (_1058) {
+        return _1058;
     };
-    var runArbEnum = function (_1052) {
-        return _1052;
+    var runArbEnum = function (_1060) {
+        return _1060;
     };
-    var runAlphaNumString = function (_1047) {
-        return _1047;
+    var runAlphaNumString = function (_1055) {
+        return _1055;
     };
     var monoidResult = new Data_Monoid.Monoid(function () {
         return semigroupResult;
@@ -21363,13 +21751,13 @@ PS.Test_StrongCheck = (function () {
         return function (b) {
             return !Prelude["=="](eqResult)(a)(b);
         };
-    }, function (_1056) {
-        return function (_1057) {
-            if (_1056 instanceof Success && _1057 instanceof Success) {
+    }, function (_1064) {
+        return function (_1065) {
+            if (_1064 instanceof Success && _1065 instanceof Success) {
                 return true;
             };
-            if (_1056 instanceof Failed && _1057 instanceof Failed) {
-                return _1056.value0 === _1057.value0;
+            if (_1064 instanceof Failed && _1065 instanceof Failed) {
+                return _1064.value0 === _1065.value0;
             };
             return false;
         };
@@ -21379,18 +21767,18 @@ PS.Test_StrongCheck = (function () {
             return function (b) {
                 return !Prelude["=="](eqArbEnum(__dict_Eq_1016))(a)(b);
             };
-        }, function (_1067) {
-            return function (_1068) {
-                return Prelude["=="](__dict_Eq_1016)(_1067)(_1068);
+        }, function (_1075) {
+            return function (_1076) {
+                return Prelude["=="](__dict_Eq_1016)(_1075)(_1076);
             };
         });
     };
     var ordArbEnum = function (__dict_Ord_1015) {
         return new Prelude.Ord(function () {
             return eqArbEnum(__dict_Ord_1015["__superclass_Prelude.Eq_0"]());
-        }, function (_1069) {
-            return function (_1070) {
-                return Prelude.compare(__dict_Ord_1015)(_1069)(_1070);
+        }, function (_1077) {
+            return function (_1078) {
+                return Prelude.compare(__dict_Ord_1015)(_1077)(_1078);
             };
         });
     };
@@ -21417,28 +21805,28 @@ PS.Test_StrongCheck = (function () {
         };
     };
     var countSuccesses = (function () {
-        var countSuccesses$prime = function (__copy__1054) {
-            return function (__copy__1055) {
-                var _1054 = __copy__1054;
-                var _1055 = __copy__1055;
+        var countSuccesses$prime = function (__copy__1062) {
+            return function (__copy__1063) {
+                var _1062 = __copy__1062;
+                var _1063 = __copy__1063;
                 tco: while (true) {
-                    if (_1055.length === 0) {
-                        return _1054;
+                    if (_1063.length === 0) {
+                        return _1062;
                     };
-                    if (_1055.length >= 1) {
-                        var _3877 = _1055.slice(1);
-                        if (_1055[0] instanceof Success) {
-                            var __tco__1054 = _1054 + 1;
-                            _1054 = __tco__1054;
-                            _1055 = _3877;
+                    if (_1063.length >= 1) {
+                        var _3898 = _1063.slice(1);
+                        if (_1063[0] instanceof Success) {
+                            var __tco__1062 = _1062 + 1;
+                            _1062 = __tco__1062;
+                            _1063 = _3898;
                             continue tco;
                         };
                     };
-                    if (_1055.length >= 1) {
-                        var _3879 = _1055.slice(1);
-                        var __tco__1054 = _1054;
-                        _1054 = __tco__1054;
-                        _1055 = _3879;
+                    if (_1063.length >= 1) {
+                        var _3900 = _1063.slice(1);
+                        var __tco__1062 = _1062;
+                        _1062 = __tco__1062;
+                        _1063 = _3900;
                         continue tco;
                     };
                     throw new Error("Failed pattern match");
@@ -21458,11 +21846,11 @@ PS.Test_StrongCheck = (function () {
                                 var results = quickCheckPure(__dict_Testable_1019)(n)(s)(prop);
                                 return countSuccesses(results) / Data_Array.length(results);
                             };
-                            var measure$prime = function (_1053) {
-                                if (_1053 === 0) {
+                            var measure$prime = function (_1061) {
+                                if (_1061 === 0) {
                                     return [  ];
                                 };
-                                return Prelude["<>"](Data_Array.semigroupArray)(measure$prime(_1053 - 1))([ measure(_1053 * x) ]);
+                                return Prelude["<>"](Data_Array.semigroupArray)(measure$prime(_1061 - 1))([ measure(_1061 * x) ]);
                             };
                             var freqs = measure$prime(4);
                             var dists = Prelude["<$>"](Data_Array.functorArray)(Prelude["<<<"](Prelude.semigroupoidArr)(Math.abs)(Prelude["-"](Prelude.numNumber)(freq)))(freqs);
@@ -21473,26 +21861,26 @@ PS.Test_StrongCheck = (function () {
                             })(Prelude[":"](1)(dists))(dists);
                             var fails = Data_Array.length(Data_Array.filter(Prelude[">"](Prelude.ordNumber)(0))(dirs));
                             var succs = Data_Array.filter(Prelude["<="](Prelude.ordNumber)(0))(dirs);
-                            var _3881 = fails > 1;
-                            if (_3881) {
-                                var _3882 = x < 1000000;
-                                if (_3882) {
+                            var _3902 = fails > 1;
+                            if (_3902) {
+                                var _3903 = x < 1000000;
+                                if (_3903) {
                                     var __tco_x = x * 10;
                                     x = __tco_x;
                                     continue tco;
                                 };
-                                if (!_3882) {
+                                if (!_3903) {
                                     return Failed.create("Divergence of statistical test: freqs = " + (Prelude.show(Prelude.showArray(Prelude.showNumber))(freqs) + (", dists = " + (Prelude.show(Prelude.showArray(Prelude.showNumber))(dists) + (", dirs = " + (Prelude.show(Prelude.showArray(Prelude.showNumber))(dirs) + (", fails: " + Prelude.show(Prelude.showNumber)(fails))))))));
                                 };
                                 throw new Error("Failed pattern match");
                             };
-                            if (!_3881) {
+                            if (!_3902) {
                                 return Data_Maybe.maybe(new Failed("Error!"))(function (l) {
-                                    var _3883 = l > 0.5;
-                                    if (_3883) {
+                                    var _3904 = l > 0.5;
+                                    if (_3904) {
                                         return Failed.create("Final convergence distance too low: " + Prelude.show(Prelude.showNumber)(l));
                                     };
-                                    if (!_3883) {
+                                    if (!_3904) {
                                         return Success.value;
                                     };
                                     throw new Error("Failed pattern match");
@@ -21515,8 +21903,8 @@ PS.Test_StrongCheck = (function () {
         return function (freq) {
             return function (prop) {
                 return function __do() {
-                    var _62 = Control_Monad_Eff_Random.random();
-                    return Prelude["<<<"](Prelude.semigroupoidArr)(Debug_Trace.trace)(Prelude.show(showResult))(statCheckPure(__dict_Testable_1020)(_62)(freq)(prop))();
+                    var _64 = Control_Monad_Eff_Random.random();
+                    return Prelude["<<<"](Prelude.semigroupoidArr)(Debug_Trace.trace)(Prelude.show(showResult))(statCheckPure(__dict_Testable_1020)(_64)(freq)(prop))();
                 };
             };
         };
@@ -21526,43 +21914,43 @@ PS.Test_StrongCheck = (function () {
     };
     var coarbTuple = function (__dict_CoArbitrary_1021) {
         return function (__dict_CoArbitrary_1022) {
-            return new CoArbitrary(function (_1078) {
-                return Prelude[">>>"](Prelude.semigroupoidArr)(coarbitrary(__dict_CoArbitrary_1021)(_1078.value0))(coarbitrary(__dict_CoArbitrary_1022)(_1078.value1));
+            return new CoArbitrary(function (_1086) {
+                return Prelude[">>>"](Prelude.semigroupoidArr)(coarbitrary(__dict_CoArbitrary_1021)(_1086.value0))(coarbitrary(__dict_CoArbitrary_1022)(_1086.value1));
             });
         };
     };
     var coarbNumber = new CoArbitrary(Test_StrongCheck_Gen.perturbGen(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)));
-    var coarbPositive = new CoArbitrary(function (_1061) {
-        return coarbitrary(coarbNumber)(_1061);
+    var coarbPositive = new CoArbitrary(function (_1069) {
+        return coarbitrary(coarbNumber)(_1069);
     });
-    var coarbSignum = new CoArbitrary(function (_1064) {
-        return coarbitrary(coarbNumber)(_1064);
+    var coarbSignum = new CoArbitrary(function (_1072) {
+        return coarbitrary(coarbNumber)(_1072);
     });
-    var coarbNonZero = new CoArbitrary(function (_1063) {
-        return coarbitrary(coarbNumber)(_1063);
+    var coarbNonZero = new CoArbitrary(function (_1071) {
+        return coarbitrary(coarbNumber)(_1071);
     });
-    var coarbNegative = new CoArbitrary(function (_1062) {
-        return coarbitrary(coarbNumber)(_1062);
+    var coarbNegative = new CoArbitrary(function (_1070) {
+        return coarbitrary(coarbNumber)(_1070);
     });
     var coarbMaybe = function (__dict_CoArbitrary_1023) {
-        return new CoArbitrary(function (_1080) {
-            if (_1080 instanceof Data_Maybe.Nothing) {
+        return new CoArbitrary(function (_1088) {
+            if (_1088 instanceof Data_Maybe.Nothing) {
                 return Test_StrongCheck_Gen.perturbGen(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(1);
             };
-            if (_1080 instanceof Data_Maybe.Just) {
-                return coarbitrary(__dict_CoArbitrary_1023)(_1080.value0);
+            if (_1088 instanceof Data_Maybe.Just) {
+                return coarbitrary(__dict_CoArbitrary_1023)(_1088.value0);
             };
             throw new Error("Failed pattern match");
         });
     };
     var coarbEither = function (__dict_CoArbitrary_1024) {
         return function (__dict_CoArbitrary_1025) {
-            return new CoArbitrary(function (_1079) {
-                if (_1079 instanceof Data_Either.Left) {
-                    return coarbitrary(__dict_CoArbitrary_1024)(_1079.value0);
+            return new CoArbitrary(function (_1087) {
+                if (_1087 instanceof Data_Either.Left) {
+                    return coarbitrary(__dict_CoArbitrary_1024)(_1087.value0);
                 };
-                if (_1079 instanceof Data_Either.Right) {
-                    return coarbitrary(__dict_CoArbitrary_1025)(_1079.value0);
+                if (_1087 instanceof Data_Either.Right) {
+                    return coarbitrary(__dict_CoArbitrary_1025)(_1087.value0);
                 };
                 throw new Error("Failed pattern match");
             });
@@ -21571,23 +21959,23 @@ PS.Test_StrongCheck = (function () {
     var coarbChar = new CoArbitrary(function (c) {
         return coarbitrary(coarbNumber)(Data_Char.toCharCode(c));
     });
-    var coarbBoolean = new CoArbitrary(function (_1076) {
-        if (_1076) {
+    var coarbBoolean = new CoArbitrary(function (_1084) {
+        if (_1084) {
             return Test_StrongCheck_Gen.perturbGen(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(1);
         };
-        if (!_1076) {
+        if (!_1084) {
             return Test_StrongCheck_Gen.perturbGen(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(2);
         };
         throw new Error("Failed pattern match");
     });
     var coarbArray = function (__dict_CoArbitrary_1026) {
-        return new CoArbitrary(function (_1081) {
-            if (_1081.length === 0) {
+        return new CoArbitrary(function (_1089) {
+            if (_1089.length === 0) {
                 return Prelude.id(Prelude.categoryArr);
             };
-            if (_1081.length >= 1) {
-                var _3900 = _1081.slice(1);
-                return Prelude["<<<"](Prelude.semigroupoidArr)(coarbitrary(coarbArray(__dict_CoArbitrary_1026))(_3900))(coarbitrary(__dict_CoArbitrary_1026)(_1081[0]));
+            if (_1089.length >= 1) {
+                var _3921 = _1089.slice(1);
+                return Prelude["<<<"](Prelude.semigroupoidArr)(coarbitrary(coarbArray(__dict_CoArbitrary_1026))(_3921))(coarbitrary(__dict_CoArbitrary_1026)(_1089[0]));
             };
             throw new Error("Failed pattern match");
         });
@@ -21596,20 +21984,20 @@ PS.Test_StrongCheck = (function () {
         return coarbitrary(coarbArray(coarbMaybe(coarbNumber)))(Prelude["<$>"](Data_Array.functorArray)(Data_String.charCodeAt(0))(Data_String.split("")(s)));
     });
     var coarbArbEnum = function (__dict_Enum_1027) {
-        return new CoArbitrary(function (_1066) {
-            return coarbitrary(coarbNumber)(Data_Enum.fromEnum(__dict_Enum_1027)(_1066));
+        return new CoArbitrary(function (_1074) {
+            return coarbitrary(coarbNumber)(Data_Enum.fromEnum(__dict_Enum_1027)(_1074));
         });
     };
-    var coarbAlphaNumString = new CoArbitrary(function (_1077) {
-        return coarbitrary(coarbString)(_1077);
+    var coarbAlphaNumString = new CoArbitrary(function (_1085) {
+        return coarbitrary(coarbString)(_1085);
     });
     var check = function (__dict_Testable_1028) {
         return function (f) {
             return function (prop) {
                 return function __do() {
-                    var _63 = Control_Monad_Eff_Random.random();
+                    var _65 = Control_Monad_Eff_Random.random();
                     return (function () {
-                        var results = f(_63)(prop);
+                        var results = f(_65)(prop);
                         var successes = countSuccesses(results);
                         return function __do() {
                             Debug_Trace.trace(Prelude.show(Prelude.showNumber)(successes) + ("/" + (Prelude.show(Prelude.showNumber)(Data_Array.length(results)) + " test(s) passed.")))();
@@ -21668,8 +22056,8 @@ PS.Test_StrongCheck = (function () {
     var testableFunction = function (__dict_Arbitrary_1036) {
         return function (__dict_Testable_1037) {
             return new Testable(function (f) {
-                return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(__dict_Arbitrary_1036))(function (_75) {
-                    return test(__dict_Testable_1037)(f(_75));
+                return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(__dict_Arbitrary_1036))(function (_77) {
+                    return test(__dict_Testable_1037)(f(_77));
                 });
             });
         };
@@ -21702,31 +22090,31 @@ PS.Test_StrongCheck = (function () {
         return new Data_Enum.Enum(function () {
             return ordArbEnum(__dict_Enum_1044["__superclass_Prelude.Ord_0"]());
         }, (function () {
-            var f = function (_1075) {
-                return _1075;
+            var f = function (_1083) {
+                return _1083;
             };
             return arbEnumCardinality(__dict_Enum_1044)(f);
-        })(), Data_Enum.firstEnum(__dict_Enum_1044), function (_1074) {
-            return Data_Enum.fromEnum(__dict_Enum_1044)(_1074);
-        }, Data_Enum.lastEnum(__dict_Enum_1044), function (_1072) {
-            return Prelude["<$>"](Data_Maybe.functorMaybe)(ArbEnum)(Data_Enum.pred(__dict_Enum_1044)(_1072));
-        }, function (_1073) {
-            return Prelude["<$>"](Data_Maybe.functorMaybe)(ArbEnum)(Data_Enum.succ(__dict_Enum_1044)(_1073));
+        })(), Data_Enum.firstEnum(__dict_Enum_1044), function (_1082) {
+            return Data_Enum.fromEnum(__dict_Enum_1044)(_1082);
+        }, Data_Enum.lastEnum(__dict_Enum_1044), function (_1080) {
+            return Prelude["<$>"](Data_Maybe.functorMaybe)(ArbEnum)(Data_Enum.pred(__dict_Enum_1044)(_1080));
+        }, function (_1081) {
+            return Prelude["<$>"](Data_Maybe.functorMaybe)(ArbEnum)(Data_Enum.succ(__dict_Enum_1044)(_1081));
         }, function (v) {
             return Prelude["<$>"](Data_Maybe.functorMaybe)(ArbEnum)(Data_Enum.toEnum(__dict_Enum_1044)(v));
         });
     };
     var arbChar = new Arbitrary(Test_StrongCheck_Gen.charGen(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)));
-    var arbBoolean = new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Test_StrongCheck_Gen.uniform(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(function (_67) {
-        return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))((_67 * 2) < 1);
+    var arbBoolean = new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Test_StrongCheck_Gen.uniform(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(function (_69) {
+        return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))((_69 * 2) < 1);
     }));
     var arbEither = function (__dict_Arbitrary_1045) {
         return function (__dict_Arbitrary_1046) {
-            return new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbBoolean))(function (_69) {
-                if (_69) {
+            return new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbBoolean))(function (_71) {
+                if (_71) {
                     return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Either.Left.create)(arbitrary(__dict_Arbitrary_1045));
                 };
-                if (!_69) {
+                if (!_71) {
                     return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Either.Right.create)(arbitrary(__dict_Arbitrary_1046));
                 };
                 throw new Error("Failed pattern match");
@@ -21734,50 +22122,50 @@ PS.Test_StrongCheck = (function () {
         };
     };
     var arbMaybe = function (__dict_Arbitrary_1040) {
-        return new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbBoolean))(function (_70) {
-            if (_70) {
+        return new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbBoolean))(function (_72) {
+            if (_72) {
                 return Prelude.pure(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Maybe.Nothing.value);
             };
-            if (!_70) {
+            if (!_72) {
                 return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Maybe.Just.create)(arbitrary(__dict_Arbitrary_1040));
             };
             throw new Error("Failed pattern match");
         }));
     };
-    var arbNonZero = new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbNumber))(function (_65) {
-        return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbBoolean))(function (_64) {
+    var arbNonZero = new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbNumber))(function (_67) {
+        return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbBoolean))(function (_66) {
             var sign = (function () {
-                if (_64) {
+                if (_66) {
                     return 1.0;
                 };
-                if (!_64) {
+                if (!_66) {
                     return -1.0;
                 };
                 throw new Error("Failed pattern match");
             })();
-            return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(_65 * maxNumber * sign);
+            return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(_67 * maxNumber * sign);
         });
     }));
-    var arbSignum = new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbBoolean))(function (_66) {
+    var arbSignum = new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbBoolean))(function (_68) {
         return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))((function () {
-            if (_66) {
+            if (_68) {
                 return 1;
             };
-            if (!_66) {
+            if (!_68) {
                 return -1;
             };
             throw new Error("Failed pattern match");
         })());
     }));
     var arbArray = function (__dict_Arbitrary_1047) {
-        return new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbBoolean))(function (_74) {
-            if (_74) {
+        return new Arbitrary(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbBoolean))(function (_76) {
+            if (_76) {
                 return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))([  ]);
             };
-            if (!_74) {
-                return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(__dict_Arbitrary_1047))(function (_73) {
-                    return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbArray(__dict_Arbitrary_1047)))(function (_72) {
-                        return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude[":"](_73)(_72));
+            if (!_76) {
+                return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(__dict_Arbitrary_1047))(function (_75) {
+                    return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbArray(__dict_Arbitrary_1047)))(function (_74) {
+                        return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude[":"](_75)(_74));
                     });
                 });
             };
@@ -21789,8 +22177,8 @@ PS.Test_StrongCheck = (function () {
         return function (__dict_CoArbitrary_1035) {
             return new CoArbitrary(function (f) {
                 return function (gen) {
-                    return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbArray(__dict_Arbitrary_1034)))(function (_71) {
-                        return coarbitrary(coarbArray(__dict_CoArbitrary_1035))(Data_Array.map(f)(_71))(gen);
+                    return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbArray(__dict_Arbitrary_1034)))(function (_73) {
+                        return coarbitrary(coarbArray(__dict_CoArbitrary_1035))(Data_Array.map(f)(_73))(gen);
                     });
                 };
             });
@@ -21798,8 +22186,8 @@ PS.Test_StrongCheck = (function () {
     };
     var arbArbEnum = function (__dict_Enum_1048) {
         return new Arbitrary((function () {
-            var f = function (_1065) {
-                return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe_Unsafe.fromJust)(Data_Enum.toEnum(__dict_Enum_1048)))(Test_StrongCheck_Gen.chooseInt(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(0)(_1065 - 1));
+            var f = function (_1073) {
+                return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<<<"](Prelude.semigroupoidArr)(Data_Maybe_Unsafe.fromJust)(Data_Enum.toEnum(__dict_Enum_1048)))(Test_StrongCheck_Gen.chooseInt(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(0)(_1073 - 1));
             };
             return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(ArbEnum)(cardPerturb1(__dict_Enum_1048)(f));
         })());
@@ -21809,8 +22197,8 @@ PS.Test_StrongCheck = (function () {
             var index = Math.min(Data_String.length("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") - 1)(Math.floor(x * Data_String.length("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")));
             return Data_String.charAt(index)("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
         };
-        return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbArray(arbNumber)))(function (_68) {
-            return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Maybe_Unsafe.fromJust(Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude["<<<"](Prelude.semigroupoidArr)(AlphaNumString)(Data_String.fromCharArray))(Data_Traversable.sequence(Data_Traversable.traversableArray)(Data_Maybe.applicativeMaybe)(Prelude["<$>"](Data_Array.functorArray)(lookup)(_68)))));
+        return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(arbitrary(arbArray(arbNumber)))(function (_70) {
+            return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Maybe_Unsafe.fromJust(Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude["<<<"](Prelude.semigroupoidArr)(AlphaNumString)(Data_String.fromCharArray))(Data_Traversable.sequence(Data_Traversable.traversableArray)(Data_Maybe.applicativeMaybe)(Prelude["<$>"](Data_Array.functorArray)(lookup)(_70)))));
         });
     })());
     return {
@@ -21931,40 +22319,40 @@ PS.Test_StrongCheck_Perturb = (function () {
     /**
      *  | Combines two perturbers to produce a perturber of the sum
      */
-    var $less$bslash$div$greater = function (_1093) {
-        return function (_1094) {
+    var $less$bslash$div$greater = function (_1101) {
+        return function (_1102) {
             
             /**
              *  FIXME: underconstrained
              */
-            var perturb$prime = function (_1103) {
-                return function (_1104) {
-                    if (_1104 instanceof Data_Either.Left) {
-                        return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Either.Left.create)(_1093.perturb(_1103)(_1104.value0));
+            var perturb$prime = function (_1111) {
+                return function (_1112) {
+                    if (_1112 instanceof Data_Either.Left) {
+                        return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Either.Left.create)(_1101.perturb(_1111)(_1112.value0));
                     };
-                    if (_1104 instanceof Data_Either.Right) {
-                        return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Either.Right.create)(_1094.perturb(_1103)(_1104.value0));
+                    if (_1112 instanceof Data_Either.Right) {
+                        return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Either.Right.create)(_1102.perturb(_1111)(_1112.value0));
                     };
                     throw new Error("Failed pattern match");
                 };
             };
-            var dist$prime = function (_1105) {
-                return function (_1106) {
-                    if (_1105 instanceof Data_Either.Left && _1106 instanceof Data_Either.Left) {
-                        return _1093.dist(_1105.value0)(_1106.value0);
+            var dist$prime = function (_1113) {
+                return function (_1114) {
+                    if (_1113 instanceof Data_Either.Left && _1114 instanceof Data_Either.Left) {
+                        return _1101.dist(_1113.value0)(_1114.value0);
                     };
-                    if (_1105 instanceof Data_Either.Right && _1106 instanceof Data_Either.Right) {
-                        return _1094.dist(_1105.value0)(_1106.value0);
+                    if (_1113 instanceof Data_Either.Right && _1114 instanceof Data_Either.Right) {
+                        return _1102.dist(_1113.value0)(_1114.value0);
                     };
                     return 1;
                 };
             };
-            var dims$prime = function (_1107) {
-                if (_1107 instanceof Data_Either.Left) {
-                    return _1093.dims(_1107.value0);
+            var dims$prime = function (_1115) {
+                if (_1115 instanceof Data_Either.Left) {
+                    return _1101.dims(_1115.value0);
                 };
-                if (_1107 instanceof Data_Either.Right) {
-                    return _1094.dims(_1107.value0);
+                if (_1115 instanceof Data_Either.Right) {
+                    return _1102.dims(_1115.value0);
                 };
                 throw new Error("Failed pattern match");
             };
@@ -21979,29 +22367,29 @@ PS.Test_StrongCheck_Perturb = (function () {
     /**
      *  TODO: Move to Data.Functor.Invariant
      */
-    var xmap = function (_1084) {
-        return function (_1085) {
-            return function (_1086) {
+    var xmap = function (_1092) {
+        return function (_1093) {
+            return function (_1094) {
                 return {
                     perturb: function (n) {
                         return function (b) {
-                            return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(_1084)(_1086.perturb(n)(_1085(b)));
+                            return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(_1092)(_1094.perturb(n)(_1093(b)));
                         };
                     }, 
                     dist: function (b1) {
                         return function (b2) {
-                            return _1086.dist(_1085(b1))(_1085(b2));
+                            return _1094.dist(_1093(b1))(_1093(b2));
                         };
                     }, 
                     dims: function (b) {
-                        return _1086.dims(_1085(b));
+                        return _1094.dims(_1093(b));
                     }
                 };
             };
         };
     };
-    var unPerturber = function (_1083) {
-        return _1083;
+    var unPerturber = function (_1091) {
+        return _1091;
     };
     var square = Prelude.flip(Math.pow)(2);
     var toDist = function (xs) {
@@ -22021,11 +22409,11 @@ PS.Test_StrongCheck_Perturb = (function () {
     var perturbChar = new Perturb((function () {
         var perturb$prime = function (n) {
             return function (e) {
-                var _3945 = n < (1 / (2 * 65536));
-                if (_3945) {
+                var _3966 = n < (1 / (2 * 65536));
+                if (_3966) {
                     return Prelude.pure(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(e);
                 };
-                if (!_3945) {
+                if (!_3966) {
                     return Test_StrongCheck.arbitrary(Test_StrongCheck.arbChar);
                 };
                 throw new Error("Failed pattern match");
@@ -22033,11 +22421,11 @@ PS.Test_StrongCheck_Perturb = (function () {
         };
         var dist$prime = function (a) {
             return function (b) {
-                var _3946 = Prelude["=="](Data_Char.eqChar)(a)(b);
-                if (_3946) {
+                var _3967 = Prelude["=="](Data_Char.eqChar)(a)(b);
+                if (_3967) {
                     return 0;
                 };
-                if (!_3946) {
+                if (!_3967) {
                     return 1 / (2 * 65536);
                 };
                 throw new Error("Failed pattern match");
@@ -22073,14 +22461,14 @@ PS.Test_StrongCheck_Perturb = (function () {
      */
     var k0 = Math.log(maxNumber + 1);
     var perturbNumber = new Perturb((function () {
-        var perturb$prime = function (_1113) {
-            return function (_1114) {
-                if (_1113 === 0) {
-                    return Prelude.pure(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(_1114);
+        var perturb$prime = function (_1121) {
+            return function (_1122) {
+                if (_1121 === 0) {
+                    return Prelude.pure(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(_1122);
                 };
-                return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Test_StrongCheck_Gen.uniform(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(function (_80) {
-                    return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Test_StrongCheck.runSignum)(Test_StrongCheck.arbitrary(Test_StrongCheck.arbSignum)))(function (_79) {
-                        return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(_79 * (Math.exp(k0 * (_80 * _1113)) - 1) + _1114);
+                return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Test_StrongCheck_Gen.uniform(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(function (_82) {
+                    return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Test_StrongCheck.runSignum)(Test_StrongCheck.arbitrary(Test_StrongCheck.arbSignum)))(function (_81) {
+                        return Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(_81 * (Math.exp(k0 * (_82 * _1121)) - 1) + _1122);
                     });
                 });
             };
@@ -22128,18 +22516,18 @@ PS.Test_StrongCheck_Perturb = (function () {
      *  | searching, while the attempts parameter determines how many levels.
      */
     var searchIn$prime = function (__dict_Perturb_1050) {
-        return function (_1087) {
-            return function (_1088) {
-                return function (_1089) {
-                    return function (_1090) {
+        return function (_1095) {
+            return function (_1096) {
+                return function (_1097) {
+                    return function (_1098) {
                         var search0 = function (k_1) {
                             return function (d) {
-                                return ifThenElse(k_1 <= 0)(Data_Monoid.mempty(Test_StrongCheck_Gen.monoidGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))))(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Foldable.find(Data_Foldable.foldableArray)(_1089))(Test_StrongCheck_Gen.takeGen(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(1)(Test_StrongCheck_Gen.chunked(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(_1088)(perturb(__dict_Perturb_1050)(d)(_1090)))))(function (_76) {
-                                    return Prelude["<>"](Test_StrongCheck_Gen.semigroupGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Maybe.fromMaybe(Data_Monoid.mempty(Test_StrongCheck_Gen.monoidGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))))(Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude.pure(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))))(_76)))(search0(k_1 - 1)(d / 2));
+                                return ifThenElse(k_1 <= 0)(Data_Monoid.mempty(Test_StrongCheck_Gen.monoidGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))))(Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Foldable.find(Data_Foldable.foldableArray)(_1097))(Test_StrongCheck_Gen.takeGen(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(1)(Test_StrongCheck_Gen.chunked(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(_1096)(perturb(__dict_Perturb_1050)(d)(_1098)))))(function (_78) {
+                                    return Prelude["<>"](Test_StrongCheck_Gen.semigroupGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Maybe.fromMaybe(Data_Monoid.mempty(Test_StrongCheck_Gen.monoidGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))))(Prelude["<$>"](Data_Maybe.functorMaybe)(Prelude.pure(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))))(_78)))(search0(k_1 - 1)(d / 2));
                                 }));
                             };
                         };
-                        return search0(_1087)(1);
+                        return search0(_1095)(1);
                     };
                 };
             };
@@ -22158,11 +22546,11 @@ PS.Test_StrongCheck_Perturb = (function () {
             return function (xs) {
                 var len = 1 + Data_Array.length(xs);
                 var dims$prime = function (a) {
-                    var _3957 = len > 0;
-                    if (_3957) {
+                    var _3978 = len > 0;
+                    if (_3978) {
                         return 1;
                     };
-                    if (!_3957) {
+                    if (!_3978) {
                         return 0;
                     };
                     throw new Error("Failed pattern match");
@@ -22170,11 +22558,11 @@ PS.Test_StrongCheck_Perturb = (function () {
                 var cutoff = 1 / (2 * len);
                 var dist$prime = function (a1) {
                     return function (a2) {
-                        var _3958 = Prelude["=="](__dict_Eq_1052)(a2)(a2);
-                        if (_3958) {
+                        var _3979 = Prelude["=="](__dict_Eq_1052)(a2)(a2);
+                        if (_3979) {
                             return 0;
                         };
-                        if (!_3958) {
+                        if (!_3979) {
                             return cutoff;
                         };
                         throw new Error("Failed pattern match");
@@ -22182,11 +22570,11 @@ PS.Test_StrongCheck_Perturb = (function () {
                 };
                 var perturb$prime = function (n) {
                     return function (a) {
-                        var _3959 = n < cutoff;
-                        if (_3959) {
+                        var _3980 = n < cutoff;
+                        if (_3980) {
                             return Prelude.pure(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(a);
                         };
-                        if (!_3959) {
+                        if (!_3980) {
                             return Test_StrongCheck_Gen.elements(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(x)(xs);
                         };
                         throw new Error("Failed pattern match");
@@ -22222,16 +22610,16 @@ PS.Test_StrongCheck_Perturb = (function () {
     };
     var perturbArray = function (__dict_Perturb_1056) {
         return new Perturb((function () {
-            var perturb$prime = function (_1115) {
-                return function (_1116) {
-                    if (_1116.length === 0) {
+            var perturb$prime = function (_1123) {
+                return function (_1124) {
+                    if (_1124.length === 0) {
                         return Prelude.pure(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))([  ]);
                     };
-                    if (_1115 === 0) {
-                        return Data_Traversable.sequence(Data_Traversable.traversableArray)(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<$>"](Data_Array.functorArray)(perturb(__dict_Perturb_1056)(0))(_1116));
+                    if (_1123 === 0) {
+                        return Data_Traversable.sequence(Data_Traversable.traversableArray)(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<$>"](Data_Array.functorArray)(perturb(__dict_Perturb_1056)(0))(_1124));
                     };
-                    var dx = delta(Data_Array.length(_1116))(_1115);
-                    return Data_Traversable.sequence(Data_Traversable.traversableArray)(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<$>"](Data_Array.functorArray)(perturb(__dict_Perturb_1056)(dx))(_1116));
+                    var dx = delta(Data_Array.length(_1124))(_1123);
+                    return Data_Traversable.sequence(Data_Traversable.traversableArray)(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<$>"](Data_Array.functorArray)(perturb(__dict_Perturb_1056)(dx))(_1124));
                 };
             };
             var dist$prime = function (a) {
@@ -22268,24 +22656,24 @@ PS.Test_StrongCheck_Perturb = (function () {
     /**
      *  | Combines two perturbers to produce a perturber of the product
      */
-    var $less$div$bslash$greater = function (_1091) {
-        return function (_1092) {
-            var perturb$prime = function (_1098) {
-                return function (_1099) {
-                    var dx = delta(_1091.dims(_1099.value0) + _1092.dims(_1099.value1))(_1098);
+    var $less$div$bslash$greater = function (_1099) {
+        return function (_1100) {
+            var perturb$prime = function (_1106) {
+                return function (_1107) {
+                    var dx = delta(_1099.dims(_1107.value0) + _1100.dims(_1107.value1))(_1106);
                     var dx2 = dx * dx;
-                    var ld = Math.sqrt(dx2 * _1091.dims(_1099.value0));
-                    var rd = Math.sqrt(dx2 * _1092.dims(_1099.value1));
-                    return Prelude["<*>"](Test_StrongCheck_Gen.applyGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Tuple.Tuple.create)(_1091.perturb(ld)(_1099.value0)))(_1092.perturb(rd)(_1099.value1));
+                    var ld = Math.sqrt(dx2 * _1099.dims(_1107.value0));
+                    var rd = Math.sqrt(dx2 * _1100.dims(_1107.value1));
+                    return Prelude["<*>"](Test_StrongCheck_Gen.applyGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Data_Tuple.Tuple.create)(_1099.perturb(ld)(_1107.value0)))(_1100.perturb(rd)(_1107.value1));
                 };
             };
-            var dist$prime = function (_1100) {
-                return function (_1101) {
-                    return toDist([ _1091.dist(_1100.value0)(_1101.value0), _1092.dist(_1100.value1)(_1101.value1) ]);
+            var dist$prime = function (_1108) {
+                return function (_1109) {
+                    return toDist([ _1099.dist(_1108.value0)(_1109.value0), _1100.dist(_1108.value1)(_1109.value1) ]);
                 };
             };
-            var dims$prime = function (_1102) {
-                return _1091.dims(_1102.value0) + _1092.dims(_1102.value1);
+            var dims$prime = function (_1110) {
+                return _1099.dims(_1110.value0) + _1100.dims(_1110.value1);
             };
             return {
                 perturb: perturb$prime, 
@@ -22301,14 +22689,14 @@ PS.Test_StrongCheck_Perturb = (function () {
      *  Test.StrongCheck.Gen.Gen<u15286> with another type.
      */
     var cardPerturb1F = function (__dict_Enum_1057) {
-        return function (_1095) {
-            return function (_1096) {
-                return function (_1097) {
-                    var _3980 = _1096 < (1 / (2 * _1097));
-                    if (_3980) {
-                        return Prelude.pure(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(_1095);
+        return function (_1103) {
+            return function (_1104) {
+                return function (_1105) {
+                    var _4001 = _1104 < (1 / (2 * _1105));
+                    if (_4001) {
+                        return Prelude.pure(Test_StrongCheck_Gen.applicativeGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(_1103);
                     };
-                    if (!_3980) {
+                    if (!_4001) {
                         return Prelude["<$>"](Test_StrongCheck_Gen.functorGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Test_StrongCheck.runArbEnum)(Test_StrongCheck.arbitrary(Test_StrongCheck.arbArbEnum(__dict_Enum_1057)));
                     };
                     throw new Error("Failed pattern match");
@@ -22343,15 +22731,15 @@ PS.Test_StrongCheck_Perturb = (function () {
             };
             var dist$prime = function (a) {
                 return function (b) {
-                    var f = function (_1108) {
-                        return function (_1109) {
-                            return function (_1110) {
-                                var _3984 = Prelude["=="]((__dict_Enum_1060["__superclass_Prelude.Ord_0"]())["__superclass_Prelude.Eq_0"]())(Test_StrongCheck.runArbEnum(_1109))(Test_StrongCheck.runArbEnum(_1110));
-                                if (_3984) {
+                    var f = function (_1116) {
+                        return function (_1117) {
+                            return function (_1118) {
+                                var _4005 = Prelude["=="]((__dict_Enum_1060["__superclass_Prelude.Ord_0"]())["__superclass_Prelude.Eq_0"]())(Test_StrongCheck.runArbEnum(_1117))(Test_StrongCheck.runArbEnum(_1118));
+                                if (_4005) {
                                     return 0;
                                 };
-                                if (!_3984) {
-                                    return 1 / (2 * _1108);
+                                if (!_4005) {
+                                    return 1 / (2 * _1116);
                                 };
                                 throw new Error("Failed pattern match");
                             };
@@ -22361,13 +22749,13 @@ PS.Test_StrongCheck_Perturb = (function () {
                 };
             };
             var dims$prime = function (e) {
-                var f = function (_1111) {
-                    return function (_1112) {
-                        var _3987 = _1111 <= 0;
-                        if (_3987) {
+                var f = function (_1119) {
+                    return function (_1120) {
+                        var _4008 = _1119 <= 0;
+                        if (_4008) {
                             return 0;
                         };
-                        if (!_3987) {
+                        if (!_4008) {
                             return 1;
                         };
                         throw new Error("Failed pattern match");
@@ -22420,8 +22808,8 @@ PS.Test_StrongCheck_Perturb = (function () {
             };
             var perturb$prime = function (d) {
                 return function (v) {
-                    return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Test_StrongCheck.arbitrary(Test_StrongCheck.arbNumber))(function (_78) {
-                        return Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))))(Prelude["<<<"](Prelude.semigroupoidArr)(clamp)(Math.round))(_78 * length * d + v);
+                    return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Test_StrongCheck.arbitrary(Test_StrongCheck.arbNumber))(function (_80) {
+                        return Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))))(Prelude["<<<"](Prelude.semigroupoidArr)(clamp)(Math.round))(_80 * length * d + v);
                     });
                 };
             };
@@ -22452,8 +22840,8 @@ PS.Test_StrongCheck_Perturb = (function () {
             };
             var perturb$prime = function (d) {
                 return function (v) {
-                    return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Test_StrongCheck.arbitrary(Test_StrongCheck.arbNumber))(function (_77) {
-                        return Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))))(clamp)(_77 * length * d + v);
+                    return Prelude[">>="](Test_StrongCheck_Gen.bindGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy)))(Test_StrongCheck.arbitrary(Test_StrongCheck.arbNumber))(function (_79) {
+                        return Prelude["<<<"](Prelude.semigroupoidArr)(Prelude["return"](Test_StrongCheck_Gen.monadGenT(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))))(clamp)(_79 * length * d + v);
                     });
                 };
             };
@@ -22513,14 +22901,14 @@ PS.Test_StrongCheck_Landscape = (function () {
     var Landscape = function (x) {
         return x;
     };
-    var unLandscape = function (_1119) {
-        return _1119;
+    var unLandscape = function (_1127) {
+        return _1127;
     };
-    var unDriverState = function (_1118) {
-        return _1118;
+    var unDriverState = function (_1126) {
+        return _1126;
     };
-    var whereAt = function (_1117) {
-        return (unDriverState(Control_Comonad_Cofree.head(_1117))).value;
+    var whereAt = function (_1125) {
+        return (unDriverState(Control_Comonad_Cofree.head(_1125))).value;
     };
     
     /**
@@ -22583,9 +22971,9 @@ PS.Test_StrongCheck_Landscape = (function () {
                         var loop = function (a_1) {
                             return function (s_1) {
                                 return function (v_1) {
-                                    return Prelude[">>="](Control_Monad_ListT.bindListT(Data_Lazy.monadLazy))(Test_StrongCheck_Gen.toLazyList(Test_StrongCheck_Gen.infinite(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(Test_StrongCheck_Perturb.perturb(__dict_Perturb_1065)(v_1)(a_1)))(s_1))(function (_81) {
-                                        var h = mkState(_81)(v_1)(s_1);
-                                        var t = loop(_81)(Test_StrongCheck_Gen.updateSeedState(s_1))(d(v_1));
+                                    return Prelude[">>="](Control_Monad_ListT.bindListT(Data_Lazy.monadLazy))(Test_StrongCheck_Gen.toLazyList(Test_StrongCheck_Gen.infinite(Control_Monad_Free.monadFree(Data_Lazy.functorLazy))(Test_StrongCheck_Perturb.perturb(__dict_Perturb_1065)(v_1)(a_1)))(s_1))(function (_83) {
+                                        var h = mkState(_83)(v_1)(s_1);
+                                        var t = loop(_83)(Test_StrongCheck_Gen.updateSeedState(s_1))(d(v_1));
                                         return Prelude["return"](Control_Monad_ListT.monadListT(Data_Lazy.monadLazy))(Control_Comonad_Cofree.mkCofree(h)(t));
                                     });
                                 };

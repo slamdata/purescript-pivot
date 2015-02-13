@@ -30,10 +30,12 @@
 
 ### Types
 
+     cell data
 
     data Cell where
       C :: JCursor -> Number -> Number -> JsonPrim -> Cell
 
+     header data
 
     data Tree where
       T :: [String] -> Number -> Number -> [Tree] -> Tree
@@ -53,21 +55,26 @@
 
     _nattr :: String -> Number -> Markup -> Markup
 
+     produce data table from json, according to header tree
 
     cFromJson :: Tree -> JCursor -> Json -> [[Cell]]
 
+     merge table segments for each key of an object into one
 
     cMergeObj :: [[[Cell]]] -> [[Cell]]
 
+     pad tall header cells from above
 
     insertHeaderCells :: Number -> Tree -> Tree
 
 
     localeCompare :: String -> String -> Number
 
+     maybe merge a tuple of objects into a table segment
 
     mergeObjTuple :: Tree -> JCursor -> [Json] -> Maybe [[Cell]]
 
+     render a grid from an array of arrays
 
     renderRows :: forall a. (Markup -> Markup) -> (Number -> Number -> a -> Markup) -> [[a]] -> Markup
 
@@ -77,21 +84,26 @@
 
     renderThead :: (Markup -> Markup) -> (Tree -> Markup) -> Tree -> Markup
 
+     sort header tree by ColumnOrdering
 
     sortTree :: ([String] -> [String] -> Ordering) -> Tree -> Tree
 
 
     strcmp :: String -> String -> Ordering
 
+     produce a tree of header data from json
 
     tFromJson :: [String] -> Json -> Tree
 
+     add child to tree, unify if exists
 
     tMergeArray :: Tree -> Tree -> Tree
 
+     produce header rows from header tree
 
     tsToRows :: [Tree] -> [[Tree]]
 
+     maybe return the width of a tuple composed of primitive values
 
     widthOfPrimTuple :: [String] -> [Json] -> Maybe Number
 
