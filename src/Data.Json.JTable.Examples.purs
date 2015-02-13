@@ -16,10 +16,11 @@ exampleRendererDefault = renderJTableDef
 
 exampleRendererDebug = renderJTable defJTableOpts {style = debugStyle}
 
+-- normally one would use css classes, but here it is one less thing to look up
 exampleRendererSemantic = renderJTable defJTableOpts {
     style = noStyle { td = \c j -> case toSemantic j of
-      Integral   n -> td $ text $ show n
-      Fractional n -> td $ do
+      Integral   n -> td ! style "text-align:right" $ text $ show n
+      Fractional n -> td ! style "text-align:right" $ do
         let s = split "." (show n)
         text $ AU.head $ s
         if length s > 1 

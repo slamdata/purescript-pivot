@@ -135,11 +135,15 @@
 ### Type Class Instances
 
 
-    instance showSemantic :: Show JSemantic
+    instance eqJSemantic :: Eq JSemantic
+
+
+    instance showJSemantic :: Show JSemantic
 
 
 ### Values
 
+     TODO: date, time
 
     toSemantic :: JsonPrim -> JSemantic
 

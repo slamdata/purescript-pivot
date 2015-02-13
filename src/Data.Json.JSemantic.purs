@@ -5,7 +5,12 @@ module Data.Json.JSemantic
 
 import Data.Argonaut.JCursor(JsonPrim(..), runJsonPrim)
 import Data.Maybe
-import Data.String.Regex
+import Data.String.Regex (RegexFlags(..), regex, test)
+import Data.String
+import Data.Foldable
+import qualified Data.Array as A
+import qualified Data.Array.Unsafe as AU
+import Data.Tuple
 import qualified Data.Date as Date
 import Math
 
@@ -22,8 +27,7 @@ data JSemantic = Integral   Number
                | Currency   Number
                | NA
 
-
-instance showSemantic :: Show JSemantic where
+instance showJSemantic :: Show JSemantic where
   show (Integral   n) = show n
   show (Fractional n) = show n
   show (Date       d) = show d
@@ -35,6 +39,21 @@ instance showSemantic :: Show JSemantic where
   show (Percent    n) = show n ++ "%"
   show (Currency   n) = "$" ++ show n
   show (NA)           = ""
+
+instance eqJSemantic :: Eq JSemantic where
+  (==) (Integral   a) (Integral   b) = a == b
+  (==) (Fractional a) (Fractional b) = a == b
+  (==) (Date       a) (Date       b) = a == b
+  (==) (DateTime   a) (DateTime   b) = a == b
+  (==) (Time       a) (Time       b) = a == b
+  (==) (Interval u v) (Interval x y) = (u == x) && (v == y)
+  (==) (Text       a) (Text       b) = a == b
+  (==) (Bool       a) (Bool       b) = a == b
+  (==) (Percent    a) (Percent    b) = a == b
+  (==) (Currency   a) (Currency   b) = a == b
+  (==) (NA) (NA) = true
+  (==) _ _ = false
+  (/=) a b = not (a == b)
 
 
 noFlags :: RegexFlags
@@ -62,17 +81,25 @@ foreign import parsePercent """function parsePercent (s) {
   return s.replace("%", "") * 1}""" :: String -> Number
 
 foreign import parseCurrency """function parseCurrency (s) {
-  return s.replace(",", "").replace("$", "") * 1}""" :: String -> Number
+  return (s.replace(/\,/g, "").replace(/\$/g, "")) * 1}""" :: String -> Number
 
 
 analyzeStr :: String -> JSemantic
 analyzeStr s = 
-  if percentRegex s then Percent $ parsePercent s
+  if percentRegex s then Percent $ parsePercent s 
   else if currencyRegex s then Currency $ parseCurrency s
   else if dateRegex s then case Date.fromString s of
     (Just d) ->  DateTime d
-    Nothing -> NA -- shouldn't happen
-  else Text s
+    Nothing -> Text s -- shouldn't happen
+  else 
+    let sp = split " - " s in 
+    if A.length sp == 2 && all dateRegex sp 
+    then case Tuple (Date.fromString $ AU.head sp) 
+                    (Date.fromString $ AU.head $ AU.tail sp) of
+           (Tuple (Just u) (Just v)) -> Interval u v
+           _ -> Text s -- shouldn't happen
+    else Text s
+  -- TODO: date, time
 
 toSemantic :: JsonPrim -> JSemantic
 toSemantic p = runJsonPrim p (const NA) Bool analyzeNum analyzeStr
