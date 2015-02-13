@@ -96,7 +96,10 @@ tFromJson path json =
           let ts = ja <#> tFromJson path
               tk = ts >>= tKids
               t' = foldl tMergeArray (T path 0 0 []) tk
-              w = max 1 (t' # tWidth)
+              tsws = ts <#> tWidth
+              w = if (not $ null ts) && (all ((==) (AU.head tsws)) tsws)
+                  then max (AU.head tsws) (t' # tWidth)
+                  else max 1 (t' # tWidth)
           in T path w (t' # tHeight) (t' # tKids)
 
 
