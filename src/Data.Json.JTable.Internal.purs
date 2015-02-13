@@ -2,6 +2,7 @@ module Data.Json.JTable.Internal
   ( renderJTableRaw, renderRows, renderThead, renderTbody, tsToRows, sortTree
   , Tree(..), tPath, tWidth, tHeight, tKids
   , Cell(..), cCursor, cWidth, cHeight, cJsonPrim
+  , JPath(..)
   , tFromJson, tMergeArray, widthOfPrimTuple, insertHeaderCells
   , cFromJson, cMergeObj, mergeObjTuple
   , _cN, toPrim, strcmp, localeCompare, _nattr, _cspan, _rspan
@@ -23,9 +24,11 @@ import Data.Argonaut.Parser (jsonParser)
 import Text.Smolder.HTML (thead, tbody, tr, th, td)
 import Text.Smolder.Markup (Markup(..), Attribute(..), attribute, (!))
 
+-- path of object keys, with array indices omitted
+type JPath = [String]
 
 -- header data
-data Tree = T [String] Number Number [Tree]
+data Tree = T JPath Number Number [Tree]
 tPath (T p _ _ _) = p
 tWidth (T _ w _ _) = w
 tHeight (T _ _ h _) = h
@@ -52,7 +55,7 @@ toPrim = (foldJson _cN primBool primNum primStr _cN _cN) :: Json -> JsonPrim
 
 
 -- maybe return the width of a tuple composed of primitive values
-widthOfPrimTuple :: [String] -> [Json] -> Maybe Number
+widthOfPrimTuple :: JPath -> [Json] -> Maybe Number
 widthOfPrimTuple path ja = 
   if null path || length ja <= 1 then Nothing else let
     f = foldJson (const 0) (const 1) (const 2) (const 3) (const 4) (const 5)
@@ -77,7 +80,7 @@ tMergeArray (T p w h k) t1@(T p1 w1 h1 k1) =
                in T p w' h' k'
 
 -- produce a tree of header data from json
-tFromJson :: [String] -> Json -> Tree
+tFromJson :: JPath -> Json -> Tree
 tFromJson path json =
   case json # toObject of -- object
     Just jo -> if M.isEmpty jo then T path 1 0 [] else let
@@ -182,7 +185,7 @@ renderTbody tr' tdf t json =
   in renderRows tr' tdf' $ cFromJson t JCursorTop json
 
 -- sort header tree by ColumnOrdering
-sortTree :: ([String] -> [String] -> Ordering) -> Tree -> Tree
+sortTree :: (JPath -> JPath -> Ordering) -> Tree -> Tree
 sortTree ord (T p w h k) = T p w h ( 
   sortBy (\t1 t2 -> ord (t1 # tPath) (t2 # tPath)) (k <#> sortTree ord))
 

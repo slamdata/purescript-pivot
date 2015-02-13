@@ -5,13 +5,14 @@
 ### Types
 
 
-    type ColumnOrdering = [String] -> [String] -> Ordering
+    type ColumnOrdering = JPath -> JPath -> Ordering
 
 
     type JTableOpts = { insertHeaderCells :: Boolean, columnOrdering :: ColumnOrdering, style :: TableStyle }
 
+     type JPath = [String]
 
-    type TableStyle = { td :: JCursor -> JsonPrim -> Markup, th :: [String] -> Markup, tr :: Markup -> Markup, table :: Markup -> Markup }
+    type TableStyle = { td :: JCursor -> JsonPrim -> Markup, th :: JPath -> Markup, tr :: Markup -> Markup, table :: Markup -> Markup }
 
 
 ### Values
@@ -35,10 +36,14 @@
     data Cell where
       C :: JCursor -> Number -> Number -> JsonPrim -> Cell
 
+     path of object keys, with array indices omitted
+
+    type JPath = [String]
+
      header data
 
     data Tree where
-      T :: [String] -> Number -> Number -> [Tree] -> Tree
+      T :: JPath -> Number -> Number -> [Tree] -> Tree
 
 
 ### Type Class Instances
@@ -86,14 +91,14 @@
 
      sort header tree by ColumnOrdering
 
-    sortTree :: ([String] -> [String] -> Ordering) -> Tree -> Tree
+    sortTree :: (JPath -> JPath -> Ordering) -> Tree -> Tree
 
 
     strcmp :: String -> String -> Ordering
 
      produce a tree of header data from json
 
-    tFromJson :: [String] -> Json -> Tree
+    tFromJson :: JPath -> Json -> Tree
 
      add child to tree, unify if exists
 
@@ -105,7 +110,7 @@
 
      maybe return the width of a tuple composed of primitive values
 
-    widthOfPrimTuple :: [String] -> [Json] -> Maybe Number
+    widthOfPrimTuple :: JPath -> [Json] -> Maybe Number
 
 
 ## Module Data.Json.JSemantic
