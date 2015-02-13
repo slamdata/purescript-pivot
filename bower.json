@@ -25,7 +25,8 @@
   "devDependencies": {
     "purescript-debug-foreign": "~0.0.4",
     "purescript-strongcheck": "~0.7.0",
-    "purescript-random": "jacereda/purescript-random#master"
+    "purescript-random": "jacereda/purescript-random#master",
+    "purescript-test-unit": "~1.1.5"
   },
   "resolutions": {
     "purescript-maps": "~0.2.0",

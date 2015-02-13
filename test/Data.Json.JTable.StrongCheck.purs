@@ -31,13 +31,15 @@ genJsonObject = sized \size ->
   (vectorOf size $ resize (size-1) arbitrary) <#> SM.fromList >>> A.fromObject
 
 genJson :: Gen Json
-genJson = sized \size -> oneOf (pure jsonNull) ([
+genJson = sized \size -> 
+  if size == 0 
+  then oneOf (pure jsonNull) [
     arbitrary <#> A.fromBoolean,
     arbitrary <#> A.fromNumber,
-    arbitrary <#> A.fromBoolean,
+    arbitrary <#> A.fromBoolean ] 
+  else oneOf (pure jsonNull) [
     resize (size-1) genJsonArray,
-    resize (size-1) genJsonObject
-  ] :: [Gen Json])
+    resize (size-1) genJsonObject ]
 
 instance arbJson :: Arbitrary Json where
   arbitrary = genJson
@@ -78,7 +80,6 @@ lengthsOkT t1 t2 =
     (not $ null t1) && (not $ null t2) && (
       (null $ AU.head t1) || (null $ AU.head t2)) || (
       (length $ AU.head t1) == (length $ AU.head t2) ))
-
 
 -- check table invariants
 checkTable :: Json -> Result
