@@ -30,6 +30,9 @@
   },
   "resolutions": {
     "purescript-maps": "~0.2.0",
-    "purescript-random": "jacereda/purescript-random#master"
+    "purescript-random": "master",
+    "purescript-foldable-traversable": "~0.2.1",
+    "purescript-transformers": "~0.4.0",
+    "purescript-identity": "~0.2.0"
   }
 }
