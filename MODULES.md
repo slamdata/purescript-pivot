@@ -40,6 +40,10 @@
 
     type JPath = [String]
 
+     rows of cells
+
+    type Table = [[Cell]]
+
      header data
 
     data Tree where
@@ -62,11 +66,11 @@
 
      produce data table from json, according to header tree
 
-    cFromJson :: Tree -> JCursor -> Json -> [[Cell]]
+    cFromJson :: Tree -> JCursor -> Json -> Table
 
      merge table segments for each key of an object into one
 
-    cMergeObj :: [[[Cell]]] -> [[Cell]]
+    cMergeObj :: [Tuple Number Table] -> Table
 
      pad tall header cells from above
 
@@ -77,7 +81,7 @@
 
      maybe merge a tuple of objects into a table segment
 
-    mergeObjTuple :: Tree -> JCursor -> [Json] -> Maybe [[Cell]]
+    mergeObjTuple :: Tree -> JCursor -> [Json] -> Maybe Table
 
      render a grid from an array of arrays
 

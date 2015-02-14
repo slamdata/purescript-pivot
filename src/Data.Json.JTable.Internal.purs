@@ -2,7 +2,7 @@ module Data.Json.JTable.Internal
   ( renderJTableRaw, renderRows, renderThead, renderTbody, tsToRows, sortTree
   , Tree(..), tPath, tWidth, tHeight, tKids
   , Cell(..), cCursor, cWidth, cHeight, cJsonPrim
-  , JPath(..)
+  , JPath(..), Table(..)
   , tFromJson, tMergeArray, widthOfPrimTuple, insertHeaderCells
   , cFromJson, cMergeObj, mergeObjTuple
   , _cN, toPrim, strcmp, localeCompare, _nattr, _cspan, _rspan
@@ -27,6 +27,9 @@ import Text.Smolder.Markup (Markup(..), Attribute(..), attribute, (!))
 -- path of object keys, with array indices omitted
 type JPath = [String]
 
+-- rows of cells
+type Table = [[Cell]]
+
 -- header data
 data Tree = T JPath Number Number [Tree]
 tPath (T p _ _ _) = p
@@ -35,7 +38,7 @@ tHeight (T _ _ h _) = h
 tKids (T _ _ _ k) = k
 
 instance showTree :: Show Tree where
-  show (T p w h k) = joinWith " " ["<T", show p, show w, show h, show k, ">"]
+  show (T p w h k) = joinWith " " ["(T", show p, show w, show h, show k, ")"]
 
 -- cell data
 data Cell = C  JCursor Number Number JsonPrim
@@ -45,7 +48,7 @@ cHeight (C _ _ h _) = h
 cJsonPrim (C _ _ _ j) = j
 
 instance showCell :: Show Cell where
-  show (C c w h j) = joinWith " " ["<T", show w, show h, show c, show j, ">"]
+  show (C c w h j) = joinWith " " ["(C", show w, show h, show c, show j, ")"]
 
 
 foreign import jnull "var jnull = null;" :: Json
@@ -104,21 +107,19 @@ tFromJson path json =
 
 
 -- merge table segments for each key of an object into one
-cMergeObj :: [[[Cell]]] -> [[Cell]]
+cMergeObj :: [(Tuple Number Table)] -> Table
 cMergeObj rss = do
-  let maxh = foldl (\n l -> max n $ length l) 0 rss
-  let fol = \n cs -> max n $ foldl (+) 0 (cs <#> cWidth)
-  let maxws = rss <#> \rs -> foldl fol 0 rs
+  let maxh = foldl (\n (Tuple w l) -> max n $ length l) 0 rss
   n <- 0 .. maxh-1
   return $ concat $ do
-    (Tuple rs w)<- rss `zip` maxws
+    (Tuple w rs)<- rss
     return $  if length rs == 1 
               then if n == 0 then (\(C c w h j) -> C c w maxh j) `map` (AU.head rs)
                              else fromMaybe [] $ rs !! n 
               else fromMaybe [C (JCursorTop) w 1 primNull] $ rs !! n
 
 -- maybe merge a tuple of objects into a table segment
-mergeObjTuple ::Tree -> JCursor -> [Json] -> Maybe [[Cell]]
+mergeObjTuple ::Tree -> JCursor -> [Json] -> Maybe Table
 mergeObjTuple t@(T p w h k) c ja = 
   let joms = ja <#> toObject
   in if (null ja) || (not $ all isJust joms) then Nothing
@@ -128,23 +129,23 @@ mergeObjTuple t@(T p w h k) c ja =
           in if length (nub all_keys) /= length all_keys
              then Nothing
              else Just $ cMergeObj $ do 
-               t'@(T p' _ _ _) <- k
+               t'@(T p' w' _ _) <- k
                let label = AU.last p'
                let i = findIndex (\ks -> elemIndex label ks > -1) keyss
                let jo = fromMaybe M.empty $ jos !! i
                let j = fromMaybe jnull $ M.lookup label jo
-               return $ cFromJson t' (downField label $ downIndex i c) j
+               return $ (Tuple w' $ cFromJson t' (downField label $ downIndex i c) j)
 
 -- produce data table from json, according to header tree
-cFromJson :: Tree -> JCursor -> Json -> [[Cell]]
+cFromJson :: Tree -> JCursor -> Json -> Table
 cFromJson t@(T p w h k) c json = 
   case json # toObject of 
     Just jo -> if M.isEmpty jo then [[C c w 1 primNull]] else
       cMergeObj $ do -- object
-        t'@(T p' _ _ _) <- k
+        t'@(T p' w' _ _) <- k
         let label = AU.last p'
         let j = fromMaybe jnull $ M.lookup label jo
-        return $ cFromJson t' (downField label c) j
+        return $ (Tuple w' $ cFromJson t' (downField label c) j)
     Nothing -> case json # toArray of
       Nothing -> [[C c w 1 $ toPrim json]] -- primitive
       Just ja -> case mergeObjTuple t c ja of
