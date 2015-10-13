@@ -3,19 +3,19 @@
 #### `noStyle`
 
 ``` purescript
-noStyle :: TableStyle
+noStyle :: forall p. TableStyle p
 ```
 
 #### `bootstrapStyle`
 
 ``` purescript
-bootstrapStyle :: TableStyle
+bootstrapStyle :: forall p. TableStyle p
 ```
 
 #### `debugStyle`
 
 ``` purescript
-debugStyle :: TableStyle
+debugStyle :: forall p. TableStyle p
 ```
 
 #### `inOrdering`
@@ -33,19 +33,25 @@ alphaOrdering :: ColumnOrdering
 #### `jTableOptsDefault`
 
 ``` purescript
-jTableOptsDefault :: JTableOpts
+jTableOptsDefault :: forall p. JTableOpts p
 ```
 
 #### `renderJTable`
 
 ``` purescript
-renderJTable :: JTableOpts -> Json -> Markup
+renderJTable :: forall p. JTableOpts p -> Json -> Markup p
 ```
 
 #### `renderJTableDef`
 
 ``` purescript
-renderJTableDef :: Json -> Markup
+renderJTableDef :: forall p a. Json -> Markup p
+```
+
+#### `jtableComponent`
+
+``` purescript
+jtableComponent :: forall p g. JTableOpts p -> Component Json JTableInput g p
 ```
 
 
