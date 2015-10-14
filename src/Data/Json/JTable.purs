@@ -9,7 +9,7 @@ module Data.Json.JTable
 
 import Prelude
 import Data.String (joinWith)
-import Data.Argonaut.Core (Json(..))
+import Data.Argonaut.Core (Json())
 import Data.Argonaut.JCursor (JCursor(..), JsonPrim(..), runJsonPrim)
 import Data.Const
 import Data.Void
@@ -80,7 +80,7 @@ renderJTableDef = renderJTable jTableOptsDefault
 jtableComponent :: forall p g. JTableOpts p -> H.Component Json JTableInput g p
 jtableComponent opts = H.component render eval
   where
-    render :: H.Render Json JTableInput _
+    render :: H.Render Json JTableInput p
     render json = renderJTable opts json
 
     eval :: H.Eval JTableInput Json JTableInput g

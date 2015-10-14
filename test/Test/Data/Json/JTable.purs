@@ -3,6 +3,8 @@ module Test.Data.Json.JTable where
 import Prelude
 import Control.Monad.Eff (Eff())
 import Control.Monad.Eff.Console
+import Control.Monad.Eff.Exception (EXCEPTION())
+import Control.Monad.Eff.Random (RANDOM())
 import Data.Foldable (for_)
 import Data.Argonaut.Core (Json(), JArray())
 import Data.Argonaut.JCursor (primToJson, primNull)
@@ -14,30 +16,41 @@ import qualified Halogen.HTML.Renderer.String as H
 import qualified Halogen.HTML.Indexed as H
 import qualified Halogen.HTML.Properties.Indexed as P
 
+type TestEffects e =
+  ( err :: EXCEPTION
+  , random :: RANDOM
+  , console :: CONSOLE
+  | e
+  )
+
 jNull = primToJson primNull
 foreign import j0 :: Json
 foreign import jTup2 :: Json
 foreign import jATup2 :: JArray
-foreign import jTup3   :: Json
-foreign import jATup3  :: JArray
-foreign import jHomoTup2   :: Json
-foreign import jAHomoTup2  :: JArray
-foreign import jArr3   :: Json
-foreign import jAArr3  :: JArray
-foreign import jObj2  :: Json
-foreign import jObjArr0  :: Json
-foreign import jObj2Tup2  :: Json
-foreign import jObj2Obj2  :: Json
-foreign import jObjArr2Tup2  :: Json
-foreign import jTup2Obj  :: JArray
-foreign import jObjTup2Obj  :: Json
+foreign import jTup3 :: Json
+foreign import jATup3 :: JArray
+foreign import jHomoTup2 :: Json
+foreign import jAHomoTup2 :: JArray
+foreign import jArr3 :: Json
+foreign import jAArr3 :: JArray
+foreign import jObj2 :: Json
+foreign import jObjArr0 :: Json
+foreign import jObj2Tup2 :: Json
+foreign import jObj2Obj2 :: Json
+foreign import jObjArr2Tup2 :: Json
+foreign import jTup2Obj :: JArray
+foreign import jObjTup2Obj :: Json
 foreign import jObj2EArr :: Json
-foreign import jObjWeird  :: Json
-foreign import jArrObj2Tups  :: Json
-foreign import jMergeObjTup  :: Json
+foreign import jObjWeird :: Json
+foreign import jArrObj2Tups :: Json
+foreign import jMergeObjTup :: Json
 
 
-type TestCase = {json :: Json, html :: Markup Void, msg :: String }
+type TestCase =
+  { json :: Json
+  , html :: Markup Void
+  , msg :: String
+  }
 
 cases :: Array TestCase
 cases =
@@ -227,7 +240,7 @@ insertedCase =
   }
 
 
-assertion :: TestCase -> Eff _ Unit
+assertion :: forall e. TestCase -> Eff (TestEffects e) Unit
 assertion {json: json, msg: msg, html: html} = do
   let expected = H.renderHTML html
       actual = H.renderHTML $ renderJTableDef json
@@ -235,7 +248,7 @@ assertion {json: json, msg: msg, html: html} = do
   assert ((actual == expected) <?> errorMsg)
 
 
-headerCellAssertion :: TestCase -> Eff _ Unit
+headerCellAssertion :: forall e. TestCase -> Eff (TestEffects e) Unit
 headerCellAssertion {json: json, msg: msg, html: html} = do
   let expected = H.renderHTML html
       opts = jTableOptsDefault {insertHeaderCells = true}

@@ -8,8 +8,9 @@ import Data.List (toList)
 
 import Control.Bind
 import Control.Monad.Eff
-import Control.Monad.Eff.Exception (throwException)
+import Control.Monad.Eff.Exception (EXCEPTION(), throwException)
 import qualified Control.Monad.Aff as Aff
+import qualified Control.Monad.Aff.AVar as Aff
 import Control.Plus
 
 import Data.Argonaut.Core (Json(), jsonEmptyArray)
@@ -31,7 +32,7 @@ type ExampleState = String
 data ExampleInput a
   = SetJsonText String a
 
-parent :: forall g p. (Functor g) => ParentComponentP ExampleState Json ExampleInput J.JTableInput g _ p
+parent :: forall g p. (Functor g) => ParentComponentP ExampleState Json ExampleInput J.JTableInput g Unit p
 parent = component' render eval (\_ -> pure unit)
   where
     render :: Render ExampleState ExampleInput Unit
@@ -64,7 +65,13 @@ ui opts =
   install' parent \_ ->
     createChild (J.jtableComponent opts) jsonEmptyArray
 
-main :: Eff _ Unit
+type ExampleEffects =
+  ( dom :: DOM.DOM
+  , avar :: Aff.AVAR
+  , err :: EXCEPTION
+  )
+
+main :: Eff ExampleEffects Unit
 main =
   Aff.runAff throwException (const (pure unit)) $ do
     app <- runUI (ui J.jTableOptsDefault) (installedState "")
