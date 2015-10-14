@@ -8,18 +8,11 @@ import Data.Argonaut.Core (Json(), JArray())
 import Data.Argonaut.JCursor (primToJson, primNull)
 import Data.Json.JTable (renderJTable, renderJTableDef, jTableOptsDefault)
 import Data.Json.JTable.Internal (renderJTableRaw, Markup())
+import Data.Void
 import Test.StrongCheck
 import qualified Halogen.HTML.Renderer.String as H
-import qualified Halogen.HTML as H
-import qualified Halogen.HTML.Attributes as A
-
-
-
-rowSpan :: forall i. Int -> A.Attr i
-rowSpan = A.attr (A.attributeName "rowSpan") <<< show
-
-colSpan :: forall i. Int -> A.Attr i
-colSpan = A.attr (A.attributeName "colSpan") <<< show
+import qualified Halogen.HTML.Indexed as H
+import qualified Halogen.HTML.Properties.Indexed as P
 
 jNull = primToJson primNull
 foreign import j0 :: Json
@@ -44,9 +37,9 @@ foreign import jArrObj2Tups  :: Json
 foreign import jMergeObjTup  :: Json
 
 
-type TestCase = {json :: Json, html :: Markup, msg :: String }
+type TestCase = {json :: Json, html :: Markup Void, msg :: String }
 
-cases :: Array TestCase 
+cases :: Array TestCase
 cases =
   [ { json: jNull
     , msg: "null"
@@ -77,7 +70,7 @@ cases =
   , { json: jObj2Tup2
     , msg: "jObj2Tup2"
     , html: H.table_ [ H.thead_ [ H.tr_ [ H.th_ [ H.text "a" ]
-                                        , H.th [ colSpan 2 ] [ H.text "b"]
+                                        , H.th [ P.colSpan 2 ] [ H.text "b"]
                                         ]
                                 ]
                      , H.tbody_ [ H.tr_ [ H.td_ [ H.text "1" ]
@@ -89,12 +82,12 @@ cases =
     }
   , { json: jObj2Obj2
     , msg: "jObj2Obj2"
-    , html: H.table_ [ H.thead_ [ H.tr_ [ H.th [ rowSpan 2 ] [ H.text "a"]
-                                        , H.th [ colSpan 2 ] [ H.text "b"]
+    , html: H.table_ [ H.thead_ [ H.tr_ [ H.th [ P.rowSpan 2 ] [ H.text "a"]
+                                        , H.th [ P.colSpan 2 ] [ H.text "b"]
                                         ]
                                 , H.tr_ [ H.th_ [ H.text "b1" ]
                                         , H.th_ [ H.text "b2" ]
-                                        ] 
+                                        ]
                                 ]
                      , H.tbody_ [ H.tr_ [ H.td_ [ H.text "1" ]
                                         , H.td_ [ H.text "one"]
@@ -105,7 +98,7 @@ cases =
     }
   , { json: jObjArr2Tup2
     , msg: "jObjArr2Tup2"
-    , html: H.table_ [ H.thead_ [ H.tr_ [ H.th [ colSpan 2 ] [H.text "a"]
+    , html: H.table_ [ H.thead_ [ H.tr_ [ H.th [ P.colSpan 2 ] [H.text "a"]
                                         ]
                                 ]
                      , H.tbody_ [ H.tr_ [ H.td_ [ H.text "1"]
@@ -114,16 +107,16 @@ cases =
                                 , H.tr_ [ H.td_ [ H.text "3" ]
                                         , H.td_ [ H.text "four" ]
                                         ]
-                                ] 
+                                ]
                      ]
     }
   , { json: jObjTup2Obj
     , msg: "jObjTup2Obj"
-    , html: H.table_ [ H.thead_ [ H.tr_ [ H.th [ colSpan 2 ] [ H.text "a" ]
+    , html: H.table_ [ H.thead_ [ H.tr_ [ H.th [ P.colSpan 2 ] [ H.text "a" ]
                                         ]
                                 , H.tr_ [ H.th_ [ H.text "x" ]
                                         , H.th_ [ H.text "y" ]
-                                        ] 
+                                        ]
                                 ]
                      , H.tbody_ [ H.tr_ [ H.td_ [ H.text "1" ]
                                        , H.td_ [ H.text "2" ]
@@ -145,11 +138,11 @@ cases =
     }
   , { json: jObjWeird
     , msg: "jObjWeird"
-    , html: H.table_ [ H.thead_ [ H.tr_ [ H.th [ colSpan 5 ] [H.text "a"]
-                                        , H.th [ colSpan 5
-                                               , rowSpan 2 ] [H.text "b" ]
+    , html: H.table_ [ H.thead_ [ H.tr_ [ H.th [ P.colSpan 5 ] [H.text "a"]
+                                        , H.th [ P.colSpan 5
+                                               , P.rowSpan 2 ] [H.text "b" ]
                                         ]
-                                , H.tr_ [ H.th [ colSpan 4 ] [H.text "x" ]
+                                , H.tr_ [ H.th [ P.colSpan 4 ] [H.text "x" ]
                                         , H.th_ [ H.text "y" ]
                                         ]
                                 ]
@@ -169,8 +162,8 @@ cases =
     }
   , { json: jArrObj2Tups
     , msg: "jArrObj2Tups"
-    , html: H.table_ [ H.thead_ [ H.tr_ [ H.th [colSpan 3] [ H.text "a"]
-                                        , H.th [colSpan 3] [ H.text "b"]
+    , html: H.table_ [ H.thead_ [ H.tr_ [ H.th [P.colSpan 3] [ H.text "a"]
+                                        , H.th [P.colSpan 3] [ H.text "b"]
                                         ]
                                 ]
                      , H.tbody_ [ H.tr_ [ H.td_ [ H.text "3" ]
@@ -180,7 +173,7 @@ cases =
                                         , H.td_ [ H.text "2" ]
                                         , H.td_ [ H.text "" ]
                                         ]
-                                , H.tr_ [ H.td [colSpan 3] [ H.text ""]
+                                , H.tr_ [ H.td [P.colSpan 3] [ H.text ""]
                                         , H.td_ [H.text "3"]
                                         , H.td_ [H.text "2"]
                                         , H.td_ [H.text "1"]
@@ -196,7 +189,7 @@ cases =
   , { json: jMergeObjTup
     , msg: "jMergeObjTup"
     , html: H.table_ [ H.thead_ [ H.tr_ [ H.th_ [ H.text "a" ]
-                                        , H.th [rowSpan 2] [H.text "b"]
+                                        , H.th [P.rowSpan 2] [H.text "b"]
                                         ]
                                 , H.tr_ [ H.th_ [ H.text "x" ] ]
                                 ]
@@ -204,21 +197,21 @@ cases =
                                         , H.td_ [ H.text "8" ]
                                         ]
                                 , H.tr_ [ H.td_ [ H.text "1" ]
-                                        , H.td [rowSpan 2] [ H.text "9" ]
+                                        , H.td [P.rowSpan 2] [ H.text "9" ]
                                         ]
                                 , H.tr_ [ H.td_ [ H.text "2" ]
                                         ]
                                 ]
                      ]
     }
-  ] 
+  ]
 
 insertedCase :: TestCase
 insertedCase =
   { json: jObj2Obj2
   , msg: "jObj2Obj2"
   , html: H.table_ [ H.thead_ [ H.tr_ [ H.th_ [ ]
-                                      , H.th [colSpan 2] [ H.text "b" ]
+                                      , H.th [P.colSpan 2] [ H.text "b" ]
                                       ]
                               , H.tr_ [ H.th_ [ H.text "a"]
                                       , H.th_ [ H.text "b1" ]
@@ -234,23 +227,23 @@ insertedCase =
   }
 
 
-assertion :: TestCase -> Eff _ Unit 
+assertion :: TestCase -> Eff _ Unit
 assertion {json: json, msg: msg, html: html} = do
-  let expected = H.renderHTMLToString html
-      actual = H.renderHTMLToString $ renderJTableDef json
+  let expected = H.renderHTML html
+      actual = H.renderHTML $ renderJTableDef json
       errorMsg = msg <> "\nactual: " <> actual <> "\nexpected: " <> expected
   assert ((actual == expected) <?> errorMsg)
-    
+
 
 headerCellAssertion :: TestCase -> Eff _ Unit
 headerCellAssertion {json: json, msg: msg, html: html} = do
-  let expected = H.renderHTMLToString html
+  let expected = H.renderHTML html
       opts = jTableOptsDefault {insertHeaderCells = true}
-      actual = H.renderHTMLToString $ renderJTable opts json
+      actual = H.renderHTML $ renderJTable opts json
       errorMsg = "special assertion" <> msg <> "\nactual: " <> actual <> "\nexpected: " <> expected
   assert ((actual == expected) <?> errorMsg)
 
 main = do
   for_ cases assertion
-  headerCellAssertion insertedCase 
- 
+  headerCellAssertion insertedCase
+
