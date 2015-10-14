@@ -6,16 +6,23 @@
 type JPath = List String
 ```
 
+#### `JTableInput`
+
+``` purescript
+data JTableInput a
+  = SetJson Json a
+```
+
 #### `Markup`
 
 ``` purescript
-type Markup = HTML Void
+type Markup p = HTML p (JTableInput Unit)
 ```
 
 #### `TableStyle`
 
 ``` purescript
-type TableStyle = { table :: Array Markup -> Markup, tr :: Array Markup -> Markup, th :: String -> JPath -> Int -> Int -> Markup, td :: JCursor -> JsonPrim -> Int -> Int -> Markup }
+type TableStyle p = { table :: Array (Markup p) -> Markup p, tr :: Array (Markup p) -> Markup p, th :: String -> JPath -> Int -> Int -> Markup p, td :: JCursor -> JsonPrim -> Int -> Int -> Markup p }
 ```
 
 #### `ColumnOrdering`
@@ -27,13 +34,13 @@ type ColumnOrdering = String -> JPath -> String -> JPath -> Ordering
 #### `JTableOpts`
 
 ``` purescript
-type JTableOpts = { style :: TableStyle, columnOrdering :: ColumnOrdering, insertHeaderCells :: Boolean, maxTupleSize :: Int }
+type JTableOpts p = { style :: TableStyle p, columnOrdering :: ColumnOrdering, insertHeaderCells :: Boolean, maxTupleSize :: Int }
 ```
 
 #### `renderJTableRaw`
 
 ``` purescript
-renderJTableRaw :: JTableOpts -> Json -> Markup
+renderJTableRaw :: forall p a. JTableOpts p -> Json -> Markup p
 ```
 
 
