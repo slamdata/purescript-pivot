@@ -13,14 +13,14 @@ import Data.Argonaut.Core (Json())
 import Data.Argonaut.JCursor (JsonPrim())
 import Data.Functor (($>))
 import Data.Json.JSemantic (toSemanticDef, renderJSemantic)
-import Data.Json.JTable.Internal
+import Data.Json.JTable.Internal (ColumnOrdering, JPath, JTableOpts, Markup, TableStyle, JTableQuery(SetJson), renderJTableRaw)
 import Data.Json.JTable.Internal (JTableQuery(..), JTableOpts()) as I
 import Data.List (fromList)
 import Data.String (joinWith)
 
 import Halogen (modify) as H
-import Halogen.Component as H
-import Halogen.HTML.Indexed as H
+import Halogen.Component (Eval, Render, Component, component) as H
+import Halogen.HTML.Indexed (text, br_, className, small, td, th, table, tr_, table_) as H
 import Halogen.HTML.Properties.Indexed as P
 
 renderJsonSimple :: JsonPrim -> String

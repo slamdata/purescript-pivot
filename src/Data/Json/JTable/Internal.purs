@@ -8,7 +8,7 @@ module Data.Json.JTable.Internal
   , Markup()
   ) where
 
-import Prelude
+import Prelude (class Ord, Ordering, Unit, one, (-), zero, ($), (<$>), (==), flip, bind, (<<<), pure, (>>=), (>), (&&), not, (+), (>>>), (<=), const, return, (<))
 
 import Control.Alt ((<|>))
 import Control.MonadPlus (guard)
