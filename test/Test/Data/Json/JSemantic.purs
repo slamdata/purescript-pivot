@@ -1,9 +1,9 @@
 module Test.Data.Json.JSemantic where
 
-import Prelude
+import Prelude (Unit, bind, negate, ($), (<>), (==), show)
 
 import Control.Monad.Eff (Eff())
-import Control.Monad.Eff.Console
+import Control.Monad.Eff.Console (log)
 
 import Data.Argonaut.JCursor (JsonPrim(), primNull, primNum, primBool, primStr)
 import Data.Date as D

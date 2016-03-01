@@ -8,7 +8,7 @@ module Data.Json.JSemantic
   , renderJSemantic
   ) where
 
-import Prelude
+import Prelude (class Eq, class Show, const, ($), (<$>), pure, (<<<), map, (>>=), bind, id, zero, (<>), show, (++), (==), (&&), (>))
 
 import Control.Plus (empty)
 

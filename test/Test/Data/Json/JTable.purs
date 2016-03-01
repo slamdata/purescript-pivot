@@ -12,9 +12,9 @@ import Data.Json.JTable (renderJTable, renderJTableDef, jTableOptsDefault)
 import Data.Json.JTable.Internal (Markup())
 import Data.Void (Void())
 
-import Halogen.HTML.Indexed as H
+import Halogen.HTML.Indexed (text, td_, tr_, tbody_, th_, th, thead_, table_, td) as H
 import Halogen.HTML.Properties.Indexed as P
-import Halogen.HTML.Renderer.String as H
+import Halogen.HTML.Renderer.String (renderHTML) as H
 
 import Test.StrongCheck (assert, (<?>))
 import Test.Data.Json.TestEffects (TestEffects())
