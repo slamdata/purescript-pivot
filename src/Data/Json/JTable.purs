@@ -1,5 +1,5 @@
 module Data.Json.JTable
-  ( renderJTable, renderJTableDef
+  ( renderJTable, renderJTableDef, renderJsonSimple
   , jTableOptsDefault
   , inOrdering, alphaOrdering
   , noStyle, bootstrapStyle, debugStyle
@@ -21,8 +21,8 @@ import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 
-renderJsonPrim ∷ JsonPrim → String
-renderJsonPrim j = runJsonPrim j (const "") show showNumber id
+renderJsonSimple ∷ JsonPrim → String
+renderJsonSimple j = runJsonPrim j (const "") show showNumber id
   where
   showNumber n =
     let s = show n
@@ -69,7 +69,7 @@ alphaOrdering l1 _ l2 _ = compare l1 l2
 
 jTableOptsDefault ∷ JT.JTableOpts
 jTableOptsDefault =
-  { style: noStyle renderJsonPrim
+  { style: noStyle renderJsonSimple
   , columnOrdering: inOrdering
   , insertHeaderCells: false
   , maxTupleSize: 10
