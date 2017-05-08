@@ -224,24 +224,12 @@ intervalString s = do
   d2 ← datetimeString s2
   pure $ Interval d1 d2
 
-integralString ∷ String → Maybe JSemantic
-integralString s = do
-  _ ← match rxGuardNum s
-  Integral <$> (s2n s >>= fromNumber)
-
-fractionalString ∷ String → Maybe JSemantic
-fractionalString s = do
-  _ ← match rxGuardNum s
-  Fractional <$> s2n s
-
 textString ∷ String → Maybe JSemantic
 textString s = pure $ Text s
 
 stringParsers ∷ L.List (String → Maybe JSemantic)
 stringParsers
-  = integralString
-  : fractionalString
-  : percentString
+  = percentString
   : currencyLeftString
   : currencyRightString
   : timeString
